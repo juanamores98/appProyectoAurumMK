@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aurum MK</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/all.css" rel="stylesheet">
+</head>
+<body class="body-estilo">
+    <div class="container body-container-estilo">
+        @Html.Partial("_Menu")  
+        <main>
+            @RenderBody()
+        </main>
+        @Html.Partial("_Footer")
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

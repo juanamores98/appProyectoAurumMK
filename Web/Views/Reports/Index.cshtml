@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Reportes";
+}
+<div class="row">
+    <div class="col-xl-3">
+        <div class="row">
+            <div class="col-xl-3">
+                <h1>Inicio</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="nav nav-tabs flex-column text-start">
+                    <li class="nav-item"><a class="nav-link active" href="~/Views/Reports/Index.cshtml">Estado del sistema</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reporte de Inventario</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#">Reporte de Movimientos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reporte de Ventas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reporte de Usuarios</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h1>Estado Actual</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card card-reporte-estilo">
+                        <div class="card-body card-reporte-estilo">
+                            <h4 class="card-title">Productos Registrados<br></h4>
+                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <h6 class="text-muted card-subtitle mb-2">Total en tienda</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-reporte-estilo">
+                        <div class="card-body card-reporte-estilo" style="font-size: 14px;">
+                            <h4 class="card-title">Productos Ingresados&nbsp; &nbsp;</h4>
+                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <h6 class="text-muted card-subtitle mb-2">Abastecimiento</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-reporte-estilo">
+                        <div class="card-body card-reporte-estilo">
+                            <h4 class="card-title">Productos&nbsp; Descontados</h4>
+                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <h6 class="text-muted card-subtitle mb-2">Descontados</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card card-reporte-estilo">
+                        <div class="card-body card-reporte-estilo">
+                            <h4 class="card-title">Productos por reponer</h4>
+                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <h6 class="text-muted card-subtitle mb-2">Para Reposicion</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,183 @@
+﻿/*Paleta de Colores*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    width:100% !important;
+}
+
+.menu-estilo {
+    background-color: #F28B0C; 
+}
+
+
+
+.boton-estilo {
+    color: #fff;
+    background-color: #F29F05 !important;
+    border-color: #aea79f;
+    margin:5px;
+}
+
+    .boton-estilo:hover {
+        color: #fff;
+        background-color: #F2E7AC !important;
+        border-color: #978e83;
+    }
+
+    .boton-estiloy:focus, .boton-estilo.focus {
+        color: #fff;
+        background-color: #F2F2F2 !important;
+        border-color: #978e83;
+        box-shadow: 0 0 0 0.2rem rgba(186, 180, 173, 0.5);
+    }
+
+    .boton-estilo.disabled, .boton-estilo:disabled {
+        color: #fff;
+        background-color: #aea79f !important;
+        border-color: #aea79f;
+    }
+.link-estilo {
+    color: #2A2C59 !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+}
+.link-estilo:hover{
+    color: #F2E7AC !important;
+}
+.carousel-inicio-max-heigh{
+    height:500px !important;
+}
+.body-estilo {
+    background-image: url("/Resources/fondo2.jpg");
+}
+.body-container-estilo {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    min-width: 1500px !important;
+    background-color: #F2E7AC;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    
+}
+.anuncio-imagen-inicio-estilo{
+    height:200px;
+}
+.card-header-inicio-estilo {
+    background-color: #2A2C59;
+}
+.card-body-inicio-estilo {
+    background-color: #F2F2F2;
+}
+.fila-inicio-estilo {
+    width: 100%;
+    display: inline-block;
+}
+.jumbotron-inicio-estilo {
+    width: 70% !important;
+    float: left !important;
+    height: 450px !important;
+}
+.footer-estilo {
+    text-align: center;
+}
+.card-inicio-estilo {
+    width: 30% !important;
+    float: left !important;
+    height: 450px !important;
+}
+.card-reporte-estilo {
+    background-color: #F2F2F2 !important;
+    border-radius: 20px !important;
+}
+.boton-estilo-anuncio-width {
+    width: 47%;
+    float: left;
+}
+.p-footer {
+    text-align: center;
+}
+/*Aquí empieza estilo About*/
+.contenedorTitulo {
+    /*background-color: #F2F2F2 !important;*/
+    width: 80% !important;
+    margin: auto;
+}
+
+.imalogoAurum {
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.hrAbout {
+    border: 1px solid #2A2C59;
+    width: 60%;
+    margin: 25px auto;
+}
+
+/*Aquí empieza estilo About*/
+p {
+    text-align: justify;
+    font-size: 20px;
+}
+
+.parrafoCard {
+    text-align: justify;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.contenedorTitulo {
+    /*background-color: #F2F2F2 !important;*/
+    width: 80% !important;
+    margin: auto;
+}
+
+.imalogoAurum{
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.hrAbout {
+    border: 1px solid #2A2C59;
+    width: 60%;
+    margin: 25px auto;
+}
+p{
+    text-align: justify;
+    font-size: 20px;
+}
+
+.parrafoCard {
+    text-align: justify;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.fotoIntegrantes {
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+.fotoIntegrantes {
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/*Aquí finaliza estilo About*/
+
+/*Aquí empieza estilo Mantenimiento*/
+.mantenimiento-row {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.mantenimiento-nav-col {
+    background: #1d2554 !important;
+}
+/*Aquí finaliza estilo Mantenimiento*/
