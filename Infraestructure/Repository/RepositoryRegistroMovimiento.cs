@@ -89,14 +89,14 @@ namespace Infraestructure.Repository
 
        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdProducto(int IdProducto)
         {
-            /* try
+             try
              {
                  IEnumerable<RegistroMovimiento> lista = null;
                  using (MyContext ctx = new MyContext())
                  {
                      ctx.Configuration.LazyLoadingEnabled = false;
                      lista = ctx.RegistroMovimiento
-                         .Where(x => x.IdProducto == IdProducto)
+                         .Where(p => p.Producto.Any(x => x.IdProducto == IdProducto))
                          .Include(x => x.Producto)
                          .Include(x => x.Usuario)
                          .Include(x => x.TipoMovimiento)
@@ -117,8 +117,8 @@ namespace Infraestructure.Repository
                  string mensaje = "";
                  Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                  throw;
-             }*/
-            throw new NotImplementedException();
+             }
+           
         }
 
 
