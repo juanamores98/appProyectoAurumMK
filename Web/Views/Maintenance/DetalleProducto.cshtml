@@ -248,45 +248,4 @@
             </div>
         </div>
     </div>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayName("ID")
-            </th>
-            <th>
-                @Html.DisplayName("idU")
-            </th>
-            <th>
-                @Html.DisplayName("fecha")
-            </th>
-            <th>
-                @Html.DisplayName("Comentario")
-            </th>
-            <th>
-                @Html.DisplayName("Descripcion TM")
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.RegistroMovimiento)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdMovimiento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaHora)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comentario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoMovimiento.Descripcion)
-                </td>
-            </tr>
-        }
-
-    </table>
+    
