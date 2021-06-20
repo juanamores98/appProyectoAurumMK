@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="AuronMkModel.PedidoProducto" Width="1.5" PointX="7.5" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.Producto" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.Proveedor" Width="1.5" PointX="10.5" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.RegistroMovimiento" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.RegistroMovimiento" Width="2.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.Sucursal" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.TipoMovimiento" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.TipoUsuario" Width="1.5" PointX="3.75" PointY="17" IsExpanded="true" />
@@ -42,7 +42,7 @@
         <AssociationConnector Association="AuronMkModel.ColorProducto" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.ProductoProveedor" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.RegistroProducto" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AuronMkModel.MotivoMovimiento" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AuronMkModel.MotivoMovimiento" Width="2.75" PointX="3" PointY="3.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
