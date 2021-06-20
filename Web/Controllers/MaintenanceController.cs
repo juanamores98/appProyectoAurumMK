@@ -44,7 +44,7 @@ namespace web.Controllers
             }
             return View();
         }
-        // GET: Libro/Details/5
+        // GET: Producto/Details/5
         public ActionResult DetalleProducto(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
@@ -87,6 +87,65 @@ namespace web.Controllers
         /*
          * COLORES
          */
+        /*
+         * Proveedor
+         */
+        // GET: Proveedor/Details/5
+        public ActionResult MantenimientoProveedor()
+        {
+            IEnumerable<Proveedor> lista = null;
+            try
+            {
+                IServiceProveedor _ServiceProveedor = new ServiceProveedor();
+                lista = _ServiceProveedor.GetProveedor();
+                ViewBag.title = "Lista Proveedor";
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
 
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+            return View();
+        }
+        // GET: Proveedor/Details/5
+        public ActionResult DetalleProveedor(int? id)
+        {
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor proveedor = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                proveedor = _ServiceProveedor.GetProveedorByID(id.Value);
+                if (proveedor == null)
+                {
+                    TempData["Message"] = "No existe el producto solicitado";
+                    TempData["Redirect"] = "producto";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(proveedor);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }

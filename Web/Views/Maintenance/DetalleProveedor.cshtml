@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Infraestructure.Models.Producto>
+﻿@model Infraestructure.Models.Proveedor
 
 @{
-    ViewBag.Title = "Mantenimiento Producto";
+    ViewBag.Title = "Mantenimiento Proveedor";
 }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -28,7 +28,7 @@
                                 <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"></path>
                             </svg><span> Usuarios</span>
                         </a>
-                        <a class="nav-link active" href="@Url.Action("MantenimientoProducto", "Maintenance")" style="font-size: 20px;">
+                        <a class="nav-link" href="@Url.Action("MantenimientoProducto", "Maintenance")" style="font-size: 20px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-box-seam" style="font-size: 20px;">
                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"></path>
                             </svg><span>&nbsp; Producto</span>
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("MantenimientoProveedor", "Maintenance")">
+                        <a class="nav-link active" href="@Url.Action("MantenimientoProveedor", "Maintenance")">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-truck" style="font-size: 20px;">
                                 <path fill-rule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
                             </svg><span style="font-size: 20px;">&nbsp;Proveedor</span>
@@ -63,43 +63,130 @@
     </div>
     <div class="col-xl-9">
         <div class="container">
+            <hr>
+            <h1> Detalle Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
-                <div class="col">
-                    <hr>
-                    <h1>Lista de productos</h1>
-                    <hr>
-                    <a class="btn  boton-estilo" >
-                    Nuevo producto 
-                    <i class="fas fa-plus"></i>
-                    </a>
-                    <hr>
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Informacion</h5>
+                        </div>
+                        <div class="card-body">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.IdProveedor)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.IdProveedor)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Telefono)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Telefono)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Direccion)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Direccion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Pais)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Pais)
+                                    </dd>
+                                </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Contacto</h5>
+                        </div>
+                        <div class="card-body">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("ID")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Nombre")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Telefono")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Correo")
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model.ContactoProveedor)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdContactoProveedor)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
+                                            </td>
+                                            <td>
+                                                <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IdProducto)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Nombre)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.CostoU)
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Cantidad Total")
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EstadoSistema)
-                                </th>
-                                <th></th>
-                            </tr>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Productos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("ID")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Nombre")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Costo")
+                                        </th>
+                                        <th></th>
+                                    </tr>
 
-                            @foreach (var item in Model)
-                            {
+                                    @foreach (var item in Model.Producto)
+                                    {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.IdProducto)
@@ -111,23 +198,20 @@
                                         @Html.DisplayFor(modelItem => item.CostoU)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Inventario.Sum(x => x.Stock).Value)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EstadoSistema.Descripcion)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Detalle", "DetalleProducto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Borrar", "Delete", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                                        @Html.ActionLink("Detalle", "DetalleProducto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) 
                                     </td>
                                 </tr>
-                            }
+                                    }
 
-                        </table>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <p>
+                @Html.ActionLink("Regresar a lista", "MantenimientoProveedor", null, new { @class = "btn  boton-estilo" })
+            </p>
         </div>
     </div>
 </div>

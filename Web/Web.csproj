@@ -396,6 +396,8 @@
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Reports\ReporteMovimientos.cshtml" />
+    <Content Include="Views\Maintenance\MantenimientoProveedor.cshtml" />
+    <Content Include="Views\Maintenance\DetalleProveedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

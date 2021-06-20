@@ -8,7 +8,7 @@ namespace web.Views
 {
     public class AboutController : Controller
     {
-        public ActionResult About()
+        public ActionResult Index()
         {
             return View(); 
         }

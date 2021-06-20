@@ -17,6 +17,7 @@ namespace web.Controllers
             return View();
 
         }
+        // GET: RegistroMovimientos/List/5
         public ActionResult ReporteMovimientos()
         {
             IEnumerable<RegistroMovimiento> lista = null;
