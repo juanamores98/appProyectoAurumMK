@@ -26,11 +26,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge badge-pill badge-success">Perfil</span></a>
                 <div class="dropdown-menu">
-                    @Html.ActionLink("Estado del sistema", "Index", "Reports", null, new { @class = "dropdown-item" })
-                    <a class="dropdown-item" href="#">Reporte de Inventario</a>
-                    <a class="dropdown-item" href="#">Reporte de Movimientos</a>
-                    <a class="dropdown-item" href="#">Reporte de Ventas</a>
-                    <a class="dropdown-item" href="#">Reporte de Usuarios</a>
+                    @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
                     <div class="dropdown-divider"></div>
                     @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })
                     <div class="dropdown-divider"></div>
