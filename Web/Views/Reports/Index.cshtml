@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Infraestructure.Models.Inventario>
+
+@{
     ViewBag.Title = "Reportes";
 }
 
@@ -58,7 +60,7 @@
                     <div class="card card-reporte-estilo">
                         <div class="card-body card-reporte-estilo">
                             <h4 class="card-title">Productos Registrados<br></h4>
-                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <p class="card-text" style="font-size: 77px;">@Model.Count()</p>
                             <h6 class="text-muted card-subtitle mb-2">Total en tienda</h6>
                         </div>
                     </div>
@@ -66,18 +68,22 @@
                 <div class="col">
                     <div class="card card-reporte-estilo">
                         <div class="card-body card-reporte-estilo" style="font-size: 14px;">
-                            <h4 class="card-title">Productos Ingresados&nbsp; &nbsp;</h4>
-                            <p class="card-text" style="font-size: 77px;">0</p>
-                            <h6 class="text-muted card-subtitle mb-2">Abastecimiento</h6>
+                            <h4 class="card-title">Entradas &nbsp; Registradas</h4>
+                            <p class="card-text" style="font-size: 77px;">
+                                @ViewBag.registroEntradas
+                            </p>
+                            <h6 class="text-muted card-subtitle mb-2">Movimientos</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card card-reporte-estilo">
                         <div class="card-body card-reporte-estilo">
-                            <h4 class="card-title">Productos&nbsp; Descontados</h4>
-                            <p class="card-text" style="font-size: 77px;">0</p>
-                            <h6 class="text-muted card-subtitle mb-2">Descontados</h6>
+                            <h4 class="card-title">Salidas &nbsp; Registradas</h4>
+                            <p class="card-text" style="font-size: 77px;">
+                                @ViewBag.registroSalidas
+                            </p>
+                            <h6 class="text-muted card-subtitle mb-2">Movimientos</h6>
                         </div>
                     </div>
                 </div>
@@ -85,7 +91,9 @@
                     <div class="card card-reporte-estilo">
                         <div class="card-body card-reporte-estilo">
                             <h4 class="card-title">Productos por reponer</h4>
-                            <p class="card-text" style="font-size: 77px;">0</p>
+                            <p class="card-text" style="font-size: 77px;">
+                                @Model.Where(x=>x.StockMinimo==x.Stock).Count()
+                            </p>
                             <h6 class="text-muted card-subtitle mb-2">Para Reposicion</h6>
                         </div>
                     </div>

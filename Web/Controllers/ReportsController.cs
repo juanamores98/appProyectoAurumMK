@@ -14,8 +14,24 @@ namespace web.Controllers
         // GET: Reporte
         public ActionResult Index()
         {
-            return View();
+            IEnumerable<Inventario> lista= null;
+            try
+            {
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceRegistroMovimiento _ServiceRegistroMovimiento = new ServiceRegistroMovimiento();
+                lista = _ServiceInventario.GetInventario();
+                ViewBag.registroEntradas = _ServiceRegistroMovimiento.GetRegistroMovimiento().Where(r => r.IdTipoMovimiento == 1).Count();
+                ViewBag.registroSalidas = _ServiceRegistroMovimiento.GetRegistroMovimiento().Where(m => m.IdTipoMovimiento == 2).Count();
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
 
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
         // GET: RegistroMovimientos/List/5
         public ActionResult ReporteMovimientos()
