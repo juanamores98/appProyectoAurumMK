@@ -11,18 +11,26 @@ namespace Infraestructure.Models
     {
 
         [Display(Name = "ID")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public int IdProducto { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
         [Display(Name = "Imagen del Producto")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public byte[] Imagen { get; set; }
         [Display(Name = "Costo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "{0} deber númerico y con dos decimales")]
         public Nullable<double> CostoU { get; set; }
         [Display(Name = "ID del estado en el sistema")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdEstadoSistema { get; set; }
         [Display(Name = "ID Categoria")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
         [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
@@ -34,8 +42,8 @@ namespace Infraestructure.Models
         public virtual ICollection<Color> Color { get; set; }
         [Display(Name = "Proveedor")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [Display(Name = "Movimiento")]
-        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
+        [Display(Name = "Registro Producto")]
+        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
     }
     internal partial class InventarioMetadata
     {
@@ -95,7 +103,7 @@ namespace Infraestructure.Models
         public virtual TipoMovimiento TipoMovimiento { get; set; }
         [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
-        [Display(Name = "Producto")]
-        public virtual ICollection<Producto> Producto { get; set; }
+        [Display(Name = "Registro Producto")]
+        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
     }
 }

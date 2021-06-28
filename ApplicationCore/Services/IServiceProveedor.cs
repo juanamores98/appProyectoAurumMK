@@ -13,8 +13,8 @@ namespace ApplicationCore.Services
         IEnumerable<Proveedor> GetProveedor();
         IEnumerable<Proveedor> GetProveedorByNombre(String nombre);
         IEnumerable<Proveedor> GetProveedorByProductoID(int id);
-        IEnumerable<Proveedor> GetProveedorByEstadoSistema(int IdEstadoSistema);
-        void DeleteProveedor(int id);
+        IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id);
+        void DeleteProveedorByID(int id);
         Proveedor Save();
     }
 }

@@ -11,11 +11,11 @@ namespace Infraestructure.Repository
     {
         RegistroMovimiento GetRegistroMovimientoByID(int id);
         IEnumerable<RegistroMovimiento> GetRegistroMovimiento();
-        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdTipoMovimiento(int IdTipoMovimiento);
-        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdMotivoMovimiento(int IdMotivoMovimiento);
-        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdProducto(int IdProducto);
-        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdUsuario(int IdUsuario);
-        void DeleteRegistroMovimiento(int id);
+        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByTipoMovimientoID(int id);
+        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByMotivoMovimientoID(int id);
+        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByProductoID(int id);
+        IEnumerable<RegistroMovimiento> GetRegistroMovimientoByUsuarioID(int id);
+        void DeleteRegistroMovimientoByID(int id);
         RegistroMovimiento Save();
     }
 }

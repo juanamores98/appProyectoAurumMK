@@ -21,9 +21,9 @@ namespace Infraestructure.Models
         {
             this.Inventario = new HashSet<Inventario>();
             this.PedidoProducto = new HashSet<PedidoProducto>();
+            this.RegistroProducto = new HashSet<RegistroProducto>();
             this.Color = new HashSet<Color>();
             this.Proveedor = new HashSet<Proveedor>();
-            this.RegistroMovimiento = new HashSet<RegistroMovimiento>();
         }
     
         public int IdProducto { get; set; }
@@ -40,10 +40,10 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Color> Color { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
 }

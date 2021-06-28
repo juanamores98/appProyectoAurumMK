@@ -19,7 +19,7 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RegistroMovimiento()
         {
-            this.Producto = new HashSet<Producto>();
+            this.RegistroProducto = new HashSet<RegistroProducto>();
         }
     
         public int IdMovimiento { get; set; }
@@ -29,9 +29,10 @@ namespace Infraestructure.Models
         public Nullable<int> IdTipoMovimiento { get; set; }
         public Nullable<int> IdMotivoMovimiento { get; set; }
     
+        public virtual MotivoMovimiento MotivoMovimiento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
         public virtual TipoMovimiento TipoMovimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Producto> Producto { get; set; }
     }
 }

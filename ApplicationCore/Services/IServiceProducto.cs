@@ -12,10 +12,10 @@ namespace ApplicationCore.Services
         Producto GetProductoByID(int id);
         IEnumerable<Producto> GetProducto();
         IEnumerable<Producto> GetProductoByNombre(String nombre);
-        IEnumerable<Producto> GetProductoByEstadoSistema(int IdEstadoSistema);
-        IEnumerable<Producto> GetProductoByColor(int IdColor);
-        IEnumerable<Producto> GetProductoByProveedor(int IdProveedor);
-        void DeleteProducto(int id);
+        IEnumerable<Producto> GetProductoByEstadoSistemaID(int id);
+        IEnumerable<Producto> GetProductoByColorID(int id);
+        IEnumerable<Producto> GetProductoByProveedorID(int id);
+        void DeleteProductoByID(int id);
         Producto Save();
     }
 }

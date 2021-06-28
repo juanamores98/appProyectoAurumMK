@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryProducto : IRepositoryProducto
     {
-        public void DeleteProducto(int id)
+        public void DeleteProductoByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +30,7 @@ namespace Infraestructure.Repository
                         .Include(x => x.Color)
                         .Include(x => x.Proveedor)
                         .Include(x => x.EstadoSistema)
-                        .Include(x => x.RegistroMovimiento)
+                        .Include("RegistroProducto.RegistroMovimiento")
                         .ToList<Producto>();
                 }
                 return lista;
@@ -50,12 +50,12 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Producto> GetProductoByColor(int IdColor)
+        public IEnumerable<Producto> GetProductoByColorID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Producto> GetProductoByEstadoSistema(int IdEstadoSistema)
+        public IEnumerable<Producto> GetProductoByEstadoSistemaID(int id)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +73,7 @@ namespace Infraestructure.Repository
                         .Include(x => x.Color)
                         .Include(x => x.Proveedor)
                         .Include(x => x.EstadoSistema)
-                        .Include(x => x.RegistroMovimiento)
+                        .Include("RegistroProducto.RegistroMovimiento")
                         .FirstOrDefault();
             }
             return oProducto;
@@ -83,7 +83,7 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Producto> GetProductoByProveedor(int IdProveedor)
+        public IEnumerable<Producto> GetProductoByProveedorID(int id)
         {
             throw new NotImplementedException();
         }

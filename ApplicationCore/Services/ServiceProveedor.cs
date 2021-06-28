@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceProveedor : IServiceProveedor
     {
-        public void DeleteProveedor(int id)
+        public void DeleteProveedorByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+             repository.DeleteProveedorByID(id);
         }
 
         public IEnumerable<Proveedor> GetProveedor()
@@ -21,9 +22,10 @@ namespace ApplicationCore.Services
             return repository.GetProveedor();
         }
 
-        public IEnumerable<Proveedor> GetProveedorByEstadoSistema(int IdEstadoSistema)
+        public IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.GetProveedorByEstadoSistemaID(id);
         }
 
         public Proveedor GetProveedorByID(int id)
@@ -34,7 +36,8 @@ namespace ApplicationCore.Services
 
         public IEnumerable<Proveedor> GetProveedorByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.GetProveedorByNombre(nombre);
         }
 
         public IEnumerable<Proveedor> GetProveedorByProductoID(int id)

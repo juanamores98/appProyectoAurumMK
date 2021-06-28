@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceRegistroMovimiento : IServiceRegistroMovimiento
     {
-        public void DeleteRegistroMovimiento(int id)
+        public void DeleteRegistroMovimientoByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
+             repository.DeleteRegistroMovimientoByID(id);
         }
 
         public IEnumerable<RegistroMovimiento> GetRegistroMovimiento()
@@ -23,30 +24,32 @@ namespace ApplicationCore.Services
 
         public RegistroMovimiento GetRegistroMovimientoByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
+            return repository.GetRegistroMovimientoByID(id);
         }
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdMotivoMovimiento(int IdMotivoMovimiento)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByMotivoMovimientoID(int id)
         {
             IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
-            return repository.GetRegistroMovimientoByIdMotivoMovimiento(IdMotivoMovimiento);
+            return repository.GetRegistroMovimientoByMotivoMovimientoID(id);
         }
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdProducto(int IdProducto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdTipoMovimiento(int IdTipoMovimiento)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByProductoID(int id)
         {
             IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
-            return repository.GetRegistroMovimientoByIdTipoMovimiento(IdTipoMovimiento);
+            return repository.GetRegistroMovimientoByProductoID(id);
         }
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdUsuario(int IdUsuario)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByTipoMovimientoID(int id)
         {
             IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
-            return repository.GetRegistroMovimientoByIdUsuario(IdUsuario);
+            return repository.GetRegistroMovimientoByTipoMovimientoID(id);
+        }
+
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByUsuarioID(int id)
+        {
+            IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
+            return repository.GetRegistroMovimientoByUsuarioID(id);
         }
 
         public RegistroMovimiento Save()

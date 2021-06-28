@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AuronMkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AuronMkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CalificacionUsuario">
           <Key>
             <PropertyRef Name="IdCalificacion" />
@@ -299,6 +299,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IdMotivoMovimiento">
+          <End Role="MotivoMovimiento" Type="Self.MotivoMovimiento" Multiplicity="1" />
+          <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MotivoMovimiento">
+              <PropertyRef Name="IdMotivoMovimiento" />
+            </Principal>
+            <Dependent Role="RegistroMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IdMovimiento">
           <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="1" />
           <End Role="RegistroProducto" Type="Self.RegistroProducto" Multiplicity="*" />
@@ -536,6 +548,10 @@
             <End Role="EstadoSistema" EntitySet="EstadoSistema" />
             <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_IdMotivoMovimiento" Association="Self.FK_IdMotivoMovimiento">
+            <End Role="MotivoMovimiento" EntitySet="MotivoMovimiento" />
+            <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
+          </AssociationSet>
           <AssociationSet Name="FK_IdMovimiento" Association="Self.FK_IdMovimiento">
             <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
             <End Role="RegistroProducto" EntitySet="RegistroProducto" />
@@ -597,7 +613,8 @@
             <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuronMkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -678,6 +695,14 @@
           <NavigationProperty Name="Producto" Relationship="Self.FK_IdProducto4" FromRole="Inventario" ToRole="Producto" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK_IdSucursal" FromRole="Inventario" ToRole="Sucursal" />
         </EntityType>
+        <EntityType Name="MotivoMovimiento">
+          <Key>
+            <PropertyRef Name="IdMotivoMovimiento" />
+          </Key>
+          <Property Name="IdMotivoMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RegistroMovimiento" Relationship="Self.FK_IdMotivoMovimiento" FromRole="MotivoMovimiento" ToRole="RegistroMovimiento" />
+        </EntityType>
         <EntityType Name="Pedido">
           <Key>
             <PropertyRef Name="IdPedido" />
@@ -719,9 +744,9 @@
           <NavigationProperty Name="EstadoSistema" Relationship="Self.FK_IdEstadoSistema1" FromRole="Producto" ToRole="EstadoSistema" />
           <NavigationProperty Name="Inventario" Relationship="Self.FK_IdProducto4" FromRole="Producto" ToRole="Inventario" />
           <NavigationProperty Name="PedidoProducto" Relationship="Self.FK_IdProductos" FromRole="Producto" ToRole="PedidoProducto" />
+          <NavigationProperty Name="RegistroProducto" Relationship="Self.FK_IdProducto5" FromRole="Producto" ToRole="RegistroProducto" />
           <NavigationProperty Name="Color" Relationship="Self.ColorProducto" FromRole="Producto" ToRole="Color" />
           <NavigationProperty Name="Proveedor" Relationship="Self.ProductoProveedor" FromRole="Producto" ToRole="Proveedor" />
-          <NavigationProperty Name="RegistroMovimiento" Relationship="Self.RegistroProducto" FromRole="Producto" ToRole="RegistroMovimiento" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -746,10 +771,22 @@
           <Property Name="FechaHora" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoMovimiento" Type="Int32" />
+          <Property Name="IdMotivoMovimiento" Type="Int32" />
+          <NavigationProperty Name="MotivoMovimiento" Relationship="Self.FK_IdMotivoMovimiento" FromRole="RegistroMovimiento" ToRole="MotivoMovimiento" />
+          <NavigationProperty Name="RegistroProducto" Relationship="Self.FK_IdMovimiento" FromRole="RegistroMovimiento" ToRole="RegistroProducto" />
           <NavigationProperty Name="TipoMovimiento" Relationship="Self.FK_IdTipoMovimiento" FromRole="RegistroMovimiento" ToRole="TipoMovimiento" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_IdUsuario5" FromRole="RegistroMovimiento" ToRole="Usuario" />
-          <NavigationProperty Name="Producto" Relationship="Self.RegistroProducto" FromRole="RegistroMovimiento" ToRole="Producto" />
-          <Property Name="IdMotivoMovimiento" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RegistroProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdMovimiento" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_IdProducto5" FromRole="RegistroProducto" ToRole="Producto" />
+          <NavigationProperty Name="RegistroMovimiento" Relationship="Self.FK_IdMovimiento" FromRole="RegistroProducto" ToRole="RegistroMovimiento" />
         </EntityType>
         <EntityType Name="Sucursal">
           <Key>
@@ -941,6 +978,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IdMotivoMovimiento">
+          <End Role="MotivoMovimiento" Type="Self.MotivoMovimiento" Multiplicity="1" />
+          <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MotivoMovimiento">
+              <PropertyRef Name="IdMotivoMovimiento" />
+            </Principal>
+            <Dependent Role="RegistroMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IdPedido">
           <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
           <End Role="PedidoProducto" Type="Self.PedidoProducto" Multiplicity="*" />
@@ -974,6 +1023,30 @@
             </Principal>
             <Dependent Role="PedidoProducto">
               <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdProducto5">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="RegistroProducto" Type="Self.RegistroProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="RegistroProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdMovimiento">
+          <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="1" />
+          <End Role="RegistroProducto" Type="Self.RegistroProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegistroMovimiento">
+              <PropertyRef Name="IdMovimiento" />
+            </Principal>
+            <Dependent Role="RegistroProducto">
+              <PropertyRef Name="IdMovimiento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1021,10 +1094,6 @@
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
         </Association>
-        <Association Name="RegistroProducto">
-          <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="*" />
-          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="AuronMkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CalificacionUsuario" EntityType="Self.CalificacionUsuario" />
           <EntitySet Name="CategoriaProducto" EntityType="Self.CategoriaProducto" />
@@ -1033,11 +1102,13 @@
           <EntitySet Name="CostoEnvio" EntityType="Self.CostoEnvio" />
           <EntitySet Name="EstadoSistema" EntityType="Self.EstadoSistema" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
+          <EntitySet Name="MotivoMovimiento" EntityType="Self.MotivoMovimiento" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" />
           <EntitySet Name="PedidoProducto" EntityType="Self.PedidoProducto" />
           <EntitySet Name="Producto" EntityType="Self.Producto" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="RegistroMovimiento" EntityType="Self.RegistroMovimiento" />
+          <EntitySet Name="RegistroProducto" EntityType="Self.RegistroProducto" />
           <EntitySet Name="Sucursal" EntityType="Self.Sucursal" />
           <EntitySet Name="TipoMovimiento" EntityType="Self.TipoMovimiento" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
@@ -1090,6 +1161,10 @@
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
+          <AssociationSet Name="FK_IdMotivoMovimiento" Association="Self.FK_IdMotivoMovimiento">
+            <End Role="MotivoMovimiento" EntitySet="MotivoMovimiento" />
+            <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
+          </AssociationSet>
           <AssociationSet Name="FK_IdPedido" Association="Self.FK_IdPedido">
             <End Role="Pedido" EntitySet="Pedido" />
             <End Role="PedidoProducto" EntitySet="PedidoProducto" />
@@ -1101,6 +1176,14 @@
           <AssociationSet Name="FK_IdProductos" Association="Self.FK_IdProductos">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="PedidoProducto" EntitySet="PedidoProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdProducto5" Association="Self.FK_IdProducto5">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="RegistroProducto" EntitySet="RegistroProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdMovimiento" Association="Self.FK_IdMovimiento">
+            <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
+            <End Role="RegistroProducto" EntitySet="RegistroProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_IdTipoMovimiento" Association="Self.FK_IdTipoMovimiento">
             <End Role="TipoMovimiento" EntitySet="TipoMovimiento" />
@@ -1122,19 +1205,7 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="RegistroProducto" Association="Self.RegistroProducto">
-            <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <EntitySet Name="MotivoMovimiento" EntityType="AuronMkModel.MotivoMovimiento" />
         </EntityContainer>
-        <EntityType Name="MotivoMovimiento">
-          <Key>
-            <PropertyRef Name="IdMotivoMovimiento" />
-          </Key>
-          <Property Name="IdMotivoMovimiento" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1209,6 +1280,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MotivoMovimiento">
+            <EntityTypeMapping TypeName="AuronMkModel.MotivoMovimiento">
+              <MappingFragment StoreEntitySet="MotivoMovimiento">
+                <ScalarProperty Name="IdMotivoMovimiento" ColumnName="IdMotivoMovimiento" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Pedido">
             <EntityTypeMapping TypeName="AuronMkModel.Pedido">
               <MappingFragment StoreEntitySet="Pedido">
@@ -1259,12 +1338,21 @@
           <EntitySetMapping Name="RegistroMovimiento">
             <EntityTypeMapping TypeName="AuronMkModel.RegistroMovimiento">
               <MappingFragment StoreEntitySet="RegistroMovimiento">
-                <ScalarProperty Name="IdMotivoMovimiento" ColumnName="IdMotivoMovimiento" />
                 <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
                 <ScalarProperty Name="Comentario" ColumnName="Comentario" />
                 <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+                <ScalarProperty Name="IdMotivoMovimiento" ColumnName="IdMotivoMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistroProducto">
+            <EntityTypeMapping TypeName="AuronMkModel.RegistroProducto">
+              <MappingFragment StoreEntitySet="RegistroProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1325,22 +1413,6 @@
               <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="RegistroProducto" TypeName="AuronMkModel.RegistroProducto" StoreEntitySet="RegistroProducto">
-            <EndProperty Name="RegistroMovimiento">
-              <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
-            </EndProperty>
-            <EndProperty Name="Producto">
-              <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="MotivoMovimiento">
-            <EntityTypeMapping TypeName="AuronMkModel.MotivoMovimiento">
-              <MappingFragment StoreEntitySet="MotivoMovimiento">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdMotivoMovimiento" ColumnName="IdMotivoMovimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

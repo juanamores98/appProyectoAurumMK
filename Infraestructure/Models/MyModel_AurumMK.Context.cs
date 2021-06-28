@@ -32,15 +32,16 @@ namespace Infraestructure.Models
         public virtual DbSet<CostoEnvio> CostoEnvio { get; set; }
         public virtual DbSet<EstadoSistema> EstadoSistema { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
+        public virtual DbSet<MotivoMovimiento> MotivoMovimiento { get; set; }
         public virtual DbSet<Pedido> Pedido { get; set; }
         public virtual DbSet<PedidoProducto> PedidoProducto { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<RegistroMovimiento> RegistroMovimiento { get; set; }
+        public virtual DbSet<RegistroProducto> RegistroProducto { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
         public virtual DbSet<TipoMovimiento> TipoMovimiento { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<MotivoMovimiento> MotivoMovimiento { get; set; }
     }
 }

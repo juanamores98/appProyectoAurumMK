@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Models
 {
-    class MyContext:AuronMkEntities
+    public class MyContext:AuronMkEntities
     {
         public MyContext() { }
     }

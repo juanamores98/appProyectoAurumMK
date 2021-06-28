@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceProducto : IServiceProducto
     {
-        public void DeleteProducto(int id)
+        public void DeleteProductoByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            repository.DeleteProductoByID(id);
         }
 
         public IEnumerable<Producto> GetProducto()
@@ -21,14 +22,16 @@ namespace ApplicationCore.Services
             return repository.GetProducto();
         }
 
-        public IEnumerable<Producto> GetProductoByColor(int IdColor)
+        public IEnumerable<Producto> GetProductoByColorID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByColorID(id);
         }
 
-        public IEnumerable<Producto> GetProductoByEstadoSistema(int IdEstadoSistema)
+        public IEnumerable<Producto> GetProductoByEstadoSistemaID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByEstadoSistemaID(id);
         }
 
         public Producto GetProductoByID(int id)
@@ -39,12 +42,14 @@ namespace ApplicationCore.Services
 
         public IEnumerable<Producto> GetProductoByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByNombre(nombre);
         }
 
-        public IEnumerable<Producto> GetProductoByProveedor(int IdProveedor)
+        public IEnumerable<Producto> GetProductoByProveedorID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByProveedorID(id);
         }
 
         public Producto Save()

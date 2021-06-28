@@ -6,29 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-
 namespace Infraestructure.Repository
 {
-    public class RepositoryProveedor : IRepositoryProveedor
+    public class RepositoryColor : IRepositoryColor
     {
-        public void DeleteProveedorByID(int id)
+        public void DeleteColorByID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Proveedor> GetProveedor()
+        public IEnumerable<Color> GetColor()
         {
             try
             {
-                IEnumerable<Proveedor> lista = null;
+                IEnumerable<Color> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Proveedor
-                        .Include(x => x.ContactoProveedor)
+                    lista = ctx.Color
                         .Include(x => x.EstadoSistema)
                         .Include(x => x.Producto)
-                        .ToList<Proveedor>();
+                        .ToList<Color>();
                 }
                 return lista;
             }
@@ -47,52 +45,44 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id)
+        public IEnumerable<Color> GetColorByEstadoSistemaID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Proveedor GetProveedorByID(int id)
+        public Color GetColorByID(int id)
         {
-            Proveedor oProveedor = null;
+            Color oColor = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oProveedor = ctx.Proveedor
-                        .Where(p => p.IdProveedor == id)
-                        .Include(x => x.ContactoProveedor)
-                        .Include(x => x.EstadoSistema)
+                oColor = ctx.Color
+                        .Where(p => p.IdColor == id)
                         .Include(x => x.Producto)
+                        .Include(x => x.EstadoSistema)
                         .FirstOrDefault();
             }
-            return oProveedor;
+            return oColor;
         }
 
-        public IEnumerable<Proveedor> GetProveedorByNombre(string nombre)
+        public IEnumerable<Color> GetColorByProductoID(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Proveedor> GetProveedorByProductoID(int id)
-        {
-            IEnumerable<Proveedor> lista = null;
+            IEnumerable<Color> lista = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Proveedor
-                    .Where(p => p.Producto.Any(x=>x.IdProducto==id)) 
-                    .Include(x => x.ContactoProveedor)
+                lista = ctx.Color
+                    .Where(p => p.Producto.Any(x => x.IdProducto == id))
                     .Include(x => x.EstadoSistema)
                     .Include(x => x.Producto)
-                    .ToList<Proveedor>();
+                    .ToList<Color>();
             }
             return lista;
         }
 
-        public Proveedor Save()
+        public Color Save()
         {
             throw new NotImplementedException();
         }
-        
     }
 }

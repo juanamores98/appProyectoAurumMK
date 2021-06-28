@@ -10,9 +10,10 @@ namespace ApplicationCore.Services
 {
     public class ServiceInventario : IServiceInventario
     {
-        public void DeleteInventario(int id)
+        public void DeleteInventarioByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryInventario repository = new RepositoryInventario();
+            repository.DeleteInventarioByID(id);
         }
 
         public IEnumerable<Inventario> GetInventario()
@@ -21,19 +22,20 @@ namespace ApplicationCore.Services
             return repository.GetInventario();
         }
 
-        public IEnumerable<Inventario> GetInventarioByEstadoSistema(int IdEstadoSistema)
+        public IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id)
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<Inventario> GetInventarioByProductoID(int IdProducto)
+        public IEnumerable<Inventario> GetInventarioByProductoID(int id)
         {
             IRepositoryInventario repository = new RepositoryInventario();
-            return repository.GetInventarioByProductoID(IdProducto);
+            return repository.GetInventarioByProductoID(id);
         }
 
         public Inventario GetInventarioByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryInventario repository = new RepositoryInventario();
+            return repository.GetInventarioByID(id);
         }
 
         public Inventario Save()

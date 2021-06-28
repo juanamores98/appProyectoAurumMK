@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryRegistroMovimiento : IRepositoryRegistroMovimiento
     {
-        public void DeleteRegistroMovimiento(int id) //queda asi
+        public void DeleteRegistroMovimientoByID(int id) //queda asi
         {
             throw new NotImplementedException();
         }
@@ -25,10 +25,10 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.RegistroMovimiento
-                        .Include(x => x.Producto)
+                        .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
                         .Include(x => x.TipoMovimiento)
-                        //.Include(x => x.MotivoMovimiento)
+                        .Include(x => x.MotivoMovimiento)
                         .ToList<RegistroMovimiento>();
                 }
                 return lista;
@@ -53,7 +53,7 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdMotivoMovimiento(int IdMotivoMovimiento)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByMotivoMovimientoID(int id)
         {
             try
             {
@@ -62,8 +62,8 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.RegistroMovimiento
-                        .Where(x => x.IdMotivoMovimiento == IdMotivoMovimiento)
-                        .Include(x => x.Producto)
+                        .Where(x => x.IdMotivoMovimiento == id)
+                        .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
                         .Include(x => x.TipoMovimiento)
                         //.Include(x => x.MotivoMovimiento)
@@ -87,16 +87,16 @@ namespace Infraestructure.Repository
         }
     
 
-       public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdProducto(int IdProducto)
+       public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByProductoID(int id)
         {
-             try
+            /* try
              {
                  IEnumerable<RegistroMovimiento> lista = null;
                  using (MyContext ctx = new MyContext())
                  {
                      ctx.Configuration.LazyLoadingEnabled = false;
                      lista = ctx.RegistroMovimiento
-                         .Where(p => p.Producto.Any(x => x.IdProducto == IdProducto))
+                         .Where(p => p.RegistroProducto.Select(x=>x.Producto.Any(x => x.IdProducto == IdProducto)))
                          .Include(x => x.Producto)
                          .Include(x => x.Usuario)
                          .Include(x => x.TipoMovimiento)
@@ -117,12 +117,13 @@ namespace Infraestructure.Repository
                  string mensaje = "";
                  Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                  throw;
-             }
-           
+             }*/
+            throw new NotImplementedException();
+
         }
 
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdTipoMovimiento(int IdTipoMovimiento)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByTipoMovimientoID(int id)
         {
             try
             {
@@ -131,8 +132,8 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.RegistroMovimiento
-                        .Where(x => x.IdTipoMovimiento == IdTipoMovimiento)
-                        .Include(x => x.Producto)
+                        .Where(x => x.IdTipoMovimiento == id)
+                        .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
                         .Include(x => x.TipoMovimiento)
                         //.Include(x => x.MotivoMovimiento)
@@ -155,7 +156,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByIdUsuario(int IdUsuario)
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByUsuarioID(int id)
         {
             try
             {
@@ -164,8 +165,8 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.RegistroMovimiento
-                        .Where(x => x.IdUsuario == IdUsuario)
-                        .Include(x => x.Producto)
+                        .Where(x => x.IdUsuario == id)
+                        .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
                         .Include(x => x.TipoMovimiento)
                         //.Include(x => x.MotivoMovimiento)

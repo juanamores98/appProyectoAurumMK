@@ -12,11 +12,13 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MotivoMovimiento
+    public partial class RegistroProducto
     {
-        public int IdMotivoMovimiento { get; set; }
-        public string Descripcion { get; set; }
+        public int IdProducto { get; set; }
+        public int IdMovimiento { get; set; }
+        public Nullable<int> Cantidad { get; set; }
     
+        public virtual Producto Producto { get; set; }
         public virtual RegistroMovimiento RegistroMovimiento { get; set; }
     }
 }

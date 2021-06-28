@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryInventario : IRepositoryInventario
     {
-        public void DeleteInventario(int id)
+        public void DeleteInventarioByID(int id)
         {
             throw new NotImplementedException();
         }
@@ -46,12 +46,12 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Inventario> GetInventarioByEstadoSistema(int IdEstadoSistema)
+        public IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Inventario> GetInventarioByProductoID(int IdProducto)
+        public IEnumerable<Inventario> GetInventarioByProductoID(int id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Inventario
-                        .Where(x=>x.IdProducto==IdProducto)
+                        .Where(x=>x.IdProducto==id)
                         .Include(x => x.Producto)
                         .Include(x => x.Sucursal)
                         .ToList<Inventario>();
