@@ -11,52 +11,48 @@ namespace Infraestructure.Models
     {
 
         [Display(Name = "ID")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public int IdProducto { get; set; }
-        
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
-        
         [Display(Name = "Imagen del Producto")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public byte[] Imagen { get; set; }
-        
         [Display(Name = "Costo")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
-        [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "{0} deber númerico y con dos decimales")]
         public Nullable<double> CostoU { get; set; }
-        
         [Display(Name = "ID del estado en el sistema")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdEstadoSistema { get; set; }
         [Display(Name = "ID Categoria")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
         [Display(Name = "Categoria")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
-        [Display(Name = "Inventarios")]
-        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
+        [Display(Name = "Inventario")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [Display(Name = "Color")]
         public virtual ICollection<Color> Color { get; set; }
         [Display(Name = "Proveedor")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [Display(Name = "Registro Producto")]
-        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
+        [Display(Name = "Movimiento")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
     internal partial class InventarioMetadata
     {
         [Display(Name = "ID")]
         public int IdInventario { get; set; }
+        [Display(Name = "ID Producto")]
+        public int IdProducto { get; set; }
+        [Display(Name = "Cantidad Minima")]
+        public Nullable<int> StockMinimo { get; set; }
+        [Display(Name = "Cantidad")]
+        public Nullable<int> Stock { get; set; }
+        [Display(Name = "Estante")]
+        public string Estante { get; set; }
         [Display(Name = "ID Sucursal")]
         public Nullable<int> IdSucursal { get; set; }
-        [Display(Name = "Productos")]
-        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
+        [Display(Name = "Producto")]
+        public virtual Producto Producto { get; set; }
         [Display(Name = "Sucursal")]
         public virtual Sucursal Sucursal { get; set; }
     }
@@ -99,7 +95,9 @@ namespace Infraestructure.Models
         public virtual TipoMovimiento TipoMovimiento { get; set; }
         [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
-        [Display(Name = "Registro Producto")]
-        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
+        [Display(Name = "Producto")]
+        public virtual ICollection<Producto> Producto { get; set; }
     }
+
+
 }
