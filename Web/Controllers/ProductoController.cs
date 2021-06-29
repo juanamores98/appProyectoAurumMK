@@ -117,10 +117,10 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                /*ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
+                ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
                 ViewBag.listaInventario = listaSeleccionInventario(producto.InventarioProducto);
                 ViewBag.listaProveedor = listaSeleccionProveedor(producto.Proveedor);
-                ViewBag.listaColor = listaSeleccionColor(producto.Color);*/
+                ViewBag.listaColor = listaSeleccionColor(producto.Color);
                 return View(producto);
             }
             catch (Exception ex)
@@ -138,17 +138,50 @@ namespace Web.Controllers
         // POST: Producto/Save/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile,)
-        {/*
-            if (ModelState.IsValid)
+        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores)
+        {
+            MemoryStream target = new MemoryStream();
+            IServiceProducto _ServiceProducto = new ServiceProducto();
+            try
             {
-                db.Entry(producto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Cuando es Insert Image viene en null porque se pasa diferente
+                if (producto.Imagen == null)
+                {
+                    if (ImageFile != null)
+                    {
+                        ImageFile.InputStream.CopyTo(target);
+                        producto.Imagen = target.ToArray();
+                        ModelState.Remove("Imagen");
+                    }
+
+                }
+                if (ModelState.IsValid)
+                {
+                    Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
+                    ViewBag.listaInventario = listaSeleccionInventario(producto.InventarioProducto);
+                    ViewBag.listaProveedor = listaSeleccionProveedor(producto.Proveedor);
+                    ViewBag.listaColor = listaSeleccionColor(producto.Color);
+                    return View("Create", producto);
+                }
+
+                return RedirectToAction("IndexAdmin");
             }
-            ViewBag.IdCategoriaProducto = new SelectList(db.CategoriaProducto, "IdCategoriaProducto", "Descripcion", producto.IdCategoriaProducto);
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", producto.IdEstadoSistema);
-            */return View();
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         // GET: Producto/Delete/5

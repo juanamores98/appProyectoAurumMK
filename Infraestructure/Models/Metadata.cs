@@ -39,12 +39,15 @@ namespace Infraestructure.Models
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
         [Display(Name = "Inventarios")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [Display(Name = "Color")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Color> Color { get; set; }
         [Display(Name = "Proveedor")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [Display(Name = "Registro Producto")]
         public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }

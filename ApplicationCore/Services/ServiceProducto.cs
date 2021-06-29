@@ -52,9 +52,10 @@ namespace ApplicationCore.Services
             return repository.GetProductoByProveedorID(id);
         }
 
-        public Producto Save()
+        public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores)
         {
-            throw new NotImplementedException();
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.Save(producto,seleccionInventarios,  seleccionProveedores, seleccionColores);
         }
     }
 }
