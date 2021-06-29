@@ -138,7 +138,7 @@ namespace Web.Controllers
         // POST: Producto/Save/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "IdProducto,Nombre,Imagen,CostoU,IdEstadoSistema,IdCategoriaProducto")] Producto producto)
+        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile,)
         {/*
             if (ModelState.IsValid)
             {
@@ -208,7 +208,6 @@ namespace Web.Controllers
             }
 
             return new MultiSelectList(listaInventario, "IdInventario", "IdInventario", listaInventarioSelect);
-
         }
         private MultiSelectList listaSeleccionProveedor(ICollection<Proveedor> proveedores)
         {
