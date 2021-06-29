@@ -106,7 +106,7 @@
                                         <th></th>
                                     </tr>
 
-                                    @foreach (var item in (List<Infraestructure.Models.Proveedor>)ViewBag.listaProveedorProducto)
+                                    @foreach (var item in (List<Infraestructure.Models.Proveedor>)ViewBag.listaProveedor)
                                     {
                                         <tr>
                                             <td>
@@ -164,7 +164,7 @@
                                         <th></th>
                                     </tr>
 
-                                    @foreach (var item in  (List<Infraestructure.Models.Inventario>)ViewBag.listaInventarioProducto)
+                                    @foreach (var item in (List<Infraestructure.Models.InventarioProducto>)ViewBag.listaInventarioProducto)
                                     {
                                         <tr>
                                             <td>
@@ -180,7 +180,7 @@
                                                 @Html.DisplayFor(modelItem => item.Estante)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+                                                @Html.DisplayFor(modelItem => item.Inventario.Sucursal.Nombre)
                                             </td>
                                         </tr>
                                     }

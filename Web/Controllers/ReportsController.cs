@@ -14,12 +14,12 @@ namespace web.Controllers
         // GET: Reporte
         public ActionResult Index()
         {
-            IEnumerable<Inventario> lista= null;
+            IEnumerable<InventarioProducto> lista= null;
             try
             {
-                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
                 IServiceRegistroMovimiento _ServiceRegistroMovimiento = new ServiceRegistroMovimiento();
-                lista = _ServiceInventario.GetInventario();
+                lista = _ServiceInventarioProducto.GetInventarioProducto();
                 ViewBag.registroEntradas = _ServiceRegistroMovimiento.GetRegistroMovimiento().Where(r => r.IdTipoMovimiento == 1).Count();
                 ViewBag.registroSalidas = _ServiceRegistroMovimiento.GetRegistroMovimiento().Where(m => m.IdTipoMovimiento == 2).Count();
                 return View(lista);

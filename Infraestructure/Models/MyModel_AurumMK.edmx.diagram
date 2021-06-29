@@ -4,25 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c02744068a744089a749b4dd0e6b00c7" Name="Diagram1">
-        <EntityTypeShape EntityType="AuronMkModel.CalificacionUsuario" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.CategoriaProducto" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Color" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.ContactoProveedor" Width="1.5" PointX="12.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.CostoEnvio" Width="1.5" PointX="9" PointY="25.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.EstadoSistema" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Inventario" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.MotivoMovimiento" Width="1.5" PointX="6" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Pedido" Width="1.5" PointX="11.25" PointY="17" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.PedidoProducto" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Producto" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Proveedor" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.RegistroMovimiento" Width="1.5" PointX="8.25" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.RegistroProducto" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Sucursal" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.TipoMovimiento" Width="1.5" PointX="6" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.TipoUsuario" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Usuario" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+      <Diagram DiagramId="d588fbeab15a4edd9309cb34521098ff" Name="Diagram1">
+        <EntityTypeShape EntityType="AuronMkModel.CalificacionUsuario" Width="1.5" PointX="10.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.CategoriaProducto" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Color" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.ContactoProveedor" Width="1.5" PointX="12.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.CostoEnvio" Width="1.5" PointX="11" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.EstadoSistema" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Inventario" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.InventarioProducto" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.MotivoMovimiento" Width="1.5" PointX="11" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Pedido" Width="1.5" PointX="13.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.PedidoProducto" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Producto" Width="1.5" PointX="5.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Proveedor" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.RegistroMovimiento" Width="1.5" PointX="13.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.RegistroProducto" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Sucursal" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.TipoMovimiento" Width="1.5" PointX="11" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.TipoUsuario" Width="1.5" PointX="5.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Usuario" Width="1.5" PointX="8" PointY="12.625" IsExpanded="true" />
         <AssociationConnector Association="AuronMkModel.FK_IdUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdCategoriaProducto" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdEstadoSistema2" ManuallyRouted="false" />
@@ -33,8 +34,9 @@
         <AssociationConnector Association="AuronMkModel.FK_IdEstadoSistema1" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdEstadoSistema3" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdEstadoSistema5" ManuallyRouted="false" />
-        <AssociationConnector Association="AuronMkModel.FK_IdProducto4" ManuallyRouted="false" />
+        <AssociationConnector Association="AuronMkModel.FK_IdInventario" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdSucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="AuronMkModel.FK_IdProducto" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdMotivoMovimiento" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdPedido" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.FK_IdUsuario1" ManuallyRouted="false" />

@@ -25,7 +25,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Inventario
-                        .Include(x => x.Producto)
+                        .Include("InventarioProducto.Producto")
                         .Include(x => x.Sucursal)
                         .ToList<Inventario>();
                 }
@@ -51,7 +51,7 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Inventario> GetInventarioByProductoID(int id)
+        public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {
             try
             {
@@ -60,8 +60,8 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Inventario
-                        .Where(x=>x.IdProducto==id)
-                        .Include(x => x.Producto)
+                        .Where(x=>x.IdSucursal==id)
+                        .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
                         .ToList<Inventario>();
                 }
@@ -84,7 +84,17 @@ namespace Infraestructure.Repository
 
         public Inventario GetInventarioByID(int id)
         {
-            throw new NotImplementedException();
+            Inventario oInventario = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oInventario = ctx.Inventario
+                        .Where(p => p.IdInventario == id)
+                        .Include(x=>x.InventarioProducto)
+                        .Include(x => x.Sucursal)
+                        .FirstOrDefault();
+            }
+            return oInventario;
         }
 
         public Inventario Save()

@@ -26,10 +26,10 @@ namespace ApplicationCore.Services
         {
             throw new NotImplementedException();
         }
-        public IEnumerable<Inventario> GetInventarioByProductoID(int id)
+        public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {
             IRepositoryInventario repository = new RepositoryInventario();
-            return repository.GetInventarioByProductoID(id);
+            return repository.GetInventarioBySucursalID(id);
         }
 
         public Inventario GetInventarioByID(int id)

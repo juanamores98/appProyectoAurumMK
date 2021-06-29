@@ -44,7 +44,7 @@ namespace Web.Controllers
             ServiceProducto _ServiceProducto = new ServiceProducto();
             Producto producto = null;
             IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-            IServiceInventario _ServiceInventario = new ServiceInventario();
+            IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
 
             try
             {
@@ -64,8 +64,8 @@ namespace Web.Controllers
                     return RedirectToAction("Default", "Error");
                 }
                 
-                ViewBag.listaProveedorProducto = _ServiceProveedor.GetProveedorByProductoID(id.Value);
-                ViewBag.listaInventarioProducto = _ServiceInventario.GetInventarioByProductoID(id.Value);
+                ViewBag.listaProveedor = _ServiceProveedor.GetProveedorByProductoID(id.Value);
+                ViewBag.listaInventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByProductoID(id.Value);
                 
                 return View(producto);
             }
@@ -117,10 +117,10 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
-                ViewBag.listaInventario = listaSeleccionInventario(producto.Inventario);
+                /*ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
+                ViewBag.listaInventario = listaSeleccionInventario(producto.InventarioProducto);
                 ViewBag.listaProveedor = listaSeleccionProveedor(producto.Proveedor);
-                ViewBag.listaColor = listaSeleccionColor(producto.Color);
+                ViewBag.listaColor = listaSeleccionColor(producto.Color);*/
                 return View(producto);
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save([Bind(Include = "IdProducto,Nombre,Imagen,CostoU,IdEstadoSistema,IdCategoriaProducto")] Producto producto)
-        {
+        {/*
             if (ModelState.IsValid)
             {
                 db.Entry(producto).State = EntityState.Modified;
@@ -148,13 +148,13 @@ namespace Web.Controllers
             }
             ViewBag.IdCategoriaProducto = new SelectList(db.CategoriaProducto, "IdCategoriaProducto", "Descripcion", producto.IdCategoriaProducto);
             ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", producto.IdEstadoSistema);
-            return View(producto);
+            */return View();
         }
 
         // GET: Producto/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -162,8 +162,8 @@ namespace Web.Controllers
             if (producto == null)
             {
                 return HttpNotFound();
-            }
-            return View(producto);
+            }*/
+            return View();
         }
 
         // POST: Producto/Delete/5
@@ -171,20 +171,20 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Producto producto = db.Producto.Find(id);
+            /*Producto producto = db.Producto.Find(id);
             db.Producto.Remove(producto);
-            db.SaveChanges();
+            db.SaveChanges();*/
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
         //METODOS AUXILIARES
         private SelectList listaSeleccionCategoriaProducto(int idCategoriaProducto = 0)
         {
@@ -193,11 +193,12 @@ namespace Web.Controllers
             IEnumerable<CategoriaProducto> listaCategoriaProducto = _ServiceCategoriaProducto.GetCategoriaProducto();
             return new SelectList(listaCategoriaProducto, "IdCategoriaProducto", "Descripcion", idCategoriaProducto);
         }
-        private MultiSelectList listaSeleccionInventario(ICollection<Inventario> inventarios)
+        private MultiSelectList listaSeleccionInventario(ICollection<InventarioProducto> inventarios)
         {
             //Lista de Inventario
             IServiceInventario _ServiceInventario = new ServiceInventario();
             IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventario();
+            //Inventarios donde se encuentra el producto
             int[] listaInventarioSelect = null;
 
             if (inventarios != null)

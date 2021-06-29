@@ -13,16 +13,20 @@ namespace Infraestructure.Models
         [Display(Name = "ID")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public int IdProducto { get; set; }
+        
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
+        
         [Display(Name = "Imagen del Producto")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public byte[] Imagen { get; set; }
+        
         [Display(Name = "Costo")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [RegularExpression(@"^[0-9]+(\.[0-9]{1,2})?$", ErrorMessage = "{0} deber númerico y con dos decimales")]
         public Nullable<double> CostoU { get; set; }
+        
         [Display(Name = "ID del estado en el sistema")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdEstadoSistema { get; set; }
@@ -34,8 +38,8 @@ namespace Infraestructure.Models
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
-        [Display(Name = "Inventario")]
-        public virtual ICollection<Inventario> Inventario { get; set; }
+        [Display(Name = "Inventarios")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [Display(Name = "Color")]
@@ -49,18 +53,10 @@ namespace Infraestructure.Models
     {
         [Display(Name = "ID")]
         public int IdInventario { get; set; }
-        [Display(Name = "ID Producto")]
-        public int IdProducto { get; set; }
-        [Display(Name = "Cantidad Minima")]
-        public Nullable<int> StockMinimo { get; set; }
-        [Display(Name = "Cantidad")]
-        public Nullable<int> Stock { get; set; }
-        [Display(Name = "Estante")]
-        public string Estante { get; set; }
         [Display(Name = "ID Sucursal")]
         public Nullable<int> IdSucursal { get; set; }
-        [Display(Name = "Producto")]
-        public virtual Producto Producto { get; set; }
+        [Display(Name = "Productos")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Sucursal")]
         public virtual Sucursal Sucursal { get; set; }
     }

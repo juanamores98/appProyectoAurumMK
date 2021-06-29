@@ -66,14 +66,20 @@
         <EntityType Name="Inventario">
           <Key>
             <PropertyRef Name="IdInventario" />
+          </Key>
+          <Property Name="IdInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventarioProducto">
+          <Key>
+            <PropertyRef Name="IdInventario" />
             <PropertyRef Name="IdProducto" />
           </Key>
           <Property Name="IdInventario" Type="int" Nullable="false" />
           <Property Name="IdProducto" Type="int" Nullable="false" />
-          <Property Name="StockMinimo" Type="int" />
           <Property Name="Stock" Type="int" />
+          <Property Name="StockMinimo" Type="int" />
           <Property Name="Estante" Type="varchar(max)" />
-          <Property Name="IdSucursal" Type="int" />
         </EntityType>
         <EntityType Name="MotivoMovimiento">
           <Key>
@@ -299,6 +305,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IdInventario">
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="InventarioProducto" Type="Self.InventarioProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventario">
+              <PropertyRef Name="IdInventario" />
+            </Principal>
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdInventario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IdMotivoMovimiento">
           <End Role="MotivoMovimiento" Type="Self.MotivoMovimiento" Multiplicity="1" />
           <End Role="RegistroMovimiento" Type="Self.RegistroMovimiento" Multiplicity="0..1" />
@@ -335,6 +353,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IdProducto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="InventarioProducto" Type="Self.InventarioProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IdProducto2">
           <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
           <End Role="ColorProducto" Type="Self.ColorProducto" Multiplicity="*" />
@@ -355,18 +385,6 @@
               <PropertyRef Name="IdProducto" />
             </Principal>
             <Dependent Role="ProductoProveedor">
-              <PropertyRef Name="IdProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IdProducto4">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
-            </Principal>
-            <Dependent Role="Inventario">
               <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
@@ -420,7 +438,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IdSucursal">
-          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
           <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
@@ -500,6 +518,7 @@
           <EntitySet Name="CostoEnvio" EntityType="Self.CostoEnvio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoSistema" EntityType="Self.EstadoSistema" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventarioProducto" EntityType="Self.InventarioProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MotivoMovimiento" EntityType="Self.MotivoMovimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PedidoProducto" EntityType="Self.PedidoProducto" Schema="dbo" store:Type="Tables" />
@@ -548,6 +567,10 @@
             <End Role="EstadoSistema" EntitySet="EstadoSistema" />
             <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_IdInventario" Association="Self.FK_IdInventario">
+            <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
+          </AssociationSet>
           <AssociationSet Name="FK_IdMotivoMovimiento" Association="Self.FK_IdMotivoMovimiento">
             <End Role="MotivoMovimiento" EntitySet="MotivoMovimiento" />
             <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
@@ -560,6 +583,10 @@
             <End Role="Pedido" EntitySet="Pedido" />
             <End Role="PedidoProducto" EntitySet="PedidoProducto" />
           </AssociationSet>
+          <AssociationSet Name="FK_IdProducto" Association="Self.FK_IdProducto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
+          </AssociationSet>
           <AssociationSet Name="FK_IdProducto2" Association="Self.FK_IdProducto2">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="ColorProducto" EntitySet="ColorProducto" />
@@ -567,10 +594,6 @@
           <AssociationSet Name="FK_IdProducto3" Association="Self.FK_IdProducto3">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="ProductoProveedor" EntitySet="ProductoProveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IdProducto4" Association="Self.FK_IdProducto4">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
           <AssociationSet Name="FK_IdProducto5" Association="Self.FK_IdProducto5">
             <End Role="Producto" EntitySet="Producto" />
@@ -684,16 +707,24 @@
         <EntityType Name="Inventario">
           <Key>
             <PropertyRef Name="IdInventario" />
+          </Key>
+          <Property Name="IdInventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InventarioProducto" Relationship="Self.FK_IdInventario" FromRole="Inventario" ToRole="InventarioProducto" />
+          <NavigationProperty Name="Sucursal" Relationship="Self.FK_IdSucursal" FromRole="Inventario" ToRole="Sucursal" />
+        </EntityType>
+        <EntityType Name="InventarioProducto">
+          <Key>
+            <PropertyRef Name="IdInventario" />
             <PropertyRef Name="IdProducto" />
           </Key>
           <Property Name="IdInventario" Type="Int32" Nullable="false" />
           <Property Name="IdProducto" Type="Int32" Nullable="false" />
-          <Property Name="StockMinimo" Type="Int32" />
           <Property Name="Stock" Type="Int32" />
+          <Property Name="StockMinimo" Type="Int32" />
           <Property Name="Estante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <NavigationProperty Name="Producto" Relationship="Self.FK_IdProducto4" FromRole="Inventario" ToRole="Producto" />
-          <NavigationProperty Name="Sucursal" Relationship="Self.FK_IdSucursal" FromRole="Inventario" ToRole="Sucursal" />
+          <NavigationProperty Name="Inventario" Relationship="Self.FK_IdInventario" FromRole="InventarioProducto" ToRole="Inventario" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_IdProducto" FromRole="InventarioProducto" ToRole="Producto" />
         </EntityType>
         <EntityType Name="MotivoMovimiento">
           <Key>
@@ -742,7 +773,7 @@
           <Property Name="IdCategoriaProducto" Type="Int32" />
           <NavigationProperty Name="CategoriaProducto" Relationship="Self.FK_IdCategoriaProducto" FromRole="Producto" ToRole="CategoriaProducto" />
           <NavigationProperty Name="EstadoSistema" Relationship="Self.FK_IdEstadoSistema1" FromRole="Producto" ToRole="EstadoSistema" />
-          <NavigationProperty Name="Inventario" Relationship="Self.FK_IdProducto4" FromRole="Producto" ToRole="Inventario" />
+          <NavigationProperty Name="InventarioProducto" Relationship="Self.FK_IdProducto" FromRole="Producto" ToRole="InventarioProducto" />
           <NavigationProperty Name="PedidoProducto" Relationship="Self.FK_IdProductos" FromRole="Producto" ToRole="PedidoProducto" />
           <NavigationProperty Name="RegistroProducto" Relationship="Self.FK_IdProducto5" FromRole="Producto" ToRole="RegistroProducto" />
           <NavigationProperty Name="Color" Relationship="Self.ColorProducto" FromRole="Producto" ToRole="Color" />
@@ -954,20 +985,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_IdProducto4">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+        <Association Name="FK_IdInventario">
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="1" />
+          <End Role="InventarioProducto" Type="Self.InventarioProducto" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="IdProducto" />
+            <Principal Role="Inventario">
+              <PropertyRef Name="IdInventario" />
             </Principal>
-            <Dependent Role="Inventario">
-              <PropertyRef Name="IdProducto" />
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdInventario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IdSucursal">
-          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="1" />
           <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sucursal">
@@ -975,6 +1006,18 @@
             </Principal>
             <Dependent Role="Inventario">
               <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdProducto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="InventarioProducto" Type="Self.InventarioProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdProducto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1102,6 +1145,7 @@
           <EntitySet Name="CostoEnvio" EntityType="Self.CostoEnvio" />
           <EntitySet Name="EstadoSistema" EntityType="Self.EstadoSistema" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
+          <EntitySet Name="InventarioProducto" EntityType="Self.InventarioProducto" />
           <EntitySet Name="MotivoMovimiento" EntityType="Self.MotivoMovimiento" />
           <EntitySet Name="Pedido" EntityType="Self.Pedido" />
           <EntitySet Name="PedidoProducto" EntityType="Self.PedidoProducto" />
@@ -1153,13 +1197,17 @@
             <End Role="EstadoSistema" EntitySet="EstadoSistema" />
             <End Role="Sucursal" EntitySet="Sucursal" />
           </AssociationSet>
-          <AssociationSet Name="FK_IdProducto4" Association="Self.FK_IdProducto4">
-            <End Role="Producto" EntitySet="Producto" />
+          <AssociationSet Name="FK_IdInventario" Association="Self.FK_IdInventario">
             <End Role="Inventario" EntitySet="Inventario" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_IdSucursal" Association="Self.FK_IdSucursal">
             <End Role="Sucursal" EntitySet="Sucursal" />
             <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdProducto" Association="Self.FK_IdProducto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_IdMotivoMovimiento" Association="Self.FK_IdMotivoMovimiento">
             <End Role="MotivoMovimiento" EntitySet="MotivoMovimiento" />
@@ -1272,11 +1320,18 @@
             <EntityTypeMapping TypeName="AuronMkModel.Inventario">
               <MappingFragment StoreEntitySet="Inventario">
                 <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Estante" ColumnName="Estante" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventarioProducto">
+            <EntityTypeMapping TypeName="AuronMkModel.InventarioProducto">
+              <MappingFragment StoreEntitySet="InventarioProducto">
+                <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="StockMinimo" ColumnName="StockMinimo" />
+                <ScalarProperty Name="Estante" ColumnName="Estante" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

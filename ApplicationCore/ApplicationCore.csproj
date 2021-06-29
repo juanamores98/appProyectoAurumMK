@@ -45,12 +45,14 @@
     <Compile Include="Services\IServiceCategoriaProducto.cs" />
     <Compile Include="Services\IServiceColor.cs" />
     <Compile Include="Services\IServiceInventario.cs" />
+    <Compile Include="Services\IServiceInventarioProducto.cs" />
     <Compile Include="Services\IServiceProducto.cs" />
     <Compile Include="Services\IServiceProveedor.cs" />
     <Compile Include="Services\IServiceRegistroMovimiento.cs" />
     <Compile Include="Services\ServiceCategoriaProducto.cs" />
     <Compile Include="Services\ServiceColor.cs" />
     <Compile Include="Services\ServiceInventario.cs" />
+    <Compile Include="Services\ServiceInventarioProducto.cs" />
     <Compile Include="Services\ServiceProducto.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceRegistroMovimiento.cs" />

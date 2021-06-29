@@ -16,14 +16,17 @@ namespace Infraestructure.Models
     [MetadataType(typeof(InventarioMetadata))]
     public partial class Inventario
     {
-        public int IdInventario { get; set; }
-        public int IdProducto { get; set; }
-        public Nullable<int> StockMinimo { get; set; }
-        public Nullable<int> Stock { get; set; }
-        public string Estante { get; set; }
-        public Nullable<int> IdSucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Inventario()
+        {
+            this.InventarioProducto = new HashSet<InventarioProducto>();
+        }
     
-        public virtual Producto Producto { get; set; }
+        public int IdInventario { get; set; }
+        public int IdSucursal { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         public virtual Sucursal Sucursal { get; set; }
     }
 }
