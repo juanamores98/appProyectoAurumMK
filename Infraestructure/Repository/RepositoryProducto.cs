@@ -88,7 +88,7 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public Producto Save(/*Producto producto, string[] seleccionInventarios,string[] seleccionProveedores,string[] seleccionColores*/)
+        public Producto Save(Producto producto, string[] seleccionInventarios,string[] seleccionProveedores,string[] seleccionColores)
         {
             /*int retorno = 0;
             Producto oProducto = null;

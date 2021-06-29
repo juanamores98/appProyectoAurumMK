@@ -26,13 +26,16 @@ namespace Infraestructure.Models
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
-        [Display(Name = "Inventario")]
-        public virtual ICollection<Inventario> Inventario { get; set; }
+        [Display(Name = "Inventarios")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [Display(Name = "Color")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Color> Color { get; set; }
         [Display(Name = "Proveedor")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [Display(Name = "Movimiento")]
         public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
