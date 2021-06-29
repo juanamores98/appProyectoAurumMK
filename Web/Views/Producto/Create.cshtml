@@ -57,7 +57,7 @@
                             @Html.DropDownList("seleccionInventarios",
                             (MultiSelectList)ViewBag.listaSeleccionInventario,
                             "Seleccione inventarios",
-                            htmlAttributes: new { @class = "form-control" })
+                            new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
                             @Html.ValidationMessageFor(model => model.InventarioProducto, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             @Html.DropDownList("seleccionProveedores",
                             (MultiSelectList)ViewBag.listaSeleccionProveedor,
                             "Seleccione proveedores",
-                            htmlAttributes: new { @class = "form-control" })
+                            new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
                             @Html.ValidationMessageFor(model => model.Proveedor, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             @Html.DropDownList("seleccionColores",
                             (MultiSelectList)ViewBag.listaSeleccionColor,
                             "Seleccione colores",
-                            htmlAttributes: new { @class = "form-control" })
+                            new { htmlAttributes= new { @class = "form-control" }, multiple = "multiple" })
                             @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
                         </div>
                     </div>
