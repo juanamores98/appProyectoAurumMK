@@ -31,10 +31,10 @@ namespace Infraestructure.Models
         public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
-        [Display(Name = "Color")]
+        [Display(Name = "Colores")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Color> Color { get; set; }
-        [Display(Name = "Proveedor")]
+        [Display(Name = "Proveedores")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [Display(Name = "Movimiento")]

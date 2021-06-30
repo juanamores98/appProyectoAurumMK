@@ -117,10 +117,10 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
-                ViewBag.listaInventario = listaSeleccionInventario(producto.InventarioProducto);
-                ViewBag.listaProveedor = listaSeleccionProveedor(producto.Proveedor);
-                ViewBag.listaColor = listaSeleccionColor(producto.Color);
+                ViewBag.listaSeleccionCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
+                ViewBag.listaSeleccionInventario = listaSeleccionInventario(producto.InventarioProducto);
+                ViewBag.listaSeleccionProveedor = listaSeleccionProveedor(producto.Proveedor);
+                ViewBag.listaSeleccionColor = listaSeleccionColor(producto.Color);
                 return View(producto);
             }
             catch (Exception ex)
