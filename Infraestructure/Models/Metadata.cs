@@ -43,18 +43,8 @@ namespace Infraestructure.Models
     {
         [Display(Name = "ID")]
         public int IdInventario { get; set; }
-        [Display(Name = "ID Producto")]
-        public int IdProducto { get; set; }
-        [Display(Name = "Cantidad Minima")]
-        public Nullable<int> StockMinimo { get; set; }
-        [Display(Name = "Cantidad")]
-        public Nullable<int> Stock { get; set; }
-        [Display(Name = "Estante")]
-        public string Estante { get; set; }
         [Display(Name = "ID Sucursal")]
         public Nullable<int> IdSucursal { get; set; }
-        [Display(Name = "Producto")]
-        public virtual Producto Producto { get; set; }
         [Display(Name = "Sucursal")]
         public virtual Sucursal Sucursal { get; set; }
     }
