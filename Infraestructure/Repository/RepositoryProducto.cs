@@ -231,7 +231,7 @@ namespace Infraestructure.Repository
                         }
                         //Actualizar o Insertar Color
                         var seleccionColoresID = new HashSet<string>(seleccionColores);
-                        if (seleccionColores != null)
+                        if (seleccionColores != null) 
                         {
                             ctx.Entry(producto).Collection(p => p.Color).Load();
                             var newColorForProducto = ctx.Color
