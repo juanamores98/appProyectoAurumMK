@@ -10,6 +10,10 @@ namespace Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
+            //Jqueryui
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                      "~/Scripts/jquery-ui.js"
+                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,7 +30,8 @@ namespace Web
                       //"~/Content/bootstrap.css",
                       //"~/Content/site.css"));
                       "~/Content/MiEstilo.css",
-                      "~/Content/bootstrap_united.css"
+                      "~/Content/bootstrap_united.css",
+                      "~/Content/jquery-ui.css"
                       ));
         }
     }

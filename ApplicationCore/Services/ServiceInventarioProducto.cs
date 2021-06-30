@@ -20,7 +20,11 @@ namespace ApplicationCore.Services
             IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
             return repository.GetInventarioProducto();
         }
-
+        public InventarioProducto GetInventarioProductoByID(int idInventario, int idProducto)
+        {
+            IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
+            return repository.GetInventarioProductoByID(idInventario, idProducto);
+        }
         public IEnumerable<InventarioProducto> GetInventarioProductoByInventarioID(int id)
         {
             IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();

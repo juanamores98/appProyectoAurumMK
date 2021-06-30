@@ -45,7 +45,20 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-
+        public InventarioProducto GetInventarioProductoByID(int idInventario,int idProducto)
+        {
+            InventarioProducto oInventarioProducto = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oInventarioProducto = ctx.InventarioProducto
+                        .Where(x => x.IdInventario == idInventario && x.IdProducto == idProducto)
+                        .Include(x => x.Producto)
+                        .Include(x => x.Inventario.Sucursal)
+                        .FirstOrDefault();
+            }
+            return oInventarioProducto;
+        }
         public IEnumerable<InventarioProducto> GetInventarioProductoByInventarioID(int id)
         {
             try

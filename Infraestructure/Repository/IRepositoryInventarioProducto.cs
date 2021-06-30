@@ -10,6 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoryInventarioProducto
     {
         IEnumerable<InventarioProducto> GetInventarioProducto();
+        InventarioProducto GetInventarioProductoByID(int idInventario, int idProducto);
         IEnumerable<InventarioProducto> GetInventarioProductoByInventarioID(int id);
         IEnumerable<InventarioProducto> GetInventarioProductoByProductoID(int id);
         void DeleteInventarioProductoByID(int id);

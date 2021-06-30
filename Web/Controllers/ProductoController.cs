@@ -24,7 +24,7 @@ namespace Web.Controllers
             try
             {
                 IServiceProducto _ServiceProducto = new ServiceProducto();
-                lista = _ServiceProducto.GetProducto();
+                lista = _ServiceProducto.GetProductoByEstadoSistemaID(1);
                 ViewBag.title = "Lista Producto";
                 return View(lista);
             }
@@ -137,13 +137,18 @@ namespace Web.Controllers
 
         // POST: Producto/Save/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores)
+        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema = 1)
         {
             MemoryStream target = new MemoryStream();
             IServiceProducto _ServiceProducto = new ServiceProducto();
             try
             {
+                //Se llenan las variables 
+                if (idEstadoSistema==0)
+                {
+                    seleccionInventarios = seleccionProveedores = seleccionColores = new string[0];
+                }
+
                 // Cuando es Insert Image viene en null porque se pasa diferente
                 if (producto.Imagen == null)
                 {
@@ -157,28 +162,28 @@ namespace Web.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores);
+                    Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores, idEstadoSistema);
                 }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.Util.ValidateErrors(this);
-                    ViewBag.listaCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
-                    ViewBag.listaInventario = listaSeleccionInventario(producto.InventarioProducto);
-                    ViewBag.listaProveedor = listaSeleccionProveedor(producto.Proveedor);
-                    ViewBag.listaColor = listaSeleccionColor(producto.Color);
+                    ViewBag.listaSeleccionCategoriaProducto = listaSeleccionCategoriaProducto(producto.IdCategoriaProducto.Value);
+                    ViewBag.listaSeleccionInventario = listaSeleccionInventario(producto.InventarioProducto);
+                    ViewBag.listaSeleccionProveedor = listaSeleccionProveedor(producto.Proveedor);
+                    ViewBag.listaSeleccionColor = listaSeleccionColor(producto.Color);
                     return View("Create", producto);
                 }
 
-                return RedirectToAction("IndexAdmin");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
+                TempData["Redirect"] = "Producto";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
@@ -187,16 +192,37 @@ namespace Web.Controllers
         // GET: Producto/Delete/5
         public ActionResult Delete(int? id)
         {
-            /*if (id == null)
+            ServiceProducto _ServiceProducto = new ServiceProducto();
+            Producto producto = null;
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                producto = _ServiceProducto.GetProductoByID(id.Value);
+                if (producto == null)
+                {
+                    TempData["Message"] = "No existe el producto solicitado";
+                    TempData["Redirect"] = "Producto";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(producto);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
-            }*/
-            return View();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Producto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         // POST: Producto/Delete/5

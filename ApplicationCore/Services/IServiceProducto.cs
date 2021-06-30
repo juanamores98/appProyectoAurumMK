@@ -16,6 +16,6 @@ namespace ApplicationCore.Services
         IEnumerable<Producto> GetProductoByColorID(int id);
         IEnumerable<Producto> GetProductoByProveedorID(int id);
         void DeleteProductoByID(int id);
-        Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores);
+        Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores, int idEstadoSistema);
     }
 }

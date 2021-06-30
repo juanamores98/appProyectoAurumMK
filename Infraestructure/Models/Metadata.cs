@@ -28,13 +28,11 @@ namespace Infraestructure.Models
         public Nullable<double> CostoU { get; set; }
         
         [Display(Name = "ID del estado en el sistema")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdEstadoSistema { get; set; }
         [Display(Name = "ID Categoria")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
         [Display(Name = "Categoria")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
