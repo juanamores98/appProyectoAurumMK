@@ -37,8 +37,8 @@ namespace Infraestructure.Models
         [Display(Name = "Proveedores")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [Display(Name = "Movimiento")]
-        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
+        //[Display(Name = "Movimiento")] este da problemas
+        //public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
     internal partial class InventarioMetadata
     {
@@ -101,6 +101,7 @@ namespace Infraestructure.Models
         [Display(Name = "Producto")]
         public virtual ICollection<Producto> Producto { get; set; }
     }
+
     internal partial class RegistroMovimientoMetadata
     {
 
@@ -257,4 +258,201 @@ namespace Infraestructure.Models
         [Display(Name = "Sucursal")]
         public virtual ICollection<Sucursal> Sucursal { get; set; }
     }
+
+    internal partial class InventarioProductoMetadata
+    {
+        [Display(Name = "Inventario")]
+        public int IdInventario { get; set; }
+
+        [Display(Name = "Código producto")]
+        public int IdProducto { get; set; }
+
+        [Display(Name = "Cantidad en stock")]
+        public Nullable<int> Stock { get; set; }
+
+        [Display(Name = "Stock mínimo")]
+        public Nullable<int> StockMinimo { get; set; }
+
+        [Display(Name = "Estante")]
+        public string Estante { get; set; }
+
+        [Display(Name = "Inventario")]
+        public virtual Inventario Inventario { get; set; }
+
+        [Display(Name = "Producto")]
+        public virtual Producto Producto { get; set; }
+    }
+
+    internal partial class MotivoMovimientoMetadata
+    {
+        [Display(Name = "Motivo del Movimiento")]
+        public int IdMotivoMovimiento { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Registro de Movimiento")]
+        public virtual RegistroMovimiento RegistroMovimiento { get; set; }
+    }
+
+    internal partial class PedidoMetadata
+    {
+        [Display(Name = "Código pedido")]
+        public int IdPedido { get; set; }
+
+        [Display(Name = "Impuesto")]
+        public Nullable<double> Impuesto { get; set; }
+
+        [Display(Name = "Descuento")]
+        public Nullable<double> Descuento { get; set; }
+
+        [Display(Name = "SubTotal")]
+        public Nullable<double> SubTotal { get; set; }
+
+        [Display(Name = "Total")]
+        public Nullable<double> Total { get; set; }
+
+        [Display(Name = "Costo de envío")]
+        public Nullable<int> IdCostoEnvio { get; set; }
+
+        [Display(Name = "Código usuario")]
+        public Nullable<int> IdUsuario { get; set; }
+
+        [Display(Name = "Fecha y hora")]
+        public string FechaHora { get; set; }
+
+        [Display(Name = "Costo del envío")]
+        public virtual CostoEnvio CostoEnvio { get; set; }
+
+        [Display(Name = "Pedido y productos")]
+        public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
+
+        [Display(Name = "Usuario")]
+        public virtual Usuario Usuario { get; set; }
+    }
+
+    internal partial class PedidoProductoMetadata
+    {
+
+        [Display(Name = "Código pedido")]
+        public int IdPedido { get; set; }
+
+        [Display(Name = "Código producto")]
+        public int IdProducto { get; set; }
+
+        [Display(Name = "Cantidad")]
+        public Nullable<int> Cantidad { get; set; }
+
+        [Display(Name = "Pedido")]
+        public virtual Pedido Pedido { get; set; }
+
+        [Display(Name = "Producto")]
+        public virtual Producto Producto { get; set; }
+    }
+
+    internal partial class RegistroProductoMetadata
+    {
+        [Display(Name = "Código producto")]
+        public int IdProducto { get; set; }
+
+        [Display(Name = "Código movimiento")]
+        public int IdMovimiento { get; set; }
+
+        [Display(Name = "Cantidad")]
+        public Nullable<int> Cantidad { get; set; }
+
+        [Display(Name = "Producto")]
+        public virtual Producto Producto { get; set; }
+
+        [Display(Name = "Registro movimiento")]
+        public virtual RegistroMovimiento RegistroMovimiento { get; set; }
+    }
+
+    internal partial class SucursalMetadata
+    {
+        [Display(Name = "Código sucursal")]
+        public int IdSucursal { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Teléfono")]
+        public Nullable<int> Telefono { get; set; }
+
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
+
+        [Display(Name = "Código estado en sistema")]
+        public Nullable<int> IdEstadoSistema { get; set; }
+
+        [Display(Name = "Estado en sistema")]
+        public virtual EstadoSistema EstadoSistema { get; set; }
+
+        [Display(Name = "Inventario")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
+    }
+    internal partial class TipoMovimientoMetadata
+    {
+        [Display(Name = "Código tipo movimiento")]
+        public int IdTipoMovimiento { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Registro de movimiento")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
+    }
+
+    internal partial class TipoUsuarioMetadata
+    {
+        [Display(Name = "Código tipo usuario")]
+        public int IdTipoUsuario { get; set; }
+
+        [Display(Name = "Descripción")]
+        public string Descripcion { get; set; }
+
+        [Display(Name = "Usuario")]
+        public virtual ICollection<Usuario> Usuario { get; set; }
+    }
+    internal partial class UsuarioMetadata
+    {
+        [Display(Name = "Código usuario")]
+        public int IdUsuario { get; set; }
+
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Display(Name = "Correo")]
+        public string Correo { get; set; }
+
+        [Display(Name = "Contraseña")]
+        public string Contra { get; set; }
+
+        [Display(Name = "Teléfono")]
+        public Nullable<int> Telefono { get; set; }
+
+        [Display(Name = "Dirección")]
+        public string Direccion { get; set; }
+
+        [Display(Name = "Código estado en sistema")]
+        public Nullable<int> IdEstadoSistema { get; set; }
+
+        [Display(Name = "Código tipo de usuario")]
+        public Nullable<int> IdTipoUsuario { get; set; }
+
+        [Display(Name = "Calificación usuario")]
+        public virtual ICollection<CalificacionUsuario> CalificacionUsuario { get; set; }
+        [Display(Name = "Estado en sistema")]
+        public virtual EstadoSistema EstadoSistema { get; set; }
+
+        [Display(Name = "Pedido")]
+        public virtual ICollection<Pedido> Pedido { get; set; }
+
+        [Display(Name = "Registro de movimiento")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
+
+        [Display(Name = "Tipo de usuario")]
+        public virtual TipoUsuario TipoUsuario { get; set; }
+    }
+
 }
