@@ -52,7 +52,6 @@ namespace web.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
-            return View();
         }
     }
 }

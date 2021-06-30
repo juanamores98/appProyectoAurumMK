@@ -199,22 +199,21 @@ namespace Infraestructure.Repository
                                 }
                             }
                             producto.InventarioProducto = newInventarioProductoForProducto;
-
                             ctx.Entry(producto).State = EntityState.Modified;
                             retorno = ctx.SaveChanges();
-                        }
-                        //Se añade los inventarios nuevos que contendran el producto
-                        foreach (var inventario in seleccionInventarios)
-                        {
-                            bool existeInventarioP = _RepositoryInventarioProducto.GetInventarioProductoByID(int.Parse(inventario), producto.IdProducto) != null;
-                            if (!existeInventarioP)
+                            //Se añade los inventarios nuevos que contendran el producto
+                            foreach (var inventario in seleccionInventarios)
                             {
-                                InventarioProducto oInventarioProducto = new InventarioProducto();
-                                oInventarioProducto.IdInventario = int.Parse(inventario);
-                                oInventarioProducto.IdProducto = producto.IdProducto;
-                                oInventarioProducto.StockMinimo = 1;
-                                oInventarioProducto.Stock = 1;
-                                ctx.InventarioProducto.Add(oInventarioProducto);
+                                bool existeInventarioP = _RepositoryInventarioProducto.GetInventarioProductoByID(int.Parse(inventario), producto.IdProducto) != null;
+                                if (!existeInventarioP)
+                                {
+                                    InventarioProducto oInventarioProducto = new InventarioProducto();
+                                    oInventarioProducto.IdInventario = int.Parse(inventario);
+                                    oInventarioProducto.IdProducto = producto.IdProducto;
+                                    oInventarioProducto.StockMinimo = 1;
+                                    oInventarioProducto.Stock = 1;
+                                    ctx.InventarioProducto.Add(oInventarioProducto);
+                                }
                             }
                         }
                         //Actualizar o Insertar Proveedor

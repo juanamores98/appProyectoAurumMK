@@ -37,8 +37,7 @@ namespace Infraestructure.Models
         [Display(Name = "Proveedores")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
-        //[Display(Name = "Movimiento")] este da problemas
-        //public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
+        
     }
     internal partial class InventarioMetadata
     {
@@ -137,9 +136,7 @@ namespace Infraestructure.Models
         [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Producto requerido")]
-        [Display(Name = "Producto")]
-        public virtual ICollection<Producto> Producto { get; set; }
+        
     }
 
     internal partial class CalificacionUsuarioMetadata
