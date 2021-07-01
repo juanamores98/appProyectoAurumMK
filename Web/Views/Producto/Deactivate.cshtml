@@ -1,7 +1,7 @@
 ﻿@model Infraestructure.Models.Producto
 
 @{
-    ViewBag.Title = "Desactivar Producto";
+    ViewBag.Title = "Mantenimiento Producto";
 }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -10,7 +10,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Detalle Producto a  desactivar <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Desactivar Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
@@ -93,7 +93,7 @@
                                 @Html.HiddenFor(model => model.IdProducto)
                                 <div class="form-actions no-color">
                                     <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                    <input type="submit" value="Desactivar" class="btn boton-estilo" />
+                                    <input type="submit" value="Desactivar Producto" class="btn boton-estilo" />
                                 </div>
                             }
                         </div>

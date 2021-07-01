@@ -156,7 +156,9 @@ namespace Web.Controllers
                     }
 
                 }
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || idEstadoSistema==0)
+                //En caso de que el idEstadoSistema sea 0 significa que es una desactivacion del producto
+                //,por cual no se comprueban las validaciones de campos
                 {
                     Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores,idEstadoSistema);
                 }
@@ -185,8 +187,8 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Producto/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Producto/Deactivate/5
+        public ActionResult Deactivate(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
             Producto producto = null;

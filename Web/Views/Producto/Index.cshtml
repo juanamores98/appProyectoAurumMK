@@ -9,68 +9,69 @@
     </div>
     <div class="col-xl-9">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <hr>
-                    <h1>Lista de productos</h1>
-                    <hr>
-                    <a class="btn  boton-estilo" href="@Url.Action("Create", "Producto")">
-                        Nuevo producto
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    <hr>
+            <hr>
+            <h1>Lista de Productos</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Productos</h5>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IdProducto)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Nombre)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.CostoU)
-                                </th>
-                                <th>
-                                    @Html.DisplayName("Cantidad Total")
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EstadoSistema)
-                                </th>
-                                <th></th>
-                            </tr>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn  boton-estilo" href="@Url.Action("Create", "Producto")">
+                                Nuevo producto
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdProducto)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CostoU)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EstadoSistema)
+                                        </th>
+                                        <th></th>
+                                    </tr>
 
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdProducto)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td>
-                                        ¢@Html.DisplayFor(modelItem => item.CostoU)
-                                    </td>
-                                    <td>
-                                        
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EstadoSistema.Descripcion)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Detalle", "Details", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Borrar", "Delete", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
-                                    </td>
-                                </tr>
-                            }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdProducto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                ¢@Html.DisplayFor(modelItem => item.CostoU)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EstadoSistema.Descripcion)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                                            </td>
+                                        </tr>
+                                    }
 
-                        </table>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1> Detalle Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1> Desactivar Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
@@ -113,44 +113,20 @@
                 <div class="col">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="text-primary m-0 fw-bold">Productos</h5>
+                            <h5 class="text-primary m-0 fw-bold">Desactivar Proveedor</h5>
+                            <hr />
+                            <h3>Esta seguro de desactivar el proveedor?</h3>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayName("ID")
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName("Nombre")
-                                        </th>
-                                        <th>
-                                            @Html.DisplayName("Costo")
-                                        </th>
-                                        <th></th>
-                                    </tr>
-
-                                    @foreach (var item in Model.Producto)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.IdProducto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CostoU)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
-                                            </td>
-                                        </tr>
-                                    }
-
-                                </table>
-                            </div>
+                            @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.IdProveedor)
+                                <div class="form-actions no-color">
+                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo" />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

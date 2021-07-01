@@ -15,6 +15,6 @@ namespace Infraestructure.Repository
         IEnumerable<Proveedor> GetProveedorByProductoID(int id);
         IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id);
         void DeleteProveedorByID(int id);
-        Proveedor Save();
+        Proveedor Save(Proveedor proveedor, int idEstadoSistema);
     }
 }

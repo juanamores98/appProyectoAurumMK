@@ -136,7 +136,7 @@ namespace Infraestructure.Repository
                     if (oProducto == null)//Si es null se crea un producto
                     {
 
-                        //Insertar Producto en Inventarios con valores basicos
+                        //Insertar inventario con el producto con valores predeterminados
                         if (seleccionInventarios != null)
                         {
                             foreach (var inventario in seleccionInventarios)
@@ -149,9 +149,10 @@ namespace Infraestructure.Repository
                                 ctx.InventarioProducto.Add(oInventarioProducto);
                             }
                         }
+                        //Insertar Producto
                         ctx.Producto.Add(producto);
                         retorno = ctx.SaveChanges();
-                        //Actualizar o Insertar Proveedor
+                        //Actualizar o Insertar Proveedor del producto
                         var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
                         if (seleccionProveedores != null)
                         {
@@ -163,7 +164,7 @@ namespace Infraestructure.Repository
                             ctx.Entry(producto).State = EntityState.Modified;
                             retorno = ctx.SaveChanges();
                         }
-                        //Actualizar o Insertar Color
+                        //Actualizar o Insertar Color del producto
                         var seleccionColoresID = new HashSet<string>(seleccionColores);
                         if (seleccionColores != null)
                         {
@@ -180,12 +181,12 @@ namespace Infraestructure.Repository
                     {//Caso contrario de null el se actualiza el producto
 
                         //Actualizar producto
-                        ctx.Producto.Add(producto);//El Add sirve para los dos funciones, insertar o actualizar
-                        ctx.Entry(producto).State = EntityState.Modified;
+                        ctx.Producto.Add(producto);
+                        ctx.Entry(producto).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
                         retorno = ctx.SaveChanges();
                         if (producto.IdEstadoSistema != 0)//Si el estado en el sistema es 0 significa que es una desactivacion del producto por lo que no se actualizan sus tablas relacionadas
                         {
-                            //Actualizar  e Insertar Inventarios
+                            //Actualizar  e Insertar Inventarios del producto
                             if (seleccionInventarios != null)
                             {
                                 ctx.Entry(producto).Collection(p => p.InventarioProducto).Load();
@@ -205,10 +206,10 @@ namespace Infraestructure.Repository
                                         inventariosConservados.Add(oInventarioProducto);
                                     }
                                 }
-                                //Limpiamos en la BD todos los inventarios
+                                //Limpiamos en la BD todos los inventarios del producto
                                 producto.InventarioProducto.Clear();
 
-                                //Agregamos en la lista de conservados los inventarios nuevos
+                                //Agregamos en la lista de conservados los inventarios nuevos del producto
                                 for (int i = 0; i < seleccionInventarios.Count(); i++)
                                 {
                                     if (inventariosConservados.FirstOrDefault(x => x.IdInventario == int.Parse(seleccionInventarios[i])) == null)
@@ -228,7 +229,7 @@ namespace Infraestructure.Repository
                                 retorno = ctx.SaveChanges();
 
                             }
-                            //Actualizar e Insertar Proveedor
+                            //Actualizar e Insertar Proveedor del producto
                             var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
                             if (seleccionProveedores != null)
                             {
@@ -240,7 +241,7 @@ namespace Infraestructure.Repository
                                 ctx.Entry(producto).State = EntityState.Modified;
                                 retorno = ctx.SaveChanges();
                             }
-                            //Actualizar e Insertar Color
+                            //Actualizar e Insertar Color del producto
                             var seleccionColoresID = new HashSet<string>(seleccionColores);
                             if (seleccionColores != null)
                             {
