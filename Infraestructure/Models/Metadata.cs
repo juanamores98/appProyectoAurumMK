@@ -42,7 +42,7 @@ namespace Infraestructure.Models
     internal partial class InventarioMetadata
     {
         [Display(Name = "ID")]
-        public int IdInventario { get; set; }
+        public int IdInventario { get; set; } 
         [Display(Name = "ID Sucursal")]
         public Nullable<int> IdSucursal { get; set; }
         [Display(Name = "Sucursal")]
@@ -60,8 +60,8 @@ namespace Infraestructure.Models
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "El formato válido es 88888888")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
+        //[StringLength(8, MinimumLength = 8, ErrorMessage = "El formato válido es 88888888")]
         [Display(Name = "Teléfono")]
         public Nullable<int> Telefono { get; set; }
 

@@ -148,6 +148,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProductoesController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -409,7 +410,6 @@
     <Content Include="Views\Reports\ReporteMovimientos.cshtml" />
     <Content Include="Views\Shared\_MenuMantenimiento.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
-    <Content Include="Views\Producto\Deleteffgsd.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
     <Content Include="Views\Producto\Edit.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
@@ -424,6 +424,7 @@
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Producto\Delete.cshtml" />
+    <Content Include="Views\Productoes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

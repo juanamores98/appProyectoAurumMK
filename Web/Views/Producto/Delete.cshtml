@@ -90,10 +90,11 @@
                             @using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 @Html.AntiForgeryToken()
-                            <div class="form-actions no-color">
-                                <input type="text" name="idEstadoSistema" value="0"  style="display: none"/>
-                                <input type="submit" value="Desactivar" class="btn boton-estilo" />
-                            </div>
+                                @Html.HiddenFor(model => model.IdProducto)
+                                <div class="form-actions no-color">
+                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                    <input type="submit" value="Desactivar" class="btn boton-estilo" />
+                                </div>
                             }
                         </div>
                     </div>
