@@ -17,67 +17,25 @@
             {
                 @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
+                <div class="form-horizontal">
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <div class="container">
-                <div class="row">
-
-                    <!--Caja para agregar los proveedores-->
-                    <div class="col">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.IdProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.IdProveedor, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IdProveedor, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })del proveedor
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })del proveedor
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" }) del proveedor
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Pais, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Caja para los contactos de los proveedores-->
-                    <div class="col">
-
-                        <h5>Añadir Contactos del proveedor</h5>
-
+                    <div class="container">
                         <div class="row">
 
+                            <!--Caja para agregar los proveedores-->
                             <div class="col">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <label>ID del proveedor</label>
+                                        @Html.EditorFor(model => model.IdProveedor, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.IdProveedor, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })del proveedor
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
@@ -85,87 +43,123 @@
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label col-md-2" })del proveedor
                                     <div class="col-md-10">
                                         @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
-                            </div>
-
-                            <div class="col-sm">
-
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
+                                        <label>Dirección del proveedor</label>
                                         @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Pais, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
+                                        <label>País del proveedor</label>
                                         @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "form-control" } })
                                         @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Añadir contacto" class="btn boton-estilo" />
+                            <!--Caja para los contactos de los proveedores-->
+                            <div class="col">
+
+                                <h5>Añadir Contactos del proveedor</h5>
+
+                                <div class="row">
+
+                                    <div class="col">
+
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label>Nombre del contacto</label>
+                                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label>Teléfono</label>
+                                                @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
                                     </div>
+
+                                    <div class="col-sm">
+
+                                        <div class="form-group">
+                                            <div class="col-md-10">
+                                                <label>Correo electrónico</label>
+                                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="padding-top: 27px;">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input style="width:166px;" type="submit" value="Añadir contacto" class="btn boton-estilo" />
+                                            </div>
+                                        </div>
+                                            <label>
+
+                                            </label>
+                                        <div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Teléfono</th>
+                                                <th scope="col">Correo electrónico</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Alfredo</td>
+                                                <td>22222222</td>
+                                                <td>email</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Melanie</td>
+                                                <td>22222222</td>
+                                                <td>email</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Juan</td>
+                                                <td>22222222</td>
+                                                <td>email</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>
 
                         </div>
-
-                        <div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Teléfono</th>
-                                        <th scope="col">País</th>
-                                        <th scope="col">Dirección</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Alfredo</td>
-                                        <td>22222222</td>
-                                        <td>Costa Rica</td>
-                                        <td>San José</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Melanie</td>
-                                        <td>22222222</td>
-                                        <td>Costa Rica</td>
-                                        <td>San José</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan</td>
-                                        <td>22222222</td>
-                                        <td>Costa Rica</td>
-                                        <td>San José</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Crear proveedor" class="btn boton-estilo" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn boton-estilo" />
-                </div>
-            </div>
-        </div>
             }
             <div>
                 @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
