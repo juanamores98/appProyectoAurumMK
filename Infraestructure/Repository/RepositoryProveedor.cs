@@ -16,7 +16,7 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Proveedor> GetProveedor()
+        public IEnumerable<Proveedor> GetProveedor() 
         {
             try
             {
