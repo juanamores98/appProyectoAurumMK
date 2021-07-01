@@ -10,7 +10,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Detalle Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Detalle Producto a  desactivar <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
@@ -82,7 +82,7 @@
                 <div class="col">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="text-primary m-0 fw-bold">Desactivacion</h5>
+                            <h5 class="text-primary m-0 fw-bold">Desactivar Producto</h5>
                             <hr />
                             <h3>Esta seguro de desactivar el producto?</h3>
                         </div>
@@ -91,9 +91,8 @@
                             {
                                 @Html.AntiForgeryToken()
                             <div class="form-actions no-color">
-                                <input type="text" name="idEstadoSistema" value="0" />
-                                <input type="submit" value="Desactivar" class="btn boton-estilo" /> |
-                                @Html.ActionLink("Back to List", "Index")
+                                <input type="text" name="idEstadoSistema" value="0"  style="display: none"/>
+                                <input type="submit" value="Desactivar" class="btn boton-estilo" />
                             </div>
                             }
                         </div>
@@ -101,11 +100,6 @@
                 </div>
             </div>
             <hr />
-            <div class="row">
-                <div>
-                    @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
-                </div>
-            </div>
             <p>
                 @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
             </p>

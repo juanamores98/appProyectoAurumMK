@@ -181,53 +181,52 @@ namespace Infraestructure.Repository
                     ctx.Producto.Add(producto);
                     ctx.Entry(producto).State = EntityState.Modified;
                     retorno = ctx.SaveChanges();
-                    if (idEstadoSistema != 0)
+                    if (idEstadoSistema != 0)//Si el estado en el sistema es 0 significa que es una desactivacion del producto por lo que no se actualizan sus tablas relacionadas
                     {
-                        //Mantener inventario seleccionados y borrar inventarios borrados
+                        //Actualizar  e Insertar Inventarios
                         if (seleccionInventarios != null)
                         {
                             ctx.Entry(producto).Collection(p => p.InventarioProducto).Load();
                             IEnumerable<InventarioProducto> inventariosActuales = _RepositoryInventarioProducto.GetInventarioProductoByProductoID(producto.IdProducto);
                             List<InventarioProducto> inventariosConservados = new List<InventarioProducto>();
+                            //Agregamos en la lista los inventarios quye se van a conservar
                             foreach (var item in inventariosActuales)
                             {
                                 if (seleccionInventarios.Contains(item.IdInventario.ToString()))
                                 {
-                                    inventariosConservados.Add(item);
-                                }
-                            }
-                            producto.InventarioProducto.Clear();
-                            ctx.Entry(producto).State = EntityState.Modified;
-                            retorno = ctx.SaveChanges();
-                            ctx.Entry(producto).Collection(p => p.InventarioProducto).Load();
-                            /*
-                            foreach (var item in inventariosActuales)
-                            {
-                                if (!inventariosConservados.Contains(item))
-                                {
-                                    producto.InventarioProducto.Remove(item);
-                                }
-                            }*/
-                            for (int i = 0; i < seleccionInventarios.Count(); i++)
-                            {
-                                InventarioProducto oInventarioProducto = new InventarioProducto();
-                                oInventarioProducto.IdInventario = int.Parse(seleccionInventarios[i]);
-                                oInventarioProducto.IdProducto = producto.IdProducto;
-                                oInventarioProducto.StockMinimo = 1;
-                                oInventarioProducto.Stock = 1;
-                                if (inventariosConservados.FirstOrDefault(x => x.IdInventario == int.Parse(seleccionInventarios[i])) == null)
-                                {
+                                    InventarioProducto oInventarioProducto = new InventarioProducto();
+                                    oInventarioProducto.IdInventario = item.IdInventario;
+                                    oInventarioProducto.IdProducto =item.IdProducto;
+                                    oInventarioProducto.StockMinimo = item.StockMinimo;
+                                    oInventarioProducto.Stock = item.Stock;
+                                    oInventarioProducto.Estante = item.Estante;
                                     inventariosConservados.Add(oInventarioProducto);
                                 }
                             }
+                            //Limpiamos en la BD todos los inventarios
+                            producto.InventarioProducto.Clear();
+                            
+                            //Agregamos en la lista de conservados los inventarios nuevos
+                            for (int i = 0; i < seleccionInventarios.Count(); i++)
+                            {
+                                if (inventariosConservados.FirstOrDefault(x => x.IdInventario == int.Parse(seleccionInventarios[i])) == null)
+                                {
+                                    InventarioProducto oInventarioProducto = new InventarioProducto();
+                                    oInventarioProducto.IdInventario = int.Parse(seleccionInventarios[i]);
+                                    oInventarioProducto.IdProducto = producto.IdProducto;
+                                    oInventarioProducto.StockMinimo = 1;
+                                    oInventarioProducto.Stock = 1;
+                                    inventariosConservados.Add(oInventarioProducto);
+                                }
+                            }
+
+                            //Agregamos los inventarios conservados y nuevos al producto
                             producto.InventarioProducto = inventariosConservados;
-                            ctx.Producto.Add(producto);
                             ctx.Entry(producto).State = EntityState.Modified;
                             retorno = ctx.SaveChanges();
-                            //Se añade los inventarios nuevos que contendran el producto
 
                         }
-                        //Actualizar o Insertar Proveedor
+                        //Actualizar e Insertar Proveedor
                         var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
                         if (seleccionProveedores != null)
                         {
@@ -239,7 +238,7 @@ namespace Infraestructure.Repository
                             ctx.Entry(producto).State = EntityState.Modified;
                             retorno = ctx.SaveChanges();
                         }
-                        //Actualizar o Insertar Color
+                        //Actualizar e Insertar Color
                         var seleccionColoresID = new HashSet<string>(seleccionColores);
                         if (seleccionColores != null)
                         {
