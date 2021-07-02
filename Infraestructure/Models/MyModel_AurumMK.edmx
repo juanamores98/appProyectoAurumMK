@@ -25,7 +25,7 @@
           <Key>
             <PropertyRef Name="IdColor" />
           </Key>
-          <Property Name="IdColor" Type="int" Nullable="false" />
+          <Property Name="IdColor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar(max)" />
           <Property Name="IdEstadoSistema" Type="int" />
         </EntityType>
@@ -41,7 +41,8 @@
           <Key>
             <PropertyRef Name="IdContactoProveedor" />
           </Key>
-          <Property Name="IdContactoProveedor" Type="int" Nullable="false" />
+          <Property Name="IdContactoProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="int" />
           <Property Name="Nombre" Type="varchar(max)" />
           <Property Name="Telefono" Type="int" />
           <Property Name="Correo" Type="varchar(max)" />
@@ -680,6 +681,7 @@
           <Property Name="IdProveedor" Type="Int32" />
           <NavigationProperty Name="EstadoSistema" Relationship="Self.FK_IdEstadoSistema4" FromRole="ContactoProveedor" ToRole="EstadoSistema" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_IdProveedor1" FromRole="ContactoProveedor" ToRole="Proveedor" />
+          <Property Name="Cedula" Type="Int32" />
         </EntityType>
         <EntityType Name="CostoEnvio">
           <Key>
@@ -1289,6 +1291,7 @@
           <EntitySetMapping Name="ContactoProveedor">
             <EntityTypeMapping TypeName="AuronMkModel.ContactoProveedor">
               <MappingFragment StoreEntitySet="ContactoProveedor">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
                 <ScalarProperty Name="IdContactoProveedor" ColumnName="IdContactoProveedor" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />

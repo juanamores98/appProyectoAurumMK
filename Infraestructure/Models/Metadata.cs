@@ -59,7 +59,7 @@ namespace Infraestructure.Models
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
         //[StringLength(8, MinimumLength = 8, ErrorMessage = "El formato válido es 88888888")]
         [Display(Name = "Teléfono")]
         public Nullable<int> Telefono { get; set; }
@@ -177,16 +177,19 @@ namespace Infraestructure.Models
 
     internal partial class ContactoProveedorMetadata
     {
-        [Display(Name = "Código de Contacto proveedor")]
+        [Display(Name = "ID")]
         public int IdContactoProveedor { get; set; }
 
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
 
         [Display(Name = "Télefono")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> Telefono { get; set; }
 
         [Display(Name = "Correo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Correo { get; set; }
 
         [Display(Name = "Código estado en sistema")]
@@ -194,6 +197,9 @@ namespace Infraestructure.Models
 
         [Display(Name = "Código proveedor")]
         public Nullable<int> IdProveedor { get; set; }
+        [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        public Nullable<int> Cedula { get; set; }
 
         [Display(Name = "Estado en sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }

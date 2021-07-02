@@ -22,6 +22,7 @@ namespace Infraestructure.Models
         public string Correo { get; set; }
         public Nullable<int> IdEstadoSistema { get; set; }
         public Nullable<int> IdProveedor { get; set; }
+        public Nullable<int> Cedula { get; set; }
     
         public virtual EstadoSistema EstadoSistema { get; set; }
         public virtual Proveedor Proveedor { get; set; }

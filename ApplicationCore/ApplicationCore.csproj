@@ -44,6 +44,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IServiceCategoriaProducto.cs" />
     <Compile Include="Services\IServiceColor.cs" />
+    <Compile Include="Services\IServiceContactoProveedor.cs" />
     <Compile Include="Services\IServiceInventario.cs" />
     <Compile Include="Services\IServiceInventarioProducto.cs" />
     <Compile Include="Services\IServiceProducto.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Services\IServiceRegistroMovimiento.cs" />
     <Compile Include="Services\ServiceCategoriaProducto.cs" />
     <Compile Include="Services\ServiceColor.cs" />
+    <Compile Include="Services\ServiceContactoProveedor.cs" />
     <Compile Include="Services\ServiceInventario.cs" />
     <Compile Include="Services\ServiceInventarioProducto.cs" />
     <Compile Include="Services\ServiceProducto.cs" />

@@ -18,7 +18,7 @@
                     <h5 class="text-primary m-0 fw-bold">Proveedor</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post))
+                    @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">

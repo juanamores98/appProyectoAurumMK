@@ -423,6 +423,7 @@
     <Content Include="Views\Producto\Deactivate.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Deactivate.cshtml" />
+    <Content Include="Views\Proveedor\Contacto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
