@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
     {
         Proveedor GetProveedorByID(int id);
         IEnumerable<Proveedor> GetProveedor();
-        IEnumerable<Proveedor> GetProveedorByNombre(String nombre);
+        IEnumerable<Proveedor> GetProveedorByNombre(string nombre);
         IEnumerable<Proveedor> GetProveedorByProductoID(int id);
         IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id);
         void DeleteProveedorByID(int id);

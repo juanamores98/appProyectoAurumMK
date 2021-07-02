@@ -188,5 +188,60 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        // GET: Proveedor/Contacto/5
+        public ActionResult Contacto(int? idProveedor)
+        {
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor proveedorVista = _ServiceProveedor.GetProveedorByID(idProveedor.Value);
+            ViewBag.proveedor = proveedorVista;
+            return View();
+        }
+        // POST: Proveedor/SaveContacto/5
+        public ActionResult SaveContacto(ContactoProveedor contactoProveedor, int idProveedor=0,int idEstadoSistema=1)
+        {
+            try
+            {
+                ServiceContactoProveedor _ServiceContactoProveedor = new ServiceContactoProveedor();
+                if (ModelState.IsValid || idEstadoSistema == 0)
+                //En caso de que el idEstadoSistema sea 0 significa que es una desactivacion del proveedor
+                //,por cual no se comprueban las validaciones de campos
+                {
+                    contactoProveedor.IdProveedor = idProveedor;
+                    ContactoProveedor oContactoProveedor = _ServiceContactoProveedor.Save(contactoProveedor, idEstadoSistema);
+                }
+                return RedirectToAction("Edit", new { id = idProveedor });
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        public ActionResult DeleteContacto(int idContactoProveedor,int idProveedor)
+        {
+
+            try
+            {
+                ServiceContactoProveedor _ServiceContactoProveedor = new ServiceContactoProveedor();
+                _ServiceContactoProveedor.DeleteContactoProveedorByID(idContactoProveedor);
+                return RedirectToAction("Edit", new { id = idProveedor });
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
     }
 }

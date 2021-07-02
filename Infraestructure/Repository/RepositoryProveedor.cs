@@ -130,13 +130,13 @@ namespace Infraestructure.Repository
                     oProveedor = GetProveedorByID((int)proveedor.IdProveedor);
                     if (oProveedor == null)//Si es null se crea un proveedor
                     {
-                        //Insercion del producto
+                        //Insercion del proveedor
                         ctx.Proveedor.Add(proveedor);
                         retorno = ctx.SaveChanges();
                     }
                     else
                     {
-                        //Actualizar producto
+                        //Actualizar proveedor
                         ctx.Proveedor.Add(proveedor);
                         ctx.Entry(proveedor).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
                         retorno = ctx.SaveChanges();

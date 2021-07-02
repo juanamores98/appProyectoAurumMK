@@ -134,6 +134,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepositoryColor.cs" />
+    <Compile Include="Repository\IRepositoryContactoProveedor.cs" />
     <Compile Include="Repository\IRepositoryInventario.cs" />
     <Compile Include="Repository\IRepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\IRepositoryInventarioProducto.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Repository\IRepositoryRegistroMovimiento.cs" />
     <Compile Include="Repository\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\RepositoryColor.cs" />
+    <Compile Include="Repository\RepositoryContactoProveedor.cs" />
     <Compile Include="Repository\RepositoryInventario.cs" />
     <Compile Include="Repository\RepositoryInventarioProducto.cs" />
     <Compile Include="Repository\RepositoryProducto.cs" />
