@@ -46,9 +46,10 @@ namespace ApplicationCore.Services
             return repository.GetProveedorByProductoID(id);
         }
 
-        public Proveedor Save()
+        public Proveedor Save(Proveedor proveedor, int idEstadoSistema)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.Save(proveedor, idEstadoSistema);
         }
     }
 }

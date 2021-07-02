@@ -1,7 +1,7 @@
 ﻿@model Infraestructure.Models.Producto
 
 @{
-    ViewBag.Title = "Detalle Producto";
+    ViewBag.Title = "Mantenimiento Producto";
 }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -10,7 +10,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Detalle Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Detalle Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">

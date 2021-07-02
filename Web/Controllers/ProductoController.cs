@@ -81,6 +81,7 @@ namespace Web.Controllers
             }
         }
 
+        
         // GET: Producto/Create
         public ActionResult Create()
         {
@@ -121,6 +122,7 @@ namespace Web.Controllers
                 ViewBag.listaSeleccionInventario = listaSeleccionInventario(producto.InventarioProducto);
                 ViewBag.listaSeleccionProveedor = listaSeleccionProveedor(producto.Proveedor);
                 ViewBag.listaSeleccionColor = listaSeleccionColor(producto.Color);
+                ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", producto.IdEstadoSistema);
                 return View(producto);
             }
             catch (Exception ex)
@@ -137,18 +139,12 @@ namespace Web.Controllers
 
         // POST: Producto/Save/5
         [HttpPost]
-        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema = 1)
+        public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema=1)
         {
             MemoryStream target = new MemoryStream();
             IServiceProducto _ServiceProducto = new ServiceProducto();
             try
             {
-                //Se llenan las variables 
-                if (idEstadoSistema==0)
-                {
-                    seleccionInventarios = seleccionProveedores = seleccionColores = new string[0];
-                }
-
                 // Cuando es Insert Image viene en null porque se pasa diferente
                 if (producto.Imagen == null)
                 {
@@ -160,9 +156,11 @@ namespace Web.Controllers
                     }
 
                 }
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || idEstadoSistema==0)
+                //En caso de que el idEstadoSistema sea 0 significa que es una desactivacion del producto
+                //,por cual no se comprueban las validaciones de campos
                 {
-                    Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores, idEstadoSistema);
+                    Producto oProducto = _ServiceProducto.Save(producto, seleccionInventarios, seleccionProveedores, seleccionColores,idEstadoSistema);
                 }
                 else
                 {
@@ -189,8 +187,8 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Producto/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Producto/Deactivate/5
+        public ActionResult Deactivate(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
             Producto producto = null;
@@ -224,26 +222,6 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-
-        // POST: Producto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            /*Producto producto = db.Producto.Find(id);
-            db.Producto.Remove(producto);
-            db.SaveChanges();*/
-            return RedirectToAction("Index");
-        }
-
-        /*protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }*/
         //METODOS AUXILIARES
         private SelectList listaSeleccionCategoriaProducto(int idCategoriaProducto = 0)
         {

@@ -55,7 +55,7 @@ namespace ApplicationCore.Services
         public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores, int idEstadoSistema)
         {
             IRepositoryProducto repository = new RepositoryProducto();
-            return repository.Save(producto,seleccionInventarios,  seleccionProveedores, seleccionColores, idEstadoSistema);
+            return repository.Save(producto,seleccionInventarios,  seleccionProveedores, seleccionColores,idEstadoSistema);
         }
     }
 }

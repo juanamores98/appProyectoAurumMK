@@ -9,56 +9,65 @@
     </div>
     <div class="col-xl-9">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <hr>
-                    <h1>Lista de Proveedores</h1>
-                    <hr>
-                    <a class="btn  boton-estilo" href="@Url.Action("Create", "Proveedor")">
-                        Nuevo proveedor
-                        <i class="fas fa-plus"></i>
-                    </a>
-                    <hr>
+            <hr>
+            <h1>Lista de Proveedores</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Proveedores</h5>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IdProveedor)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Nombre)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Telefono)
-                                </th>
-                                <th></th>
-                            </tr>
+                <div class="card-body">
 
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdProveedor)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Telefono)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Detalle", "Details", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" }) |
-                                        @Html.ActionLink("Borrar", "Delete", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" })
-                                    </td>
-                                </tr>
-                            }
+                    <div class="row">
+                        <div class="col">
 
-                        </table>
+                            <a class="btn  boton-estilo" href="@Url.Action("Create", "Proveedor")">
+                                Nuevo proveedor
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdProveedor)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Nombre)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Telefono)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdProveedor)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Telefono)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

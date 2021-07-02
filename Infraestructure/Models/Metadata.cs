@@ -13,36 +13,36 @@ namespace Infraestructure.Models
         [Display(Name = "ID")]
         public int IdProducto { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
         [Display(Name = "Imagen del Producto")]
         public byte[] Imagen { get; set; }
         [Display(Name = "Costo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<double> CostoU { get; set; }
         [Display(Name = "ID del estado en el sistema")]
         public Nullable<int> IdEstadoSistema { get; set; }
-        [Display(Name = "ID Categoria")]
+        [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
         [Display(Name = "Categoria")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
         [Display(Name = "Inventarios")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         [Display(Name = "Pedido")]
         public virtual ICollection<PedidoProducto> PedidoProducto { get; set; }
         [Display(Name = "Colores")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Color> Color { get; set; }
         [Display(Name = "Proveedores")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         
     }
     internal partial class InventarioMetadata
     {
         [Display(Name = "ID")]
-        public int IdInventario { get; set; }
+        public int IdInventario { get; set; } 
         [Display(Name = "ID Sucursal")]
         public Nullable<int> IdSucursal { get; set; }
         [Display(Name = "Sucursal")]
@@ -51,7 +51,6 @@ namespace Infraestructure.Models
     internal partial class ProveedorMetadata
     {
         
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Código requerido")]
         [Display(Name = "ID")]
         public int IdProveedor { get; set; }
 
@@ -60,8 +59,8 @@ namespace Infraestructure.Models
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
-        [StringLength(8, MinimumLength = 8, ErrorMessage = "El formato válido es 88888888")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Teléfono requerido")]
+        //[StringLength(8, MinimumLength = 8, ErrorMessage = "El formato válido es 88888888")]
         [Display(Name = "Teléfono")]
         public Nullable<int> Telefono { get; set; }
 
@@ -74,19 +73,18 @@ namespace Infraestructure.Models
         [Display(Name = "País")]
         public string Pais { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado en sistema requerido")]
         [Display(Name = "ID del Estado en el Sistema")]
         public Nullable<int> IdEstadoSistema { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Contacto requerido")]
+        
         [Display(Name = "Contacto")]
         public virtual ICollection<ContactoProveedor> ContactoProveedor { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Estado en sistema requerido")]
+        
         [Display(Name = "Estado en el Sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Producto requerido")]
+        
         [Display(Name = "Producto")]
         public virtual ICollection<Producto> Producto { get; set; }
     }

@@ -23,7 +23,7 @@ namespace Web.Controllers
             try
             {
                 IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-                lista = _ServiceProveedor.GetProveedor();
+                lista = _ServiceProveedor.GetProveedorByEstadoSistemaID(1);
                 ViewBag.title = "Lista Proveedor";
                 return View(lista);
             }
@@ -54,8 +54,8 @@ namespace Web.Controllers
                 proveedor = _ServiceProveedor.GetProveedorByID(id.Value);
                 if (proveedor == null)
                 {
-                    TempData["Message"] = "No existe el producto solicitado";
-                    TempData["Redirect"] = "producto";
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
@@ -67,7 +67,7 @@ namespace Web.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
+                TempData["Redirect"] = "Proveedor";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -77,94 +77,116 @@ namespace Web.Controllers
         // GET: Proveedor/Create
         public ActionResult Create()
         {
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion");
             return View();
         }
 
-        // POST: Proveedor/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProveedor,Nombre,Telefono,Direccion,Pais,IdEstadoSistema")] Proveedor proveedor)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Proveedor.Add(proveedor);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", proveedor.IdEstadoSistema);
-            return View(proveedor);
-        }
-
+        
         // GET: Proveedor/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor proveedor = null;
+
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                proveedor = _ServiceProveedor.GetProveedorByID(id.Value);
+                if (proveedor == null)
+                {
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(proveedor);
             }
-            Proveedor proveedor = db.Proveedor.Find(id);
-            if (proveedor == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", proveedor.IdEstadoSistema);
-            return View(proveedor);
         }
 
-        // POST: Proveedor/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Proveedor/Save/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProveedor,Nombre,Telefono,Direccion,Pais,IdEstadoSistema")] Proveedor proveedor)
+        public ActionResult Save(Proveedor proveedor, int idEstadoSistema=1)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(proveedor).State = EntityState.Modified;
-                db.SaveChanges();
+                ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+                if (ModelState.IsValid || idEstadoSistema == 0)
+                //En caso de que el idEstadoSistema sea 0 significa que es una desactivacion del proveedor
+                //,por cual no se comprueban las validaciones de campos
+                {
+                    Proveedor oProveedor = _ServiceProveedor.Save(proveedor, idEstadoSistema);
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", proveedor);
+                }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", proveedor.IdEstadoSistema);
-            return View(proveedor);
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
-        // GET: Proveedor/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Proveedor/Deactivate/5
+        public ActionResult Deactivate(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Proveedor proveedor = db.Proveedor.Find(id);
-            if (proveedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(proveedor);
-        }
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor proveedor = null;
 
-        // POST: Proveedor/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Proveedor proveedor = db.Proveedor.Find(id);
-            db.Proveedor.Remove(proveedor);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                db.Dispose();
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                proveedor = _ServiceProveedor.GetProveedorByID(id.Value);
+                if (proveedor == null)
+                {
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(proveedor);
             }
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
     }
 }

@@ -1,0 +1,139 @@
+﻿@model Infraestructure.Models.Proveedor
+
+@{
+    ViewBag.Title = "Mantenimiento Proveedor";
+}
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1> Desactivar Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Informacion</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdProveedor)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdProveedor)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nombre)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Telefono)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Direccion)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Direccion)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Pais)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Pais)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Contacto</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayName("ID")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Nombre")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Telefono")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Correo")
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model.ContactoProveedor)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IdContactoProveedor)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+                                        <td>
+                                            <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
+                                        </td>
+                                        <td>
+                                            <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Desactivar Proveedor</h5>
+                            <hr />
+                            <h3>Esta seguro de desactivar el proveedor?</h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.IdProveedor)
+                                <div class="form-actions no-color">
+                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+                @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
+            </p>
+        </div>
+    </div>
+</div>
