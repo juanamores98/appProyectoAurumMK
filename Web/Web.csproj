@@ -199,6 +199,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include=".bin\node.cmd" />
     <None Include="Resources\Pack14.jpg" />
     <None Include="Resources\Pack15.jpg" />
     <None Include="Resources\Pack16.jpg" />
@@ -425,6 +426,7 @@
     <Content Include="Views\Proveedor\Deactivate.cshtml" />
     <Content Include="Views\Proveedor\Contacto.cshtml" />
     <Content Include="Views\Color\Index.cshtml" />
+    <Content Include="Views\Color\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

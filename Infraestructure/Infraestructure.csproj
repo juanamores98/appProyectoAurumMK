@@ -152,6 +152,7 @@
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".bin\node.cmd" />
     <None Include="App.config" />
     <EntityDeploy Include="Models\MyModel_AurumMK.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

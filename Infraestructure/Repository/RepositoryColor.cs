@@ -53,12 +53,14 @@ namespace Infraestructure.Repository
                 IEnumerable<Color> lista = null;
                 using (MyContext ctx = new MyContext())
                 {
-                    ctx.Configuration.LazyLoadingEnabled = false;
+
                     lista = ctx.Color
                         .Where(x => x.IdEstadoSistema == id)
                         .ToList<Color>();
+
                 }
                 return lista;
+
             }
             catch (DbUpdateException dbEx)
             {

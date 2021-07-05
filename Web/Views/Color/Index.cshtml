@@ -39,7 +39,7 @@
                                             @Html.DisplayNameFor(model => model.Descripcion)
                                         </th>
                                         <th>
-                                            @Html.DisplayNameFor(model => model.IdEstadoSistema)
+                                            <label>Estado en sistema</label>
                                         </th>
                                         <th></th>
                                     </tr>
@@ -54,12 +54,20 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.IdEstadoSistema)
+                                                @if (item.IdEstadoSistema == 1)
+                                                {
+                                                    <label>Activo</label>
+                                                }
+                                                else
+                                                {
+                                                    <label>Inactivo</label>
+                                                }
+
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdColor}, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor}, new { @class = "btn  boton-estilo" })
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor }, new { @class = "btn  boton-estilo" })
                                             </td>
                                         </tr>
                                     }
