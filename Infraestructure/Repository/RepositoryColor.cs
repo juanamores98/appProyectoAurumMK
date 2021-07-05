@@ -48,7 +48,31 @@ namespace Infraestructure.Repository
 
         public IEnumerable<Color> GetColorByEstadoSistemaID(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<Color> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Color
+                        .Where(x => x.IdEstadoSistema == id)
+                        .ToList<Color>();
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
         }
 
         public Color GetColorByID(int id)

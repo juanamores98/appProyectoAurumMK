@@ -23,7 +23,8 @@ namespace ApplicationCore.Services
 
         public IEnumerable<Color> GetColorByEstadoSistemaID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryColor repository = new RepositoryColor();
+            return repository.GetColorByEstadoSistemaID(id);
         }
 
         public Color GetColorByID(int id)

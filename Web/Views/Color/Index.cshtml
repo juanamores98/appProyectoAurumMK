@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Infraestructure.Models.Color>
+
+@{
+    ViewBag.Title = "Mantimiento Color";
+}
+
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Lista de Colores</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Colores</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn  boton-estilo" href="@Url.Action("Create", "Color")">
+                                Nuevo Color
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdColor)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Descripcion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdEstadoSistema)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdColor)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Descripcion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdEstadoSistema)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdColor}, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor}, new { @class = "btn  boton-estilo" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
