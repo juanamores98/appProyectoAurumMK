@@ -27,12 +27,19 @@
                                     <div class="col">
                                         <div class="row">
                                             @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label " })
-                                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
                                         <div class="row">
-                                            
+                                            @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                                         </div>
+                                    </div>
 
+                                    <div class="col">
+                                        <div class="row">
+                                            <label>Seleccione el color a guardar</label>
+                                        </div>
+                                        <div class="row">
+                                            <input id="color-picker" value="#"/>
+                                        </div>
                                     </div>
                                 </div>
 

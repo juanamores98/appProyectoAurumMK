@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Aurum MK</title>
     @Styles.Render("~/Content/css")
     <link href="~/Content/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
 
 </head>
 <body class="body-estilo">
@@ -21,5 +22,16 @@
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js")
+    <script>
+        $('#color-picker').spectrum({
+            type: "component",
+            togglePaletteOnly: true,
+            showInput: true,
+            showAlpha: false,
+            showButtons: false
+        });
+    </script>
+
 </body>
 </html>
