@@ -69,19 +69,35 @@ namespace Web.Controllers
             return View();
         }
 
-        // POST: Color/Edit/5
+        // POST: Color/Save/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Save(Color color)
         {
             try
             {
-                // TODO: Add update logic here
+                IServiceColor _ServiceColor = new ServiceColor();
+
+                if (ModelState.IsValid)
+                {
+                    Color oColorI = _ServiceColor.Save(color);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", color);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Color";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 

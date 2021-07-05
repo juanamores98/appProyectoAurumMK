@@ -106,10 +106,51 @@ namespace Infraestructure.Repository
             }
             return lista;
         }
-
         public Color Save()
         {
             throw new NotImplementedException();
+        }
+
+        public Color Save(Color color)
+        {
+            int retorno = 0; //Contabiliza la cantidad de líneas afectadas
+            Color oColor = null;
+
+            //Si idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el color
+            if (color.IdEstadoSistema != 0)
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oColor = GetColorByID((int)color.IdColor);
+                    IRepositoryColor _RepositoryColor = new RepositoryColor();
+                    color.IdEstadoSistema = 1; //Para crear o editar un color el estado siempre será 1 (Activo)
+
+                    if (oColor == null)//Si es nulo se crea un color
+                    {
+                        ctx.Color.Add(color);
+                        retorno = ctx.SaveChanges();
+                    }
+                    else
+                    {
+                        //Si el color no es nulo, lo actualiza
+                        ctx.Color.Add(color);
+                        ctx.Entry(color).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+
+                        // Si el estado en el sistema es "0" quiere decir que es una desactivación del color
+
+                    }
+
+                    if (retorno >= 0)
+                    {
+                        oColor = GetColorByID((int)color.IdColor);
+                    }
+
+                }
+            }
+
+            return oColor;
         }
     }
 }

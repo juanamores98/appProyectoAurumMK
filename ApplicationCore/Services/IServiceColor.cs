@@ -15,5 +15,6 @@ namespace ApplicationCore.Services
         IEnumerable<Color> GetColorByEstadoSistemaID(int id);
         void DeleteColorByID(int id);
         Color Save();
+        Color Save(Color color);
     }
 }

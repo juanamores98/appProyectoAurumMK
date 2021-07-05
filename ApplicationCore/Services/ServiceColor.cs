@@ -43,5 +43,11 @@ namespace ApplicationCore.Services
         {
             throw new NotImplementedException();
         }
+
+        public Color Save(Color color)
+        {
+            IRepositoryColor repository = new RepositoryColor();
+            return repository.Save(color);
+        }
     }
 }

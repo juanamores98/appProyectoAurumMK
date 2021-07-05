@@ -15,5 +15,6 @@ namespace Infraestructure.Repository
         IEnumerable<Color> GetColorByEstadoSistemaID(int id);
         void DeleteColorByID(int id);
         Color Save();
+        Color Save(Color color);
     }
 }
