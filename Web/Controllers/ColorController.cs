@@ -50,7 +50,7 @@ namespace Web.Controllers
 
         // POST: Color/Save/5
         [HttpPost]
-        public ActionResult Save(Color color)
+        public ActionResult Save(Color color, String codigoColor)
         {
             try
             {
