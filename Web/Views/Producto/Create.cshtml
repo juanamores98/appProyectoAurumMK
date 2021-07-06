@@ -44,7 +44,7 @@
                                     <div class="row">
                                         @Html.DropDownListFor(model => model.IdCategoriaProducto,
                                         (SelectList)ViewBag.listaSeleccionCategoriaProducto,
-                                        "Seleccione una categoria",
+                                        "Seleccione una categoría",
                                         htmlAttributes: new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.IdCategoriaProducto, "", new { @class = "text-danger" })
                                     </div>
