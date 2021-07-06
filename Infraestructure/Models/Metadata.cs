@@ -22,10 +22,10 @@ namespace Infraestructure.Models
         public Nullable<double> CostoU { get; set; }
         [Display(Name = "ID del estado en el sistema")]
         public Nullable<int> IdEstadoSistema { get; set; }
-        [Display(Name = "Categoria")]
+        [Display(Name = "Categoría")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
-        [Display(Name = "Categoria")]
+        [Display(Name = "Categoría")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
@@ -65,7 +65,7 @@ namespace Infraestructure.Models
         public Nullable<int> Telefono { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Dirección requerida")]
-        [Display(Name = "Direccion")]
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "No se admiten números")]
