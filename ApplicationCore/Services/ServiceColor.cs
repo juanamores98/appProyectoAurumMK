@@ -32,6 +32,11 @@ namespace ApplicationCore.Services
             IRepositoryColor repository = new RepositoryColor();
             return repository.GetColorByID(id);
         }
+        public Color GetColorByCodigo(string codigo)
+        {
+            IRepositoryColor repository = new RepositoryColor();
+            return repository.GetColorByCodigo(codigo);
+        }
 
         public IEnumerable<Color> GetColorByProductoID(int id)
         {
@@ -39,15 +44,10 @@ namespace ApplicationCore.Services
             return repository.GetColorByProductoID(id);
         }
 
-        public Color Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Color Save(Color color)
+        public Color Save(Color color, int idEstadoSistema)
         {
             IRepositoryColor repository = new RepositoryColor();
-            return repository.Save(color);
+            return repository.Save(color, idEstadoSistema);
         }
     }
 }

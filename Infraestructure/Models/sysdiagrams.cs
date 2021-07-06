@@ -11,16 +11,13 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(PedidoProductoMetadata))]
-    public partial class PedidoProducto
-    {
-        public int IdPedido { get; set; }
-        public int IdProducto { get; set; }
-        public Nullable<int> Cantidad { get; set; }
     
-        public virtual Pedido Pedido { get; set; }
-        public virtual Producto Producto { get; set; }
+    public partial class sysdiagrams
+    {
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
