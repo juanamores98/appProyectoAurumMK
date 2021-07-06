@@ -182,7 +182,7 @@ namespace Infraestructure.Repository
                         //Si la imagen viene en null significa que se va usar la anterior  
                         if (producto.Imagen==null)
                         {
-                            producto.Imagen = oProducto.Imagen;//Usamos la imagen oProducto que sirve para verificar la existencia del producto 
+                            producto.Imagen = oProducto.Imagen;//Usamos la imagen de oProducto, del producto existente 
                         }
                         //Actualizar producto
                         ctx.Producto.Add(producto);
