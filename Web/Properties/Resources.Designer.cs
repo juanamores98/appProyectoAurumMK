@@ -153,6 +153,26 @@ namespace Web.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Corazon {
+            get {
+                object obj = ResourceManager.GetObject("Corazon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ella {
+            get {
+                object obj = ResourceManager.GetObject("Ella", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap fondo1 {
             get {
                 object obj = ResourceManager.GetObject("fondo1", resourceCulture);
@@ -166,6 +186,16 @@ namespace Web.Properties {
         internal static System.Drawing.Bitmap fondo2 {
             get {
                 object obj = ResourceManager.GetObject("fondo2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Girasol {
+            get {
+                object obj = ResourceManager.GetObject("Girasol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -236,6 +266,16 @@ namespace Web.Properties {
         internal static System.Drawing.Bitmap loading {
             get {
                 object obj = ResourceManager.GetObject("loading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Marinero {
+            get {
+                object obj = ResourceManager.GetObject("Marinero", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,6 +463,16 @@ namespace Web.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Perrito {
+            get {
+                object obj = ResourceManager.GetObject("Perrito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Pulseras {
             get {
                 object obj = ResourceManager.GetObject("Pulseras", resourceCulture);
@@ -496,6 +546,16 @@ namespace Web.Properties {
         internal static System.Drawing.Bitmap test {
             get {
                 object obj = ResourceManager.GetObject("test", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tucan {
+            get {
+                object obj = ResourceManager.GetObject("Tucan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

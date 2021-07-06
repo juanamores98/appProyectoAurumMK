@@ -244,6 +244,12 @@
     <None Include="Resources\Pack11.jpg" />
     <None Include="Resources\Pack12.jpg" />
     <None Include="Resources\Pack13.jpg" />
+    <None Include="Resources\Corazon.jpg" />
+    <None Include="Resources\Ella.jpg" />
+    <None Include="Resources\Girasol.jpg" />
+    <None Include="Resources\Marinero.jpg" />
+    <None Include="Resources\Perrito.jpg" />
+    <None Include="Resources\Tucan.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

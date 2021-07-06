@@ -179,7 +179,11 @@ namespace Infraestructure.Repository
                     }
                     else
                     {//Caso contrario de null el se actualiza el producto
-
+                        //Si la imagen viene en null significa que se va usar la anterior  
+                        if (producto.Imagen==null)
+                        {
+                            producto.Imagen = oProducto.Imagen;//Usamos la imagen de oProducto, del producto existente 
+                        }
                         //Actualizar producto
                         ctx.Producto.Add(producto);
                         ctx.Entry(producto).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
