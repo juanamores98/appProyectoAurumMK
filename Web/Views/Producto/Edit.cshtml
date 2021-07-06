@@ -60,11 +60,11 @@
                                         <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Imagen)" id="ImagenProducto" style="height:125px;width:125px">
                                     </div>
                                     <div class="row">
-                                        @Html.Label("Debe añadir y cambiar la imagen", htmlAttributes: new { @class = "control-label " })
+                                        @Html.Label("Añadir y cambiar la imagen", htmlAttributes: new { @class = "control-label " })
                                     </div>
                                     <div class="row">
                                         <!--Html.HiddenFor(model => model.Imagen)-->
-                                        <input type="file" name="ImageFile" required />
+                                        <input type="file" name="ImageFile"  />
                                     </div>
                                 </div>
                             </div>
