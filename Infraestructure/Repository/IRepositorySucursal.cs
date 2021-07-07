@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Infraestructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Services
+namespace Infraestructure.Repository
 {
-    public interface IServiceSucursal
+    public interface IRepositorySucursal
     {
-        //Proveedor GetProveedorByID(int id);
-        //IEnumerable<Proveedor> GetProveedor();
-        //IEnumerable<Proveedor> GetProveedorByNombre(string nombre);
-        //IEnumerable<Proveedor> GetProveedorByProductoID(int id);
-        //IEnumerable<Proveedor> GetProveedorByEstadoSistemaID(int id);
-        //void DeleteProveedorByID(int id);
-        //Proveedor Save(Proveedor proveedor, int idEstadoSistema);
+        Sucursal GetSucursalByID(int id);
+        Sucursal GetSucursalByNombre(string nombre);
+        IEnumerable<Sucursal> GetSucursal();
+        IEnumerable<Sucursal> GetSucursalByInventarioID(int id);
+        IEnumerable<Sucursal> GetSucursalByEstadoSistemaID(int id);
+        Sucursal Save(Sucursal sucursal, int idEstadoSistema);
     }
 }

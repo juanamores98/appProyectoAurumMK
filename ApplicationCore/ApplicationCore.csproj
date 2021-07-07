@@ -59,6 +59,7 @@
     <Compile Include="Services\ServiceProducto.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceRegistroMovimiento.cs" />
+    <Compile Include="Services\ServiceSucursal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

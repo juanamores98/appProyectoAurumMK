@@ -153,6 +153,7 @@
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryRegistroMovimiento.cs" />
+    <Compile Include="Repository\RepositorySucursal.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
