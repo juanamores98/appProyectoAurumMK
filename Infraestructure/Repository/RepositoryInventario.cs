@@ -46,10 +46,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {

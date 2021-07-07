@@ -55,24 +55,46 @@ namespace Web.Controllers
         // GET: Inventario/Create
         public ActionResult Create()
         {
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre");
+            ViewBag.listaSeleccionSucursal = listaSeleccionSucursal();
             return View();
         }
 
         // GET: Inventario/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            ServiceInventario _ServiceInventario = new ServiceInventario();
+            Inventario inventario = null;
+
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                inventario = _ServiceInventario.GetInventarioByID(id.Value);
+                if (inventario == null)
+                {
+                    TempData["Message"] = "No existe el producto solicitado";
+                    TempData["Redirect"] = "Inventario";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.listaSeleccionSucursal = listaSeleccionSucursal(inventario.IdSucursal);
+                return View(inventario);
             }
-            Inventario inventario = db.Inventario.Find(id);
-            if (inventario == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", inventario.IdSucursal);
-            return View(inventario);
         }
 
         // POST: Inventario/Edit/5
@@ -104,12 +126,12 @@ namespace Web.Controllers
             return View(inventario);
         }
         //METODOS AUXILIARES
-        private SelectList listaSeleccionCategoriaProducto(int idCategoriaProducto = 0)
+        private SelectList listaSeleccionSucursal(int idSucursal = 0)
         {
-            //Lista de categorias de producto
-            IServiceCategoriaProducto _ServiceCategoriaProducto = new ServiceCategoriaProducto();
-            IEnumerable<CategoriaProducto> listaCategoriaProducto = _ServiceCategoriaProducto.GetCategoriaProducto();
-            return new SelectList(listaCategoriaProducto, "IdCategoriaProducto", "Descripcion", idCategoriaProducto);
+            //Lista de Sucursales
+            IServiceSucursal _ServiceSucursal = new ServiceSucursal();
+            IEnumerable<Sucursal> listaSucursal = _ServiceSucursal.GetSucursalByEstadoSistemaID(1);
+            return new SelectList(listaSucursal, "IdSurursal", "Nombre", idSucursal);
         }
     }
 }
