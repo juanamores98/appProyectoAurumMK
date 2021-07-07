@@ -38,9 +38,10 @@ namespace ApplicationCore.Services
             return repository.GetInventarioByID(id);
         }
 
-        public Inventario Save()
+        public Inventario Save(Inventario inventario)
         {
-            throw new NotImplementedException();
+            IRepositoryInventario repository = new RepositoryInventario();
+            return repository.Save(inventario);
         }
     }
 }

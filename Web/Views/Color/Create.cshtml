@@ -30,6 +30,7 @@
                                         </div>
                                         <div class="row">
                                             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
@@ -38,7 +39,7 @@
                                             <label>Seleccione el color a guardar</label>
                                         </div>
                                         <div class="row">
-                                            <input  style="height:35px; border: 1px; box-shadow: 0.5px 0.5px 3px #000000 ;" id="color-picker" value="#"/>
+                                            <input  style="height:35px; border: 1px; box-shadow: 0.5px 0.5px 3px #000000 ;" id="color-picker" name="codigoColor"/>
                                         </div>
                                     </div>
                                 </div>
@@ -61,4 +62,4 @@
         </div>
     </div>
     @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")}
+    @Scripts.Render("~/bundles/jqueryval")}

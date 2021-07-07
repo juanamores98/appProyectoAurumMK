@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Infraestructure.Models.Inventario>
+
+@{
+    ViewBag.Title = "Mantenimiento Inventario";
+}
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Lista de Inventarios</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Inventarios</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <a  class="btn  boton-estilo" href="@Url.Action("Create", "Inventario")">
+                                Nuevo Inventario
+                                <i class="fas fa-plus"></i>
+                            </a>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdInventario)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Sucursal.Nombre)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdInventario)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form">
+        <h4>Añadir inventario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(., "IdSucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdSucursal", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model., "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Nuevo Inventario" class="btn boton-estilo" >
+                    <i class="fas fa-plus"></i>
+                <input />
+            </div>
+        </div>
+    </div>
+}*@

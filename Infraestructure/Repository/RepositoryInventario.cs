@@ -60,7 +60,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Inventario
-                        .Where(x=>x.IdSucursal==id)
+                        .Where(x => x.IdSucursal == id)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
                         .ToList<Inventario>();
@@ -90,16 +90,45 @@ namespace Infraestructure.Repository
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oInventario = ctx.Inventario
                         .Where(p => p.IdInventario == id)
-                        .Include(x=>x.InventarioProducto)
+                        .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
                         .FirstOrDefault();
             }
             return oInventario;
         }
 
-        public Inventario Save()
+        public Inventario Save(Inventario inventario)
         {
-            throw new NotImplementedException();
+            int retorno = 0; //Contabiliza la cantidad de líneas afectadas
+            Inventario oInventario = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oInventario = GetInventarioByID(inventario.IdInventario);
+
+                if (oInventario == null )
+                {
+                    //Insercion
+                    ctx.Inventario.Add(inventario);
+                    retorno = ctx.SaveChanges();
+                }
+                else
+                {
+                    //Actualizacion
+                    ctx.Inventario.Add(inventario);
+                    ctx.Entry(inventario).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+
+                }
+
+                if (retorno >= 0)
+                {
+                    oInventario = GetInventarioByID(inventario.IdInventario);
+                }
+
+            }
+
+            return oInventario;
         }
     }
 }

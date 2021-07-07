@@ -24,6 +24,7 @@ namespace Infraestructure.Models
     
         public int IdColor { get; set; }
         public string Descripcion { get; set; }
+        public string Codigo { get; set; }
         public Nullable<int> IdEstadoSistema { get; set; }
     
         public virtual EstadoSistema EstadoSistema { get; set; }

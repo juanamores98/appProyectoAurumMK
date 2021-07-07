@@ -10,11 +10,11 @@ namespace ApplicationCore.Services
     public interface IServiceColor
     {
         Color GetColorByID(int id);
+        Color GetColorByCodigo(string codigo);
         IEnumerable<Color> GetColor();
         IEnumerable<Color> GetColorByProductoID(int id);
         IEnumerable<Color> GetColorByEstadoSistemaID(int id);
         void DeleteColorByID(int id);
-        Color Save();
-        Color Save(Color color);
+        Color Save(Color color, int idEstadoSistema);
     }
 }

@@ -15,19 +15,19 @@ namespace Infraestructure.Models
 
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "No se admiten números")]
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
         [Display(Name = "Imagen del Producto")]
         public byte[] Imagen { get; set; }
 
         [RegularExpression(@"^[0-9''-'\s]{1,40}$", ErrorMessage = "Solo se admiten números")]
         [Display(Name = "Costo")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<double> CostoU { get; set; }
         [Display(Name = "ID del estado en el sistema")]
         public Nullable<int> IdEstadoSistema { get; set; }
         [Display(Name = "Categoría")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
         [Display(Name = "Categoría")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
@@ -167,6 +167,7 @@ namespace Infraestructure.Models
         public int IdColor { get; set; }
 
         [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
 
         [Display(Name = "Código estado en sistema")]
@@ -186,19 +187,19 @@ namespace Infraestructure.Models
 
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "No se admiten números")]
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
 
         [RegularExpression(@"^[0-9''-'\s]{1,40}$", ErrorMessage = "Solo se admiten números")]
         //extension
         [Display(Name = "Télefono")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> Telefono { get; set; }
 
 
         [RegularExpression(@"^[\w-]+(\.[\w-]+)*@([a-z0-9-]+(\.[a-z0-9-]+)*?\.[a-z]{2,6}|(\d{1,3}\.){3}\d{1,3})(:\d{4})?$", ErrorMessage = "Formato de correo incorrecto")]
         [Display(Name = "Correo")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Correo { get; set; }
 
         [Display(Name = "Código estado en sistema")]
@@ -210,7 +211,7 @@ namespace Infraestructure.Models
         //solo numeros
         //sea de 9
         [Display(Name = "Cédula")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> Cedula { get; set; }
 
         [Display(Name = "Estado en sistema")]

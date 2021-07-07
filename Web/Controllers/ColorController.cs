@@ -19,7 +19,7 @@ namespace Web.Controllers
         {
             IEnumerable<Color> lista = null;
             try
-            {
+            {  
                 IServiceColor _ServiceColor = new ServiceColor();
                 lista = _ServiceColor.GetColorByEstadoSistemaID(1);
                 ViewBag.title = "Lista Color";
@@ -40,25 +40,56 @@ namespace Web.Controllers
         {
             return View();
         }
-        
+
 
         // GET: Color/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            ServiceColor _ServiceColor = new ServiceColor();
+            Color color = null;
+
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                color = _ServiceColor.GetColorByID(id.Value);
+                if (color == null)
+                {
+                    TempData["Message"] = "No existe el producto solicitado";
+                    TempData["Redirect"] = "Color";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                return View(color);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Color";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         // POST: Color/Save/5
         [HttpPost]
-        public ActionResult Save(Color color)
+        public ActionResult Save(Color color, string codigoColor, int idEstadoSistema = 1)
         {
             try
             {
                 IServiceColor _ServiceColor = new ServiceColor();
-
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || idEstadoSistema == 0)
                 {
-                    Color oColorI = _ServiceColor.Save(color);
+                    color.Codigo = codigoColor;
+                    Color oColor = _ServiceColor.Save(color, idEstadoSistema);
                 }
                 else
                 {
@@ -69,7 +100,7 @@ namespace Web.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
@@ -80,10 +111,14 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Color/Deactivate/5
-        public ActionResult Deactivate(int id)
+        // POST: Color/Deactivate/5
+        public ActionResult Deactivate(int? id)
         {
-            return View();
+            ServiceColor _ServiceColor = new ServiceColor();
+            Color color = null;
+            color = _ServiceColor.GetColorByID(id.Value);
+            Save(color, null, 0);
+            return RedirectToAction("Index");
         }
     }
 }

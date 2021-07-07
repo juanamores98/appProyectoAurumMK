@@ -91,6 +91,20 @@ namespace Infraestructure.Repository
             }
             return oColor;
         }
+        public Color GetColorByCodigo(string codigo)
+        {
+            Color oColor = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oColor = ctx.Color
+                        .Where(p => p.Codigo == codigo)
+                        .Include(x => x.Producto)
+                        .Include(x => x.EstadoSistema)
+                        .FirstOrDefault();
+            }
+            return oColor;
+        }
 
         public IEnumerable<Color> GetColorByProductoID(int id)
         {
@@ -106,27 +120,24 @@ namespace Infraestructure.Repository
             }
             return lista;
         }
-        public Color Save()
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public Color Save(Color color)
+        public Color Save(Color color,int idEstadoSistema)
         {
             int retorno = 0; //Contabiliza la cantidad de líneas afectadas
             Color oColor = null;
 
             //Si idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el color
-            if (color.IdEstadoSistema != 0)
+            if (idEstadoSistema != 0)
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oColor = GetColorByID((int)color.IdColor);
-                    IRepositoryColor _RepositoryColor = new RepositoryColor();
+                    oColor = GetColorByID(color.IdColor);
+                    
                     color.IdEstadoSistema = 1; //Para crear o editar un color el estado siempre será 1 (Activo)
 
-                    if (oColor == null)//Si es nulo se crea un color
+                    if (oColor == null && GetColorByCodigo(color.Codigo)==null)//Si es nulo se crea un color
                     {
                         ctx.Color.Add(color);
                         retorno = ctx.SaveChanges();
@@ -147,6 +158,16 @@ namespace Infraestructure.Repository
                         oColor = GetColorByID((int)color.IdColor);
                     }
 
+                }
+            }
+            else
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    color = ctx.Color.Find(color.IdColor);
+                    color.IdEstadoSistema = idEstadoSistema;
+                    ctx.SaveChanges();
                 }
             }
 

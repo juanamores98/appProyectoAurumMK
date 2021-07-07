@@ -14,6 +14,6 @@ namespace Infraestructure.Repository
         IEnumerable<Inventario> GetInventarioBySucursalID(int id);
         IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id);
         void DeleteInventarioByID(int id);
-        Inventario Save();
+        Inventario Save(Inventario inventario);
     }
 }

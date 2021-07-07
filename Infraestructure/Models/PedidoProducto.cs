@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(PedidoProductoMetadata))]
     public partial class PedidoProducto
     {
         public int IdPedido { get; set; }

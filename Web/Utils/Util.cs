@@ -41,5 +41,7 @@ namespace Web.Util
         return lista;
 
     }
-}
+        //COMENTARIOS 
+        //Comando para inicializar los identities en una tabla SQLServer: DBCC CHECKIDENT('Color',RESEED,1)
+    }
 }
