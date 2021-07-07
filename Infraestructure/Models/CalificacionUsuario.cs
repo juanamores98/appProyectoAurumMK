@@ -13,7 +13,7 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(CalificacionUsuarioMetadata))]
+    [MetadataType(typeof(CalificacionUsuarioMetadata))] 
     public partial class CalificacionUsuario
     {
         public int IdCalificacion { get; set; }
