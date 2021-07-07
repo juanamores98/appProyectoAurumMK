@@ -134,7 +134,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oColor = GetColorByID(color.IdColor);
-                    IRepositoryColor _RepositoryColor = new RepositoryColor();
+                    
                     color.IdEstadoSistema = 1; //Para crear o editar un color el estado siempre será 1 (Activo)
 
                     if (oColor == null && GetColorByCodigo(color.Codigo)==null)//Si es nulo se crea un color

@@ -78,7 +78,7 @@
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor }, new { @class = "btn  boton-estilo" })
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor }, new { @class = "btn  boton-estilo", onclick = "return confirm('¿Está seguro de desactivar este color?');" })
                                             </td>
                                         </tr>
                                     }

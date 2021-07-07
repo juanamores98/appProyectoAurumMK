@@ -124,7 +124,7 @@
                                 @Html.HiddenFor(model => model.IdProveedor)
                                 <div class="form-actions no-color">
                                     <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo" />
+                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo"  onclick="return confirm('¿Está seguro de desactivar este proveedor?');"/>
                                 </div>
                             }
                         </div>

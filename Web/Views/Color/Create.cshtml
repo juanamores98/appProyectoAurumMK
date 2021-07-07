@@ -30,6 +30,7 @@
                                         </div>
                                         <div class="row">
                                             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
 
