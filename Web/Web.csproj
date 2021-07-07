@@ -441,6 +441,7 @@
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Inventario\Edit.cshtml" />
     <Content Include="Views\Inventario\Index.cshtml" />
+    <Content Include="Views\CategoriaProducto\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
