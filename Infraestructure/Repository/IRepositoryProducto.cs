@@ -15,6 +15,8 @@ namespace Infraestructure.Repository
         IEnumerable<Producto> GetProductoByEstadoSistemaID(int id);
         IEnumerable<Producto> GetProductoByColorID(int id);
         IEnumerable<Producto> GetProductoByProveedorID(int id);
+        IEnumerable<Producto> GetProductoByCategoriaProductoID(int id);
+        void SetNullIdCategoriaProductoInProductoByCategotegoriaID(int idCategoriaProducto);
         void DeleteProductoByID(int id);
         Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores, int idEstadoSistema);
     }
