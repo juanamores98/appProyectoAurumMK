@@ -13,7 +13,41 @@ namespace Infraestructure.Repository
     {
         public void DeleteInventarioByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryInventarioProducto repositoryInventarioProducto = new RepositoryInventarioProducto();
+            int returno;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    //Primero Borramos todos los productos en este inventario
+                    foreach (InventarioProducto inventarioProducto in repositoryInventarioProducto.GetInventarioProductoByInventarioID(id))
+                    {
+                        ctx.Entry(inventarioProducto).State = EntityState.Deleted;
+                        returno = ctx.SaveChanges();
+                    }
+                    /* La carga diferida retrasa la carga de datos relacionados,
+                     * hasta que lo solicite específicamente.*/
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    Inventario inventario = new Inventario()
+                    {
+                        IdInventario = id
+                    };
+                    ctx.Entry(inventario).State = EntityState.Deleted;
+                    returno = ctx.SaveChanges();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
         }
 
         public IEnumerable<Inventario> GetInventario()

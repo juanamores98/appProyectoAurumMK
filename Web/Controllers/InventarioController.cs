@@ -37,21 +37,6 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Inventario/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Inventario inventario = db.Inventario.Find(id);
-            if (inventario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(inventario);
-        }
-
         // GET: Inventario/Create
         public ActionResult Create()
         {
@@ -97,33 +82,75 @@ namespace Web.Controllers
             }
         }
 
-        // POST: Inventario/Edit/5
+        // POST: Inventario/Save/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "IdInventario,IdSucursal")] Inventario inventario)
+        public ActionResult Save(Inventario inventario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(inventario).State = EntityState.Modified;
-                db.SaveChanges();
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                if (ModelState.IsValid)
+                {
+                    Inventario oInventario = _ServiceInventario.Save(inventario);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", inventario);
+                }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.IdSucursal = new SelectList(db.Sucursal, "IdSucursal", "Nombre", inventario.IdSucursal);
-            return View(inventario);
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
         // GET: Inventario/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            ServiceInventario _ServiceInventario = new ServiceInventario();
+            Inventario inventario = null;
+            IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                inventario = _ServiceInventario.GetInventarioByID(id.Value);
+                if (inventario == null)
+                {
+                    TempData["Message"] = "No existe el inventario solicitado";
+                    TempData["Redirect"] = "Inventario";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.listaProductosPorInventario = _ServiceInventarioProducto.GetInventarioProductoByProductoID(id.Value);
+
+                return View(inventario);
             }
-            Inventario inventario = db.Inventario.Find(id);
-            if (inventario == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
-            return View(inventario);
         }
         //METODOS AUXILIARES
         private SelectList listaSeleccionSucursal(int idSucursal = 0)
