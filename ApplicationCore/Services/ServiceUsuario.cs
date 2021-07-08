@@ -22,6 +22,7 @@ namespace ApplicationCore.Services
         public Usuario Save(Usuario usuario)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
+            usuario.Contra = Cryptography.EncrypthAES(usuario.Contra);
             return repository.Save(usuario);
         }
 
