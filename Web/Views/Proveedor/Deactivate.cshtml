@@ -15,7 +15,7 @@
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h5 class="text-primary m-0 fw-bold">Informacion</h5>
+                            <h5 class="text-primary m-0 fw-bold">Información</h5>
                         </div>
                         <div class="card-body">
                             <dl class="dl-horizontal">
@@ -77,7 +77,7 @@
                                         @Html.DisplayName("Nombre")
                                     </th>
                                     <th>
-                                        @Html.DisplayName("Telefono")
+                                        @Html.DisplayName("Teléfono")
                                     </th>
                                     <th>
                                         @Html.DisplayName("Correo")
@@ -115,7 +115,7 @@
                         <div class="card-header py-3">
                             <h5 class="text-primary m-0 fw-bold">Desactivar Proveedor</h5>
                             <hr />
-                            <h3>Esta seguro de desactivar el proveedor?</h3>
+                            <h3>¿Está seguro que desea desactivar el proveedor?</h3>
                         </div>
                         <div class="card-body">
                             @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -124,7 +124,7 @@
                                 @Html.HiddenFor(model => model.IdProveedor)
                                 <div class="form-actions no-color">
                                     <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo" />
+                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo"  onclick="return confirm('¿Está seguro de desactivar este proveedor?');"/>
                                 </div>
                             }
                         </div>

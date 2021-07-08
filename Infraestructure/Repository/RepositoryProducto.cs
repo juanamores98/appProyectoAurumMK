@@ -115,7 +115,53 @@ namespace Infraestructure.Repository
         {
             throw new NotImplementedException();
         }
-        
+        public IEnumerable<Producto> GetProductoByCategoriaProductoID(int id)
+        {
+            try
+            {
+                IEnumerable<Producto> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Producto
+                        .Where(x => x.IdCategoriaProducto == id)
+                        .Include(x => x.InventarioProducto)
+                        .Include(x => x.CategoriaProducto)
+                        .Include(x => x.Color)
+                        .Include(x => x.Proveedor)
+                        .Include(x => x.EstadoSistema)
+                        .Include("RegistroProducto.RegistroMovimiento")
+                        .ToList<Producto>();
+                }
+                return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+        public void SetNullIdCategoriaProductoInProductoByCategotegoriaID(int idCategoriaProducto)
+        {
+            foreach (Producto productoItem in GetProductoByCategoriaProductoID(idCategoriaProducto)) {
+                using (MyContext ctx = new MyContext())
+                {
+                    productoItem.IdCategoriaProducto = null;
+                    ctx.Entry(productoItem).State = EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+
         //El metodo save  es usado para insertar , actualizar y desactivar productos
         public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema)
         {

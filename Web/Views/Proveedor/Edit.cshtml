@@ -62,7 +62,7 @@
                         <hr />
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Editar Proveedor" class="btn boton-estilo" />
+                                <input type="submit" value="Editar Proveedor" class="btn boton-estilo" onclick="return confirm('¿Está seguro de editar este proveedor?');" />
                             </div>
                         </div>
                     }
@@ -82,7 +82,7 @@
                                 @Html.DisplayName("Nombre")
                             </th>
                             <th>
-                                @Html.DisplayName("Telefono")
+                                @Html.DisplayName("Teléfono")
                             </th>
                             <th>
                                 @Html.DisplayName("Correo")
@@ -106,7 +106,7 @@
                             <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
                         </td>
                         <td>
-                            @Html.ActionLink("Borrar", "DeleteContacto", new { idContactoProveedor = item.IdContactoProveedor,idProveedor= Model.IdProveedor }, new { @class = "btn  boton-estilo" })
+                            @Html.ActionLink("Borrar", "DeleteContacto", new { idContactoProveedor = item.IdContactoProveedor,idProveedor= Model.IdProveedor }, new { @class = "btn  boton-estilo", onclick = "return confirm('Esta seguro de borrar este contacto?');" })
                         </td>
                     </tr>
                         }

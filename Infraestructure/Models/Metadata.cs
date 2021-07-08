@@ -13,19 +13,19 @@ namespace Infraestructure.Models
         [Display(Name = "ID")]
         public int IdProducto { get; set; }
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
         [Display(Name = "Imagen del Producto")]
         public byte[] Imagen { get; set; }
         [Display(Name = "Costo")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<double> CostoU { get; set; }
         [Display(Name = "ID del estado en el sistema")]
         public Nullable<int> IdEstadoSistema { get; set; }
-        [Display(Name = "Categoria")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name = "Categoría")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> IdCategoriaProducto { get; set; }
-        [Display(Name = "Categoria")]
+        [Display(Name = "Categoría")]
         public virtual CategoriaProducto CategoriaProducto { get; set; }
         [Display(Name = "Estado en el sistema")]
         public virtual EstadoSistema EstadoSistema { get; set; }
@@ -65,7 +65,7 @@ namespace Infraestructure.Models
         public Nullable<int> Telefono { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Dirección requerida")]
-        [Display(Name = "Direccion")]
+        [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
         [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "No se admiten números")]
@@ -163,6 +163,7 @@ namespace Infraestructure.Models
         public int IdColor { get; set; }
 
         [Display(Name = "Descripción")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
 
         [Display(Name = "Código estado en sistema")]
@@ -181,15 +182,15 @@ namespace Infraestructure.Models
         public int IdContactoProveedor { get; set; }
 
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
 
         [Display(Name = "Télefono")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> Telefono { get; set; }
 
         [Display(Name = "Correo")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Correo { get; set; }
 
         [Display(Name = "Código estado en sistema")]
@@ -198,7 +199,7 @@ namespace Infraestructure.Models
         [Display(Name = "Código proveedor")]
         public Nullable<int> IdProveedor { get; set; }
         [Display(Name = "Cédula")]
-        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> Cedula { get; set; }
 
         [Display(Name = "Estado en sistema")]

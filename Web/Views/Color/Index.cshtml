@@ -60,10 +60,10 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)
                                             </td>
                                             <td style="text-align: center;">
-                                                <label></label>
+                                                @Html.DisplayFor(modelItem => item.Codigo)
                                             </td>
                                             <td style="text-align: center;">
-                                                <input style="border:0;" type="color" value="#ea9999" disabled="disabled"/>
+                                                <input style="border:0;" type="color" value="@item.Codigo" disabled="disabled"/>
                                             </td>
                                             <td style="text-align: center;">
                                                 @if (item.IdEstadoSistema == 1)
@@ -78,8 +78,7 @@
                                             </td>
                                             <td>
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Detalle", "Details", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor }, new { @class = "btn  boton-estilo" })
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdColor }, new { @class = "btn  boton-estilo", onclick = "return confirm('¿Está seguro de desactivar este color?');" })
                                             </td>
                                         </tr>
                                     }

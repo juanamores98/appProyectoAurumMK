@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d588fbeab15a4edd9309cb34521098ff" Name="Diagram1">
+      <Diagram DiagramId="363db7b5628b4584993221584bd30a90" Name="Diagram1">
         <EntityTypeShape EntityType="AuronMkModel.CalificacionUsuario" Width="1.5" PointX="10.25" PointY="13.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.CategoriaProducto" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Color" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Color" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.ContactoProveedor" Width="1.5" PointX="12.75" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.CostoEnvio" Width="1.5" PointX="11" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.EstadoSistema" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Inventario" Width="1.5" PointX="5.25" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.InventarioProducto" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Inventario" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.InventarioProducto" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.MotivoMovimiento" Width="1.5" PointX="11" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.Pedido" Width="1.5" PointX="13.25" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.PedidoProducto" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
@@ -20,7 +20,8 @@
         <EntityTypeShape EntityType="AuronMkModel.Proveedor" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.RegistroMovimiento" Width="1.5" PointX="13.25" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.RegistroProducto" Width="1.5" PointX="10.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuronMkModel.Sucursal" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.Sucursal" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuronMkModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.TipoMovimiento" Width="1.5" PointX="11" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.TipoUsuario" Width="1.5" PointX="5.75" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AuronMkModel.Usuario" Width="1.5" PointX="8" PointY="12.625" IsExpanded="true" />

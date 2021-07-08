@@ -98,8 +98,6 @@ namespace Web.Controllers
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
             Producto producto = null;
-            IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-            IServiceInventario _ServiceInventario = new ServiceInventario();
 
             try
             {
@@ -250,7 +248,7 @@ namespace Web.Controllers
         {
             //Lista de Proveedor
             IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-            IEnumerable<Proveedor> listaProveedor = _ServiceProveedor.GetProveedor();
+            IEnumerable<Proveedor> listaProveedor = _ServiceProveedor.GetProveedorByEstadoSistemaID(1);
             int[] listaProveedorSelect = null;
 
             if (proveedores != null)
@@ -266,7 +264,7 @@ namespace Web.Controllers
         {
             //Lista de Color
             IServiceColor _Servicecolores = new ServiceColor();
-            IEnumerable<Color> listaColor = _Servicecolores.GetColor();
+            IEnumerable<Color> listaColor = _Servicecolores.GetColorByEstadoSistemaID(1);
             int[] listaColorSelect = null;
 
             if (colores != null)
