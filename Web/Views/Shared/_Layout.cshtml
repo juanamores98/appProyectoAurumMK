@@ -22,8 +22,16 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)
     @Scripts.Render("https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js")
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(ViewBag.NotificationMessage);
+        </script>
+    }
+
     <script>
         $('#color-picker').spectrum({
             type: "component",

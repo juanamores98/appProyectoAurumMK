@@ -26,6 +26,16 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            // SweetAlert
+            bundles.Add(new ScriptBundle("~/bundles/sweetalert").Include(
+                      "~/Scripts/sweetalert.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css2").Include(
+                        "~/Content/bootstrap.css",
+                        //"~/Content/bootstrap-materia.min.css",
+                        "~/Content/jquery-ui.css",
+                        "~/Content/sweetalert.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.css",
                       //"~/Content/site.css"));
