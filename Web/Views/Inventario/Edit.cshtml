@@ -11,7 +11,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Añadir Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span></h1> 
+            <h1>Editar Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span> | @Html.ActionLink("Detalle", "Details", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Borrar", "Delete", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -25,13 +25,18 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
-                                @Html.LabelFor(model => model.IdSucursal, "IdSucursal", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.IdInventario, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.IdSucursal, (SelectList)ViewBag.listaSeleccionSucursal, htmlAttributes: new { @class = "form-control" })
+                                    <input type="text" name="idProveedor" value="@Model.IdInventario" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.IdSucursal, (SelectList)ViewBag.listaSeleccionSucursal, "Seleccione Sucursal", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <input type="submit" value="Editar Inventario" class="btn boton-estilo" />

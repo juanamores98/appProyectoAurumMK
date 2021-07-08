@@ -36,8 +36,47 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        // GET: Inventario/Details/5
+        public ActionResult Details(int? id)
+        {
+            ServiceInventario _ServiceInventario = new ServiceInventario();
+            Inventario inventario = null;
+            IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
 
-        // GET: Inventario/Create
+            try
+            {
+                // Si va null
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                inventario = _ServiceInventario.GetInventarioByID(id.Value);
+                if (inventario == null)
+                {
+                    TempData["Message"] = "No existe el inventario solicitado";
+                    TempData["Redirect"] = "Inventario";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+                ViewBag.listaProductosPorInventario = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+
+                return View(inventario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        // GET: Inventario/Create/5
         public ActionResult Create()
         {
             ViewBag.listaSeleccionSucursal = listaSeleccionSucursal();
@@ -137,9 +176,50 @@ namespace Web.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                ViewBag.listaProductosPorInventario = _ServiceInventarioProducto.GetInventarioProductoByProductoID(id.Value);
+                ViewBag.listaProductosPorInventario = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
 
                 return View(inventario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        // GET: Inventario/Management/5
+        [HttpPost]
+        public ActionResult Management(int? id)
+        {
+            try
+            {
+                
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Inventario";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        // POST: Inventario/Delete/5
+        [HttpPost]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            try
+            {
+                ServiceInventario _ServiceInventario = new ServiceInventario();
+                _ServiceInventario.DeleteInventarioByID(id.Value);
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -158,7 +238,7 @@ namespace Web.Controllers
             //Lista de Sucursales
             IServiceSucursal _ServiceSucursal = new ServiceSucursal();
             IEnumerable<Sucursal> listaSucursal = _ServiceSucursal.GetSucursalByEstadoSistemaID(1);
-            return new SelectList(listaSucursal, "IdSurursal", "Nombre", idSucursal);
+            return new SelectList(listaSucursal, "IdSucursal", "Nombre", idSucursal);
         }
     }
 }

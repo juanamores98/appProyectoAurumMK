@@ -10,7 +10,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Borrar Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Editar", "Edit", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Detalle Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Borrar", "Delete", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-2">
                     <div class="card shadow mb-4">
@@ -90,29 +90,6 @@
 
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h5 class="text-primary m-0 fw-bold">Borrar Inventario</h5>
-                            <hr />
-                            <h3>¿Desea borrar este inventario?</h3>
-                            <h4 class="text-danger">*Borrar este inventario sera irreversible</h4>
-                        </div>
-                        <div class="card-body">
-                            @using (Html.BeginForm("DeleteConfirmed", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-                            <div class="form-actions no-color">
-                                <input type="text" name="id" value="@Html.DisplayFor(model => model.IdInventario)" style="display: none" />
-                                <input type="submit" value="Borrar Inventario" class="btn boton-estilo" onclick="return confirm('¿Está seguro de borrar este inventario?');" />
-                            </div>
-                            }
                         </div>
                     </div>
                 </div>
