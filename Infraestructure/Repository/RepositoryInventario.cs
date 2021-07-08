@@ -17,14 +17,18 @@ namespace Infraestructure.Repository
             int returno;
             try
             {
-                using (MyContext ctx = new MyContext())
+
+                //Primero Borramos todos los productos en este inventario
+                foreach (InventarioProducto inventarioProducto in repositoryInventarioProducto.GetInventarioProductoByInventarioID(id))
                 {
-                    //Primero Borramos todos los productos en este inventario
-                    foreach (InventarioProducto inventarioProducto in repositoryInventarioProducto.GetInventarioProductoByInventarioID(id))
+                    using (MyContext ctx = new MyContext())
                     {
                         ctx.Entry(inventarioProducto).State = EntityState.Deleted;
                         returno = ctx.SaveChanges();
                     }
+                }
+                using (MyContext ctx = new MyContext())
+                {
                     /* La carga diferida retrasa la carga de datos relacionados,
                      * hasta que lo solicite específicamente.*/
                     ctx.Configuration.LazyLoadingEnabled = false;
@@ -80,7 +84,7 @@ namespace Infraestructure.Repository
             }
         }
 
-        
+
 
         public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {
@@ -137,7 +141,7 @@ namespace Infraestructure.Repository
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oInventario = GetInventarioByID(inventario.IdInventario);
 
-                if (oInventario == null )
+                if (oInventario == null)
                 {
                     //Insercion
                     ctx.Inventario.Add(inventario);
