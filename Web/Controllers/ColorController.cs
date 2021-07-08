@@ -114,11 +114,23 @@ namespace Web.Controllers
         // POST: Color/Deactivate/5
         public ActionResult Deactivate(int? id)
         {
-            ServiceColor _ServiceColor = new ServiceColor();
-            Color color = null;
-            color = _ServiceColor.GetColorByID(id.Value);
-            Save(color, null, 0);
-            return RedirectToAction("Index");
+            try
+            {
+                ServiceColor _ServiceColor = new ServiceColor();
+                Color color = null;
+                color = _ServiceColor.GetColorByID(id.Value);
+                Save(color, null, 0);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Color";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
     }
 }
