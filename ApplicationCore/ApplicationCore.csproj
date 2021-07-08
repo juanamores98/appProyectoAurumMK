@@ -51,6 +51,7 @@
     <Compile Include="Services\IServiceProducto.cs" />
     <Compile Include="Services\IServiceProveedor.cs" />
     <Compile Include="Services\IServiceRegistroMovimiento.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceCategoriaProducto.cs" />
     <Compile Include="Services\ServiceColor.cs" />
     <Compile Include="Services\ServiceContactoProveedor.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceRegistroMovimiento.cs" />
     <Compile Include="Services\ServiceSucursal.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

@@ -165,6 +165,7 @@
     </Compile>
     <Compile Include="PRUEBA.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\SweetAlerHelper.cs" />
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
