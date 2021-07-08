@@ -13,7 +13,7 @@ namespace web.Controllers
     public class MaintenanceController : Controller
     {
         // GET: Maintenance Index
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             return View();
         }
