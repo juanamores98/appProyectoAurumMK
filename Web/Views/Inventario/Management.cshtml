@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Infraestructure.Models.InventarioProducto>
+
+@{
+    ViewBag.Title = "Gestión Inventario";
+}
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Gestión de Inventario <span class="badge bg-info">@(((Infraestructure.Models.Inventario)ViewBag.inventarioGestion).IdInventario)</span>| @Html.ActionLink("Detalle", "Details", new { id = ((Infraestructure.Models.Inventario)ViewBag.inventarioGestion).IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Editar", "Edit", new { id = ((Infraestructure.Models.Inventario)ViewBag.inventarioGestion).IdInventario }, new { @class = "btn  boton-estilo" }) </h1> <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Productos en el Inventario</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdProducto)
+                            </th>
+                            <th>
+                                @Html.DisplayName("Nombre del Producto")
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StockMinimo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Stock)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Estante)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                @using (Html.BeginForm("ManagementChange", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.HiddenFor(modelItem => item.IdInventario)
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdProducto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.StockMinimo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(modelItem => item.StockMinimo, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.Stock, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(modelItem => item.Stock, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => item.Estante, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(modelItem => item.Estante, "", new { @class = "text-danger" })
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="Modificar" class="btn boton-estilo" /> 
+                                    </td>
+                                }
+                            </tr>
+                        }
+
+                    </table>
+
+
+                </div>
+            </div>
+            <p>
+                @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
+            </p>
+        </div>
+    </div>
+</div>
+

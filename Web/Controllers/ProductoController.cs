@@ -232,7 +232,7 @@ namespace Web.Controllers
         {
             //Lista de Inventario
             IServiceInventario _ServiceInventario = new ServiceInventario();
-            IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventario();
+            IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventarioByEstadoSistemaID(1);
             //Inventarios donde se encuentra el producto
             int[] listaInventarioSelect = null;
 

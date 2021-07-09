@@ -23,7 +23,7 @@ namespace Web.Controllers
             try
             {
                 IServiceInventario _ServiceInventario = new ServiceInventario();
-                lista = _ServiceInventario.GetInventario();
+                lista = _ServiceInventario.GetInventarioByEstadoSistemaID(1);
                 ViewBag.title = "Lista Inventarios";
                 return View(lista);
             }
@@ -123,14 +123,14 @@ namespace Web.Controllers
 
         // POST: Inventario/Save/5
         [HttpPost]
-        public ActionResult Save(Inventario inventario)
+        public ActionResult Save(Inventario inventario,int idEstadoSistema=1)
         {
             try
             {
                 IServiceInventario _ServiceInventario = new ServiceInventario();
-                if (ModelState.IsValid)
+                if (ModelState.IsValid|| idEstadoSistema==0)
                 {
-                    Inventario oInventario = _ServiceInventario.Save(inventario);
+                    Inventario oInventario = _ServiceInventario.Save(inventario, idEstadoSistema);
                 }
                 else
                 {
@@ -152,8 +152,8 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Inventario/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Inventario/Deactivate/5
+        public ActionResult Deactivate(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
             Inventario inventario = null;
@@ -192,13 +192,16 @@ namespace Web.Controllers
             }
         }
         // GET: Inventario/Management/5
-        [HttpPost]
         public ActionResult Management(int? id)
         {
+            IEnumerable<InventarioProducto> lista = null;
             try
             {
-                
-                return RedirectToAction("Index");
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+                lista = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                ViewBag.inventarioGestion = _ServiceInventario.GetInventarioByID(id.Value);
+                return View(lista);
             }
             catch (Exception ex)
             {
@@ -211,15 +214,17 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // POST: Inventario/Delete/5
-        [HttpPost]
-        public ActionResult DeleteConfirmed(int? id)
+        // POST: Inventario/ManagementChange/5
+        public ActionResult ManagementChange(InventarioProducto inventarioProducto)
         {
+            IEnumerable<InventarioProducto> lista = null;
             try
             {
-                ServiceInventario _ServiceInventario = new ServiceInventario();
-                _ServiceInventario.DeleteInventarioByID(id.Value);
-                return RedirectToAction("Index");
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+                lista = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(inventarioProducto.IdInventario);
+                ViewBag.inventarioGestion = _ServiceInventario.GetInventarioByID(inventarioProducto.IdInventario);
+                return RedirectToAction("Management", lista);
             }
             catch (Exception ex)
             {

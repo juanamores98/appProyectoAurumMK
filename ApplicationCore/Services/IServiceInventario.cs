@@ -11,8 +11,9 @@ namespace ApplicationCore.Services
     {
         Inventario GetInventarioByID(int id);
         IEnumerable<Inventario> GetInventario();
+        IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id);
         IEnumerable<Inventario> GetInventarioBySucursalID(int id);
         void DeleteInventarioByID(int id);
-        Inventario Save(Inventario inventario);
+        Inventario Save(Inventario inventario, int idEstadoSistema);
     }
 }

@@ -24,9 +24,11 @@ namespace Infraestructure.Models
     
         public int IdInventario { get; set; }
         public int IdSucursal { get; set; }
+        public Nullable<int> IdEstadoSistema { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         public virtual Sucursal Sucursal { get; set; }
+        public virtual EstadoSistema EstadoSistema { get; set; }
     }
 }

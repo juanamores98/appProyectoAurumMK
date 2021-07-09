@@ -124,7 +124,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Producto
-                        .Where(x => x.IdCategoriaProducto == id)
+                        .Where(x => x.IdCategoriaProducto == id && x.IdEstadoSistema == 1)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.CategoriaProducto)
                         .Include(x => x.Color)
