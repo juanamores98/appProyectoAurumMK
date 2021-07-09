@@ -165,6 +165,7 @@
     </Compile>
     <Compile Include="PRUEBA.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\SweetAlerHelper.cs" />
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +198,7 @@
     <Content Include="Content\solid.min.css" />
     <Content Include="Content\svg-with-js.css" />
     <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="favicon.ico" />
@@ -369,6 +371,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />

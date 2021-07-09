@@ -145,6 +145,7 @@
     <Compile Include="Repository\IRepositoryProducto.cs" />
     <Compile Include="Repository\IRepositoryRegistroMovimiento.cs" />
     <Compile Include="Repository\IRepositorySucursal.cs" />
+    <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\RepositoryColor.cs" />
     <Compile Include="Repository\RepositoryContactoProveedor.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryRegistroMovimiento.cs" />
     <Compile Include="Repository\RepositorySucursal.cs" />
+    <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
