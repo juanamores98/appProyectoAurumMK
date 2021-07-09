@@ -85,7 +85,7 @@
                                     <th></th>
                                 </tr>
 
-                                @foreach (var item in Model.ContactoProveedor)
+                                @foreach (var item in Model.ContactoProveedor.Where(x => x.IdEstadoSistema == 1))
                                 {
                                     <tr>
                                         <td>
@@ -131,7 +131,7 @@
                                         <th></th>
                                     </tr>
 
-                                    @foreach (var item in Model.Producto)
+                                    @foreach (var item in Model.Producto.Where(x=>x.IdEstadoSistema==1))
                                     {
                                         <tr>
                                             <td>

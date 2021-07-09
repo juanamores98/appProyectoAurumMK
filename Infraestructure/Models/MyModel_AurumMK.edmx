@@ -4,22 +4,24 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AuronMkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AuronMkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CalificacionUsuario">
           <Key>
             <PropertyRef Name="IdCalificacion" />
           </Key>
-          <Property Name="IdCalificacion" Type="int" Nullable="false" />
+          <Property Name="IdCalificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="Calificacion" Type="int" />
           <Property Name="Comentario" Type="varchar(max)" />
+          <Property Name="IdEstadoSistema" Type="int" />
         </EntityType>
         <EntityType Name="CategoriaProducto">
           <Key>
             <PropertyRef Name="IdCategoriaProducto" />
           </Key>
-          <Property Name="IdCategoriaProducto" Type="int" Nullable="false" />
+          <Property Name="IdCategoriaProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="IdEstadoSistema" Type="int" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -71,6 +73,7 @@
           </Key>
           <Property Name="IdInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdEstadoSistema" Type="int" />
         </EntityType>
         <EntityType Name="InventarioProducto">
           <Key>
@@ -82,6 +85,7 @@
           <Property Name="Stock" Type="int" />
           <Property Name="StockMinimo" Type="int" />
           <Property Name="Estante" Type="varchar(max)" />
+          <Property Name="IdEstadoSistema" Type="int" />
         </EntityType>
         <EntityType Name="MotivoMovimiento">
           <Key>
@@ -209,6 +213,30 @@
           <Property Name="IdEstadoSistema" Type="int" />
           <Property Name="IdTipoUsuario" Type="int" />
         </EntityType>
+        <Association Name="FK_CalificacionUsuario_EstadoSistema">
+          <End Role="EstadoSistema" Type="Self.EstadoSistema" Multiplicity="0..1" />
+          <End Role="CalificacionUsuario" Type="Self.CalificacionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="CalificacionUsuario">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaProducto_EstadoSistema">
+          <End Role="EstadoSistema" Type="Self.EstadoSistema" Multiplicity="0..1" />
+          <End Role="CategoriaProducto" Type="Self.CategoriaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="CategoriaProducto">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EstadoSistema">
           <End Role="EstadoSistema" Type="Self.EstadoSistema" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -521,6 +549,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Inventario_EstadoSistema">
+          <End Role="EstadoSistema" Type="Self.EstadoSistema" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioProducto_EstadoSistema">
+          <End Role="EstadoSistema" Type="Self.EstadoSistema" Multiplicity="0..1" />
+          <End Role="InventarioProducto" Type="Self.InventarioProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AuronMkModelStoreContainer">
           <EntitySet Name="CalificacionUsuario" EntityType="Self.CalificacionUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoriaProducto" EntityType="Self.CategoriaProducto" Schema="dbo" store:Type="Tables" />
@@ -544,6 +596,14 @@
           <EntitySet Name="TipoMovimiento" EntityType="Self.TipoMovimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CalificacionUsuario_EstadoSistema" Association="Self.FK_CalificacionUsuario_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="CalificacionUsuario" EntitySet="CalificacionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaProducto_EstadoSistema" Association="Self.FK_CategoriaProducto_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="CategoriaProducto" EntitySet="CategoriaProducto" />
+          </AssociationSet>
           <AssociationSet Name="FK_EstadoSistema" Association="Self.FK_EstadoSistema">
             <End Role="EstadoSistema" EntitySet="EstadoSistema" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -648,9 +708,16 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="RegistroMovimiento" EntitySet="RegistroMovimiento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Inventario_EstadoSistema" Association="Self.FK_Inventario_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioProducto_EstadoSistema" Association="Self.FK_InventarioProducto_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuronMkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -663,6 +730,8 @@
           <Property Name="Calificacion" Type="Int32" />
           <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_IdUsuario" FromRole="CalificacionUsuario" ToRole="Usuario" />
+          <Property Name="IdEstadoSistema" Type="Int32" />
+          <NavigationProperty Name="EstadoSistema" Relationship="AuronMkModel.FK_CalificacionUsuario_EstadoSistema" FromRole="CalificacionUsuario" ToRole="EstadoSistema" />
         </EntityType>
         <EntityType Name="CategoriaProducto">
           <Key>
@@ -671,6 +740,8 @@
           <Property Name="IdCategoriaProducto" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_IdCategoriaProducto" FromRole="CategoriaProducto" ToRole="Producto" />
+          <Property Name="IdEstadoSistema" Type="Int32" />
+          <NavigationProperty Name="EstadoSistema" Relationship="AuronMkModel.FK_CategoriaProducto_EstadoSistema" FromRole="CategoriaProducto" ToRole="EstadoSistema" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -718,6 +789,10 @@
           <NavigationProperty Name="Producto" Relationship="Self.FK_IdEstadoSistema1" FromRole="EstadoSistema" ToRole="Producto" />
           <NavigationProperty Name="Proveedor" Relationship="Self.FK_IdEstadoSistema3" FromRole="EstadoSistema" ToRole="Proveedor" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK_IdEstadoSistema5" FromRole="EstadoSistema" ToRole="Sucursal" />
+          <NavigationProperty Name="CalificacionUsuario" Relationship="AuronMkModel.FK_CalificacionUsuario_EstadoSistema" FromRole="EstadoSistema" ToRole="CalificacionUsuario" />
+          <NavigationProperty Name="CategoriaProducto" Relationship="AuronMkModel.FK_CategoriaProducto_EstadoSistema" FromRole="EstadoSistema" ToRole="CategoriaProducto" />
+          <NavigationProperty Name="Inventario" Relationship="AuronMkModel.FK_Inventario_EstadoSistema" FromRole="EstadoSistema" ToRole="Inventario" />
+          <NavigationProperty Name="InventarioProducto" Relationship="AuronMkModel.FK_InventarioProducto_EstadoSistema" FromRole="EstadoSistema" ToRole="InventarioProducto" />
         </EntityType>
         <EntityType Name="Inventario">
           <Key>
@@ -727,6 +802,8 @@
           <Property Name="IdSucursal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InventarioProducto" Relationship="Self.FK_IdInventario" FromRole="Inventario" ToRole="InventarioProducto" />
           <NavigationProperty Name="Sucursal" Relationship="Self.FK_IdSucursal" FromRole="Inventario" ToRole="Sucursal" />
+          <Property Name="IdEstadoSistema" Type="Int32" />
+          <NavigationProperty Name="EstadoSistema" Relationship="AuronMkModel.FK_Inventario_EstadoSistema" FromRole="Inventario" ToRole="EstadoSistema" />
         </EntityType>
         <EntityType Name="InventarioProducto">
           <Key>
@@ -740,6 +817,8 @@
           <Property Name="Estante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inventario" Relationship="Self.FK_IdInventario" FromRole="InventarioProducto" ToRole="Inventario" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_IdProducto" FromRole="InventarioProducto" ToRole="Producto" />
+          <Property Name="IdEstadoSistema" Type="Int32" />
+          <NavigationProperty Name="EstadoSistema" Relationship="AuronMkModel.FK_InventarioProducto_EstadoSistema" FromRole="InventarioProducto" ToRole="EstadoSistema" />
         </EntityType>
         <EntityType Name="MotivoMovimiento">
           <Key>
@@ -1279,7 +1358,71 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
+          <AssociationSet Name="FK_CalificacionUsuario_EstadoSistema" Association="AuronMkModel.FK_CalificacionUsuario_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="CalificacionUsuario" EntitySet="CalificacionUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategoriaProducto_EstadoSistema" Association="AuronMkModel.FK_CategoriaProducto_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="CategoriaProducto" EntitySet="CategoriaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventario_EstadoSistema" Association="AuronMkModel.FK_Inventario_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventarioProducto_EstadoSistema" Association="AuronMkModel.FK_InventarioProducto_EstadoSistema">
+            <End Role="EstadoSistema" EntitySet="EstadoSistema" />
+            <End Role="InventarioProducto" EntitySet="InventarioProducto" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_CalificacionUsuario_EstadoSistema">
+          <End Type="AuronMkModel.EstadoSistema" Role="EstadoSistema" Multiplicity="0..1" />
+          <End Type="AuronMkModel.CalificacionUsuario" Role="CalificacionUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="CalificacionUsuario">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategoriaProducto_EstadoSistema">
+          <End Type="AuronMkModel.EstadoSistema" Role="EstadoSistema" Multiplicity="0..1" />
+          <End Type="AuronMkModel.CategoriaProducto" Role="CategoriaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="CategoriaProducto">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventario_EstadoSistema">
+          <End Type="AuronMkModel.EstadoSistema" Role="EstadoSistema" Multiplicity="0..1" />
+          <End Type="AuronMkModel.Inventario" Role="Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventarioProducto_EstadoSistema">
+          <End Type="AuronMkModel.EstadoSistema" Role="EstadoSistema" Multiplicity="0..1" />
+          <End Type="AuronMkModel.InventarioProducto" Role="InventarioProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSistema">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Principal>
+            <Dependent Role="InventarioProducto">
+              <PropertyRef Name="IdEstadoSistema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1289,6 +1432,7 @@
           <EntitySetMapping Name="CalificacionUsuario">
             <EntityTypeMapping TypeName="AuronMkModel.CalificacionUsuario">
               <MappingFragment StoreEntitySet="CalificacionUsuario">
+                <ScalarProperty Name="IdEstadoSistema" ColumnName="IdEstadoSistema" />
                 <ScalarProperty Name="IdCalificacion" ColumnName="IdCalificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
@@ -1299,6 +1443,7 @@
           <EntitySetMapping Name="CategoriaProducto">
             <EntityTypeMapping TypeName="AuronMkModel.CategoriaProducto">
               <MappingFragment StoreEntitySet="CategoriaProducto">
+                <ScalarProperty Name="IdEstadoSistema" ColumnName="IdEstadoSistema" />
                 <ScalarProperty Name="IdCategoriaProducto" ColumnName="IdCategoriaProducto" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
@@ -1347,6 +1492,7 @@
           <EntitySetMapping Name="Inventario">
             <EntityTypeMapping TypeName="AuronMkModel.Inventario">
               <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="IdEstadoSistema" ColumnName="IdEstadoSistema" />
                 <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
               </MappingFragment>
@@ -1355,6 +1501,7 @@
           <EntitySetMapping Name="InventarioProducto">
             <EntityTypeMapping TypeName="AuronMkModel.InventarioProducto">
               <MappingFragment StoreEntitySet="InventarioProducto">
+                <ScalarProperty Name="IdEstadoSistema" ColumnName="IdEstadoSistema" />
                 <ScalarProperty Name="IdInventario" ColumnName="IdInventario" />
                 <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
                 <ScalarProperty Name="Stock" ColumnName="Stock" />

@@ -90,25 +90,34 @@
                             <th></th>
                         </tr>
 
-                        @foreach (var item in Model.ContactoProveedor)
+                        @foreach (Infraestructure.Models.ContactoProveedor item in Model.ContactoProveedor.Where(x=>x.IdEstadoSistema==1))
                         {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.IdContactoProveedor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
-                        </td>
-                        <td>
-                            <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
-                        </td>
-                        <td>
-                            @Html.ActionLink("Borrar", "DeleteContacto", new { idContactoProveedor = item.IdContactoProveedor,idProveedor= Model.IdProveedor }, new { @class = "btn  boton-estilo", onclick = "return confirm('Esta seguro de borrar este contacto?');" })
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdContactoProveedor)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td>
+                                    <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
+                                </td>
+                                <td>
+                                    <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
+                                </td>
+                                <td>
+                                    @using (Html.BeginForm("SaveContacto", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                    <div class="form-actions no-color">
+                                        <input type="text" name="idContactoProveedor" value="@item.IdContactoProveedor" style="display: none" />
+                                        <input type="text" name="idProveedor" value="@item.IdProveedor" style="display: none" />
+                                        <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                        <input type="submit" value="Desactivar" class="btn boton-estilo" onclick="return confirm('¿Está seguro de desactivar este contacto?');" />
+                                    </div>
+                                    }
+                                </td>
+                            </tr>
                         }
 
                     </table>

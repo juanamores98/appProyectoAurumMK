@@ -49,6 +49,10 @@
         <AssociationConnector Association="AuronMkModel.FK_IdTipoUsuario" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.ColorProducto" ManuallyRouted="false" />
         <AssociationConnector Association="AuronMkModel.ProductoProveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="AuronMkModel.FK_CalificacionUsuario_EstadoSistema" />
+        <AssociationConnector Association="AuronMkModel.FK_CategoriaProducto_EstadoSistema" />
+        <AssociationConnector Association="AuronMkModel.FK_Inventario_EstadoSistema" />
+        <AssociationConnector Association="AuronMkModel.FK_InventarioProducto_EstadoSistema" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

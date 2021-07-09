@@ -36,10 +36,20 @@ namespace ApplicationCore.Services
             IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
             return repository.GetInventarioProductoByProductoID(id);
         }
-
-        public InventarioProducto Save()
+        public IEnumerable<InventarioProducto> GetInventarioProductoByEstadoSistemaID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
+            return repository.GetInventarioProductoByEstadoSistemaID(id);
+        }
+        public InventarioProducto Save(InventarioProducto inventarioProducto, int idEstadoSistema)
+        {
+            IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
+            return repository.Save(inventarioProducto, idEstadoSistema);
+        }
+        public void DeactivateInventarioProductoByInventarioID(int idInventario)
+        {
+            IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
+            repository.DeactivateInventarioProductoByInventarioID(idInventario);
         }
     }
 }

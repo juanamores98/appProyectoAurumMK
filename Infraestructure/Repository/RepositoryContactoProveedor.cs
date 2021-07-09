@@ -11,37 +11,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryContactoProveedor : IRepositoryContactoProveedor
     {
-        public void DeleteContactoProveedorByID(int id)
-        {
-            int returno;
-            try
-            {
-                using (MyContext ctx = new MyContext())
-                {
-                    /* La carga diferida retrasa la carga de datos relacionados,
-                     * hasta que lo solicite específicamente.*/
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    ContactoProveedor contactoProveedor = new ContactoProveedor()
-                    {
-                        IdContactoProveedor = id
-                    };
-                    ctx.Entry(contactoProveedor).State = EntityState.Deleted;
-                    returno = ctx.SaveChanges();
-                }
-            }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "";
-                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw;
-            }
-        }
+        
 
         public IEnumerable<ContactoProveedor> GetContactoProveedor()
         {
@@ -111,7 +81,7 @@ namespace Infraestructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 oContactoProveedor = ctx.ContactoProveedor
-                        .Where(p => p.IdContactoProveedor == id)
+                        .Where(p => p.IdContactoProveedor == id )
                         .Include(x => x.Proveedor)
                         .Include(x => x.EstadoSistema)
                         .FirstOrDefault();
@@ -128,7 +98,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.ContactoProveedor
-                        .Where(x => x.Nombre == nombre)
+                        .Where(x => x.Nombre == nombre && x.IdEstadoSistema == 1)
                         .Include(x => x.Proveedor)
                         .Include(x => x.EstadoSistema)
                         .ToList<ContactoProveedor>();
@@ -157,7 +127,7 @@ namespace Infraestructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 lista = ctx.ContactoProveedor
-                    .Where(p => p.Proveedor.IdProveedor == id)
+                    .Where(p => p.Proveedor.IdProveedor == id && p.IdEstadoSistema == 1)
                     .Include(x => x.Proveedor)
                     .Include(x => x.EstadoSistema)
                     .ToList<ContactoProveedor>();
