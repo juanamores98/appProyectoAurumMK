@@ -64,9 +64,38 @@ namespace Infraestructure.Repository
             throw new NotImplementedException();
         }
 
-        public CategoriaProducto Save()
+        public CategoriaProducto Save(CategoriaProducto categoriaProducto)
         {
-            throw new NotImplementedException();
+            int retorno = 0; //Contabiliza la cantidad de líneas afectadas
+            CategoriaProducto categoria = null;
+
+            //Si idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el color
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    categoria = GetCategoriaProductoByID(categoriaProducto.IdCategoriaProducto); 
+
+                    if (categoria == null )//Si es nulo se crea una categoria
+                    {
+                        ctx.CategoriaProducto.Add(categoriaProducto);
+                        retorno = ctx.SaveChanges();
+                    }
+                    else
+                    {
+                        //Si el color no es nulo, lo actualiza
+                        ctx.CategoriaProducto.Add(categoriaProducto);
+                        ctx.Entry(categoriaProducto).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+
+                    }
+
+                    if (retorno >= 0)
+                    {
+                        categoria = GetCategoriaProductoByID((int)categoriaProducto.IdCategoriaProducto);
+                    }
+                }
+         
+            return categoria;
         }
     }
 }

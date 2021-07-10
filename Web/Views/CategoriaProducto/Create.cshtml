@@ -1,7 +1,7 @@
 ﻿@model Infraestructure.Models.CategoriaProducto
 
     @{
-        ViewBag.Title = "Mantenimiento Categoría Producto";
+        ViewBag.Title = "Mantenimiento CategoriaProducto";
     }
 
     <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
@@ -26,22 +26,13 @@
                                 <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
                                     <div class="col">
                                         <div class="row">
-                                            @Html.LabelFor(model => model.IdCategoriaProducto, htmlAttributes: new { @class = "control-label " })
-                                        </div>
-                                        <div class="row">
-                                            @Html.EditorFor(model => model.IdCategoriaProducto, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.IdCategoriaProducto, "", new { @class = "text-danger" })
-                                        </div>
-                                        <div class="row">
                                             @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label " })
                                         </div>
                                         <div class="row">
                                             @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
                                         </div>
-
                                     </div>
-
                                 </div>
 
                                 <hr />
