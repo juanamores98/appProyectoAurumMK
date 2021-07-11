@@ -47,6 +47,5 @@ namespace ApplicationCore.Services
             return repository.GetAllUsersEstadoSistemaId(id);
         }
 
-
     }
 }

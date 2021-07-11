@@ -15,8 +15,8 @@ namespace ApplicationCore.Services
 
         Usuario GetUsuario(string email, string password);
 
-        Usuario GetAllUsers();
+        IEnumerable<Usuario> GetAllUsers();
 
-        Usuario GetAllUsersEstadoSistemaId(int id);
+        IEnumerable<Usuario> GetAllUsersEstadoSistemaId(int id);
     }
 }
