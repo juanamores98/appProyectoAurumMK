@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Infraestructure.Repository
 {
@@ -110,18 +111,72 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<Usuario> GetAllUsers()
+        {
+            try
+            {
+                IEnumerable<Usuario> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    lista = ctx.Usuario
+                        .Include(x => x.CalificacionUsuario)
+                        .Include(x => x.EstadoSistema)
+                        .Include(x => x.RegistroMovimiento)
+                        .Include(x => x.Pedido)
+                        .ToList<Usuario>();
+                }
+                return lista;
 
+            }
+            catch (DbUpdateException dbEx)
+            {
 
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
+        public IEnumerable<Usuario> GetAllUsersEstadoSistemaId(int id)
+        {
+            try
+            {
+                IEnumerable<Usuario> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    lista = ctx.Usuario
+                        .Where(x => x.IdEstadoSistema == id)
+                        .Include(x => x.CalificacionUsuario)
+                        .Include(x => x.EstadoSistema)
+                        .Include(x => x.RegistroMovimiento)
+                        .Include(x => x.Pedido)
+                        .ToList<Usuario>();
+                }
+                return lista;
 
+            }
+            catch (DbUpdateException dbEx)
+            {
 
-
-
-
-
-
-
-        //
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
     }
-
+    
 }
+
+

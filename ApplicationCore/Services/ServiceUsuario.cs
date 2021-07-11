@@ -35,6 +35,18 @@ namespace ApplicationCore.Services
             return repository.GetUsuario(email, crytpPasswd);
         }
 
+        public IEnumerable<Usuario> GetAllUsers()
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetAllUsers();
+        }
+
+        public IEnumerable<Usuario> GetAllUsersEstadoSistemaId(int id)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetAllUsersEstadoSistemaId(id);
+        }
+
 
     }
 }

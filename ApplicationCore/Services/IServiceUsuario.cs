@@ -14,5 +14,9 @@ namespace ApplicationCore.Services
         Usuario Save(Usuario usuario);
 
         Usuario GetUsuario(string email, string password);
+
+        Usuario GetAllUsers();
+
+        Usuario GetAllUsersEstadoSistemaId(int id);
     }
 }
