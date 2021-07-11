@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -15,6 +16,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Usuario
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             var usuario = db.Usuario.Include(u => u.EstadoSistema).Include(u => u.TipoUsuario);
@@ -23,6 +25,7 @@ namespace Web.Controllers
 
 
         // GET: Usuario/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +41,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion");
@@ -50,6 +54,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create([Bind(Include = "IdUsuario,Nombre,Correo,Contra,Telefono,Direccion,IdEstadoSistema,IdTipoUsuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -65,6 +70,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit([Bind(Include = "IdUsuario,Nombre,Correo,Contra,Telefono,Direccion,IdEstadoSistema,IdTipoUsuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -100,6 +107,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Delete/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
             if (id == null)

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ApplicationCore.Services;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Inventario
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Inventario> lista = null;
@@ -37,6 +39,7 @@ namespace Web.Controllers
             }
         }
         // GET: Inventario/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
@@ -77,6 +80,7 @@ namespace Web.Controllers
         }
 
         // GET: Inventario/Create/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.listaSeleccionSucursal = listaSeleccionSucursal();
@@ -84,6 +88,7 @@ namespace Web.Controllers
         }
 
         // GET: Inventario/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
@@ -123,6 +128,7 @@ namespace Web.Controllers
 
         // POST: Inventario/Save/5
         [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Inventario inventario,int idEstadoSistema=1)
         {
             try
@@ -153,6 +159,7 @@ namespace Web.Controllers
         }
 
         // GET: Inventario/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Deactivate(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
@@ -192,6 +199,7 @@ namespace Web.Controllers
             }
         }
         // GET: Inventario/Management/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Management(int? id)
         {
             IEnumerable<InventarioProducto> lista = null;
@@ -215,6 +223,7 @@ namespace Web.Controllers
             }
         }
         // POST: Inventario/ManagementChange/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult ManagementChange(InventarioProducto inventarioProducto)
         {
             IEnumerable<InventarioProducto> lista = null;

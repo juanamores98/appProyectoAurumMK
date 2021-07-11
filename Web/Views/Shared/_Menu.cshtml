@@ -9,18 +9,27 @@
             <li class="nav-item active">
                 @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link link-estilo" })
             </li>
-            <li class="nav-item">
-                <a class="nav-link link-estilo" href="#">Catálogo</a>
-            </li>
+
+            @if (Session["User"] != null)
+            {
+                <li class="nav-item">
+                    <a class="nav-link link-estilo" href="#">Catálogo</a>
+                </li>
+            }
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link link-estilo" href="#">
-                    Orden
-                    <span class="badge badge-primary badge-pill">0</span>
-                </a>
-            </li>
-        </ul>
+
+        @if (Session["User"] != null)
+        {
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link link-estilo" href="#">
+                        Orden
+                        <span class="badge badge-primary badge-pill">0</span>
+                    </a>
+                </li>
+            </ul>
+        }
+
         <ul class="nav navbar-nav navbar-right">
             @{
                 string nombre = "Usuario";
@@ -39,52 +48,62 @@
                 }
 
             }
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge badge-pill badge-success">@nombre</span></a>
-                <div class="dropdown-menu">
+            @if (Session["User"] != null)
+            {
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge badge-pill badge-success">@nombre</span></a>
+                    <div class="dropdown-menu">
 
-                    <div class="dropdown-item">
+                        <div class="dropdown-item">
+                            @if (Session["User"] != null)
+                            {
+                                <div class="dropdown-item">
+                                    @* Nombre Usuario*@
+                                    Usuario: @nombre
+                                </div>
+                            }
+                        </div>
+                        @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Editar Perfil</a>
+                        <a class="dropdown-item" href="#">
+                            Orden
+                            <span class="badge badge-primary badge-pill">0</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Sobre nosotros", "Index", "About", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Calificaciones y Comentarios</a>
+                        <div class="dropdown-divider"></div>
+
                         @if (Session["User"] != null)
                         {
-                            <div class="dropdown-item">
-                                @* Nombre Usuario*@
-                                Usuario: @nombre
-                            </div>
+                            @Html.ActionLink("Cerrar sesión", "Logout", "Login", null, new { @class = "dropdown-item" });
+                        }
+                        else
+                        {
+                            @*@Html.ActionLink("Cerrar sesión", "Index", "Login", null, new { @class = "dropdown-item" });*@
                         }
                     </div>
-                    @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
-                    <div class="dropdown-divider"></div>
-                    @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Editar Perfil</a>
-                    <a class="dropdown-item" href="#">
-                        Orden
-                        <span class="badge badge-primary badge-pill">0</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    @Html.ActionLink("Sobre nosotros", "Index", "About", null, new { @class = "dropdown-item" })
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Calificaciones y Comentarios</a>
-                    <div class="dropdown-divider"></div>
+                </li>
 
-                    @if (Session["User"] != null)
-                    {
-                        @Html.ActionLink("Cerrar sesión", "Index", "Login", null, new { @class = "dropdown-item" });
-                    }
-                    else
-                    {
-                        @*@Html.ActionLink("Cerrar sesión", "Index", "Login", null, new { @class = "dropdown-item" });*@
-                    }
-                </div>
-            </li>
+            }
+
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item" style="margin-right:10px;">
-                <button type="button" onclick="window.location.href='Login/Index'" class="btn  boton-estilo">Iniciar Sesión</button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn  boton-estilo">Registrarse</button>
-            </li>
-        </ul>
+
+        @if (Session["User"] == null)
+        {
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item" style="margin-right:10px;">
+                    <button type="button" onclick="window.location.href='Login/Index'" class="btn  boton-estilo">Iniciar Sesión</button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn  boton-estilo">Registrarse</button>
+                </li>
+            </ul>
+        }
+
     </div>
 </nav>

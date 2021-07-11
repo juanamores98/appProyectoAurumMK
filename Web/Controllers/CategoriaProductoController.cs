@@ -35,6 +35,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(CategoriaProducto categoriaP)
         {
             try
@@ -67,6 +68,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
@@ -109,6 +111,7 @@ namespace Web.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
             return View();

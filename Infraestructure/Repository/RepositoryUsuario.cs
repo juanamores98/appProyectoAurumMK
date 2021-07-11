@@ -19,9 +19,13 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    usuario = ctx.Usuario.
-                        Include("Rol").
-                        Where(p => p.IdUsuario == id).FirstOrDefault<Usuario>();
+                    usuario = ctx.Usuario
+                        .Include(x => x.CalificacionUsuario)
+                        .Include(x => x.EstadoSistema)
+                        .Include(x => x.Pedido)
+                        .Include(x => x.RegistroMovimiento)
+                        .Include(x => x.TipoUsuario)
+                        .Where(p => p.IdUsuario == id).FirstOrDefault<Usuario>();
                 }
                 return usuario;
             }

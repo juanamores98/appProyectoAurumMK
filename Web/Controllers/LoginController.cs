@@ -19,7 +19,7 @@ namespace Web.Controllers
 
         //Login para validar al usuario
         [HttpPost]
-        public ActionResult LoginUsuario(Usuario usuario)
+        public ActionResult Login(Usuario usuario)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             Usuario oUsuario = null;
@@ -85,7 +85,7 @@ namespace Web.Controllers
 
 
         //Acción de cierre de sesión
-        public ActionResult LogOut()
+        public ActionResult Logout()
         {
             try
             {

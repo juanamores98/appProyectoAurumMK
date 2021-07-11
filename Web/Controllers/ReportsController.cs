@@ -6,12 +6,14 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace web.Controllers
 {
     public class ReportsController : Controller
     {
         // GET: Reporte
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<InventarioProducto> lista= null;
@@ -34,6 +36,7 @@ namespace web.Controllers
             }
         }
         // GET: RegistroMovimientos/List/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult ReporteMovimientos()
         {
             IEnumerable<RegistroMovimiento> lista = null;

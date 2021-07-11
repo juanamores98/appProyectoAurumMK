@@ -10,6 +10,7 @@ using Infraestructure.Models;
 using ApplicationCore.Services;
 using System.IO;
 using System.Reflection;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -18,6 +19,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Producto
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
@@ -39,6 +41,7 @@ namespace Web.Controllers
         }
 
         // GET: Producto/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
@@ -81,8 +84,9 @@ namespace Web.Controllers
             }
         }
 
-        
+
         // GET: Producto/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.listaSeleccionCategoriaProducto = listaSeleccionCategoriaProducto();
@@ -136,6 +140,7 @@ namespace Web.Controllers
         }
 
         // POST: Producto/Save/5
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema=1)
         {
@@ -186,6 +191,7 @@ namespace Web.Controllers
         }
 
         // GET: Producto/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Deactivate(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
