@@ -152,6 +152,7 @@
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\RegistroMovimientoController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +168,7 @@
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlerHelper.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModel\ListaRegistro.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\all.css" />
@@ -450,6 +452,10 @@
     <Content Include="Views\Inventario\Deactivate.cshtml" />
     <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Inventario\Management.cshtml" />
+    <Content Include="Views\RegistroMovimiento\Index.cshtml" />
+    <Content Include="Views\RegistroMovimiento\InventoryProductsEntry_Record.cshtml" />
+    <Content Include="Views\RegistroMovimiento\InventoryProductsEntry_Select.cshtml" />
+    <Content Include="Views\RegistroMovimiento\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
