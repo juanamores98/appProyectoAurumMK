@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aurum MK</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
+</head>
+<body class="body-estilo">
+    <div class="container body-container-estilo">
+        <nav class="navbar navbar-expand-lg navbar-dark menu-estilo">
+            <a class="navbar-brand" href="~/Views/Home/Index.cshtml">Aurum MK</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link link-estilo" })
+                </li>
+            </ul>
+            <!--Orden Lista-->
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item" style="margin-right:10px;">
+                        <button type="button" class="btn  boton-estilo">Iniciar Sesión</button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn  boton-estilo">Registrarse</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            @RenderBody()
+        </main>
+        @Html.Partial("_Footer")
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/sweetalert")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js")
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(ViewBag.NotificationMessage);
+        </script>
+    }
+
+    <script>
+        $('#color-picker').spectrum({
+            type: "component",
+            togglePaletteOnly: true,
+            showInput: true,
+            showAlpha: false,
+            showButtons: false
+        });
+    </script>
+
+
+</body>
+</html>

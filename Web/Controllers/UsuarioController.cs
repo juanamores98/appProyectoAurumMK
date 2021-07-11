@@ -21,24 +21,6 @@ namespace Web.Controllers
             return View(usuario.ToList());
         }
 
-        //Login para validar al usuario
-        public ActionResult LoginUsuario()
-        {
-            return View("Index");
-        }
-
-        //Página de no autorización al ingreso
-        public ActionResult UnAutorized()
-        {
-            return View();
-        }
-
-
-        //Acción de cierre de sesión
-        public ActionResult LogOut()
-        {
-            return View();
-        }
 
         // GET: Usuario/Details/5
         public ActionResult Details(int? id)
