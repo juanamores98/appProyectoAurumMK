@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Web
 {
-    public class PRUEBA
-    {
-    }
+	public class PRUEBA
+	{
+	}
 }

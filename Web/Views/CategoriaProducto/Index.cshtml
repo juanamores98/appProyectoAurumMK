@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col">
                             <a class="btn  boton-estilo" href="@Url.Action("Create", "CategoriaProducto")">
-                                Nuevo Color
+                                Nueva Categoría
                                 <i class="fas fa-plus"></i>
                             </a>
                             <hr>
@@ -51,12 +51,10 @@
                                                 @Html.DisplayFor(modelItem => item.Descripcion)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdCategoriaProducto }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdCategoriaProducto }, new { @class = "btn  boton-estilo", onclick = "return confirm('¿Está seguro que desea desactivar esta categoría?');" })
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdCategoriaProducto }, new { @class = "btn  boton-estilo" }) 
                                             </td>
                                         </tr>
                                     }
-
                                 </table>
                             </div>
                         </div>

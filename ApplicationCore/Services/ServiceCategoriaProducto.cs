@@ -34,9 +34,10 @@ namespace ApplicationCore.Services
             return repository.GetCategoriaProductoByProductoID(id);
         }
 
-        public CategoriaProducto Save()
+        public CategoriaProducto Save(CategoriaProducto categoriaP)
         {
-            throw new NotImplementedException();
+            IRepositoryCategoriaProducto repository = new RepositoryCategoriaProducto();
+            return repository.Save(categoriaP);
         }
     }
 }
