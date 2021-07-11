@@ -416,6 +416,8 @@ namespace Infraestructure.Models
         public string Nombre { get; set; }
 
         [Display(Name = "Correo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
         public string Correo { get; set; }
 
         [Display(Name = "Contraseña")]

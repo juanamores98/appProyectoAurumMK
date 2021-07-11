@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    interface IServiceUsuario
+    public interface IServiceUsuario
     {
         Usuario GetUsuarioByID(int id);
 
