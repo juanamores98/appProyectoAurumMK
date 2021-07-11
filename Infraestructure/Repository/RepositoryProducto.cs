@@ -149,6 +149,36 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
+        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario)
+        {
+            try
+            {
+                List<Producto> listaProductosActuales = new List<Producto>();
+                List<Producto> listaProductosNoIncluidos = new List<Producto>();
+                IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
+                foreach (Producto item in GetProductoByEstadoSistemaID(1))
+                {
+                    if (_RepositoryInventarioProducto.GetInventarioProductoByID(idInventario,item.IdProducto)==null)
+                    {
+                        listaProductosNoIncluidos.Add(GetProductoByID(item.IdProducto));
+                    }
+                }
+                return listaProductosNoIncluidos;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
         public void SetNullIdCategoriaProductoInProductoByCategotegoriaID(int idCategoriaProducto)
         {
             foreach (Producto productoItem in GetProductoByCategoriaProductoID(idCategoriaProducto)) {

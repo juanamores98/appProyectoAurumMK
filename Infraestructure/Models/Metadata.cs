@@ -421,6 +421,7 @@ namespace Infraestructure.Models
         public string Correo { get; set; }
 
         [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Contra { get; set; }
 
         [Display(Name = "Teléfono")]

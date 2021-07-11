@@ -18,6 +18,7 @@ namespace Web.Controllers
         }
 
         //Login para validar al usuario
+        [HttpPost]
         public ActionResult LoginUsuario(Usuario usuario)
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();

@@ -14,7 +14,7 @@
                 </div>
                 <p style="text-align: center !important;">Bienvenidos a Aurum MK, aquí puede iniciar sesión.</p>
                 <div class="card-body">
-                    @using (Html.BeginForm("Login", "Login"))
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
@@ -37,7 +37,7 @@
                                     @Html.LabelFor(model => model.Contra, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="row">
-                                    @Html.PasswordFor(model => model.Contra, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.EditorFor(model => model.Contra, new { htmlAttributes = new { @class = "form-control" , type = "password" } })
                                     @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
                                 </div>
                             </div>

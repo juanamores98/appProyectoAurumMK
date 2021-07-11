@@ -14,7 +14,7 @@ namespace Web.Controllers
     {
         // GET: CategoriaProducto
         //Este atributo define quienes dentro de los roles o los perfiles pueden ingresar
-        //[CustomAuthorize ((int)Roles.Administrador)]
+        [CustomAuthorize ((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<CategoriaProducto> lista = null;

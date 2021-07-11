@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Infraestructure.Models.Producto>
+
+@{
+    ViewBag.Title = "Registro Movimiento";
+}
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Ingresar Producto a Inventario @*<span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span>*@</h1>
+            <hr>
+            <div class="row">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h5 class="text-primary m-0 fw-bold">Seleccione los productos para añadir al inventario</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="table-responsive">
+
+                                    <table id="table1" class="table">
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.IdProducto)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.Nombre)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.CostoU)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.EstadoSistema)
+                                            </th>
+                                            <th></th>
+                                        </tr>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.IdProducto)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                                </td>
+                                                <td>
+                                                    ¢@Html.DisplayFor(modelItem => item.CostoU)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.EstadoSistema.Descripcion)
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
