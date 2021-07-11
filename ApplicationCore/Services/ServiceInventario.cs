@@ -21,6 +21,11 @@ namespace ApplicationCore.Services
             IRepositoryInventario repository = new RepositoryInventario();
             return repository.GetInventario();
         }
+        public IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id)
+        {
+            IRepositoryInventario repository = new RepositoryInventario();
+            return repository.GetInventarioByEstadoSistemaID(id);
+        }
         public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {
             IRepositoryInventario repository = new RepositoryInventario();
@@ -33,10 +38,10 @@ namespace ApplicationCore.Services
             return repository.GetInventarioByID(id);
         }
 
-        public Inventario Save(Inventario inventario)
+        public Inventario Save(Inventario inventario, int idEstadoSistema)
         {
             IRepositoryInventario repository = new RepositoryInventario();
-            return repository.Save(inventario);
+            return repository.Save(inventario, idEstadoSistema);
         }
     }
 }

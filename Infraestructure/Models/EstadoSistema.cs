@@ -25,6 +25,10 @@ namespace Infraestructure.Models
             this.Producto = new HashSet<Producto>();
             this.Proveedor = new HashSet<Proveedor>();
             this.Sucursal = new HashSet<Sucursal>();
+            this.CalificacionUsuario = new HashSet<CalificacionUsuario>();
+            this.CategoriaProducto = new HashSet<CategoriaProducto>();
+            this.Inventario = new HashSet<Inventario>();
+            this.InventarioProducto = new HashSet<InventarioProducto>();
         }
     
         public int IdEstadoSistema { get; set; }
@@ -42,5 +46,13 @@ namespace Infraestructure.Models
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sucursal> Sucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalificacionUsuario> CalificacionUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoriaProducto> CategoriaProducto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventario> Inventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
     }
 }

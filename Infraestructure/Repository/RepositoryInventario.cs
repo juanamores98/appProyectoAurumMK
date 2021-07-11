@@ -84,7 +84,38 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<Inventario> GetInventarioByEstadoSistemaID(int id)
+        {
+            try
+            {
+                IEnumerable<Inventario> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
 
+                    lista = ctx.Inventario
+                        .Where(x => x.IdEstadoSistema == id)
+                        .Include("InventarioProducto.Producto")
+                        .Include(x => x.Sucursal)
+                        .ToList<Inventario>();
+
+                }
+                return lista;
+
+            }
+            catch (DbUpdateException dbEx)
+            {
+
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public IEnumerable<Inventario> GetInventarioBySucursalID(int id)
         {
@@ -95,7 +126,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Inventario
-                        .Where(x => x.IdSucursal == id)
+                        .Where(x => x.IdSucursal == id&& x.IdEstadoSistema == 1)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
                         .ToList<Inventario>();
@@ -132,37 +163,51 @@ namespace Infraestructure.Repository
             return oInventario;
         }
 
-        public Inventario Save(Inventario inventario)
+        public Inventario Save(Inventario inventario,int idEstadoSistema)
         {
             int retorno = 0; //Contabiliza la cantidad de líneas afectadas
             Inventario oInventario = null;
-            using (MyContext ctx = new MyContext())
+            if (idEstadoSistema != 0)//Si idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el inventario
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oInventario = GetInventarioByID(inventario.IdInventario);
-
-                if (oInventario == null)
+                using (MyContext ctx = new MyContext())
                 {
-                    //Insercion
-                    ctx.Inventario.Add(inventario);
-                    retorno = ctx.SaveChanges();
-                }
-                else
-                {
-                    //Actualizacion
-                    ctx.Inventario.Add(inventario);
-                    ctx.Entry(inventario).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
-
-                }
-
-                if (retorno >= 0)
-                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
                     oInventario = GetInventarioByID(inventario.IdInventario);
+                    inventario.IdEstadoSistema = idEstadoSistema;
+                    if (oInventario == null)
+                    {
+                        //Insercion
+                        ctx.Inventario.Add(inventario);
+                        retorno = ctx.SaveChanges();
+                    }
+                    else
+                    {
+                        //Actualizacion
+                        ctx.Inventario.Add(inventario);
+                        ctx.Entry(inventario).State = EntityState.Modified;
+                        retorno = ctx.SaveChanges();
+
+                    }
+
+                    if (retorno >= 0)
+                    {
+                        oInventario = GetInventarioByID(inventario.IdInventario);
+                    }
+
                 }
-
             }
-
+            else
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    IRepositoryInventarioProducto repositoryInventarioProducto = new RepositoryInventarioProducto();
+                    repositoryInventarioProducto.DeactivateInventarioProductoByInventarioID(inventario.IdInventario);
+                    inventario = ctx.Inventario.Find(inventario.IdInventario);
+                    inventario.IdEstadoSistema = idEstadoSistema;
+                    ctx.SaveChanges();
+                }
+            }
             return oInventario;
         }
     }
