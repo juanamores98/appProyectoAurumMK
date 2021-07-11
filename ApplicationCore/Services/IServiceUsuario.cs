@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Services
 {
-    interface IServiceUsuario
+    public interface IServiceUsuario
     {
         Usuario GetUsuarioByID(int id);
 
         Usuario Save(Usuario usuario);
 
         Usuario GetUsuario(string email, string password);
+
+        Usuario GetAllUsers();
+
+        Usuario GetAllUsersEstadoSistemaId(int id);
     }
 }

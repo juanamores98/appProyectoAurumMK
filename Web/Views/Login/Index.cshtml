@@ -1,0 +1,63 @@
+﻿@model Infraestructure.Models.Usuario
+@{
+    ViewBag.Title = "Inicio de sesión";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+
+<div class="row" style="width: 40% !important; margin: 0px auto !important;">
+        <div class="container" style="border-radius: 10px !important;  margin: 50px auto !important; display: block !important;">
+            <div class="card shadow mb-4" style="border-radius: 20px !important;">
+                <div style="text-align:center !important;">
+                    <img style="width: 311px !important; height: 274px !important; display: inline-block !important; margin: 30px !important;" src="~/Resources/Aurum-MK.png" class="d-block w-100 carousel-inicio-max-heigh" alt="Aurum MK Logo">
+                </div>
+                <p style="text-align: center !important;">Bienvenidos a Aurum MK, aquí puede iniciar sesión.</p>
+                <div class="card-body">
+                    @using (Html.BeginForm("Login", "Login"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <hr />
+
+                        <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
+                            <div class="col">
+                                <div class="row">
+                                    @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="row">
+                                    @Html.LabelFor(model => model.Contra, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.PasswordFor(model => model.Contra, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row" style="text-align: center !important;">
+                                <div class="col"  style="justify-content: center !important;">
+                                    <input style="width: 170px !important; align-self: auto !important;" type="submit" value="Iniciar sesión" class="btn boton-estilo" />
+                                </div>
+                                <div class="col">
+                                    <input style="width: 170px !important;" type="submit" value="Cancelar" class="btn boton-estilo" />
+                                </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")}

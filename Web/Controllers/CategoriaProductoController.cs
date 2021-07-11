@@ -6,12 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
     public class CategoriaProductoController : Controller
     {
         // GET: CategoriaProducto
+        //Este atributo define quienes dentro de los roles o los perfiles pueden ingresar
+        //[CustomAuthorize ((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<CategoriaProducto> lista = null;

@@ -14,5 +14,9 @@ namespace Infraestructure.Repository
         Usuario Save(Usuario usuario);
 
         Usuario GetUsuario(string email, string password);
+
+        IEnumerable<Usuario> GetAllUsers();
+
+        IEnumerable<Usuario> GetAllUsersEstadoSistemaId(int id);
     }
 }
