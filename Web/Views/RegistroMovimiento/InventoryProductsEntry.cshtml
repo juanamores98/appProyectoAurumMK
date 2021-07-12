@@ -1,0 +1,212 @@
+﻿@model Infraestructure.Models.Inventario
+
+@{
+    ViewBag.Title = "Registro Movimiento";
+}
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Ingresar Producto a Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span></h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Registro de ingreso de producto</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                @Html.DisplayName("Usuario")
+                            </div>
+                            <div class="row">
+                                @Html.DropDownList("seleccionUsuario",
+                                        (SelectList)ViewBag.listaSeleccionUsuarios,
+                                        "Seleccione un usuario",
+                                        htmlAttributes: new { @class = "form-control" })
+                            </div>
+                            <div class="row">
+                                @Html.DisplayName("Motivo")
+                            </div>
+                            <div class="row">
+                                @Html.DropDownList("seleccionMotivo",
+                                        (SelectList)ViewBag.listaSeleccionMotivo,
+                                        "Seleccione un motivo",
+                                        htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div  style="padding:0px;margin:0px;width:20px;">
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                @Html.DisplayName("Fecha")
+                            </div>
+                            <div class="row">
+                                <input type="date" id="start" name="fecha" class="form-control"
+                                       value="2018-07-22"
+                                       min="2018-01-01" max="2018-12-31">
+                            </div>
+                            <div class="row">
+                                @Html.DisplayName("Comentario")
+                            </div>
+                            <div class="row">
+                                <input type="text" name="comentario" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Productos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table id="tableProductos" class="table">
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            @Html.DisplayName("ID")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Nombre")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Costo")
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in (List<Infraestructure.Models.Producto>)ViewBag.listaProductos)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="check-tableProductos">
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdProducto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                ¢@Html.DisplayFor(modelItem => item.CostoU)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 150px;">
+                    <button class="btn boton-estilo" onclick="addProduct();">>>></button>
+                    <button class="btn boton-estilo"onclick="removeProduct();"><<<</button>
+                </div>
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Inventario</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table id="tableInventario" class="table">
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            @Html.DisplayName("ID")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Nombre")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Costo")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Stock Minimo")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Stock")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Estante")
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function addProduct() {
+        var tableProductos = document.getElementById("tableProductos"),
+            tableInventario = document.getElementById("tableInventario"),
+            checkboxes = document.getElementsByName("check-tableProductos");
+        for (var i = 0; i < checkboxes.length; i++)
+            if (checkboxes[i].checked) {
+                // create new row and cells
+                var newRow = tableInventario.insertRow(tableInventario.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    cell3 = newRow.insertCell(2),
+                    cell4 = newRow.insertCell(3);
+                    cell5 = newRow.insertCell(4);
+                    cell6 = newRow.insertCell(5);
+                    cell7 = newRow.insertCell(6);
+                // add values to the cells
+                cell1.innerHTML = "<input type='checkbox' name='check-tableInventario'>";
+                cell2.innerHTML = tableProductos.rows[i + 1].cells[1].innerHTML;
+                cell3.innerHTML = tableProductos.rows[i + 1].cells[2].innerHTML;
+                cell4.innerHTML = tableProductos.rows[i + 1].cells[3].innerHTML;
+                cell5.innerHTML = "<input type='text' name='' class='form-control'>";
+                cell6.innerHTML = "<input type='text' name='' class='form-control'>";
+                cell7.innerHTML = "<input type='text' name='' class='form-control'>";
+
+                // remove the transfered rows from the first table [table1]
+                var index = tableProductos.rows[i + 1].rowIndex;
+                tableProductos.deleteRow(index);
+                // we have deleted some rows so the checkboxes.length have changed
+                // so we have to decrement the value of i
+                i--;
+            }
+    }
+    function removeProduct() {
+        var tableProductos = document.getElementById("tableProductos"),
+            tableInventario = document.getElementById("tableInventario"),
+            checkboxes = document.getElementsByName("check-tableInventario");
+        for (var i = 0; i < checkboxes.length; i++)
+            if (checkboxes[i].checked) {
+                // create new row and cells
+                var newRow = tableProductos.insertRow(tableProductos.length),
+                    cell1 = newRow.insertCell(0),
+                    cell2 = newRow.insertCell(1),
+                    cell3 = newRow.insertCell(2),
+                    cell4 = newRow.insertCell(3);
+                // add values to the cells
+                cell1.innerHTML = "<input type='checkbox' name='check-tableProductos'>";
+                cell2.innerHTML = tableInventario.rows[i + 1].cells[1].innerHTML;
+                cell3.innerHTML = tableInventario.rows[i + 1].cells[2].innerHTML;
+                cell4.innerHTML = tableInventario.rows[i + 1].cells[3].innerHTML;
+
+                // remove the transfered rows from the second table [table2]
+                var index = tableInventario.rows[i + 1].rowIndex;
+                tableInventario.deleteRow(index);
+                // we have deleted some rows so the checkboxes.length have changed
+                // so we have to decrement the value of i
+                i--;
+            }
+    }
+</script>
+
+

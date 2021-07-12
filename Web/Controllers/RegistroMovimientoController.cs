@@ -40,10 +40,12 @@ namespace Web.Controllers
                 IServiceInventario _ServiceInventario = new ServiceInventario();
                 IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
                 IServiceProducto _ServiceProducto = new ServiceProducto();
+                ViewBag.listaSeleccionUsuarios = listaSeleccionUsuarios();
                 ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
-                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(id.Value);
+                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(0);
                 ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(1);
-                return View(_ServiceInventario.GetInventarioByID(id.Value));
+                Inventario inventario = _ServiceInventario.GetInventarioByID(1);
+                return View(inventario);
             }
             catch (Exception ex)
             {
@@ -78,6 +80,13 @@ namespace Web.Controllers
             IServiceMotivoMovimiento _ServiceMotivoMovimiento = new ServiceMotivoMovimiento();
             IEnumerable<MotivoMovimiento> listaMotivoMovimiento = _ServiceMotivoMovimiento.GetMotivoMovimiento();
             return new SelectList(listaMotivoMovimiento, "IdMotivoMovimiento", "Descripcion");
+        }
+        private SelectList listaSeleccionUsuarios()
+        {
+            //Lista de Usuarios
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            IEnumerable<Usuario> listaUsuario = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
+            return new SelectList(listaUsuario, "IdUsuario", "Nombre");
         }
     }
 }

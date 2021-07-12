@@ -149,19 +149,26 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario)
+        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario=0)
         {
             try
             {
                 List<Producto> listaProductosActuales = new List<Producto>();
                 List<Producto> listaProductosNoIncluidos = new List<Producto>();
-                IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
-                foreach (Producto item in GetProductoByEstadoSistemaID(1))
+                if (idInventario!=0)
                 {
-                    if (_RepositoryInventarioProducto.GetInventarioProductoByID(idInventario,item.IdProducto)==null)
+                    IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
+                    foreach (Producto item in GetProductoByEstadoSistemaID(1))
                     {
-                        listaProductosNoIncluidos.Add(GetProductoByID(item.IdProducto));
+                        if (_RepositoryInventarioProducto.GetInventarioProductoByID(idInventario, item.IdProducto) == null)
+                        {
+                            listaProductosNoIncluidos.Add(GetProductoByID(item.IdProducto));
+                        }
                     }
+                }
+                else
+                {
+                    listaProductosNoIncluidos = (List<Producto>)GetProductoByEstadoSistemaID(1);
                 }
                 return listaProductosNoIncluidos;
             }

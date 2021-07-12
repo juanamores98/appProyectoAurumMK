@@ -2,7 +2,11 @@
 @{
     ViewBag.Title = "test";
 }
-
+<div class="row">
+    <input type="date" id="start" name="trip-start"
+           value="2018-07-22"
+           min="2018-01-01" max="@DateTime.Now.Year.ToString()-@DateTime.Now.Month.ToString()-@DateTime.Now.Day.ToString()">
+</div>
 <h2>test</h2>
 <table id="table" border="1">
     <tr>

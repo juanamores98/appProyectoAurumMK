@@ -3,12 +3,14 @@
     ViewBag.Title = "UnAuthorized";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
+<center>
+    <div class="card-body text-center shadow">
+        <img class="rounded-circle mb-3 mt-4" src="~/Resources/UnAuthorized.png" width="160" height="160" />
+        <h2>NO autorizado !</h2>
+        <input type="button" value="Regresar" class="btn btn-warning" onclick="goBack()" />
+    </div>
+</center>
 
-<h2>NO autorizado !</h2>
-
-<hr />
-
-<input type="button" value="Regresar" class="btn btn-warning" onclick="goBack()"/>
 
 <script>
     function goBack() {
