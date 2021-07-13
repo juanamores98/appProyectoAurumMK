@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceRegistroProducto.cs" />
     <Compile Include="Services\IServiceMotivoMovimiento.cs" />
     <Compile Include="Services\IServiceSucursal.cs" />
     <Compile Include="Services\IServiceCategoriaProducto.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Services\ServiceProducto.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceRegistroMovimiento.cs" />
+    <Compile Include="Services\ServiceRegistroProducto.cs" />
     <Compile Include="Services\ServiceSucursal.cs" />
     <Compile Include="Services\ServiceMotivoMovimiento.cs" />
     <Compile Include="Services\ServiceTipoMovimiento.cs" />

@@ -144,9 +144,6 @@
     <Compile Include="Models\Sucursal.cs">
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoMovimiento.cs">
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
@@ -166,6 +163,7 @@
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
     <Compile Include="Repository\IRepositoryRegistroMovimiento.cs" />
+    <Compile Include="Repository\IRepositoryRegistroProducto.cs" />
     <Compile Include="Repository\IRepositorySucursal.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\IRepositoryTipoMovimiento.cs" />
@@ -178,6 +176,7 @@
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryRegistroMovimiento.cs" />
+    <Compile Include="Repository\RepositoryRegistroProducto.cs" />
     <Compile Include="Repository\RepositorySucursal.cs" />
     <Compile Include="Repository\RepositoryTipoMovimiento.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />

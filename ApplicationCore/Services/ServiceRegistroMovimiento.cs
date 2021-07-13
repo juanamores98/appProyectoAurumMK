@@ -52,9 +52,10 @@ namespace ApplicationCore.Services
             return repository.GetRegistroMovimientoByUsuarioID(id);
         }
 
-        public RegistroMovimiento Save()
+        public RegistroMovimiento Save(RegistroMovimiento registroMovimiento)
         {
-            throw new NotImplementedException();
+            IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
+            return repository.Save(registroMovimiento);
         }
     }
 }

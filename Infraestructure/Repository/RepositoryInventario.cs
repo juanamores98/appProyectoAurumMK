@@ -65,6 +65,7 @@ namespace Infraestructure.Repository
                     lista = ctx.Inventario
                         .Include("InventarioProducto.Producto")
                         .Include(x => x.Sucursal)
+                        .Include(x => x.RegistroMovimiento)
                         .ToList<Inventario>();
                 }
                 return lista;
@@ -96,6 +97,7 @@ namespace Infraestructure.Repository
                         .Where(x => x.IdEstadoSistema == id)
                         .Include("InventarioProducto.Producto")
                         .Include(x => x.Sucursal)
+                        .Include(x => x.RegistroMovimiento)
                         .ToList<Inventario>();
 
                 }
@@ -129,6 +131,7 @@ namespace Infraestructure.Repository
                         .Where(x => x.IdSucursal == id&& x.IdEstadoSistema == 1)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
+                        .Include(x => x.RegistroMovimiento)
                         .ToList<Inventario>();
                 }
                 return lista;
@@ -158,6 +161,7 @@ namespace Infraestructure.Repository
                         .Where(p => p.IdInventario == id)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.Sucursal)
+                        .Include(x => x.RegistroMovimiento)
                         .FirstOrDefault();
             }
             return oInventario;

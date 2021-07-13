@@ -23,7 +23,7 @@
 
                     @using (Html.BeginForm("InventoryEntryConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
                     {
-
+                        <input type="text" name="idInventario" value="@Html.DisplayFor(model => model.IdInventario)" style="display: none" />
                         <div class="row">
                             <div class="col">
                                 <div class="row">
@@ -52,8 +52,8 @@
                                     @Html.DisplayName("Fecha")
                                 </div>
                                 <div class="row">
-                                    <input type='text' name="fechaHora" class="form-control" id='datetimepicker1'  value="2018-07-22"
-                                           min="2018-01-01" max="2018-12-31" required/>
+                                    <input type='text' name="fechaHora" class="form-control" id='datetimepicker1' value="2018-07-22"
+                                           min="2018-01-01" max="2018-12-31" required />
                                 </div>
                                 <div class="row">
                                     @Html.DisplayName("Comentario")
@@ -119,7 +119,7 @@
                             </div>
                             <div style="margin-top: 150px;">
                                 <button class="btn boton-estilo" onclick="addProduct();" style="display:block">>>></button>
-                                <button class="btn boton-estilo" onclick="removeProduct()"; style="display:block"><<<</button>
+                                <button class="btn boton-estilo" onclick="removeProduct()" ; style="display:block"><<<</button>
                             </div>
                             <div class="col">
                                 <div class="card">
@@ -180,7 +180,6 @@
     <p id="info"></p>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/myBundle")
     <script type="text/javascript">
         $(function () {
             $('#datetimepicker1').datetimepicker();
@@ -202,7 +201,7 @@
                     cell7 = newRow.insertCell(6);
                     // add values to the cells
                     cell1.innerHTML = "<input type='checkbox' name='check-tableInventario'>";
-                    cell2.innerHTML = tableProductos.rows[i + 1].cells[1].innerHTML + "<input type='text' name='ProductosId[]' value='" + tableProductos.rows[i + 1].cells[1].innerHTML + "' style='display: none'>";
+                    cell2.innerHTML = tableProductos.rows[i + 1].cells[1].innerHTML + "<input type='text' name='idProducto[]' value='" + tableProductos.rows[i + 1].cells[1].innerHTML + "' style='display: none'>";
                     cell3.innerHTML = tableProductos.rows[i + 1].cells[2].innerHTML;
                     cell4.innerHTML = tableProductos.rows[i + 1].cells[3].innerHTML;
                     cell5.innerHTML = "<input type='text' onkeypress='onlyNumbers(event)' name='stockMinimo[]' class='form-control' required >";

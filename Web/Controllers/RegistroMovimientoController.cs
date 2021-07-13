@@ -7,12 +7,14 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
     public class RegistroMovimientoController : Controller
     {
         // GET: RegistroMovimiento
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Inventario> lista = null;
@@ -33,6 +35,7 @@ namespace Web.Controllers
             }
         }
         // GET: RegistroMovimiento/InventoryEntry/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult InventoryEntry(int? id)
         {
             try
@@ -42,7 +45,7 @@ namespace Web.Controllers
                 IServiceProducto _ServiceProducto = new ServiceProducto();
                 ViewBag.listaSeleccionUsuarios = listaSeleccionUsuarios();
                 ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
-                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(1);
+                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(id.Value);
                 ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
                 Inventario inventario = _ServiceInventario.GetInventarioByID(id.Value);
                 return View(inventario);
@@ -59,12 +62,48 @@ namespace Web.Controllers
             }
         }
         //POST: RegistroMovimiento/InventoryEntryConfirm/5
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
-        public ActionResult InventoryEntryConfirm(string idUsuario, string fechaHora, string comentario, string idMotivoMovimiento, string[] ProductosId, string[] stockMinimo,string[] stock, string[] estante)
+        public ActionResult InventoryEntryConfirm(string idInventario, string idUsuario, string fechaHora, string comentario, string idMotivoMovimiento, string[] idProducto, string[] stockMinimo,string[] stock, string[] estante)
         {
             try
             {
+                //Servicios
                 IServiceRegistroMovimiento _ServiceRegistroMovimiento = new ServiceRegistroMovimiento();
+                IServiceRegistroProducto _ServiceRegistroProducto = new ServiceRegistroProducto();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+
+                //Crer y guardar Registro Movimiento
+                RegistroMovimiento oRegistroMovimiento = new RegistroMovimiento();
+                oRegistroMovimiento.IdUsuario= int.Parse(idUsuario);
+                oRegistroMovimiento.FechaHora = fechaHora;
+                oRegistroMovimiento.Comentario = comentario;
+                oRegistroMovimiento.IdTipoMovimiento = 1;//Entrada
+                oRegistroMovimiento.IdMotivoMovimiento= int.Parse(idMotivoMovimiento);
+                oRegistroMovimiento.IdInventario = int.Parse(idInventario);
+                _ServiceRegistroMovimiento.Save(oRegistroMovimiento);
+
+                //Creacion lista elementos a añaidr al inventario y lista de elementos del registro  
+                //List<InventarioProducto> listaInventarioProducto = new List<InventarioProducto>();
+                //List<RegistroProducto> listaRegistroProducto = new List<RegistroProducto>();
+                for (int i=0;i< idProducto.Length;i++)
+                {
+                    //Creacion y guardado de producto del inventario
+                    InventarioProducto oInventarioProducto = new InventarioProducto();
+                    oInventarioProducto.IdProducto = int.Parse(idProducto[i]);
+                    oInventarioProducto.IdInventario = int.Parse(idInventario);
+                    oInventarioProducto.StockMinimo = int.Parse(stockMinimo[i]);
+                    oInventarioProducto.Stock = int.Parse(stock[i]);
+                    oInventarioProducto.Estante = estante[i];
+                    _ServiceInventarioProducto.Save(oInventarioProducto,1);//Guarado con estado sistema activo
+                    
+                    //Creacion y guardado de registro del registro movimiento
+                    RegistroProducto oRegistroProducto = new RegistroProducto();
+                    oRegistroProducto.IdProducto = int.Parse(idProducto[i]);
+                    oRegistroProducto.IdMovimiento = _ServiceRegistroMovimiento.GetRegistroMovimiento().LastOrDefault().IdMovimiento;
+                    oRegistroProducto.Cantidad= int.Parse(stock[i]);
+                    _ServiceRegistroProducto.Save(oRegistroProducto);
+                }
 
                 return RedirectToAction("Index");
             }

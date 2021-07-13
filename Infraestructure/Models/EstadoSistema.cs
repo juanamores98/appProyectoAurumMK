@@ -19,14 +19,14 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EstadoSistema()
         {
+            this.CalificacionUsuario = new HashSet<CalificacionUsuario>();
+            this.CategoriaProducto = new HashSet<CategoriaProducto>();
             this.Color = new HashSet<Color>();
             this.ContactoProveedor = new HashSet<ContactoProveedor>();
             this.Usuario = new HashSet<Usuario>();
             this.Producto = new HashSet<Producto>();
             this.Proveedor = new HashSet<Proveedor>();
             this.Sucursal = new HashSet<Sucursal>();
-            this.CalificacionUsuario = new HashSet<CalificacionUsuario>();
-            this.CategoriaProducto = new HashSet<CategoriaProducto>();
             this.Inventario = new HashSet<Inventario>();
             this.InventarioProducto = new HashSet<InventarioProducto>();
         }
@@ -34,6 +34,10 @@ namespace Infraestructure.Models
         public int IdEstadoSistema { get; set; }
         public string Descripcion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalificacionUsuario> CalificacionUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoriaProducto> CategoriaProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Color> Color { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,10 +50,6 @@ namespace Infraestructure.Models
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sucursal> Sucursal { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalificacionUsuario> CalificacionUsuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoriaProducto> CategoriaProducto { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventario> Inventario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
