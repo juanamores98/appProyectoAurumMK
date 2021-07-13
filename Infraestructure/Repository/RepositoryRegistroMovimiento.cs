@@ -216,5 +216,32 @@ namespace Infraestructure.Repository
 
             return oRegistroMovimiento;
         }
+        public RegistroMovimiento InventoryEntry(string idUsuario, string fechaHora, string comentario, int idTipoMovimiento, string idMotivoMovimiento, string[] ProductosId, string[] stockMinimo, string[] stock, string[] estante)
+        {
+            //int retorno = 0;//Contabiliza las cantidad de lineas afectadas
+            RegistroMovimiento oRegistroMovimiento = null;
+            //using (MyContext ctx = new MyContext())
+            //{
+            //    ctx.Configuration.LazyLoadingEnabled = false;
+            //    oRegistroMovimiento = GetRegistroMovimientoByID((int)registroMovimiento.IdMovimiento);
+            //    if (oRegistroMovimiento == null)//Si es null se crea un registro
+            //    {
+            //        //Insercion del registro
+            //        ctx.RegistroMovimiento.Add(registroMovimiento);
+            //        retorno = ctx.SaveChanges();
+            //    }
+            //    else
+            //    {
+            //        //Actualizar registro
+            //        ctx.RegistroMovimiento.Add(registroMovimiento);
+            //        ctx.Entry(registroMovimiento).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
+            //        retorno = ctx.SaveChanges();
+            //    }
+            //}
+            //if (retorno >= 0)
+            //    oRegistroMovimiento = GetRegistroMovimientoByID((int)oRegistroMovimiento.IdMovimiento);
+
+            return oRegistroMovimiento;
+        }
     }
 }

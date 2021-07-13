@@ -32,8 +32,8 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // GET: RegistroMovimiento/InventoryProductsEntry/5
-        public ActionResult InventoryProductsEntry(int? id)
+        // GET: RegistroMovimiento/InventoryEntry/5
+        public ActionResult InventoryEntry(int? id)
         {
             try
             {
@@ -42,37 +42,45 @@ namespace Web.Controllers
                 IServiceProducto _ServiceProducto = new ServiceProducto();
                 ViewBag.listaSeleccionUsuarios = listaSeleccionUsuarios();
                 ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
-                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(0);
-                ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(1);
-                Inventario inventario = _ServiceInventario.GetInventarioByID(1);
+                ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(1);
+                ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                Inventario inventario = _ServiceInventario.GetInventarioByID(id.Value);
                 return View(inventario);
             }
             catch (Exception ex)
             {
+                // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-
+                TempData["Redirect"] = "Registro Movimiento";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
-        public ActionResult InventoryProductsEntry_Select()
-        {
-            IServiceProducto _ServiceProducto = new ServiceProducto();
-            return View(_ServiceProducto.GetProductoNonIncludeInventarioID(1));
-        }
-        // GET: RegistroMovimiento/test/5
-        public ActionResult test()
-        {
-            IServiceProducto _ServiceProducto = new ServiceProducto();
-            return View(_ServiceProducto.GetProductoNonIncludeInventarioID(1));
-        }
-        // POST: RegistroMovimiento/testForm/5
+        //POST: RegistroMovimiento/InventoryEntryConfirm/5
         [HttpPost]
-        public ActionResult testForm(string[] lista)
+        public ActionResult InventoryEntryConfirm(string idUsuario, string fechaHora, string comentario, string idMotivoMovimiento, string[] ProductosId, string[] stockMinimo,string[] stock, string[] estante)
         {
-            return RedirectToAction("test");
+            try
+            {
+                IServiceRegistroMovimiento _ServiceRegistroMovimiento = new ServiceRegistroMovimiento();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Registro Movimiento";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
+        
+
         //METODOS AUXILIARES
         private SelectList listaSeleccionMotivo()
         {
