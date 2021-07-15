@@ -229,6 +229,7 @@ namespace Infraestructure.Repository
                                 oInventarioProducto.IdProducto = producto.IdProducto;
                                 oInventarioProducto.StockMinimo = 1;
                                 oInventarioProducto.Stock = 1;
+                                oInventarioProducto.IdEstadoSistema = 1;
                                 ctx.InventarioProducto.Add(oInventarioProducto);
                             }
                         }
@@ -290,6 +291,7 @@ namespace Infraestructure.Repository
                                         oInventarioProducto.StockMinimo = item.StockMinimo;
                                         oInventarioProducto.Stock = item.Stock;
                                         oInventarioProducto.Estante = item.Estante;
+                                        oInventarioProducto.IdEstadoSistema = 1;
                                         inventariosConservados.Add(oInventarioProducto);
                                     }
                                 }
@@ -306,6 +308,7 @@ namespace Infraestructure.Repository
                                         oInventarioProducto.IdProducto = producto.IdProducto;
                                         oInventarioProducto.StockMinimo = 1;
                                         oInventarioProducto.Stock = 1;
+                                        oInventarioProducto.IdEstadoSistema = 1;
                                         inventariosConservados.Add(oInventarioProducto);
                                     }
                                 }

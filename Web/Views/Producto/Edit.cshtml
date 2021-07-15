@@ -78,8 +78,7 @@
                                         @Html.DropDownList("seleccionInventarios",
                                         (MultiSelectList)ViewBag.listaSeleccionInventario,
                                         "Seleccione inventarios",
-                                        new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.InventarioProducto, "", new { @class = "text-danger" })
+                                         htmlAttributes: new { @class = "form-control combo2", multiple = "multiple" })
                                     </div>
                                 </div>
                                 <div class="col">
@@ -87,11 +86,8 @@
                                         @Html.LabelFor(model => model.Proveedor, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="row">
-                                        @Html.DropDownList("seleccionProveedores",
-                                        (MultiSelectList)ViewBag.listaSeleccionProveedor,
-                                        "Seleccione proveedores",
-                                        new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.Proveedor, "", new { @class = "text-danger" })
+                                        @Html.DropDownList("seleccionProveedores", (MultiSelectList)ViewBag.listaSeleccionProveedor, htmlAttributes: new { @class = "form-control combo2", @data_val = "true", @data_val_required = "Seleccione al menos un proveedor", multiple = "", required = "required" })
+                                        @Html.ValidationMessage("seleccionProveedores", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col">
@@ -99,11 +95,8 @@
                                         @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="row">
-                                        @Html.DropDownList("seleccionColores",
-                                            (MultiSelectList)ViewBag.listaSeleccionColor,
-                                            "Seleccione colores",
-                                            new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                                        @Html.DropDownList("seleccionColores", (MultiSelectList)ViewBag.listaSeleccionColor, htmlAttributes: new { @class = "form-control combo2", @data_val = "true", @data_val_required = "Seleccione al menos un color", multiple = "", required = "required" })
+                                        @Html.ValidationMessage("seleccionColores", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
