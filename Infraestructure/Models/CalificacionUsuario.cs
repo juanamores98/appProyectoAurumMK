@@ -22,7 +22,7 @@ namespace Infraestructure.Models
         public string Comentario { get; set; }
         public Nullable<int> IdEstadoSistema { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
         public virtual EstadoSistema EstadoSistema { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

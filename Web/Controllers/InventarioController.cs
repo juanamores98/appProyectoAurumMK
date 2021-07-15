@@ -198,54 +198,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // GET: Inventario/Management/5
-        [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Management(int? id)
-        {
-            IEnumerable<InventarioProducto> lista = null;
-            try
-            {
-                IServiceInventario _ServiceInventario = new ServiceInventario();
-                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
-                lista = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
-                ViewBag.inventarioGestion = _ServiceInventario.GetInventarioByID(id.Value);
-                return View(lista);
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Inventario";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-        // POST: Inventario/ManagementChange/5
-        [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult ManagementChange(InventarioProducto inventarioProducto)
-        {
-            IEnumerable<InventarioProducto> lista = null;
-            try
-            {
-                IServiceInventario _ServiceInventario = new ServiceInventario();
-                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
-                lista = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(inventarioProducto.IdInventario);
-                ViewBag.inventarioGestion = _ServiceInventario.GetInventarioByID(inventarioProducto.IdInventario);
-                return RedirectToAction("Management", lista);
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Inventario";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
+        
         //METODOS AUXILIARES
         private SelectList listaSeleccionSucursal(int idSucursal = 0)
         {

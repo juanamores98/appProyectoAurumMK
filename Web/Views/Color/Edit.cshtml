@@ -67,4 +67,13 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")}
+    <script>
+        $('#color-picker').spectrum({
+            type: "component",
+            togglePaletteOnly: true,
+            showInput: true,
+            showAlpha: false,
+            showButtons: false
+        });
+    </script>
+}

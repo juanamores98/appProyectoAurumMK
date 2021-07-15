@@ -23,8 +23,8 @@ namespace Infraestructure.Models
         public string Estante { get; set; }
         public Nullable<int> IdEstadoSistema { get; set; }
     
+        public virtual EstadoSistema EstadoSistema { get; set; }
         public virtual Inventario Inventario { get; set; }
         public virtual Producto Producto { get; set; }
-        public virtual EstadoSistema EstadoSistema { get; set; }
     }
 }
