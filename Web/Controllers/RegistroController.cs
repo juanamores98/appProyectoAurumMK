@@ -1,8 +1,10 @@
-﻿using System;
+﻿using ApplicationCore.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -28,17 +30,34 @@ namespace Web.Controllers
 
         // POST: Registro/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Save(UsuarioController usuario)
         {
             try
             {
-                // TODO: Add insert logic here
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+
+                if (ModelState.IsValid)
+                {
+                    
+                    
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Index", usuario);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Color";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 

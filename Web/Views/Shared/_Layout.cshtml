@@ -16,6 +16,7 @@
         @Html.Partial("_Footer")
     </div>
     @Scripts.Render("~/bundles/myBundle")
+    @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)
     @if (ViewBag.NotificationMessage != null)
     {

@@ -518,11 +518,11 @@
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\RegistroMovimiento\Index.cshtml" />
     <Content Include="Views\RegistroMovimiento\InventoryEntry.cshtml" />
+    <Content Include="Views\Registro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Registro\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
