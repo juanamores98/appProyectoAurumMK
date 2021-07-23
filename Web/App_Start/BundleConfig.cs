@@ -14,6 +14,8 @@ namespace Web
                         "~/Scripts/moment.min.js",
                         "~/Scripts/sweetalert.min.js",
                         "~/Scripts/modernizr-2.8.3.js",
+                        "~/Scripts/bootstrap-input-spinner.js",
+                        "~/Scripts/custom-editors.js",
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery-ui.js",
                         "~/Scripts/jquery-3.6.0.slim.min.js",

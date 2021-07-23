@@ -34,16 +34,15 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // GET: RegistroMovimiento/InventoryEntry/5
+        // GET: RegistroMovimiento/InventorySupply/5
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult InventoryEntry(int? id)
+        public ActionResult InventorySupply(int? id)
         {
             try
             {
                 IServiceInventario _ServiceInventario = new ServiceInventario();
                 IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
                 IServiceProducto _ServiceProducto = new ServiceProducto();
-                ViewBag.listaSeleccionUsuarios = listaSeleccionUsuarios();
                 ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
                 ViewBag.listaProductos = _ServiceProducto.GetProductoNonIncludeInventarioID(id.Value);
                 ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
@@ -61,10 +60,62 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        //POST: RegistroMovimiento/InventoryEntryConfirm/5
+        // GET: RegistroMovimiento/InventoryRestock/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult InventoryRestock(int? id)
+        {
+            try
+            {
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+                IServiceProducto _ServiceProducto = new ServiceProducto();
+                ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
+                ViewBag.listaInventarioProductos = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                Inventario inventario = _ServiceInventario.GetInventarioByID(id.Value);
+                return View(inventario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Registro Movimiento";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        // GET: RegistroMovimiento/InventoryEmptingStock/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult InventoryEmptingStock(int? id)
+        {
+            try
+            {
+                IServiceInventario _ServiceInventario = new ServiceInventario();
+                IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
+                IServiceProducto _ServiceProducto = new ServiceProducto();
+                ViewBag.listaSeleccionMotivo = listaSeleccionMotivo();
+                ViewBag.listaInventarioProductos = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                ViewBag.inventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByInventarioID(id.Value);
+                Inventario inventario = _ServiceInventario.GetInventarioByID(id.Value);
+                return View(inventario);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Registro Movimiento";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        //POST: RegistroMovimiento/InventoryRegisterConfirm/5
         [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
-        public ActionResult InventoryEntryConfirm(string idInventario, string idUsuario, string fechaHora, string comentario, string idMotivoMovimiento, string[] idProducto, string[] stockMinimo,string[] stock, string[] estante)
+        public ActionResult InventoryRegisterConfirm(int idUsuario, string fechaHora, string comentario, int idTipoMovimiento, int idMotivoMovimiento, int idInventario, int[] idProducto, int[] stockMinimo,int[] stock, string[] estante)
         {
             try
             {
@@ -75,33 +126,40 @@ namespace Web.Controllers
 
                 //Crer y guardar Registro Movimiento
                 RegistroMovimiento oRegistroMovimiento = new RegistroMovimiento();
-                oRegistroMovimiento.IdUsuario= int.Parse(idUsuario);
+                oRegistroMovimiento.IdUsuario= idUsuario;
                 oRegistroMovimiento.FechaHora = fechaHora;
                 oRegistroMovimiento.Comentario = comentario;
-                oRegistroMovimiento.IdTipoMovimiento = 1;//Entrada
-                oRegistroMovimiento.IdMotivoMovimiento= int.Parse(idMotivoMovimiento);
-                oRegistroMovimiento.IdInventario = int.Parse(idInventario);
+                oRegistroMovimiento.IdTipoMovimiento = idTipoMovimiento;
+                oRegistroMovimiento.IdMotivoMovimiento=idMotivoMovimiento;
+                oRegistroMovimiento.IdInventario = idInventario;
                 _ServiceRegistroMovimiento.Save(oRegistroMovimiento);
 
                 //Creacion lista elementos a añaidr al inventario y lista de elementos del registro  
-                //List<InventarioProducto> listaInventarioProducto = new List<InventarioProducto>();
-                //List<RegistroProducto> listaRegistroProducto = new List<RegistroProducto>();
                 for (int i=0;i< idProducto.Length;i++)
                 {
+                    //Se busca si ya  existe el producto en el inventario 
+                    InventarioProducto tempInventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByID(idInventario, idProducto[i]);
                     //Creacion y guardado de producto del inventario
                     InventarioProducto oInventarioProducto = new InventarioProducto();
-                    oInventarioProducto.IdProducto = int.Parse(idProducto[i]);
-                    oInventarioProducto.IdInventario = int.Parse(idInventario);
-                    oInventarioProducto.StockMinimo = int.Parse(stockMinimo[i]);
-                    oInventarioProducto.Stock = int.Parse(stock[i]);
+                    oInventarioProducto.IdProducto = idProducto[i];
+                    oInventarioProducto.IdInventario = idInventario;
+                    oInventarioProducto.StockMinimo = stockMinimo[i];
+                    oInventarioProducto.Stock = stock[i];
                     oInventarioProducto.Estante = estante[i];
                     _ServiceInventarioProducto.Save(oInventarioProducto,1);//Guarado con estado sistema activo
                     
                     //Creacion y guardado de registro del registro movimiento
                     RegistroProducto oRegistroProducto = new RegistroProducto();
-                    oRegistroProducto.IdProducto = int.Parse(idProducto[i]);
+                    oRegistroProducto.IdProducto = idProducto[i];
                     oRegistroProducto.IdMovimiento = _ServiceRegistroMovimiento.GetRegistroMovimiento().LastOrDefault().IdMovimiento;
-                    oRegistroProducto.Cantidad= int.Parse(stock[i]);
+                    if (tempInventarioProducto ==null)//Si el producto no existia en el invetario se asigna en cantidad todo el stock de productos
+                    {
+                        oRegistroProducto.Cantidad = stock[i];
+                    }
+                    else//Sino se verifica los elementos nuevos o descontados
+                    {
+                        oRegistroProducto.Cantidad = stock[i] - tempInventarioProducto.Stock;
+                    }
                     _ServiceRegistroProducto.Save(oRegistroProducto);
                 }
 

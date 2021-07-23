@@ -31,17 +31,19 @@
 
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdInventario)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Ingresar Productos", "InventoryEntry", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdInventario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Ingresar Productos", "InventorySupply", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                                @Html.ActionLink("Reabastecimiento", "InventoryRestock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                                @Html.ActionLink("Desabastecimiento", "InventoryEmptingStock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                            </td>
+                        </tr>
                             }
 
                         </table>

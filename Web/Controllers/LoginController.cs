@@ -63,6 +63,7 @@ namespace Web.Controllers
         }
 
         //Página de no autorización al ingreso
+        //GET: UnAuthorized
         public ActionResult UnAuthorized()
         {
             try
@@ -80,8 +81,8 @@ namespace Web.Controllers
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Color";
-                TempData["Redirect-Action"] = "Index";
+                TempData["Redirect"] = "Login";
+                TempData["Redirect-Action"] = "Login";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

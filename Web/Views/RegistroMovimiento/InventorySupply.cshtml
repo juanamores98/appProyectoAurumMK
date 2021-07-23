@@ -3,6 +3,25 @@
 @{
     ViewBag.Title = "Registro Movimiento";
 }
+@{
+    string nombre = "Usuario";
+    string email = "Perfil";
+    string idUsuario = "ID";
+    int id = 0;
+    Infraestructure.Models.Usuario oUsuario;
+    //Validar si existe en la sesión
+    if (Session["User"] != null)
+    {
+        oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+        if (oUsuario != null)
+        {
+            nombre = $"{oUsuario.Nombre}";
+            email = oUsuario.Contra;
+            id = oUsuario.IdUsuario;
+        }
+    }
+
+}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -11,30 +30,25 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Ingresar Productos a Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span></h1>
+            <h1>Ingreso de Productos a <span class="badge bg-info">Inventario @Html.DisplayFor(model => model.IdInventario)</span> | <span class="badge bg-warning">Entrada</span> | <span class="badge bg-success">@nombre</span></h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h5 class="text-primary m-0 fw-bold">Registro Movimiento /  <span class="badge bg-success">Entrada</span></h5>
+                    <h5 class="text-primary m-0 fw-bold">Registro Movimiento</h5>
                 </div>
                 <div class="card-body">
 
 
 
-                    @using (Html.BeginForm("InventoryEntryConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
+                    @using (Html.BeginForm("InventoryRegisterConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
                     {
+                        <input type="text" name="idUsuario" value="@id" style="display: none" />
+                        <input type="text" name="idTipoMovimiento" value="1" style="display: none" />
                         <input type="text" name="idInventario" value="@Html.DisplayFor(model => model.IdInventario)" style="display: none" />
                         <div class="row">
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
                             <div class="col">
-                                <div class="row">
-                                    @Html.DisplayName("Usuario")
-                                </div>
-                                <div class="row">
-                                    @Html.DropDownList("idUsuario",
-                                            (SelectList)ViewBag.listaSeleccionUsuarios,
-                                            "Seleccione un usuario",
-                                            htmlAttributes: new { @class = "form-control", required = "required" })
-                                </div>
                                 <div class="row">
                                     @Html.DisplayName("Motivo")
                                 </div>
@@ -55,12 +69,18 @@
                                     <input type='text' name="fechaHora" class="form-control" id='datetimepicker1' value="2018-07-22"
                                            min="2018-01-01" max="2018-12-31" required />
                                 </div>
+                            </div>
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
+                            <div class="col">
                                 <div class="row">
                                     @Html.DisplayName("Comentario")
                                 </div>
                                 <div class="row">
                                     <input type="text" name="comentario" class="form-control" required>
                                 </div>
+                            </div>
+                            <div style="padding:0px;margin:0px;width:20px;">
                             </div>
                         </div>
                         <hr>
@@ -310,3 +330,4 @@
         }
     </script>
 }
+
