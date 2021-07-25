@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Inventario
 
-@{
-    ViewBag.Title = "Mantenimiento Inventario";
-}
+@{ ViewBag.Title = "Mantenimiento Inventario"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -66,27 +64,26 @@
 
                                     @foreach (var item in (List<Infraestructure.Models.InventarioProducto>)ViewBag.listaProductosPorInventario)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.IdProducto)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StockMinimo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Stock)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Estante)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
-                                            </td>
-                                        </tr>
-                                    }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StockMinimo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estante)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                            </td>
+                        </tr>}
 
                                 </table>
                             </div>
@@ -104,15 +101,14 @@
                             <h3>¿Desea desactivar este inventario?</h3>
                         </div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Save", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Save", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                             {
-                                @Html.AntiForgeryToken()
-                            <div class="form-actions no-color">
-                                @Html.HiddenFor(model => model.IdInventario)
-                                <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                <input type="submit" value="Desactivar Inventario" class="btn boton-estilo" onclick="return confirm('¿Está seguro de desactivar este inventario?');" />
-                            </div>
-                            }
+                @Html.AntiForgeryToken()
+                                <div class="form-actions no-color">
+                                    @Html.HiddenFor(model => model.IdInventario)
+                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                    <input type="submit" value="Desactivar Inventario" class="btn boton-estilo" />
+                                </div>}
                         </div>
                     </div>
                 </div>
@@ -123,3 +119,25 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de desactivar este inventario?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
+}

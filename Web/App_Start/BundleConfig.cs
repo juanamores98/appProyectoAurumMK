@@ -25,7 +25,6 @@ namespace Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.css",
                       //"~/Content/site.css",
-                      "~/Content/sweetalert.css",
                       "~/Content/jquery-ui.css",
                       "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/all.min.css",

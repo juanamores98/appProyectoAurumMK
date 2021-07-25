@@ -143,6 +143,10 @@ namespace Web.Controllers
                     Util.Util.ValidateErrors(this);
                     return View("Create", proveedor);
                 }
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
 
                 return RedirectToAction("Index");
             }

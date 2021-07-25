@@ -176,6 +176,11 @@ namespace Web.Controllers
                     return View("Create", producto);
                 }
 
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

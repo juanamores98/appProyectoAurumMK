@@ -36,13 +36,22 @@ namespace Web.Controllers
                     {
                         Session["User"] = oUsuario;
                         Log.Info($"Accede {oUsuario.Nombre} con el rol {oUsuario.IdTipoUsuario}");
-                        TempData["NotificationMessage"] = SweetAlerHelper.Mensaje("Acceso exitoso", "Bienvenido a Aurum MK", SweetAlertMessageType.success);
+                        
+                        //SweetAlert
+                        TempData["AlertMessageTitle"] = "Acceso Exitoso";
+                        TempData["AlertMessageBody"] = "Bienvenido a AurumMK";
+                        TempData["AlertMessageType"] = "success";
+
                         return RedirectToAction("Index", "Home");
                         
                     }
                     else
                     {
-                        TempData["NotificationMessage"] = SweetAlerHelper.Mensaje("Acceso Inválido", "Por favor verifique sus datos", SweetAlertMessageType.warning);
+                        //SweetAlert
+                        TempData["AlertMessageTitle"] = "Acceso Invalido";
+                        TempData["AlertMessageBody"] = "Por favor verifique sus datos";
+                        TempData["AlertMessageType"] = "warning";
+
                         Log.Warn($"{usuario.Correo} se intentó conectar y falló");
                         
                     }
@@ -63,7 +72,6 @@ namespace Web.Controllers
         }
 
         //Página de no autorización al ingreso
-        //GET: UnAuthorized
         public ActionResult UnAuthorized()
         {
             try
@@ -81,8 +89,8 @@ namespace Web.Controllers
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Login";
-                TempData["Redirect-Action"] = "Login";
+                TempData["Redirect"] = "Color";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

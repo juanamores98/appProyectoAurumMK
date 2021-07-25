@@ -40,7 +40,7 @@
 
 
 
-                    @using (Html.BeginForm("InventoryRegisterConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
+                    @using (Html.BeginForm("InventoryRegisterConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
                         <input type="text" name="idUsuario" value="@id" style="display: none" />
                         <input type="text" name="idTipoMovimiento" value="1" style="display: none" />
@@ -169,9 +169,25 @@
 
         $("input[type='number']").inputSpinner()
 
-        function validateForm() {
-            return confirm('¿Está seguro de realizar el  registro?');
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de realizar el  registro?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    },
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
         }
+
         
         function searchTable(idTable, idInput) {
             // Declare variables

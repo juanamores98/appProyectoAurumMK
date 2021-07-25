@@ -54,6 +54,12 @@ namespace Web.Controllers
                     Util.Util.ValidateErrors(this);
                     return View("Create", categoriaP);
                 }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
                 //lo devuelve al index
                 return RedirectToAction("Index");
             }

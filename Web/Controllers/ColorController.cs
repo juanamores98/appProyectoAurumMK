@@ -103,6 +103,11 @@ namespace Web.Controllers
                     return View("Create", color);
                 }
 
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

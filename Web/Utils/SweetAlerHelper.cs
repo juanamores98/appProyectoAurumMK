@@ -9,7 +9,7 @@ namespace Web.Utils
     {
         public static string Mensaje(string titulo, string mensaje, SweetAlertMessageType tipoMensaje)
         {
-            return "swal({title: '" + titulo + "',text: '" + mensaje + "',type: '" + tipoMensaje + "'});";
+            return "swal('Hello world!');";
         }
 
         public enum SweetAlertMessageType
