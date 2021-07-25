@@ -39,17 +39,18 @@ namespace Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
-                    
-                else
-                {
-                    //Valida errores si Js está deshabilitado
-                    Util.Util.ValidateErrors(this);
-                    return View("Index", usuario);
-                }
 
-                return RedirectToAction("Index");
-            }
+
+
+                else
+                    {
+                        //Valida errores si Js está deshabilitado
+                        Util.Util.ValidateErrors(this);
+                        return View("Index", usuario);
+                    }
+
+                    return RedirectToAction("Index");
+                }
             catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
