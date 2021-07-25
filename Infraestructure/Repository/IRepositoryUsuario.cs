@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
         Usuario GetUsuarioByID(int id);
 
         Usuario Save(Usuario usuario);
+        Usuario GetUsuarioByEmail(string email);
 
         Usuario GetUsuario(string email, string password);
 

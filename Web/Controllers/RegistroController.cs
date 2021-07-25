@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Services;
+using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,17 +32,24 @@ namespace Web.Controllers
 
         // POST: Registro/Create
         [HttpPost]
-        [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save(UsuarioController usuario)
+        public ActionResult Save(Usuario usuario)
         {
             try
             {
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                var oUsuario = _ServiceUsuario.GetUsuarioByEmail(usuario.Correo);
 
                 if (ModelState.IsValid)
                 {
-
+                    if (oUsuario == null)
+                    {
+                        usuario.IdEstadoSistema = 0;
+                        usuario.IdTipoUsuario = 1;
+                        Usuario usuarioNew = _ServiceUsuario.Save(usuario);
+                        return RedirectToAction("Index", "Registro");
+                    }
                 }
+                    
                 else
                 {
                     //Valida errores si Js está deshabilitado

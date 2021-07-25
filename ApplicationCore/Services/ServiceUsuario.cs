@@ -26,6 +26,13 @@ namespace ApplicationCore.Services
             return repository.Save(usuario);
         }
 
+        public Usuario GetUsuarioByEmail(string email)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            Usuario oUsuario = repository.GetUsuarioByEmail(email);
+            return oUsuario;
+        }
+
         public Usuario GetUsuario(string email, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
