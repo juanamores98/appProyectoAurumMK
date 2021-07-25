@@ -26,7 +26,7 @@ namespace Web.Controllers
 
         // GET: Registro/Create
         public ActionResult Create()
-        {
+        { 
             return View();
         }
 
