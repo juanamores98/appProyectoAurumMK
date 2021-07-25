@@ -13,6 +13,8 @@ namespace ApplicationCore.Services
 
         Usuario Save(Usuario usuario);
 
+        Usuario GetUsuarioByEmail(string email);
+
         Usuario GetUsuario(string email, string password);
 
         IEnumerable<Usuario> GetAllUsers();

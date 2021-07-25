@@ -13,78 +13,80 @@
             <p style="text-align: center !important;">Aquí puede completar su autoregistro.</p>
             <div class="card-body">
 
-                @using (Html.BeginForm("Save", "RegistroController", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Save", "Registro", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                    <hr />
+                        <hr />
 
-                    <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
-                        <div class="col">
-                            <div class="row">
-                                <label>Cédula de identidad</label>
-                            </div>
-                            <div class="row">
-                                @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control", style = "-webkit-appearance: textfield !important" } })
-                                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-                            </div>
+                        <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
+                            <div class="col">
+                                <div class="row">
+                                    <label>Cédula de identidad</label>
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control", style = "-webkit-appearance: textfield !important" } })
+                                    @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="row">
-                                <label>Nombre completo</label>
-                            </div>
-                            <div class="row">
-                                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-                            </div>
+                                <div class="row">
+                                    <label>Nombre completo</label>
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="row">
-                                @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label " })
-                            </div>
-                            <div class="row">
-                                @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
-                            </div>
+                                <div class="row">
+                                    @Html.LabelFor(model => model.Correo, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Correo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Correo, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="row">
-                                @Html.LabelFor(model => model.Contra, htmlAttributes: new { @class = "control-label " })
-                            </div>
-                            <div class="row">
-                                @Html.EditorFor(model => model.Contra, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                                @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
-                            </div>
+                                <div class="row">
+                                    @Html.LabelFor(model => model.Contra, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Contra, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                                    @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="row">
-                                <label>Confirme su contraseña</label>
-                            </div>
-                            <div class="row">
-                                <input id="corfirmacionContra" type ="password" class="form-control" />
-                                @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
-                            </div>
+                                <div class="row">
+                                    <label>Confirme su contraseña</label>
+                                </div>
+                                <div class="row">
+                                    <input id="corfirmacionContra" type="password" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.Contra, "", new { @class = "text-danger" })
+                                </div>
 
-                            <div class="row">
-                                @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label " })
+                                <div class="row">
+                                    @Html.LabelFor(model => model.Direccion, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                            <div class="row">
-                                @Html.EditorFor(model => model.Direccion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "text-danger" })
+                        </div>
+
+                        <hr />
+
+                        <div class="row" style="text-align: center !important;">
+                            <div class="col" style="justify-content: center !important;">
+                                <input type="submit" value="Enviar registro" class="btn boton-estilo" />
                             </div>
                         </div>
                     </div>
-                    
-                    <hr />
-
-                    <div class="row" style="text-align: center !important;">
-                        <div class="col" style="justify-content: center !important;">
-                            <input type="submit" value="Enviar registro" class="btn boton-estilo" />
-                        </div>
-                    </div>
-                </div>
                 }
             </div>
         </div>
     </div>
 </div>
+
+
 

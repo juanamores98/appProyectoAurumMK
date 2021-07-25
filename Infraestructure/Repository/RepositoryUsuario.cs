@@ -84,6 +84,38 @@ namespace Infraestructure.Repository
             }
         }
 
+        public Usuario GetUsuarioByEmail(string email)
+        {
+            Usuario oUsuario = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oUsuario = ctx.Usuario.Where(p => p.Correo.Equals(email)).FirstOrDefault<Usuario>();
+                }
+                if (oUsuario != null)
+                {
+                    oUsuario = GetUsuarioByID(oUsuario.IdUsuario);
+                }
+
+                return oUsuario;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+
+        }
+
         public Usuario GetUsuario(string email, string password)
         {
             Usuario oUsuario = null;
