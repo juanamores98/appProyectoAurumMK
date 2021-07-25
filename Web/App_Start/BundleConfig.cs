@@ -14,6 +14,8 @@ namespace Web
                         "~/Scripts/moment.min.js",
                         "~/Scripts/sweetalert.min.js",
                         "~/Scripts/modernizr-2.8.3.js",
+                        "~/Scripts/bootstrap-input-spinner.js",
+                        "~/Scripts/custom-editors.js",
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery-ui.js",
                         "~/Scripts/jquery-3.6.0.slim.min.js",
@@ -23,7 +25,6 @@ namespace Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       //"~/Content/bootstrap.css",
                       //"~/Content/site.css",
-                      "~/Content/sweetalert.css",
                       "~/Content/jquery-ui.css",
                       "~/Content/bootstrap-datetimepicker.min.css",
                       "~/Content/all.min.css",

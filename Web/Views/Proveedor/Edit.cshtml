@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Proveedor
 
-@{
-    ViewBag.Title = "Mantenimiento Proveedor";
-}
+@{ ViewBag.Title = "Mantenimiento Proveedor"; }
 
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -11,16 +9,16 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Editar Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1>
+            <h1>Editar <span class="badge bg-info">Proveedor @Html.DisplayFor(model => model.IdProveedor)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h5 class="text-primary m-0 fw-bold">Proveedor</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IdProveedor)
@@ -59,13 +57,12 @@
                                 </div>
                             </div>
                         </div>
-                        <hr />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Editar Proveedor" class="btn boton-estilo" onclick="return confirm('¿Está seguro de editar este proveedor?');" />
-                            </div>
-                        </div>
-                    }
+                                        <hr />
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input type="submit" value="Editar Proveedor" class="btn boton-estilo"  />
+                                                            </div>
+                                                        </div>}
                 </div>
             </div>
             <div class="card shadow mb-4">
@@ -90,35 +87,34 @@
                             <th></th>
                         </tr>
 
-                        @foreach (Infraestructure.Models.ContactoProveedor item in Model.ContactoProveedor.Where(x=>x.IdEstadoSistema==1))
+                        @foreach (Infraestructure.Models.ContactoProveedor item in Model.ContactoProveedor.Where(x => x.IdEstadoSistema == 1))
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdContactoProveedor)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
-                                </td>
-                                <td>
-                                    <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
-                                </td>
-                                <td>
-                                    @using (Html.BeginForm("SaveContacto", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                    <div class="form-actions no-color">
-                                        <input type="text" name="idContactoProveedor" value="@item.IdContactoProveedor" style="display: none" />
-                                        <input type="text" name="idProveedor" value="@item.IdProveedor" style="display: none" />
-                                        <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                        <input type="submit" value="Desactivar" class="btn boton-estilo" onclick="return confirm('¿Está seguro de desactivar este contacto?');" />
-                                    </div>
-                                    }
-                                </td>
-                            </tr>
-                        }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdContactoProveedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
+                </td>
+                <td>
+                    <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
+                </td>
+                <td>
+                    @using (Html.BeginForm("SaveContacto", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data",id="myForm2", onsubmit = "event.preventDefault(),sweetConfirm2()" }))
+                    {
+    @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="text" name="idContactoProveedor" value="@item.IdContactoProveedor" style="display: none" />
+                            <input type="text" name="idProveedor" value="@item.IdProveedor" style="display: none" />
+                            <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                            <input type="submit" value="Desactivar" class="btn boton-estilo" />
+                        </div>}
+                </td>
+            </tr>
+}
 
                     </table>
                 </div>
@@ -130,6 +126,43 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de editar este proveedor?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+        function sweetConfirm2() {
+            if ($("#myForm2").valid()) {
+                swal({
+                    title: "¿Está seguro de desactivar este contacto?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
 }
 

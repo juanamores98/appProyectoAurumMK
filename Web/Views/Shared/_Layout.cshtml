@@ -16,13 +16,20 @@
         @Html.Partial("_Footer")
     </div>
     @Scripts.Render("~/bundles/myBundle")
-    @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)
-    @if (ViewBag.NotificationMessage != null)
-    {
-        <script>
-            @Html.Raw(ViewBag.NotificationMessage);
-        </script>
-    }
+<script>
+    @if (TempData["AlertMessageTitle"] != null)
+        {
+        <text>
+            swal("@TempData["AlertMessageTitle"]", "@TempData["AlertMessageBody"]", "@TempData["AlertMessageType"]",
+                {
+                    button: false,
+                    timer: 1500,
+                }
+            );
+        </text>
+        }
+</script>
+
 </body>
 </html>

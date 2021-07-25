@@ -1,0 +1,217 @@
+﻿@model Infraestructure.Models.Inventario
+
+@{
+    ViewBag.Title = "Registro Movimiento";
+}
+@{
+    string nombre = "Usuario";
+    string email = "Perfil";
+    string idUsuario = "ID";
+    int id = 0;
+    Infraestructure.Models.Usuario oUsuario;
+    //Validar si existe en la sesión
+    if (Session["User"] != null)
+    {
+        oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+        if (oUsuario != null)
+        {
+            nombre = $"{oUsuario.Nombre}";
+            email = oUsuario.Contra;
+            id = oUsuario.IdUsuario;
+        }
+    }
+
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Desabastecimiento Productos <span class="badge bg-info">Inventario @Html.DisplayFor(model => model.IdInventario)</span> | <span class="badge bg-danger">Salida</span> | <span class="badge bg-success">@nombre</span></h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Registro Movimiento</h5>
+                </div>
+                <div class="card-body">
+
+
+
+                    @using (Html.BeginForm("InventoryRegisterConfirm", "RegistroMovimiento", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
+                    {
+                        <input type="text" name="idUsuario" value="@id" style="display: none" />
+                        <input type="text" name="idTipoMovimiento" value="2" style="display: none" />
+                        <input type="text" name="idInventario" value="@Html.DisplayFor(model => model.IdInventario)" style="display: none" />
+                        <div class="row">
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    @Html.DisplayName("Motivo")
+                                </div>
+                                <div class="row">
+                                    @Html.DropDownList("idMotivoMovimiento",
+                                            (SelectList)ViewBag.listaSeleccionMotivo,
+                                            "Seleccione un motivo",
+                                            htmlAttributes: new { @class = "form-control", required = "required" })
+                                </div>
+                            </div>
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    @Html.DisplayName("Fecha")
+                                </div>
+                                <div class="row">
+                                    <input type='text' name="fechaHora" class="form-control" id='datetimepicker1' value="2018-07-22"
+                                           min="2018-01-01" max="2018-12-31" required />
+                                </div>
+                            </div>
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    @Html.DisplayName("Comentario")
+                                </div>
+                                <div class="row">
+                                    <input type="text" name="comentario" class="form-control" required>
+                                </div>
+                            </div>
+                            <div style="padding:0px;margin:0px;width:20px;">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-header py-3">
+                                    <h5 class="text-primary m-0 fw-bold">
+                                        Productos
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" class="fa-2x text-gray-300" style="font-size: 26px;">
+                                            <path d="M12 4C11.4477 4 11 4.44772 11 5V11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H11V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13H19C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11H13V5C13 4.44772 12.5523 4 12 4Z" fill="currentColor"></path>
+                                        </svg>
+                                    </h5>
+                                    <hr />
+                                    <input type="text" id="busquedaTableProductos" onkeyup="searchTable('tableInventarioProductos','busquedaTableProductos')" placeholder="Busqueda por ID, Nombre o Costo">
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+
+                                        <table id="tableInventarioProductos" class="table">
+                                            <tr>
+                                                <th>
+                                                    @Html.DisplayName("ID Producto")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Nombre del Producto")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Stock Minimo")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Stock")
+                                                </th>
+                                                <th>
+                                                    @Html.DisplayName("Estante")
+                                                </th>
+                                                <th></th>
+                                            </tr>
+
+                                            @foreach (var item in (List<Infraestructure.Models.InventarioProducto>)ViewBag.listaInventarioProductos)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="idProducto[]" value="@Html.DisplayFor(modelItem => item.IdProducto)" style="display: none">
+                                                        @Html.DisplayFor(modelItem => item.IdProducto)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="stockMinimo[]"  value="@Html.DisplayFor(modelItem => item.StockMinimo)" min="1" max="1000" step="1" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" name="stock[]" value="@Html.DisplayFor(modelItem => item.Stock)" max="@Html.DisplayFor(modelItem => item.Stock)" min="0" step="1" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="estante[]" value="@Html.DisplayFor(modelItem => item.Estante)" class="form-control" required>
+                                                    </td>
+                                                    <td>
+                                                        @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <input type="submit" value="Registrar Movimiento" class="btn btn-lg boton-estilo" style="float:right;" />
+                    }
+                </div>
+            </div>
+            <div>
+                @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+
+        $("input[type='number']").inputSpinner()
+
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de realizar el  registro?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    },
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+        
+        function searchTable(idTable, idInput) {
+            // Declare variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById(idInput);
+            filter = input.value.toUpperCase();
+            table = document.getElementById(idTable);
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    let tdata = td[j];
+                    if (tdata) {
+                        if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+}
+

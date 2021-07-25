@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Proveedor
 
-@{
-    ViewBag.Title = "Mantenimiento Proveedor";
-}
+@{ ViewBag.Title = "Mantenimiento Proveedor"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -10,7 +8,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1> Desactivar Proveedor <span class="badge bg-info">@Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1> Desactivar <span class="badge bg-info">Proveedor @Html.DisplayFor(model => model.IdProveedor)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProveedor }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
@@ -87,21 +85,20 @@
 
                                 @foreach (var item in Model.ContactoProveedor.Where(x => x.IdEstadoSistema == 1))
                                 {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IdContactoProveedor)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Nombre)
-                                        </td>
-                                        <td>
-                                            <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
-                                        </td>
-                                        <td>
-                                            <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
-                                        </td>
-                                    </tr>
-                                }
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdContactoProveedor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            <a href="tel:@Html.DisplayFor(modelItem => item.Telefono)">@Html.DisplayFor(modelItem => item.Telefono)</a>
+                        </td>
+                        <td>
+                            <a href="mailto: @Html.DisplayFor(modelItem => item.Correo)">@Html.DisplayFor(modelItem => item.Correo)</a>
+                        </td>
+                    </tr>}
 
                             </table>
                         </div>
@@ -118,15 +115,14 @@
                             <h3>¿Desea desactivar este proveedor?</h3>
                         </div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                             {
-                                @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
                                 @Html.HiddenFor(model => model.IdProveedor)
-                                <div class="form-actions no-color">
-                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo"  onclick="return confirm('¿Está seguro de desactivar este proveedor?');"/>
-                                </div>
-                            }
+                                                <div class="form-actions no-color">
+                                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                                    <input type="submit" value="Desactivar Proveedor" class="btn boton-estilo"  />
+                                                </div>}
                         </div>
                     </div>
                 </div>
@@ -137,3 +133,25 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de desactivar este proveedor?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
+}

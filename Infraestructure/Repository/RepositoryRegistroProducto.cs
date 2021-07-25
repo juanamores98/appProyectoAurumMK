@@ -146,20 +146,20 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oRegistroProducto = GetRegistroProductoByID(registroProducto.IdProducto, registroProducto.IdMovimiento);
-                    if (oRegistroProducto == null)
-                    {
+                    //oRegistroProducto = GetRegistroProductoByID(registroProducto.IdProducto, registroProducto.IdMovimiento);
+                    //if (oRegistroProducto == null)
+                    //{
                         //Insercion 
                         ctx.RegistroProducto.Add(registroProducto);
                         retorno = ctx.SaveChanges();
-                    }
-                    else
-                    {
-                        //Actualizacion
-                        ctx.RegistroProducto.Add(registroProducto);
-                        ctx.Entry(registroProducto).State = EntityState.Modified;
-                        retorno = ctx.SaveChanges();
-                    }
+                    //}
+                    //else
+                    //{
+                    //    //Actualizacion
+                    //    ctx.RegistroProducto.Add(registroProducto);
+                    //    ctx.Entry(registroProducto).State = EntityState.Modified;
+                    //    retorno = ctx.SaveChanges();
+                    //}
 
 
                 }

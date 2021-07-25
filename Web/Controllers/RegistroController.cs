@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
@@ -40,17 +41,16 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
 
-
-
-                else
-                    {
-                        //Valida errores si Js está deshabilitado
-                        Util.Util.ValidateErrors(this);
-                        return View("Index", usuario);
-                    }
-
-                    return RedirectToAction("Index");
                 }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Index", usuario);
+                }
+
+                return RedirectToAction("Index");
+            }
             catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());

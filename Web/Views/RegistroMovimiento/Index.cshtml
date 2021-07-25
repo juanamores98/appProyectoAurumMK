@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<Infraestructure.Models.Inventario>
 
-@{
-    ViewBag.Title = "Registro Movimiento";
-}
+@{ ViewBag.Title = "Registro Movimiento"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -31,18 +29,20 @@
 
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdInventario)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Ingresar Productos", "InventoryEntry", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
-                                    </td>
-                                </tr>
-                            }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdInventario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ingresar Productos", "InventorySupply", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                        @Html.ActionLink("Reabastecimiento", "InventoryRestock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                        @Html.ActionLink("Desabastecimiento", "InventoryEmptingStock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                    </td>
+                </tr>
+}
 
                         </table>
                     </div>
