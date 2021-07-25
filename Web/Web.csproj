@@ -170,7 +170,6 @@
     <Compile Include="Security\CustomAuthenticationFilter.cs" />
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
-    <Compile Include="Utils\SweetAlerHelper.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModel\ListaRegistro.cs" />
   </ItemGroup>
