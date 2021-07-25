@@ -116,11 +116,14 @@ namespace Infraestructure.Models
 
         [Display(Name = "Tipo Movimiento")]
         public virtual TipoMovimiento TipoMovimiento { get; set; }
-
+        [Display(Name = "ID Inventario")]
+        public Nullable<int> IdInventario { get; set; }
         [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
         [Display(Name = "Inventario")]
         public virtual Inventario Inventario { get; set; }
+        [Display(Name = "Motivo Movimiento")]
+        public virtual MotivoMovimiento MotivoMovimiento { get; set; }
 
 
     }

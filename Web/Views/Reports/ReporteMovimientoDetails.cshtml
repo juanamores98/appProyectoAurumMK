@@ -1,0 +1,125 @@
+﻿@model Infraestructure.Models.RegistroMovimiento
+
+@{ ViewBag.Title = "Mantenimiento Producto"; }
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Detalle <span class="badge bg-info">Registro Movimiento @Html.DisplayFor(model => model.IdMovimiento)</span></h1> 
+            <hr>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4" >
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Información</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdMovimiento)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdMovimiento)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.TipoMovimiento)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.TipoMovimiento.Descripcion)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.MotivoMovimiento)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.MotivoMovimiento.Descripcion)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.FechaHora)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.FechaHora)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Comentario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Comentario)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdInventario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdInventario)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Usuario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdUsuario)- @Html.DisplayFor(model => model.Usuario.Nombre)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9">
+                    <div class="card shadow mb-4" >
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Productos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("ID Producto")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Cantidad")
+                                        </th>
+                                        <th>
+                                            
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model.RegistroProducto)
+                                    {
+                                        if(item.Cantidad != 0)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.IdProducto)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Cantidad)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                                                </td>
+                                            </tr>
+                                        }}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+                @Html.ActionLink("Regresar", "ReporteMovimientosIndex", null, new { @class = "btn  boton-estilo" })
+            </p>
+        </div>
+    </div>
+</div>

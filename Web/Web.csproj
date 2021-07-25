@@ -484,7 +484,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
-    <Content Include="Views\Reports\ReporteMovimientos.cshtml" />
+    <Content Include="Views\Reports\ReporteMovimientosIndex.cshtml" />
     <Content Include="Views\Shared\_MenuMantenimiento.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
@@ -521,6 +521,8 @@
     <Content Include="Views\RegistroMovimiento\InventoryEmptingStock.cshtml" />
     <Content Include="Views\RegistroMovimiento\InventoryRestock.cshtml" />
     <Content Include="Views\RegistroMovimiento\InventorySupply.cshtml" />
+    <Content Include="Views\Shared\_MenuReporte.cshtml" />
+    <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
