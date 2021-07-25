@@ -6,8 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using Web.Utils;
-using static Web.Utils.SweetAlerHelper;
 namespace Web.Controllers
 {
     public class LoginController : Controller
