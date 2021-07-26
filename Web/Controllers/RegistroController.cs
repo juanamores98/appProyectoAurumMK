@@ -46,14 +46,26 @@ namespace Web.Controllers
                         usuario.IdEstadoSistema = 0;
                         usuario.IdTipoUsuario = 1;
                         Usuario usuarioNew = _ServiceUsuario.Save(usuario);
+                        //SweetAlert
+                        TempData["AlertMessageTitle"] = "Envío de registro exitoso";
+                        TempData["AlertMessageBody"] = "El administrador le notificará por medio de un correo electrónico la aprobación de la cuenta.";
+                        TempData["AlertMessageType"] = "success";
+
                         return RedirectToAction("Index", "Registro");
                     }
                 }
-                    
+
                 else
                 {
                     //Valida errores si Js está deshabilitado
                     Util.Util.ValidateErrors(this);
+
+                    //SweetAlert
+                    TempData["AlertMessageTitle"] = "Registro inválido";
+                    TempData["AlertMessageBody"] = "Por favor verifique sus datos";
+                    TempData["AlertMessageType"] = "warning";
+
+
                     return View("Index", usuario);
                 }
 
