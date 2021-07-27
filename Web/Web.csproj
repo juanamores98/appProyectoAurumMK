@@ -494,8 +494,6 @@
     <Content Include="Views\Proveedor\Details.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Producto\Deactivate.cshtml" />
@@ -513,7 +511,6 @@
     <Content Include="Views\CategoriaProducto\Edit.cshtml" />
     <Content Include="Views\CategoriaProducto\Index.cshtml" />
     <Content Include="Views\Inventario\Deactivate.cshtml" />
-    <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\RegistroMovimiento\Index.cshtml" />
@@ -523,6 +520,9 @@
     <Content Include="Views\RegistroMovimiento\InventorySupply.cshtml" />
     <Content Include="Views\Shared\_MenuReporte.cshtml" />
     <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
+    <Content Include="Views\Inventario\Details.cshtml" />
+    <Content Include="Views\Usuario\Deactivate.cshtml" />
+    <Content Include="Views\Usuario\Activate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
