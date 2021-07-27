@@ -192,6 +192,8 @@ namespace Infraestructure.Repository
                         .Include(x => x.EstadoSistema)
                         .Include(x => x.RegistroMovimiento)
                         .Include(x => x.Pedido)
+                        .Include(x => x.EstadoSistema)
+                        .Include(x => x.TipoUsuario)
                         .ToList<Usuario>();
                 }
                 return lista;
