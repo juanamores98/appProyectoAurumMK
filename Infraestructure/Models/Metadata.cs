@@ -140,6 +140,7 @@ namespace Infraestructure.Models
         public Nullable<int> Calificacion { get; set; }
 
         [Display(Name = "Comentario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Comentario { get; set; }
 
         [Display(Name = "Usuario")]

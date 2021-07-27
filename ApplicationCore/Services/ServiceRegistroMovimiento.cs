@@ -57,5 +57,6 @@ namespace ApplicationCore.Services
             IRepositoryRegistroMovimiento repository = new RepositoryRegistroMovimiento();
             return repository.Save(registroMovimiento);
         }
+        
     }
 }
