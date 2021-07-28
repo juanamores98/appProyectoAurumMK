@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CalificacionUsuarioController.cs" />
+    <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\CategoriaProductoController.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -527,6 +528,8 @@
     <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
     <Content Include="Views\CalificacionUsuario\Create.cshtml" />
     <Content Include="Views\Reports\CalificacionesIndex.cshtml" />
+    <Content Include="Views\Catalogo\Index.cshtml" />
+    <Content Include="Views\Shared\_MenuCatalogo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

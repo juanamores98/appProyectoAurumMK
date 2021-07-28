@@ -13,7 +13,7 @@
             @if (Session["User"] != null)
             {
                 <li class="nav-item">
-                    <a class="nav-link link-estilo" href="#">Catálogo</a>
+                    @Html.ActionLink("Catálogo", "Index", "Catalogo", null, new { @class = "nav-link link-estilo" })
                 </li>
             }
         </ul>
@@ -57,16 +57,16 @@
                         <div class="dropdown-item">
                             @if (Session["User"] != null)
                             {
-                    <div class="dropdown-item">
-                        @* Nombre Usuario*@
-                        Usuario: @nombre
-                    </div>}
+                                <div class="dropdown-item">
+                                    @* Nombre Usuario*@
+                                    Usuario: @nombre
+                                </div>}
                         </div>
                         @if (((Infraestructure.Models.Usuario)Session["User"]).IdTipoUsuario == 0)
                         {
-                    @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
-                                        <div class="dropdown-divider"></div>
-                                                            @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })}
+                            @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Editar Perfil</a>
                         <a class="dropdown-item" href="#">
@@ -81,8 +81,8 @@
 
                         @if (Session["User"] != null)
                         {
-                    @Html.ActionLink("Cerrar sesión", "Logout", "Login", null, new { @class = "dropdown-item" });
-                }
+                            @Html.ActionLink("Cerrar sesión", "Logout", "Login", null, new { @class = "dropdown-item" });
+                        }
                     </div>
                 </li>
 
