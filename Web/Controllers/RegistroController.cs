@@ -26,7 +26,7 @@ namespace Web.Controllers
 
         // GET: Registro/Create
         public ActionResult Create()
-        {
+        { 
             return View();
         }
 
@@ -47,10 +47,9 @@ namespace Web.Controllers
                         usuario.IdTipoUsuario = 1;
                         Usuario usuarioNew = _ServiceUsuario.Save(usuario);
                         //SweetAlert
-                        TempData["AlertMessageTitle"] = "Envío de registro exitoso";
-                        TempData["AlertMessageBody"] = "El administrador le notificará por medio de un correo electrónico la aprobación de la cuenta.";
+                        TempData["AlertMessageTitle"] = "Registro exitoso";
+                        TempData["AlertMessageBody"] = "El administrador le notificara  por medio de un correo electronico la aprobacion de la cuenta.";
                         TempData["AlertMessageType"] = "success";
-
                         return RedirectToAction("Index", "Registro");
                     }
                 }
@@ -61,7 +60,7 @@ namespace Web.Controllers
                     Util.Util.ValidateErrors(this);
 
                     //SweetAlert
-                    TempData["AlertMessageTitle"] = "Registro inválido";
+                    TempData["AlertMessageTitle"] = "Registro invalido";
                     TempData["AlertMessageBody"] = "Por favor verifique sus datos";
                     TempData["AlertMessageType"] = "warning";
 

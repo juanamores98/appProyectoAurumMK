@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Infraestructure.Models.RegistroMovimiento>
+
+@{ ViewBag.Title = "Reporte de Movimientos"; }
+
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuReporte")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Reporte de Registro de Movimientos</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Inventarios</h5>
+                    <hr />
+                    <input type="text" id="busquedaTablaMovimiento" onkeyup="searchTable('tableMovimiento','busquedaTablaMovimiento')" placeholder="Busqueda por ID, Fecha o Comentario...">
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tableMovimiento"  class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdMovimiento)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdUsuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaHora)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Comentario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TipoMovimiento)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdMovimiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaHora)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comentario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoMovimiento.Descripcion)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalle", "ReporteMovimientoDetails", new { id = item.IdMovimiento }, new { @class = "btn  boton-estilo" })
+                    </td>
+                </tr>
+}
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function searchTable(idTable, idInput) {
+            // Declare variables
+            var input, filter, table, tr, td, i;
+            input = document.getElementById(idInput);
+            filter = input.value.toUpperCase();
+            table = document.getElementById(idTable);
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    let tdata = td[j];
+                    if (tdata) {
+                        if (tdata.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }</script>
+}

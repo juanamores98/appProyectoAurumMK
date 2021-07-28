@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CalificacionUsuarioController.cs" />
     <Compile Include="Controllers\CategoriaProductoController.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -252,6 +253,7 @@
     <None Include="Resources\Perrito.jpg" />
     <None Include="Resources\Tucan.jpg" />
     <None Include="Resources\UnAuthorized.png" />
+    <None Include="Resources\star.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -484,7 +486,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
-    <Content Include="Views\Reports\ReporteMovimientos.cshtml" />
+    <Content Include="Views\Reports\ReporteMovimientosIndex.cshtml" />
     <Content Include="Views\Shared\_MenuMantenimiento.cshtml" />
     <Content Include="Views\Producto\Create.cshtml" />
     <Content Include="Views\Producto\Details.cshtml" />
@@ -521,6 +523,10 @@
     <Content Include="Views\RegistroMovimiento\InventoryEmptingStock.cshtml" />
     <Content Include="Views\RegistroMovimiento\InventoryRestock.cshtml" />
     <Content Include="Views\RegistroMovimiento\InventorySupply.cshtml" />
+    <Content Include="Views\Shared\_MenuReporte.cshtml" />
+    <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
+    <Content Include="Views\CalificacionUsuario\Create.cshtml" />
+    <Content Include="Views\Reports\CalificacionesIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

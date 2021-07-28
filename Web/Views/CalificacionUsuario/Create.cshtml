@@ -1,0 +1,73 @@
+﻿@model Infraestructure.Models.CalificacionUsuario
+
+@{
+    ViewBag.Title = "Calificacion";
+}
+@{ string nombre = "Usuario";
+    string email = "Perfil";
+    string idUsuario = "ID";
+    int id = 0;
+    Infraestructure.Models.Usuario oUsuario;
+    //Validar si existe en la sesión
+    if (Session["User"] != null)
+    {
+        oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+        if (oUsuario != null)
+        {
+            nombre = $"{oUsuario.Nombre}";
+            email = oUsuario.Contra;
+            id = oUsuario.IdUsuario;
+        }
+    } }
+
+
+<div class="row" style="width: 40% !important; margin: 0px auto !important;">
+    <div class="container" style="border-radius: 10px !important;  margin: 50px auto !important; display: block !important;">
+        <div class="card shadow mb-4" style="border-radius: 20px !important;">
+            <div style="text-align:center !important;">
+                <img style="width: 311px !important; height: 274px !important; display: inline-block !important; margin: 30px !important;" src="~/Resources/Aurum-MK.png" class="d-block w-100 carousel-inicio-max-heigh" alt="Aurum MK Logo">
+            </div>
+            <p style="text-align: center !important;">Calificación y Comentarios.</p>
+            <div class="card-body">
+                @using (Html.BeginForm("Save", "CalificacionUsuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    <div class="container">
+                        <input type="text" name="IdUsuario" value="@id" style="display: none" />
+                        <input type="text" name="idEstadoSistema" value="1" style="display: none" />
+                        <hr />
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Calificacion, htmlAttributes: new { @class = "control-label" })
+                            <div class="col">
+                                <input type="number" name="Calificacion" value="1" min="1" max="10" step="1" required />
+                                @Html.ValidationMessage("Calificacion", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Comentario, htmlAttributes: new { @class = "control-label" })
+                            <div class="col">
+                                @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Calificar" class="btn boton-estilo" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+    $("input[type='number']").inputSpinner()
+    </script>
+}

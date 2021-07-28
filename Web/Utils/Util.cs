@@ -44,7 +44,7 @@ namespace Web.Util
         //COMENTARIOS 
         //Comando para inicializar los identities en una tabla SQLServer: DBCC CHECKIDENT('Color',RESEED,1)
         //using System.ComponentModel.DataAnnotations;
-
+        // , id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()"
         //[MetadataType(typeof(CalificacionUsuarioMetadata))]
-}
+    }
 }

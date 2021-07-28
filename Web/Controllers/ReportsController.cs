@@ -12,7 +12,7 @@ namespace web.Controllers
 {
     public class ReportsController : Controller
     {
-        // GET: Reporte
+        // GET: Reports
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
@@ -35,9 +35,16 @@ namespace web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // GET: RegistroMovimientos/List/5
+        // GET: CalificacionUsuario
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult ReporteMovimientos()
+        public ActionResult CalificacionesIndex()
+        {
+            IServiceCalificacionUsuario _service = new ServiceCalificacionUsuario();
+            return View(_service.GetCalificacionUsuarioByEstadoSistemaID(1));
+        }
+        // GET: Reports/ReporteMovimientosIndex/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult ReporteMovimientosIndex()
         {
             IEnumerable<RegistroMovimiento> lista = null;
             try
@@ -52,6 +59,25 @@ namespace web.Controllers
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
 
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        // GET: Reports/ReporteMovimientoDetails/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult ReporteMovimientoDetails(int? id)
+        {
+            IEnumerable<RegistroMovimiento> lista = null;
+            try
+            {
+                IServiceRegistroMovimiento _ServiceRegistroMovimiento = new ServiceRegistroMovimiento();
+                RegistroMovimiento oRegistroMovimiento = _ServiceRegistroMovimiento.GetRegistroMovimientoByID(id.Value);
+                return View(oRegistroMovimiento);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

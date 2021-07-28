@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using ApplicationCore.Services;
 using Infraestructure.Models;
 using Web.Security;
 
@@ -21,6 +23,48 @@ namespace Web.Controllers
         {
             var usuario = db.Usuario.Include(u => u.EstadoSistema).Include(u => u.TipoUsuario);
             return View(usuario.ToList());
+        }
+
+        public ActionResult Activate()
+        {
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                lista = _ServiceUsuario.GetAllUsersEstadoSistemaId(0);
+                ViewBag.title = "Lista Usuarios Desactivados";
+                ViewBag.listaUsuariosDesactivados = _ServiceUsuario.GetAllUsersEstadoSistemaId(0);
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        public ActionResult Deactivate()
+        {
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                lista = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
+                ViewBag.title = "Lista Usuarios Activos";
+                ViewBag.listaUsuariosActivos = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
 
@@ -122,6 +166,11 @@ namespace Web.Controllers
             return View(usuario);
         }
 
+        public ActionResult Activate1()
+        {
+            return View();
+        }
+
         // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -141,5 +190,8 @@ namespace Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
     }
 }

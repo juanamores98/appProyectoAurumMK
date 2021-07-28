@@ -48,7 +48,7 @@ namespace Web.Controllers
             Producto producto = null;
             IServiceProveedor _ServiceProveedor = new ServiceProveedor();
             IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
-
+            IServiceColor _Servicecolores = new ServiceColor();
             try
             {
                 // Si va null
@@ -69,7 +69,7 @@ namespace Web.Controllers
                 
                 ViewBag.listaProveedor = _ServiceProveedor.GetProveedorByProductoID(id.Value);
                 ViewBag.listaInventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByProductoID(id.Value);
-                
+                ViewBag.listaColor = _Servicecolores.GetColorByProductoID(id.Value);
                 return View(producto);
             }
             catch (Exception ex)
