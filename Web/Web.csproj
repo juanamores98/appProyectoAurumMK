@@ -527,6 +527,8 @@
     <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
     <Content Include="Views\CalificacionUsuario\Create.cshtml" />
     <Content Include="Views\Reports\CalificacionesIndex.cshtml" />
+    <Content Include="Views\Usuario\Activate.cshtml" />
+    <Content Include="Views\Usuario\Deactivate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
