@@ -10,11 +10,6 @@ namespace ApplicationCore.Services
 {
     public class ServiceContactoProveedor : IServiceContactoProveedor
     {
-        public void DeleteContactoProveedorByID(int id)
-        {
-            IRepositoryContactoProveedor repository = new RepositoryContactoProveedor();
-            repository.DeleteContactoProveedorByID(id);
-        }
 
         public IEnumerable<ContactoProveedor> GetContactoProveedor()
         {

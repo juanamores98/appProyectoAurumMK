@@ -16,9 +16,16 @@ namespace Infraestructure.Models
     [MetadataType(typeof(MotivoMovimientoMetadata))]
     public partial class MotivoMovimiento
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MotivoMovimiento()
+        {
+            this.RegistroMovimiento = new HashSet<RegistroMovimiento>();
+        }
+    
         public int IdMotivoMovimiento { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual RegistroMovimiento RegistroMovimiento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
 }

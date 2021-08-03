@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Producto
 
-@{
-    ViewBag.Title = "Mantenimiento Producto";
-}
+@{ ViewBag.Title = "Mantenimiento Producto"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -10,7 +8,7 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Desactivar Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Desactivar <span class="badge bg-info">Producto @Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
                     <div class="card shadow mb-4">
@@ -87,15 +85,14 @@
                             <h3>¿Desea desactivar este producto?</h3>
                         </div>
                         <div class="card-body">
-                            @using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                             {
-                                @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
                                 @Html.HiddenFor(model => model.IdProducto)
-                                <div class="form-actions no-color">
-                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
-                                    <input type="submit" value="Desactivar Producto" class="btn boton-estilo" onclick="return confirm('¿Está seguro de desactivar este producto?');"/>
-                                </div>
-                            }
+                                                <div class="form-actions no-color">
+                                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                                    <input type="submit" value="Desactivar Producto" class="btn boton-estilo" />
+                                                </div>}
                         </div>
                     </div>
                 </div>
@@ -107,3 +104,25 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de desactivar este producto?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
+}

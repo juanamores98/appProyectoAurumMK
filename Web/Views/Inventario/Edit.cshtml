@@ -1,8 +1,6 @@
 ﻿@model  Infraestructure.Models.Inventario
 
-@{
-    ViewBag.Title = "Mantenimiento Inventario";
-}
+@{ ViewBag.Title = "Mantenimiento Inventario"; }
 
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -11,39 +9,38 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Editar Inventario <span class="badge bg-info">@Html.DisplayFor(model => model.IdInventario)</span> | @Html.ActionLink("Detalle", "Details", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Borrar", "Delete", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1>
+            <h1>Editar <span class="badge bg-info">Inventario @Html.DisplayFor(model => model.IdInventario)</span> | @Html.ActionLink("Detalle", "Details", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h5 class="text-primary m-0 fw-bold">Inventario</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Save", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.IdInventario)
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.IdInventario, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <input type="text" name="idProveedor" value="@Model.IdInventario" class="form-control" readonly />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.IdSucursal, (SelectList)ViewBag.listaSeleccionSucursal, "Seleccione Sucursal", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Editar Inventario" class="btn boton-estilo" />
-                                </div>
-                            </div>
-                        </div>
-                    }
+                                        <div class="form-horizontal">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.IdInventario, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    <input type="text" name="idProveedor" value="@Model.IdInventario" class="form-control" readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.IdSucursal, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.DropDownListFor(model => model.IdSucursal, (SelectList)ViewBag.listaSeleccionSucursal, "Seleccione Sucursal", htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.IdSucursal, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Editar Inventario" class="btn boton-estilo" />
+                                                </div>
+                                            </div>
+                                        </div>}
                 </div>
             </div>
             <div>
@@ -53,4 +50,23 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")}
+    <script>
+    function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de editar este inventario?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }</script>
+}

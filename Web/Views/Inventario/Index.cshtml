@@ -50,10 +50,10 @@
                                                 @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Gestion", "Management", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                                                @Html.ActionLink("Registrar Movimiento", "Index","RegistroMovimiento", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
                                                 @Html.ActionLink("Detalle", "Details", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
                                                 @Html.ActionLink("Editar", "Edit", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
-                                                @Html.ActionLink("Borrar", "Delete", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                                                @Html.ActionLink("Desactivar", "Deactivate", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
                                             </td>
                                         </tr>
                                     }

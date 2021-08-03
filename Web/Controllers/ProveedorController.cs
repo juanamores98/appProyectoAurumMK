@@ -9,6 +9,7 @@ using System.Net;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Proveedor
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Proveedor> lista = null;
@@ -38,6 +40,7 @@ namespace Web.Controllers
         }
 
         // GET: Proveedor/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();
@@ -75,13 +78,15 @@ namespace Web.Controllers
         }
 
         // GET: Proveedor/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
         }
 
-        
+
         // GET: Proveedor/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();
@@ -119,6 +124,7 @@ namespace Web.Controllers
         }
 
         // POST: Proveedor/Save/5
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult Save(Proveedor proveedor, int idEstadoSistema=1)
         {
@@ -137,6 +143,10 @@ namespace Web.Controllers
                     Util.Util.ValidateErrors(this);
                     return View("Create", proveedor);
                 }
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
 
                 return RedirectToAction("Index");
             }
@@ -153,6 +163,7 @@ namespace Web.Controllers
         }
 
         // GET: Proveedor/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Deactivate(int? id)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();
@@ -189,6 +200,7 @@ namespace Web.Controllers
             }
         }
         // GET: Proveedor/Contacto/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Contacto(int? idProveedor)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();
@@ -197,6 +209,8 @@ namespace Web.Controllers
             return View();
         }
         // POST: Proveedor/SaveContacto/5
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult SaveContacto(ContactoProveedor contactoProveedor, int idProveedor=0,int idEstadoSistema=1)
         {
             try
@@ -209,26 +223,6 @@ namespace Web.Controllers
                     contactoProveedor.IdProveedor = idProveedor;
                     ContactoProveedor oContactoProveedor = _ServiceContactoProveedor.Save(contactoProveedor, idEstadoSistema);
                 }
-                return RedirectToAction("Edit", new { id = idProveedor });
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Proveedor";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-        public ActionResult DeleteContacto(int idContactoProveedor,int idProveedor)
-        {
-
-            try
-            {
-                ServiceContactoProveedor _ServiceContactoProveedor = new ServiceContactoProveedor();
-                _ServiceContactoProveedor.DeleteContactoProveedorByID(idContactoProveedor);
                 return RedirectToAction("Edit", new { id = idProveedor });
             }
             catch (Exception ex)

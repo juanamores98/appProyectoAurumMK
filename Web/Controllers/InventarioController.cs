@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ApplicationCore.Services;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -17,13 +18,14 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Inventario
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Inventario> lista = null;
             try
             {
                 IServiceInventario _ServiceInventario = new ServiceInventario();
-                lista = _ServiceInventario.GetInventario();
+                lista = _ServiceInventario.GetInventarioByEstadoSistemaID(1);
                 ViewBag.title = "Lista Inventarios";
                 return View(lista);
             }
@@ -37,6 +39,7 @@ namespace Web.Controllers
             }
         }
         // GET: Inventario/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
@@ -77,6 +80,7 @@ namespace Web.Controllers
         }
 
         // GET: Inventario/Create/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.listaSeleccionSucursal = listaSeleccionSucursal();
@@ -84,6 +88,7 @@ namespace Web.Controllers
         }
 
         // GET: Inventario/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
@@ -123,14 +128,15 @@ namespace Web.Controllers
 
         // POST: Inventario/Save/5
         [HttpPost]
-        public ActionResult Save(Inventario inventario)
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Save(Inventario inventario,int idEstadoSistema=1)
         {
             try
             {
                 IServiceInventario _ServiceInventario = new ServiceInventario();
-                if (ModelState.IsValid)
+                if (ModelState.IsValid|| idEstadoSistema==0)
                 {
-                    Inventario oInventario = _ServiceInventario.Save(inventario);
+                    Inventario oInventario = _ServiceInventario.Save(inventario, idEstadoSistema);
                 }
                 else
                 {
@@ -138,6 +144,11 @@ namespace Web.Controllers
                     Util.Util.ValidateErrors(this);
                     return View("Create", inventario);
                 }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
 
                 return RedirectToAction("Index");
             }
@@ -152,8 +163,9 @@ namespace Web.Controllers
             }
         }
 
-        // GET: Inventario/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Inventario/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Deactivate(int? id)
         {
             ServiceInventario _ServiceInventario = new ServiceInventario();
             Inventario inventario = null;
@@ -191,47 +203,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-        // GET: Inventario/Management/5
-        [HttpPost]
-        public ActionResult Management(int? id)
-        {
-            try
-            {
-                
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Inventario";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-        // POST: Inventario/Delete/5
-        [HttpPost]
-        public ActionResult DeleteConfirmed(int? id)
-        {
-            try
-            {
-                ServiceInventario _ServiceInventario = new ServiceInventario();
-                _ServiceInventario.DeleteInventarioByID(id.Value);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Inventario";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
+        
         //METODOS AUXILIARES
         private SelectList listaSeleccionSucursal(int idSucursal = 0)
         {

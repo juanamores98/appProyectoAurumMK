@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace Infraestructure.Repository
 {
@@ -27,6 +28,7 @@ namespace Infraestructure.Repository
                     lista = ctx.RegistroMovimiento
                         .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
+                        .Include(x => x.Inventario)
                         .Include(x => x.TipoMovimiento)
                         .Include(x => x.MotivoMovimiento)
                         .ToList<RegistroMovimiento>();
@@ -50,7 +52,36 @@ namespace Infraestructure.Repository
 
         public RegistroMovimiento GetRegistroMovimientoByID(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                RegistroMovimiento oRegistroMovimiento = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oRegistroMovimiento = ctx.RegistroMovimiento
+                            .Where(p => p.IdMovimiento == id)
+                            .Include("RegistroProducto.Producto")
+                            .Include(x => x.Usuario)
+                            .Include(x => x.Inventario)
+                            .Include(x => x.TipoMovimiento)
+                            .Include(x => x.MotivoMovimiento)
+                            .FirstOrDefault();
+                }
+                return oRegistroMovimiento;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
         }
 
         public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByMotivoMovimientoID(int id)
@@ -65,8 +96,9 @@ namespace Infraestructure.Repository
                         .Where(x => x.IdMotivoMovimiento == id)
                         .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
+                        .Include(x => x.Inventario)
                         .Include(x => x.TipoMovimiento)
-                        //.Include(x => x.MotivoMovimiento)
+                        .Include(x => x.MotivoMovimiento)
                         .ToList<RegistroMovimiento>();
                 }
                 return lista;
@@ -85,9 +117,9 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-    
 
-       public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByProductoID(int id)
+
+        public IEnumerable<RegistroMovimiento> GetRegistroMovimientoByProductoID(int id)
         {
             /* try
              {
@@ -135,8 +167,9 @@ namespace Infraestructure.Repository
                         .Where(x => x.IdTipoMovimiento == id)
                         .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
+                        .Include(x => x.Inventario)
                         .Include(x => x.TipoMovimiento)
-                        //.Include(x => x.MotivoMovimiento)
+                        .Include(x => x.MotivoMovimiento)
                         .ToList<RegistroMovimiento>();
                 }
                 return lista;
@@ -168,8 +201,9 @@ namespace Infraestructure.Repository
                         .Where(x => x.IdUsuario == id)
                         .Include("RegistroProducto.Producto")
                         .Include(x => x.Usuario)
+                        .Include(x => x.Inventario)
                         .Include(x => x.TipoMovimiento)
-                        //.Include(x => x.MotivoMovimiento)
+                        .Include(x => x.MotivoMovimiento)
                         .ToList<RegistroMovimiento>();
                 }
                 return lista;
@@ -189,32 +223,33 @@ namespace Infraestructure.Repository
             }
         }
 
-        public RegistroMovimiento Save(RegistroMovimiento registroMovimiento) 
+        public RegistroMovimiento Save(RegistroMovimiento registroMovimiento)
         {
             int retorno = 0;//Contabiliza las cantidad de lineas afectadas
             RegistroMovimiento oRegistroMovimiento = null;
-                using (MyContext ctx = new MyContext())
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oRegistroMovimiento = GetRegistroMovimientoByID((int)registroMovimiento.IdMovimiento);
+                if (oRegistroMovimiento == null)//Si es null se crea un registro
                 {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    oRegistroMovimiento = GetRegistroMovimientoByID((int)registroMovimiento.IdMovimiento);
-                    if (oRegistroMovimiento == null)//Si es null se crea un registro
-                {
-                        //Insercion del registro
-                        ctx.RegistroMovimiento.Add(registroMovimiento);
-                        retorno = ctx.SaveChanges();
-                    }
-                    else
-                    {
-                        //Actualizar registro
-                        ctx.RegistroMovimiento.Add(registroMovimiento);
-                        ctx.Entry(registroMovimiento).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
-                        retorno = ctx.SaveChanges();
-                    }
+                   //Insercion del registro
+                   ctx.RegistroMovimiento.Add(registroMovimiento);
+                    retorno = ctx.SaveChanges();
                 }
-            if (retorno >= 0)
-                oRegistroMovimiento = GetRegistroMovimientoByID((int)oRegistroMovimiento.IdMovimiento);
+                else
+                {
+                    //Actualizar registro
+                    ctx.RegistroMovimiento.Add(registroMovimiento);
+                    ctx.Entry(registroMovimiento).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
+                    retorno = ctx.SaveChanges();
+                }
+            }
+            //if (retorno >= 0)
+            //    oRegistroMovimiento = GetRegistroMovimientoByID((int)oRegistroMovimiento.IdMovimiento);
 
             return oRegistroMovimiento;
         }
+
     }
 }

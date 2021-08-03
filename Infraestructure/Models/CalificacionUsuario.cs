@@ -13,14 +13,16 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(CalificacionUsuarioMetadata))] 
+    [MetadataType(typeof(CalificacionUsuarioMetadata))]
     public partial class CalificacionUsuario
     {
         public int IdCalificacion { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<int> Calificacion { get; set; }
         public string Comentario { get; set; }
+        public Nullable<int> IdEstadoSistema { get; set; }
     
+        public virtual EstadoSistema EstadoSistema { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

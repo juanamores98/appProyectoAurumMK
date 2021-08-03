@@ -61,6 +61,11 @@ namespace ApplicationCore.Services
             IRepositoryProducto repository = new RepositoryProducto();
             repository.SetNullIdCategoriaProductoInProductoByCategotegoriaID(idCategoriaProducto);
         }
+        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoNonIncludeInventarioID(idInventario);
+        }
 
         public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores, int idEstadoSistema)
         {

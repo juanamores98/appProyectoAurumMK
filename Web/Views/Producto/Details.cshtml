@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Producto
 
-@{
-    ViewBag.Title = "Mantenimiento Producto";
-}
+@{ ViewBag.Title = "Mantenimiento Producto"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -10,10 +8,10 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Detalle Producto <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <h1>Detalle <span class="badge bg-info">Producto @Html.DisplayFor(model => model.IdProducto)</span> | @Html.ActionLink("Editar", "Edit", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1> <hr>
             <div class="row">
                 <div class="col-xl-3">
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" style="height:400px;">
                         <div class="card-header py-3">
                             <h5 class="text-primary m-0 fw-bold">Información</h5>
                         </div>
@@ -62,8 +60,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-9">
-                    <div class="card shadow mb-4">
+                <div class="col-xl-6">
+                    <div class="card shadow mb-4" style="height:400px;">
                         <div class="card-header py-3">
                             <h5 class="text-primary m-0 fw-bold">Imagen</h5>
                         </div>
@@ -73,6 +71,24 @@
                                     <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.Imagen)" role="img" alt="Libro @Html.DisplayNameFor(model => model.Nombre)" class="bd-placeholder-img" width="200" height="250">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4" style="height:400px;">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Colores</h5>
+                        </div>
+                        <div class="card-body">
+                            @foreach (var item in (List<Infraestructure.Models.Color>)ViewBag.listaColor)
+                            {
+                            <dt>
+                               @Html.DisplayFor(modelItem => item.Descripcion)
+                            </dt>
+                            <dd>
+                               <input style="border:0;" type="color" value="@item.Codigo" disabled="disabled" />
+                            </dd>
+                            }
                         </div>
                     </div>
                 </div>
@@ -108,27 +124,27 @@
 
                                     @foreach (var item in (List<Infraestructure.Models.Proveedor>)ViewBag.listaProveedor)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.IdProveedor)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Telefono)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Direccion)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Pais)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Detalle", "Details", "Proveedor", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" })
-                                            </td>
-                                        </tr>
-                                    }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdProveedor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Direccion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Pais)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalle", "Details", "Proveedor", new { id = item.IdProveedor }, new { @class = "btn  boton-estilo" })
+                            </td>
+                        </tr>
+}
 
                                 </table>
                             </div>
@@ -166,24 +182,24 @@
 
                                     @foreach (var item in (List<Infraestructure.Models.InventarioProducto>)ViewBag.listaInventarioProducto)
                                     {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.IdInventario)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.StockMinimo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Stock)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Estante)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Inventario.Sucursal.Nombre)
-                                            </td>
-                                        </tr>
-                                    }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdInventario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StockMinimo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estante)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Inventario.Sucursal.Nombre)
+                            </td>
+                        </tr>
+}
 
                                 </table>
                             </div>

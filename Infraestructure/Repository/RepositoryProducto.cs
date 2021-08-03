@@ -124,7 +124,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     lista = ctx.Producto
-                        .Where(x => x.IdCategoriaProducto == id)
+                        .Where(x => x.IdCategoriaProducto == id && x.IdEstadoSistema == 1)
                         .Include(x => x.InventarioProducto)
                         .Include(x => x.CategoriaProducto)
                         .Include(x => x.Color)
@@ -134,6 +134,43 @@ namespace Infraestructure.Repository
                         .ToList<Producto>();
                 }
                 return lista;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario=0)
+        {
+            try
+            {
+                List<Producto> listaProductosActuales = new List<Producto>();
+                List<Producto> listaProductosNoIncluidos = new List<Producto>();
+                if (idInventario!=0)
+                {
+                    IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
+                    foreach (Producto item in GetProductoByEstadoSistemaID(1))
+                    {
+                        if (_RepositoryInventarioProducto.GetInventarioProductoByID(idInventario, item.IdProducto) == null)
+                        {
+                            listaProductosNoIncluidos.Add(GetProductoByID(item.IdProducto));
+                        }
+                    }
+                }
+                else
+                {
+                    listaProductosNoIncluidos = (List<Producto>)GetProductoByEstadoSistemaID(1);
+                }
+                return listaProductosNoIncluidos;
             }
 
             catch (DbUpdateException dbEx)
@@ -192,6 +229,7 @@ namespace Infraestructure.Repository
                                 oInventarioProducto.IdProducto = producto.IdProducto;
                                 oInventarioProducto.StockMinimo = 1;
                                 oInventarioProducto.Stock = 1;
+                                oInventarioProducto.IdEstadoSistema = 1;
                                 ctx.InventarioProducto.Add(oInventarioProducto);
                             }
                         }
@@ -253,6 +291,7 @@ namespace Infraestructure.Repository
                                         oInventarioProducto.StockMinimo = item.StockMinimo;
                                         oInventarioProducto.Stock = item.Stock;
                                         oInventarioProducto.Estante = item.Estante;
+                                        oInventarioProducto.IdEstadoSistema = 1;
                                         inventariosConservados.Add(oInventarioProducto);
                                     }
                                 }
@@ -269,6 +308,7 @@ namespace Infraestructure.Repository
                                         oInventarioProducto.IdProducto = producto.IdProducto;
                                         oInventarioProducto.StockMinimo = 1;
                                         oInventarioProducto.Stock = 1;
+                                        oInventarioProducto.IdEstadoSistema = 1;
                                         inventariosConservados.Add(oInventarioProducto);
                                     }
                                 }

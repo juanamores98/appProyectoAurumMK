@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Infraestructure.Models.Inventario>
+
+@{ ViewBag.Title = "Registro Movimiento"; }
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Registro Movimiento</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Inventarios</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdInventario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Sucursal.Nombre)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdInventario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sucursal.Nombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ingresar Productos", "InventorySupply", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                        @Html.ActionLink("Reabastecimiento", "InventoryRestock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" }) |
+                        @Html.ActionLink("Desabastecimiento", "InventoryEmptingStock", new { id = item.IdInventario }, new { @class = "btn  boton-estilo" })
+                    </td>
+                </tr>
+}
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

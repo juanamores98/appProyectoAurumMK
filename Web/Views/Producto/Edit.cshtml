@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.Producto
 
-@{
-    ViewBag.Title = "Mantenimiento Producto";
-}
+@{ ViewBag.Title = "Mantenimiento Producto"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -10,16 +8,16 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Editar Producto  <span class="badge bg-info">@Html.DisplayFor(model => model.IdProducto)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1>
+            <h1>Editar <span class="badge bg-info">Producto @Html.DisplayFor(model => model.IdProducto)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })| @Html.ActionLink("Desactivar", "Deactivate", new { id = Model.IdProducto }, new { @class = "btn  boton-estilo" })</h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h5 class="text-primary m-0 fw-bold">Producto</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Save", "Producto", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         <div class="form-horizontal">
                             <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
                                 <div class="col">
@@ -44,9 +42,9 @@
                                     </div>
                                     <div class="row">
                                         @Html.DropDownListFor(model => model.IdCategoriaProducto,
-                                        (SelectList)ViewBag.listaSeleccionCategoriaProducto,
-                                        "Seleccione una categoría",
-                                        htmlAttributes: new { @class = "form-control" })
+                                             (SelectList)ViewBag.listaSeleccionCategoriaProducto,
+                                             "Seleccione una categoría",
+                                             htmlAttributes: new { @class = "form-control" })
                                         @Html.ValidationMessageFor(model => model.IdCategoriaProducto, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -64,7 +62,7 @@
                                     </div>
                                     <div class="row">
                                         <!--Html.HiddenFor(model => model.Imagen)-->
-                                        <input type="file" name="ImageFile"  />
+                                        <input type="file" name="ImageFile" />
                                     </div>
                                 </div>
                             </div>
@@ -76,10 +74,9 @@
                                     </div>
                                     <div class="row">
                                         @Html.DropDownList("seleccionInventarios",
-                                        (MultiSelectList)ViewBag.listaSeleccionInventario,
-                                        "Seleccione inventarios",
-                                        new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.InventarioProducto, "", new { @class = "text-danger" })
+                                             (MultiSelectList)ViewBag.listaSeleccionInventario,
+                                             "Seleccione inventarios",
+                                              htmlAttributes: new { @class = "form-control combo2", multiple = "multiple" })
                                     </div>
                                 </div>
                                 <div class="col">
@@ -87,11 +84,8 @@
                                         @Html.LabelFor(model => model.Proveedor, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="row">
-                                        @Html.DropDownList("seleccionProveedores",
-                                        (MultiSelectList)ViewBag.listaSeleccionProveedor,
-                                        "Seleccione proveedores",
-                                        new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.Proveedor, "", new { @class = "text-danger" })
+                                        @Html.DropDownList("seleccionProveedores", (MultiSelectList)ViewBag.listaSeleccionProveedor, htmlAttributes: new { @class = "form-control combo2", @data_val = "true", @data_val_required = "Seleccione al menos un proveedor", multiple = "", required = "required" })
+                                        @Html.ValidationMessage("seleccionProveedores", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col">
@@ -99,11 +93,8 @@
                                         @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label" })
                                     </div>
                                     <div class="row">
-                                        @Html.DropDownList("seleccionColores",
-                                            (MultiSelectList)ViewBag.listaSeleccionColor,
-                                            "Seleccione colores",
-                                            new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
-                                        @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
+                                        @Html.DropDownList("seleccionColores", (MultiSelectList)ViewBag.listaSeleccionColor, htmlAttributes: new { @class = "form-control combo2", @data_val = "true", @data_val_required = "Seleccione al menos un color", multiple = "", required = "required" })
+                                        @Html.ValidationMessage("seleccionColores", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -111,11 +102,10 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Editar Producto" class="btn boton-estilo" onclick="return confirm('¿Está seguro de editar este producto?');" />
+                                    <input type="submit" value="Editar Producto" class="btn boton-estilo" />
                                 </div>
                             </div>
-                        </div>
-                    }
+                        </div>}
 
                 </div>
             </div>
@@ -126,5 +116,24 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de editar este producto?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
 }

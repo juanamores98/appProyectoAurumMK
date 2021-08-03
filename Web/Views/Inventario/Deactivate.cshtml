@@ -1,0 +1,143 @@
+﻿@model Infraestructure.Models.Inventario
+
+@{ ViewBag.Title = "Mantenimiento Inventario"; }
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuMantenimiento")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Desactivar <span class="badge bg-info">Inventario @Html.DisplayFor(model => model.IdInventario)</span>| @Html.ActionLink("Detalle", "Details", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" }) | @Html.ActionLink("Editar", "Edit", new { id = Model.IdInventario }, new { @class = "btn  boton-estilo" })</h1> <hr>
+            <div class="row">
+                <div class="col-xl-2">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Inventario</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.IdInventario)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.IdInventario)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayName("Sucursal")
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sucursal.Nombre)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-10">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Productos en el Inventario</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayName("ID Producto")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Nombre del Producto")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Stock Minimo")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Stock")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayName("Estante")
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in (List<Infraestructure.Models.InventarioProducto>)ViewBag.listaProductosPorInventario)
+                                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdProducto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StockMinimo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estante)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Detalle", "Details", "Producto", new { id = item.IdProducto }, new { @class = "btn  boton-estilo" })
+                            </td>
+                        </tr>}
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Desactivar Inventario</h5>
+                            <hr />
+                            <h3>¿Desea desactivar este inventario?</h3>
+                        </div>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Save", "Inventario", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
+                            {
+                @Html.AntiForgeryToken()
+                                <div class="form-actions no-color">
+                                    @Html.HiddenFor(model => model.IdInventario)
+                                    <input type="text" name="idEstadoSistema" value="0" style="display: none" />
+                                    <input type="submit" value="Desactivar Inventario" class="btn boton-estilo" />
+                                </div>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+                @Html.ActionLink("Regresar a lista", "Index", null, new { @class = "btn  boton-estilo" })
+            </p>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de desactivar este inventario?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
+}

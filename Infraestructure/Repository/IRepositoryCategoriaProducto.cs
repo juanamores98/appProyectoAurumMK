@@ -13,6 +13,6 @@ namespace Infraestructure.Repository
         IEnumerable<CategoriaProducto> GetCategoriaProducto();
         IEnumerable<CategoriaProducto> GetCategoriaProductoByProductoID(int id);
         void DeleteCategoriaProductoByID(int id);
-        CategoriaProducto Save();
+        CategoriaProducto Save(CategoriaProducto categoriaProducto);
     }
 }

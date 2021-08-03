@@ -26,15 +26,33 @@ namespace ApplicationCore.Services
             return repository.Save(usuario);
         }
 
+        public Usuario GetUsuarioByEmail(string email)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            Usuario oUsuario = repository.GetUsuarioByEmail(email);
+            return oUsuario;
+        }
+
         public Usuario GetUsuario(string email, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
 
             //Encriptar la contraseña para poder compararlo
-            string crytpPasswd = Cryptography.DecrypthAES(password);
-            return repository.GetUsuario(email, crytpPasswd);
+            //string crytpPasswd = Cryptography.DecrypthAES(password);
+            return repository.GetUsuario(email, password);
         }
 
+        public IEnumerable<Usuario> GetAllUsers()
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetAllUsers();
+        }
+
+        public IEnumerable<Usuario> GetAllUsersEstadoSistemaId(int id)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetAllUsersEstadoSistemaId(id);
+        }
 
     }
 }

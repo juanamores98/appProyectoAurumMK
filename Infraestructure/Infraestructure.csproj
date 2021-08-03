@@ -43,6 +43,9 @@
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -50,6 +53,24 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -123,9 +144,6 @@
     <Compile Include="Models\Sucursal.cs">
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TipoMovimiento.cs">
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
@@ -136,25 +154,35 @@
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepositoryCalificacionUsuario.cs" />
+    <Compile Include="Repository\IRepositoryMotivoMovimiento.cs" />
     <Compile Include="Repository\IRepositoryColor.cs" />
     <Compile Include="Repository\IRepositoryContactoProveedor.cs" />
     <Compile Include="Repository\IRepositoryInventario.cs" />
     <Compile Include="Repository\IRepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\IRepositoryInventarioProducto.cs" />
+    <Compile Include="Repository\IRepositoryPedidoProducto.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
     <Compile Include="Repository\IRepositoryRegistroMovimiento.cs" />
+    <Compile Include="Repository\IRepositoryRegistroProducto.cs" />
     <Compile Include="Repository\IRepositorySucursal.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
+    <Compile Include="Repository\IRepositoryTipoMovimiento.cs" />
+    <Compile Include="Repository\RepositoryCalificacionUsuario.cs" />
     <Compile Include="Repository\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\RepositoryColor.cs" />
     <Compile Include="Repository\RepositoryContactoProveedor.cs" />
     <Compile Include="Repository\RepositoryInventario.cs" />
     <Compile Include="Repository\RepositoryInventarioProducto.cs" />
+    <Compile Include="Repository\RepositoryMotivoMovimiento.cs" />
+    <Compile Include="Repository\RepositoryPedidoProducto.cs" />
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryRegistroMovimiento.cs" />
+    <Compile Include="Repository\RepositoryRegistroProducto.cs" />
     <Compile Include="Repository\RepositorySucursal.cs" />
+    <Compile Include="Repository\RepositoryTipoMovimiento.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>

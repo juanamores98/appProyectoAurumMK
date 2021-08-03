@@ -39,11 +39,10 @@ namespace Infraestructure.Models
         public virtual DbSet<Producto> Producto { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<RegistroMovimiento> RegistroMovimiento { get; set; }
-        public virtual DbSet<RegistroProducto> RegistroProducto { get; set; }
         public virtual DbSet<Sucursal> Sucursal { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoMovimiento> TipoMovimiento { get; set; }
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<RegistroProducto> RegistroProducto { get; set; }
     }
 }

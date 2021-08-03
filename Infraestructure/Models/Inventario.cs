@@ -20,13 +20,18 @@ namespace Infraestructure.Models
         public Inventario()
         {
             this.InventarioProducto = new HashSet<InventarioProducto>();
+            this.RegistroMovimiento = new HashSet<RegistroMovimiento>();
         }
     
         public int IdInventario { get; set; }
         public int IdSucursal { get; set; }
+        public Nullable<int> IdEstadoSistema { get; set; }
     
+        public virtual EstadoSistema EstadoSistema { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
         public virtual Sucursal Sucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
 }

@@ -4,9 +4,12 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using ApplicationCore.Services;
 using Infraestructure.Models;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -15,32 +18,58 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Usuario
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             var usuario = db.Usuario.Include(u => u.EstadoSistema).Include(u => u.TipoUsuario);
             return View(usuario.ToList());
         }
 
-        //Login para validar al usuario
-        public ActionResult LoginUsuario()
+        public ActionResult Activate()
         {
-            return View("Index");
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                lista = _ServiceUsuario.GetAllUsersEstadoSistemaId(0);
+                ViewBag.title = "Lista Usuarios Desactivados";
+                ViewBag.listaUsuariosDesactivados = _ServiceUsuario.GetAllUsersEstadoSistemaId(0);
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
-        //Página de no autorización al ingreso
-        public ActionResult UnAutorized()
+        public ActionResult Deactivate()
         {
-            return View();
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                lista = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
+                ViewBag.title = "Lista Usuarios Activos";
+                ViewBag.listaUsuariosActivos = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
-
-        //Acción de cierre de sesión
-        public ActionResult LogOut()
-        {
-            return View();
-        }
 
         // GET: Usuario/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -56,6 +85,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion");
@@ -68,6 +98,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create([Bind(Include = "IdUsuario,Nombre,Correo,Contra,Telefono,Direccion,IdEstadoSistema,IdTipoUsuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -83,6 +114,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -104,6 +136,7 @@ namespace Web.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit([Bind(Include = "IdUsuario,Nombre,Correo,Contra,Telefono,Direccion,IdEstadoSistema,IdTipoUsuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -118,6 +151,7 @@ namespace Web.Controllers
         }
 
         // GET: Usuario/Delete/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,6 +164,11 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             return View(usuario);
+        }
+
+        public ActionResult Activate1()
+        {
+            return View();
         }
 
         // POST: Usuario/Delete/5
@@ -151,5 +190,8 @@ namespace Web.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
     }
 }

@@ -113,7 +113,7 @@ namespace Infraestructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 lista = ctx.Color
-                    .Where(p => p.Producto.Any(x => x.IdProducto == id))
+                    .Where(p => p.Producto.Any(x => x.IdProducto == id) && p.IdEstadoSistema == 1)
                     .Include(x => x.EstadoSistema)
                     .Include(x => x.Producto)
                     .ToList<Color>();

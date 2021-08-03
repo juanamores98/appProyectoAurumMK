@@ -1,8 +1,6 @@
 ﻿@model Infraestructure.Models.CategoriaProducto
 
-@{
-    ViewBag.Title = "Mantenimiento Categoría Producto";
-}
+@{ ViewBag.Title = "Mantenimiento CategoriaProducto"; }
 
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
@@ -11,49 +9,40 @@
     <div class="col-xl-9">
         <div class="container">
             <hr>
-            <h1>Editar Categoría <span class="badge bg-info">@Html.DisplayFor(model => model.IdCategoriaProducto)-@Html.DisplayFor(model => model.Descripcion)</span></h1>
+            <h1>Editar <span class="badge  bg-info">Categoría @Html.DisplayFor(model => model.IdCategoriaProducto)</span></h1>
             <hr>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h5 class="text-primary m-0 fw-bold">Color</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "CategoriaProducto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Save", "CategoriaProducto", FormMethod.Post, new { enctype = "multipart/form-data", id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
-                        @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.IdCategoriaProducto)
-                        <div class="form-horizontal">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
-                                <div class="col">
-                                    <div class="row">
-                                        @Html.LabelFor(model => model.IdCategoriaProducto, htmlAttributes: new { @class = "control-label " })
-                                    </div>
-                                    <div class="row">
-                                        @Html.EditorFor(model => model.IdCategoriaProducto, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.IdCategoriaProducto, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label " })
-                                    </div>
-                                    <div class="row">
-                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
+                                        <div class="form-horizontal">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="row" style="margin-left: 15px !important; margin-right: 0px !important;">
+
+                                                <div class="col">
+                                                    <div class="row">
+                                                        @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label " })
+                                                    </div>
+                                                    <div class="row">
+                                                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr />
 
 
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Editar Color" class="btn boton-estilo" onclick="confirm('¿Está seguro que desea editar esta categoría?');" />
-                                </div>
-                            </div>
-                        </div>
-                    }
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Editar Categoría" class="btn boton-estilo"  />
+                                                </div>
+                                            </div>
+                                        </div>}
                 </div>
             </div>
             <div>
@@ -63,4 +52,24 @@
     </div>
 </div>
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")}
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de editar esta categoría?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
+}

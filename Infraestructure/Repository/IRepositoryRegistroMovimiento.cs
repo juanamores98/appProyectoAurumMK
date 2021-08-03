@@ -17,5 +17,6 @@ namespace Infraestructure.Repository
         IEnumerable<RegistroMovimiento> GetRegistroMovimientoByUsuarioID(int id);
         void DeleteRegistroMovimientoByID(int id);
         RegistroMovimiento Save(RegistroMovimiento registroMovimiento);
+        
     }
 }

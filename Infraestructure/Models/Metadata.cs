@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Infraestructure.Models
 {
@@ -47,6 +48,10 @@ namespace Infraestructure.Models
         public Nullable<int> IdSucursal { get; set; }
         [Display(Name = "Sucursal")]
         public virtual Sucursal Sucursal { get; set; }
+        [Display(Name = "Inventarios")]
+        public virtual ICollection<InventarioProducto> InventarioProducto { get; set; }
+        [Display(Name = "Registro Movimiento")]
+        public virtual ICollection<RegistroMovimiento> RegistroMovimiento { get; set; }
     }
     internal partial class ProveedorMetadata
     {
@@ -91,40 +96,36 @@ namespace Infraestructure.Models
 
     internal partial class RegistroMovimientoMetadata
     {
-
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Código movimiento requerido")]
         [Display(Name = "ID")]
         public int IdMovimiento { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Usuario requerido")]
         [Display(Name = "ID Usuario")]
         public Nullable<int> IdUsuario { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Fecha y hora requeridas")]
         [Display(Name = "Fecha y hora")]
         public string FechaHora { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Comentario requerido")]
         [Display(Name = "Comentario")]
         public string Comentario { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Tipo movimiento requerido")]
         [Display(Name = "ID Tipo Movimiento")]
         public Nullable<int> IdTipoMovimiento { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Motivo movimiento requerido")]
         [Display(Name = "ID Motivo Movimiento")]
         public Nullable<int> IdMotivoMovimiento { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Tipo movimiento requerido")]
         [Display(Name = "Tipo Movimiento")]
         public virtual TipoMovimiento TipoMovimiento { get; set; }
-
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Usuario requerido")]
+        [Display(Name = "ID Inventario")]
+        public Nullable<int> IdInventario { get; set; }
         [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
+        [Display(Name = "Inventario")]
+        public virtual Inventario Inventario { get; set; }
+        [Display(Name = "Motivo Movimiento")]
+        public virtual MotivoMovimiento MotivoMovimiento { get; set; }
 
-        
+
     }
 
     internal partial class CalificacionUsuarioMetadata
@@ -139,6 +140,7 @@ namespace Infraestructure.Models
         public Nullable<int> Calificacion { get; set; }
 
         [Display(Name = "Comentario")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} es un dato requerido")]
         public string Comentario { get; set; }
 
         [Display(Name = "Usuario")]
@@ -415,9 +417,12 @@ namespace Infraestructure.Models
         public string Nombre { get; set; }
 
         [Display(Name = "Correo")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
         public string Correo { get; set; }
 
         [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Contra { get; set; }
 
         [Display(Name = "Teléfono")]

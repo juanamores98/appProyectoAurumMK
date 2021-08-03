@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -15,6 +16,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Color
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Color> lista = null;
@@ -36,6 +38,7 @@ namespace Web.Controllers
         }
 
         // GET: Color/Create/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
@@ -43,6 +46,7 @@ namespace Web.Controllers
 
 
         // GET: Color/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceColor _ServiceColor = new ServiceColor();
@@ -81,6 +85,7 @@ namespace Web.Controllers
 
         // POST: Color/Save/5
         [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Color color, string codigoColor, int idEstadoSistema = 1)
         {
             try
@@ -98,6 +103,11 @@ namespace Web.Controllers
                     return View("Create", color);
                 }
 
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -112,6 +122,7 @@ namespace Web.Controllers
         }
 
         // POST: Color/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Deactivate(int? id)
         {
             try

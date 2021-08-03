@@ -28,11 +28,13 @@ namespace Infraestructure.Models
         public string Comentario { get; set; }
         public Nullable<int> IdTipoMovimiento { get; set; }
         public Nullable<int> IdMotivoMovimiento { get; set; }
+        public Nullable<int> IdInventario { get; set; }
     
+        public virtual Inventario Inventario { get; set; }
         public virtual MotivoMovimiento MotivoMovimiento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
         public virtual TipoMovimiento TipoMovimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroProducto> RegistroProducto { get; set; }
     }
 }

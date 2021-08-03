@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Infraestructure.Models.Producto>
-@{
-    ViewBag.Title = "Mantenimientos";
-}
+@{ ViewBag.Title = "Mantenimientos"; }
 <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
     <div class="col-lg-3" style="background: #1d2554;">
         @Html.Partial("_MenuMantenimiento")
@@ -14,7 +12,31 @@
                     <a class="btn btn-link text-left card-header font-weight-bold" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-4" href="#collapse-4" role="button">Mantenimientos</a>
                     <div class="collapse show" id="collapse-4">
                         <div class="card-body">
-                            <p class="m-0">!</p>
+                            <h2 class="text-info">Funciones</h2>
+                            <p>En esta sección encontrara las opciones necesarias para gestionar los elementos de la página.</p>
+                            <hr />
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="text-warning">Revisión</h4>
+                                        <p>Revisión detallada de cada elemento de la página. Total, transparencia en el proceso para su total confianza.</p>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="text-warning">Personalizable</h4>
+                                        <p>Podrá cambiar o editar la totalidad de valores de cada elemento y además ingresar nuevos elementos.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="text-warning">Facilidad de uso</h4>
+                                        <p>Interfaz fácil de entender y manejar. Apropiado para una gestión productiva e intuitiva.</p>
+                                    </div>
+                                    <div class="col">
+                                        <h4 class="text-warning">Acceso remoto</h4>
+                                        <p>Podrá hacer uso de las distintas funciones de la gestión de manera remoto gracias al uso de una página web accesible y versátil.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

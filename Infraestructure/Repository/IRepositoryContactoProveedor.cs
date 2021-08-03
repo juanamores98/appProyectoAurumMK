@@ -14,7 +14,6 @@ namespace Infraestructure.Repository
         IEnumerable<ContactoProveedor> GetContactoProveedorByNombre(string nombre);
         IEnumerable<ContactoProveedor> GetContactoProveedorByProveedorID(int id);
         IEnumerable<ContactoProveedor> GetContactoProveedorByEstadoSistemaID(int id);
-        void DeleteContactoProveedorByID(int id);
         ContactoProveedor Save(ContactoProveedor contactoProveedor, int idEstadoSistema);
     }
 }

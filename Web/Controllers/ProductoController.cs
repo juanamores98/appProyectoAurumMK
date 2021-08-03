@@ -10,6 +10,7 @@ using Infraestructure.Models;
 using ApplicationCore.Services;
 using System.IO;
 using System.Reflection;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -18,6 +19,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Producto
+        [CustomAuthorize((int)Roles.Administrador]
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
@@ -39,13 +41,14 @@ namespace Web.Controllers
         }
 
         // GET: Producto/Details/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Details(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
             Producto producto = null;
             IServiceProveedor _ServiceProveedor = new ServiceProveedor();
             IServiceInventarioProducto _ServiceInventarioProducto = new ServiceInventarioProducto();
-
+            IServiceColor _Servicecolores = new ServiceColor();
             try
             {
                 // Si va null
@@ -66,7 +69,7 @@ namespace Web.Controllers
                 
                 ViewBag.listaProveedor = _ServiceProveedor.GetProveedorByProductoID(id.Value);
                 ViewBag.listaInventarioProducto = _ServiceInventarioProducto.GetInventarioProductoByProductoID(id.Value);
-                
+                ViewBag.listaColor = _Servicecolores.GetColorByProductoID(id.Value);
                 return View(producto);
             }
             catch (Exception ex)
@@ -81,8 +84,9 @@ namespace Web.Controllers
             }
         }
 
-        
+
         // GET: Producto/Create
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.listaSeleccionCategoriaProducto = listaSeleccionCategoriaProducto();
@@ -136,6 +140,7 @@ namespace Web.Controllers
         }
 
         // POST: Producto/Save/5
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult Save(Producto producto, HttpPostedFileBase ImageFile, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema=1)
         {
@@ -171,6 +176,11 @@ namespace Web.Controllers
                     return View("Create", producto);
                 }
 
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -186,6 +196,7 @@ namespace Web.Controllers
         }
 
         // GET: Producto/Deactivate/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Deactivate(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
@@ -232,7 +243,7 @@ namespace Web.Controllers
         {
             //Lista de Inventario
             IServiceInventario _ServiceInventario = new ServiceInventario();
-            IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventario();
+            IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventarioByEstadoSistemaID(1);
             //Inventarios donde se encuentra el producto
             int[] listaInventarioSelect = null;
 
