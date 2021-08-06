@@ -161,6 +161,7 @@
     <Compile Include="Repository\IRepositoryInventario.cs" />
     <Compile Include="Repository\IRepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\IRepositoryInventarioProducto.cs" />
+    <Compile Include="Repository\IRepositoryPedido.cs" />
     <Compile Include="Repository\IRepositoryPedidoProducto.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Repository\RepositoryInventario.cs" />
     <Compile Include="Repository\RepositoryInventarioProducto.cs" />
     <Compile Include="Repository\RepositoryMotivoMovimiento.cs" />
+    <Compile Include="Repository\RepositoryPedido.cs" />
     <Compile Include="Repository\RepositoryPedidoProducto.cs" />
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
