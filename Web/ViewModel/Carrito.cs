@@ -55,7 +55,7 @@ namespace Web.ViewModel
 
             if (nuevoItem != null)
             {
-                if (Items.Exists(x => x.))
+                if (Items.Exists(x => ))
                 {
 
                 }

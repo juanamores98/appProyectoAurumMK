@@ -176,6 +176,7 @@
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModel\Carrito.cs" />
     <Compile Include="ViewModel\ListaRegistro.cs" />
+    <Compile Include="ViewModel\ViewModelPedidoProducto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Antlr3.Runtime.dll" />
