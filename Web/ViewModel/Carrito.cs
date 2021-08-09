@@ -8,7 +8,7 @@ namespace Web.ViewModel
 {
     public class Carrito
     {
-        public List<ViewModelPedidoProducto> Items { get; private set; }
+        //public List<ViewModelPedidoProducto> Items { get; private set; }
 
         //Implementación Singleton
         //Las propiedades de solo lectura solo se pueden establecer en la inicialización o en constructor
@@ -22,7 +22,7 @@ namespace Web.ViewModel
             if (HttpContext.Current.Session["carrito"] == null)
             {
                 Instancia = new Carrito();
-                Instancia.Items = new List<ViewModelPedidoProducto>();
+                //Instancia.Items = new List<ViewModelPedidoProducto>();
                 HttpContext.Current.Session["carrito"] = Instancia;
             }
             else
@@ -48,18 +48,20 @@ namespace Web.ViewModel
             String mensaje = "";
 
             //Crear un nuevo artículo para agregar al carrito
-            ViewModelPedidoProducto nuevoItem = new ViewModelPedidoProducto(idproducto);
+            //ViewModelPedidoProducto nuevoItem = new ViewModelPedidoProducto(idproducto);
 
-            //Si este artículo ya existe en lista de libros, aumente la cantidad
-            //De lo contrario, agregue el nuevo elemento a la lista.
+            ////Si este artículo ya existe en lista de libros, aumente la cantidad
+            ////De lo contrario, agregue el nuevo elemento a la lista.
 
-            if (nuevoItem != null)
-            {
-                if (Items.Exists(x => ))
-                {
+            //if (nuevoItem != null)
+            //{
+            //    if (Items.Exists(x => ))
+            //    {
 
-                }
-            }
+            //    }
+            //}
+            return "";
         }
+    
     }
 }

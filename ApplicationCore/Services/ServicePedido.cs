@@ -11,7 +11,8 @@ namespace ApplicationCore.Services
     {
         public IEnumerable<Pedido> GetPedido()
         {
-            IRepositoryPedido
+            //IRepositoryPedido;
+            return null;
         }
 
         public Pedido GetPedidoByID(int id)

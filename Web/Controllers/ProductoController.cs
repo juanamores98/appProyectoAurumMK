@@ -19,7 +19,7 @@ namespace Web.Controllers
         private MyContext db = new MyContext();
 
         // GET: Producto
-        [CustomAuthorize((int)Roles.Administrador]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
