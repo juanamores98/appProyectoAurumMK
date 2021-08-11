@@ -144,6 +144,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CalificacionUsuarioController.cs" />
+    <Compile Include="Controllers\CatalogoController.cs" />
     <Compile Include="Controllers\CategoriaProductoController.cs" />
     <Compile Include="Controllers\ColorController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -171,9 +174,29 @@
     <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModel\Carrito.cs" />
     <Compile Include="ViewModel\ListaRegistro.cs" />
+    <Compile Include="ViewModel\ViewModelPedidoProducto.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\log4net.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\all.min.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -201,6 +224,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <None Include=".bin\node.cmd" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\Web.csproj.AssemblyReference.cache" />
     <None Include="Resources\Pack14.jpg" />
     <None Include="Resources\Pack15.jpg" />
     <None Include="Resources\Pack16.jpg" />
@@ -252,6 +277,8 @@
     <None Include="Resources\Perrito.jpg" />
     <None Include="Resources\Tucan.jpg" />
     <None Include="Resources\UnAuthorized.png" />
+    <None Include="Resources\star.png" />
+    <Content Include="obj\Debug\Web.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -494,6 +521,8 @@
     <Content Include="Views\Proveedor\Details.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
+    <Content Include="Views\Usuario\Delete.cshtml" />
+    <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Producto\Deactivate.cshtml" />
@@ -511,6 +540,7 @@
     <Content Include="Views\CategoriaProducto\Edit.cshtml" />
     <Content Include="Views\CategoriaProducto\Index.cshtml" />
     <Content Include="Views\Inventario\Deactivate.cshtml" />
+    <Content Include="Views\Inventario\Details.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\UnAuthorized.cshtml" />
     <Content Include="Views\RegistroMovimiento\Index.cshtml" />
@@ -520,13 +550,18 @@
     <Content Include="Views\RegistroMovimiento\InventorySupply.cshtml" />
     <Content Include="Views\Shared\_MenuReporte.cshtml" />
     <Content Include="Views\Reports\ReporteMovimientoDetails.cshtml" />
-    <Content Include="Views\Inventario\Details.cshtml" />
-    <Content Include="Views\Usuario\Deactivate.cshtml" />
+    <Content Include="Views\CalificacionUsuario\Create.cshtml" />
+    <Content Include="Views\Reports\CalificacionesIndex.cshtml" />
     <Content Include="Views\Usuario\Activate.cshtml" />
+    <Content Include="Views\Usuario\Deactivate.cshtml" />
+    <Content Include="Views\Catalogo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\es\" />
+    <Folder Include="bin\roslyn\" />
     <Folder Include="Models\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

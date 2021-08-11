@@ -51,5 +51,10 @@ namespace ApplicationCore.Services
             IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
             repository.DeactivateInventarioProductoByInventarioID(idInventario);
         }
+        public void DeleteAllSotckZeroInventarioProducto()
+        {
+            IRepositoryInventarioProducto repository = new RepositoryInventarioProducto();
+            repository.DeleteAllSotckZeroInventarioProducto();
+        }
     }
 }

@@ -35,6 +35,13 @@ namespace web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        // GET: CalificacionUsuario
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult CalificacionesIndex()
+        {
+            IServiceCalificacionUsuario _service = new ServiceCalificacionUsuario();
+            return View(_service.GetCalificacionUsuarioByEstadoSistemaID(1));
+        }
         // GET: Reports/ReporteMovimientosIndex/5
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult ReporteMovimientosIndex()

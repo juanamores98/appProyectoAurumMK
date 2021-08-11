@@ -17,5 +17,6 @@ namespace ApplicationCore.Services
         IEnumerable<RegistroMovimiento> GetRegistroMovimientoByUsuarioID(int id);
         void DeleteRegistroMovimientoByID(int id);
         RegistroMovimiento Save(RegistroMovimiento registroMovimiento);
+        
     }
 }

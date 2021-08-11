@@ -13,7 +13,7 @@
             @if (Session["User"] != null)
             {
                 <li class="nav-item">
-                    <a class="nav-link link-estilo" href="#">Catálogo</a>
+                    @Html.ActionLink("Catálogo", "Index", "Catalogo", null, new { @class = "nav-link link-estilo" })
                 </li>
             }
         </ul>
@@ -60,15 +60,13 @@
                                 <div class="dropdown-item">
                                     @* Nombre Usuario*@
                                     Usuario: @nombre
-                                </div>
-                            }
+                                </div>}
                         </div>
                         @if (((Infraestructure.Models.Usuario)Session["User"]).IdTipoUsuario == 0)
                         {
                             @Html.ActionLink("Reporte General", "Index", "Reports", null, new { @class = "dropdown-item" })
                             <div class="dropdown-divider"></div>
-                            @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })
-                        }
+                            @Html.ActionLink("Mantenimientos", "Index", "Maintenance", null, new { @class = "dropdown-item" })}
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Editar Perfil</a>
                         <a class="dropdown-item" href="#">
@@ -78,7 +76,7 @@
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Sobre nosotros", "Index", "About", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Calificaciones y Comentarios</a>
+                        @Html.ActionLink("Calificaciones y Comentarios", "Create", "CalificacionUsuario", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
 
                         @if (Session["User"] != null)

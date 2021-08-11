@@ -154,12 +154,15 @@
       <DependentUpon>MyModel_AurumMK.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepositoryCalificacionUsuario.cs" />
     <Compile Include="Repository\IRepositoryMotivoMovimiento.cs" />
     <Compile Include="Repository\IRepositoryColor.cs" />
     <Compile Include="Repository\IRepositoryContactoProveedor.cs" />
     <Compile Include="Repository\IRepositoryInventario.cs" />
     <Compile Include="Repository\IRepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\IRepositoryInventarioProducto.cs" />
+    <Compile Include="Repository\IRepositoryPedido.cs" />
+    <Compile Include="Repository\IRepositoryPedidoProducto.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
     <Compile Include="Repository\IRepositoryRegistroMovimiento.cs" />
@@ -167,12 +170,15 @@
     <Compile Include="Repository\IRepositorySucursal.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\IRepositoryTipoMovimiento.cs" />
+    <Compile Include="Repository\RepositoryCalificacionUsuario.cs" />
     <Compile Include="Repository\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\RepositoryColor.cs" />
     <Compile Include="Repository\RepositoryContactoProveedor.cs" />
     <Compile Include="Repository\RepositoryInventario.cs" />
     <Compile Include="Repository\RepositoryInventarioProducto.cs" />
     <Compile Include="Repository\RepositoryMotivoMovimiento.cs" />
+    <Compile Include="Repository\RepositoryPedido.cs" />
+    <Compile Include="Repository\RepositoryPedidoProducto.cs" />
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryRegistroMovimiento.cs" />

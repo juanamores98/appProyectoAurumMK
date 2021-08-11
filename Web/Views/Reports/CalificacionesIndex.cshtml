@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Infraestructure.Models.CalificacionUsuario>
+
+@{
+    ViewBag.Title = "Calificaciones";
+}
+
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuReporte")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <h1>Calificaciones registradas</h1>
+            <hr>
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Calificaciones</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdCalificacion)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Calificacion 1-10")
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Comentario)
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Usuario")
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.IdCalificacion)
+                            </th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Calificacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comentario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                            </td>
+                        </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

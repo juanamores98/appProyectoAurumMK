@@ -17,5 +17,6 @@ namespace ApplicationCore.Services
         void DeleteInventarioProductoByID(int id);
         InventarioProducto Save(InventarioProducto inventarioProducto, int idEstadoSistema);
         void DeactivateInventarioProductoByInventarioID(int idInventario);
+        void DeleteAllSotckZeroInventarioProducto();
     }
 }

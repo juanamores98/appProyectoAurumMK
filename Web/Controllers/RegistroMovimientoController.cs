@@ -112,6 +112,7 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        
         //POST: RegistroMovimiento/InventoryRegisterConfirm/5
         [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
@@ -160,6 +161,7 @@ namespace Web.Controllers
                     {
                         oRegistroProducto.Cantidad = stock[i] - tempInventarioProducto.Stock;
                     }
+                    _ServiceInventarioProducto.DeleteAllSotckZeroInventarioProducto();
                     _ServiceRegistroProducto.Save(oRegistroProducto);
                 }
 
@@ -197,6 +199,13 @@ namespace Web.Controllers
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             IEnumerable<Usuario> listaUsuario = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
             return new SelectList(listaUsuario, "IdUsuario", "Nombre");
+        }
+        private SelectList listaSeleccionInventario()
+        {
+            //Lista de Inventario
+            IServiceInventario _ServiceInventario = new ServiceInventario();
+            IEnumerable<Inventario> listaInventario = _ServiceInventario.GetInventarioByEstadoSistemaID(1);
+            return new SelectList(listaInventario, "IdInventario", "IdInventario");
         }
     }
 }

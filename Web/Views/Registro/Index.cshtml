@@ -49,6 +49,14 @@
                                 </div>
 
                                 <div class="row">
+                                    @Html.LabelFor(model => model.Telefono, htmlAttributes: new { @class = "control-label " })
+                                </div>
+                                <div class="row">
+                                    @Html.EditorFor(model => model.Telefono, new { htmlAttributes = new { @class = "form-control", style = "-webkit-appearance: textfield !important" } })
+                                    @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="row">
                                     @Html.LabelFor(model => model.Contra, htmlAttributes: new { @class = "control-label " })
                                 </div>
                                 <div class="row">

@@ -91,6 +91,20 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
+        public void DeleteAllSotckZeroInventarioProducto()
+        {
+            foreach (InventarioProducto item in GetInventarioProducto())
+            {
+                if (item.Stock==0)
+                {
+                    using (MyContext ctx = new MyContext())
+                    {
+                        ctx.Entry(item).State = EntityState.Deleted;
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
         public IEnumerable<InventarioProducto> GetInventarioProductoByInventarioID(int id)
         {
             try
