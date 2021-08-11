@@ -53,7 +53,7 @@ namespace Web.Controllers
             {
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 lista = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
-                ViewBag.title = "Lista Usuarios Activos";
+                ViewBag.title = "Lista Usuarios Activos ";
                 ViewBag.listaUsuariosActivos = _ServiceUsuario.GetAllUsersEstadoSistemaId(1);
                 return View(lista);
             }
@@ -93,9 +93,7 @@ namespace Web.Controllers
             return View();
         }
 
-        // POST: Usuario/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize((int)Roles.Administrador)]
@@ -131,26 +129,50 @@ namespace Web.Controllers
             return View(usuario);
         }
 
-        // POST: Usuario/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Edit([Bind(Include = "IdUsuario,Nombre,Correo,Contra,Telefono,Direccion,IdEstadoSistema,IdTipoUsuario")] Usuario usuario)
+        public ActionResult Edit(int idUsuario)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario oUsuario = _ServiceUsuario.GetUsuarioByID(idUsuario);
+
+                //Revisa id 
+                if (ModelState.IsValid)
+                {
+                    oUsuario.IdEstadoSistema = 1;
+                    _ServiceUsuario.Save(oUsuario);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", oUsuario);
+                }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
+                //lo devuelve al index
                 return RedirectToAction("Index");
             }
-            ViewBag.IdEstadoSistema = new SelectList(db.EstadoSistema, "IdEstadoSistema", "Descripcion", usuario.IdEstadoSistema);
-            ViewBag.IdTipoUsuario = new SelectList(db.TipoUsuario, "IdTipoUsuario", "Descripcion", usuario.IdTipoUsuario);
-            return View(usuario);
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "CategoriaProducto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
 
-        // GET: Usuario/Delete/5
+
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(int? id)
         {
@@ -171,7 +193,7 @@ namespace Web.Controllers
             return View();
         }
 
-        // POST: Usuario/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -191,7 +213,124 @@ namespace Web.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult Save(Usuario usuario)
+        {
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario oUsuario = _ServiceUsuario.GetUsuarioByID(usuario.IdUsuario);
 
+                //Revisa id 
+                if (ModelState.IsValid )
+                {
+          
+                    oUsuario  = _ServiceUsuario.Save(usuario);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", usuario);
+                }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
+                //lo devuelve al index
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "CategoriaProducto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+
+        public ActionResult ActivarConfirmado(int idUsuario)
+        {
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario oUsuario = _ServiceUsuario.GetUsuarioByID(idUsuario);
+
+                //Revisa id 
+                if (ModelState.IsValid)
+                {
+                   oUsuario.IdEstadoSistema=1;
+                   oUsuario.EstadoSistema = null;
+                  _ServiceUsuario.Save(oUsuario);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", oUsuario);
+                }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
+                //lo devuelve al index
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "CategoriaProducto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        public ActionResult DesactivarConfirmado(int idUsuario)
+        {
+            try
+            {
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario oUsuario = _ServiceUsuario.GetUsuarioByID(idUsuario);
+
+                //Revisa id 
+                if (ModelState.IsValid)
+                {
+                    oUsuario.IdEstadoSistema = 0;
+                    oUsuario.EstadoSistema = null;
+                    _ServiceUsuario.Save(oUsuario);
+                }
+                else
+                {
+                    //Valida errores si Js está deshabilitado
+                    Util.Util.ValidateErrors(this);
+                    return View("Create", oUsuario);
+                }
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
+                //lo devuelve al index
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "CategoriaProducto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
 
     }
 }

@@ -56,10 +56,12 @@ namespace Infraestructure.Repository
                     if (oUsuario == null)
                     {
                         ctx.Usuario.Add(usuario);
+                        retorno = ctx.SaveChanges();
                     }
                     else
                     {
                         ctx.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
+                        retorno = ctx.SaveChanges();
                     }
                     retorno = ctx.SaveChanges();
                 }
