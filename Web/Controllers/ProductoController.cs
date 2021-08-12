@@ -84,6 +84,7 @@ namespace Web.Controllers
             }
         }
 
+        
 
         // GET: Producto/Create
         [CustomAuthorize((int)Roles.Administrador)]
@@ -96,6 +97,11 @@ namespace Web.Controllers
             return View();
         }
 
+        // GET: Producto/CreateByUser/5
+        public ActionResult CreateByUser()
+        {
+            return View();
+        }
 
         // GET: Producto/Edit/5
         public ActionResult Edit(int? id)

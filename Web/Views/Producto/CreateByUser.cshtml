@@ -1,0 +1,104 @@
+﻿@model Infraestructure.Models.Producto
+
+@{ ViewBag.Title = "Mantenimiento Producto"; }
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="container">
+        <hr>
+        <h1>Solicitar pulsera personalizada</h1>
+        <hr>
+        <div class="row">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h5 class="text-primary m-0 fw-bold">Producto</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <canvas id="myCanvas" style="width: 400px; height: 400px"></canvas>
+                        </div>
+                        <div class="col">
+                            <h2>
+                                Escoge varios colores para tu pulsera
+                            </h2>
+                            <input id="color-picker" name='color' />
+                            <hr />
+                            <button class="btn boton-estilo" id="paintbucket-plugin">
+                                <img src="~/Resources/fill_bucket.png" width="20" /> Colorear
+                            </button>
+
+                        </div>
+                    </div>
+                    <hr />
+                    <button class="btn boton-estilo" style="float:right">
+                        <h3>Solicitar Pulsera </h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "btn  boton-estilo" })
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        // Create a variable for the canvas and it's context
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Initialise an image object
+        var image = new Image();
+        image.src = "../Resources/color-filler.png"// Load an image
+
+        // When it loads an image
+        image.onload = function () {
+            // Get the canvas' current style
+            var canvasStyle = getComputedStyle(canvas);
+
+            // Get it's current width, minus the px at the end
+            var canvasWidth = canvasStyle.width.replace("px", "");
+
+            // Work out the images ratio
+            var imageRatio = this.width / this.height;
+
+            // Work out the new height of the canvas, keeping in ratio with the image
+            var canvasHeight = canvasWidth / imageRatio;
+
+            // Set the canvas' height in the style tag to be correct
+            canvas.style.height = canvasHeight + "px";
+
+            // Set the width/height attributes to be correct (as this is what drawImage uses)
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+
+            // Draw the image at the right width/height
+            ctx.drawImage(this, 0, 0, canvasWidth, canvasHeight);
+        };
+
+        // Initialize colorpicker
+        $('#color-picker').spectrum({
+            color: "#f00",
+            showButtons: false,
+            allowEmpty: false,
+            showAlpha: false,
+            flat: true,
+            change: function (color) {
+                $('#paintbucket-plugin').data('fill-color', color.toHex());
+            }
+        });
+
+        // Bind paintbucket plugin to button
+        $('#paintbucket-plugin').paintbucket('#myCanvas');
+        $('#paintbucket-plugin').data('fill-color', $("#color-picker").spectrum("get").toHex());
+        $paintbucketBtn.click(function () {
+            if ($(this).data('paintbucket-active') === 'active') {
+                $(this)[0].classList.add('pb-active');
+            } else {
+                $(this)[0].classList.remove('pb-active');
+            }
+        });
+
+    </script>
+
+
+}
