@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Reflection;
+using System.Web.Mvc;
 using System.Data.Entity;
 
 namespace Web.ViewModel
 {
     public class Carrito
     {
-        //public List<ViewModelPedidoProducto> Items { get; private set; }
+        public List<ViewModelPedidoProducto> Items { get; private set; }
 
         //Implementación Singleton
         //Las propiedades de solo lectura solo se pueden establecer en la inicialización o en constructor
@@ -55,13 +57,70 @@ namespace Web.ViewModel
 
             if (nuevoItem != null)
             {
-                if (Items.Exists(x => x.))
+                if (Items.Exists(x => x.IdProducto == idproducto))
                 {
-
+                    ViewModelPedidoProducto item = Items.Find(x => x.IdProducto == idproducto);
+                    item.Cantidad++;
                 }
+                else
+                {
+                    nuevoItem.Cantidad = 1;
+                    Items.Add(nuevoItem);
+                }
+            }
+            else
+            {
+                
             }
             return "";
         }
 
+        public void SetItemCantidad(int idProducto, int cantidad)
+        {
+            //Si estamos configurando la cantidad a 0, elimine el artículo por completo
+            if (cantidad == 0)
+            {
+                EliminarItem(idProducto);
+            }
+            else
+            {
+                //Encuentra el artículo y actualiza la cantidad
+                ViewModelPedidoProducto actualizarItem = new ViewModelPedidoProducto(idProducto);
+
+                if (Items.Exists(x => x.IdProducto == idProducto))
+                {
+                    ViewModelPedidoProducto item = Items.Find(x => x.IdProducto == idProducto);
+                    item.Cantidad = cantidad;
+                }
+            }
+        }
+
+        public void EliminarItem(int idProducto)
+        {
+            if (Items.Exists(x => x.IdProducto == idProducto))
+            {
+                var itemEliminar = Items.Single(x => x.IdProducto == idProducto);
+                Items.Remove(itemEliminar);
+            }
+        }
+
+        public float GetTotal()
+        {
+            float total = 0;
+            total = Items.Sum(x => x.Costo);
+            return total;
+        }
+
+        public int GetCountItems()
+        {
+            int total = 0;
+            total = (int)Items.Sum(x => x.Cantidad);
+            return total;
+        }
+
+        public void EliminarCarrito()
+        {
+            Items.Clear();
+        }
     }
 }
