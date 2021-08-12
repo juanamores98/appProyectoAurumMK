@@ -48,20 +48,20 @@ namespace Web.ViewModel
             String mensaje = "";
 
             //Crear un nuevo artículo para agregar al carrito
-            //ViewModelPedidoProducto nuevoItem = new ViewModelPedidoProducto(idproducto);
+            ViewModelPedidoProducto nuevoItem = new ViewModelPedidoProducto(idproducto);
 
             ////Si este artículo ya existe en lista de libros, aumente la cantidad
             ////De lo contrario, agregue el nuevo elemento a la lista.
 
-            //if (nuevoItem != null)
-            //{
-            //    if (Items.Exists(x => ))
-            //    {
+            if (nuevoItem != null)
+            {
+                if (Items.Exists(x => x.))
+                {
 
-            //    }
-            //}
+                }
+            }
             return "";
         }
-    
+
     }
 }
