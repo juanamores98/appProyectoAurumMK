@@ -336,6 +336,8 @@ namespace Infraestructure.Models
 
         [Display(Name = "Cantidad")]
         public Nullable<int> Cantidad { get; set; }
+        [Display(Name = "Cantidad de ventas")]
+        public int CantidadVentas { get; set; }
 
         [Display(Name = "Pedido")]
         public virtual Pedido Pedido { get; set; }

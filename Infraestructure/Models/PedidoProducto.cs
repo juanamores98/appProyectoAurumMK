@@ -19,7 +19,7 @@ namespace Infraestructure.Models
         public int IdPedido { get; set; }
         public int IdProducto { get; set; }
         public Nullable<int> Cantidad { get; set; }
-    
+        public int CantidadVentas { get; set; }
         public virtual Pedido Pedido { get; set; }
         public virtual Producto Producto { get; set; }
     }

@@ -24,6 +24,7 @@ namespace Infraestructure.Repository
                     lista = ctx.PedidoProducto
                         .Include(x => x.Pedido)
                         .Include(x => x.Producto)
+                        .Include(x => x.Cantidad)
                         .ToList<PedidoProducto>();
                 }
                 return lista;
