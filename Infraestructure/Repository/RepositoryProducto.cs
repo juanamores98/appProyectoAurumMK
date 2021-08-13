@@ -149,13 +149,13 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
-        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario=0)
+        public IEnumerable<Producto> GetProductoNonIncludeInventarioID(int idInventario = 0)
         {
             try
             {
                 List<Producto> listaProductosActuales = new List<Producto>();
                 List<Producto> listaProductosNoIncluidos = new List<Producto>();
-                if (idInventario!=0)
+                if (idInventario != 0)
                 {
                     IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
                     foreach (Producto item in GetProductoByEstadoSistemaID(1))
@@ -188,7 +188,8 @@ namespace Infraestructure.Repository
         }
         public void SetNullIdCategoriaProductoInProductoByCategotegoriaID(int idCategoriaProducto)
         {
-            foreach (Producto productoItem in GetProductoByCategoriaProductoID(idCategoriaProducto)) {
+            foreach (Producto productoItem in GetProductoByCategoriaProductoID(idCategoriaProducto))
+            {
                 using (MyContext ctx = new MyContext())
                 {
                     productoItem.IdCategoriaProducto = null;
@@ -200,126 +201,45 @@ namespace Infraestructure.Repository
 
 
         //El metodo save  es usado para insertar , actualizar y desactivar productos
-        public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores,int idEstadoSistema)
+        public Producto Save(Producto producto, string[] seleccionInventarios, string[] seleccionProveedores, string[] seleccionColores, int idEstadoSistema)
         {
             int retorno = 0;//Contabiliza las cantidad de lineas afectadas
             Producto oProducto = null;
             //Si  idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el producto 
-            if (idEstadoSistema != 0)
+            if (!(seleccionInventarios == null && seleccionProveedores == null && seleccionColores == null && idEstadoSistema == 0))
             {
-                using (MyContext ctx = new MyContext())
+                if (idEstadoSistema != 0)
                 {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    oProducto = GetProductoByID((int)producto.IdProducto);
-                    IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
-                    IRepositoryInventario _RepositoryInventario = new RepositoryInventario();
-                    IRepositoryProveedor _RepositoryProveedor = new RepositoryProveedor();
-                    IRepositoryColor _RepositoryColor = new RepositoryColor();
-                    producto.IdEstadoSistema = 1;//Para crear o editar un producto el estado siempre sera 1 (Activo)
-                    if (oProducto == null)//Si es null se crea un producto
+                    using (MyContext ctx = new MyContext())
                     {
+                        ctx.Configuration.LazyLoadingEnabled = false;
+                        oProducto = GetProductoByID((int)producto.IdProducto);
+                        IRepositoryInventarioProducto _RepositoryInventarioProducto = new RepositoryInventarioProducto();
+                        IRepositoryInventario _RepositoryInventario = new RepositoryInventario();
+                        IRepositoryProveedor _RepositoryProveedor = new RepositoryProveedor();
+                        IRepositoryColor _RepositoryColor = new RepositoryColor();
+                        producto.IdEstadoSistema = 1;//Para crear o editar un producto el estado siempre sera 1 (Activo)
+                        if (oProducto == null)//Si es null se crea un producto
+                        {
 
-                        //Insertar inventario con el producto con valores predeterminados
-                        if (seleccionInventarios != null)
-                        {
-                            foreach (var inventario in seleccionInventarios)
-                            {
-                                InventarioProducto oInventarioProducto = new InventarioProducto();
-                                oInventarioProducto.IdInventario = int.Parse(inventario);
-                                oInventarioProducto.IdProducto = producto.IdProducto;
-                                oInventarioProducto.StockMinimo = 1;
-                                oInventarioProducto.Stock = 1;
-                                oInventarioProducto.IdEstadoSistema = 1;
-                                ctx.InventarioProducto.Add(oInventarioProducto);
-                            }
-                        }
-                        //Insertar Producto
-                        ctx.Producto.Add(producto);
-                        retorno = ctx.SaveChanges();
-                        //Actualizar o Insertar Proveedor del producto
-                        var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
-                        if (seleccionProveedores != null)
-                        {
-                            ctx.Entry(producto).Collection(p => p.Proveedor).Load();
-                            var newProveedorForProducto = ctx.Proveedor
-                             .Where(x => seleccionProveedoresID.Contains(x.IdProveedor.ToString())).ToList();
-                            producto.Proveedor = newProveedorForProducto;
-
-                            ctx.Entry(producto).State = EntityState.Modified;
-                            retorno = ctx.SaveChanges();
-                        }
-                        //Actualizar o Insertar Color del producto
-                        var seleccionColoresID = new HashSet<string>(seleccionColores);
-                        if (seleccionColores != null)
-                        {
-                            ctx.Entry(producto).Collection(p => p.Color).Load();
-                            var newColorForProducto = ctx.Color
-                             .Where(x => seleccionColoresID.Contains(x.IdColor.ToString())).ToList();
-                            producto.Color = newColorForProducto;
-
-                            ctx.Entry(producto).State = EntityState.Modified;
-                            retorno = ctx.SaveChanges();
-                        }
-                    }
-                    else
-                    {//Caso contrario de null el se actualiza el producto
-                        //Si la imagen viene en null significa que se va usar la anterior  
-                        if (producto.Imagen==null)
-                        {
-                            producto.Imagen = oProducto.Imagen;//Usamos la imagen de oProducto, del producto existente 
-                        }
-                        //Actualizar producto
-                        ctx.Producto.Add(producto);
-                        ctx.Entry(producto).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
-                        retorno = ctx.SaveChanges();
-                        if (producto.IdEstadoSistema != 0)//Si el estado en el sistema es 0 significa que es una desactivacion del producto por lo que no se actualizan sus tablas relacionadas
-                        {
-                            //Actualizar  e Insertar Inventarios del producto
+                            //Insertar inventario con el producto con valores predeterminados
                             if (seleccionInventarios != null)
                             {
-                                ctx.Entry(producto).Collection(p => p.InventarioProducto).Load();
-                                IEnumerable<InventarioProducto> inventariosActuales = _RepositoryInventarioProducto.GetInventarioProductoByProductoID(producto.IdProducto);
-                                List<InventarioProducto> inventariosConservados = new List<InventarioProducto>();
-                                //Agregamos en la lista los inventarios quye se van a conservar
-                                foreach (var item in inventariosActuales)
+                                foreach (var inventario in seleccionInventarios)
                                 {
-                                    if (seleccionInventarios.Contains(item.IdInventario.ToString()))
-                                    {
-                                        InventarioProducto oInventarioProducto = new InventarioProducto();
-                                        oInventarioProducto.IdInventario = item.IdInventario;
-                                        oInventarioProducto.IdProducto = item.IdProducto;
-                                        oInventarioProducto.StockMinimo = item.StockMinimo;
-                                        oInventarioProducto.Stock = item.Stock;
-                                        oInventarioProducto.Estante = item.Estante;
-                                        oInventarioProducto.IdEstadoSistema = 1;
-                                        inventariosConservados.Add(oInventarioProducto);
-                                    }
+                                    InventarioProducto oInventarioProducto = new InventarioProducto();
+                                    oInventarioProducto.IdInventario = int.Parse(inventario);
+                                    oInventarioProducto.IdProducto = producto.IdProducto;
+                                    oInventarioProducto.StockMinimo = 1;
+                                    oInventarioProducto.Stock = 1;
+                                    oInventarioProducto.IdEstadoSistema = 1;
+                                    ctx.InventarioProducto.Add(oInventarioProducto);
                                 }
-                                //Limpiamos en la BD todos los inventarios del producto
-                                producto.InventarioProducto.Clear();
-
-                                //Agregamos en la lista de conservados los inventarios nuevos del producto
-                                for (int i = 0; i < seleccionInventarios.Count(); i++)
-                                {
-                                    if (inventariosConservados.FirstOrDefault(x => x.IdInventario == int.Parse(seleccionInventarios[i])) == null)
-                                    {
-                                        InventarioProducto oInventarioProducto = new InventarioProducto();
-                                        oInventarioProducto.IdInventario = int.Parse(seleccionInventarios[i]);
-                                        oInventarioProducto.IdProducto = producto.IdProducto;
-                                        oInventarioProducto.StockMinimo = 1;
-                                        oInventarioProducto.Stock = 1;
-                                        oInventarioProducto.IdEstadoSistema = 1;
-                                        inventariosConservados.Add(oInventarioProducto);
-                                    }
-                                }
-
-                                //Agregamos los inventarios conservados y nuevos al producto
-                                producto.InventarioProducto = inventariosConservados;
-                                ctx.Entry(producto).State = EntityState.Modified;
-                                retorno = ctx.SaveChanges();
-
                             }
-                            //Actualizar e Insertar Proveedor del producto
+                            //Insertar Producto
+                            ctx.Producto.Add(producto);
+                            retorno = ctx.SaveChanges();
+                            //Actualizar o Insertar Proveedor del producto
                             var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
                             if (seleccionProveedores != null)
                             {
@@ -331,7 +251,7 @@ namespace Infraestructure.Repository
                                 ctx.Entry(producto).State = EntityState.Modified;
                                 retorno = ctx.SaveChanges();
                             }
-                            //Actualizar e Insertar Color del producto
+                            //Actualizar o Insertar Color del producto
                             var seleccionColoresID = new HashSet<string>(seleccionColores);
                             if (seleccionColores != null)
                             {
@@ -344,22 +264,114 @@ namespace Infraestructure.Repository
                                 retorno = ctx.SaveChanges();
                             }
                         }
+                        else
+                        {//Caso contrario de null el se actualiza el producto
+                         //Si la imagen viene en null significa que se va usar la anterior  
+                            if (producto.Imagen == null)
+                            {
+                                producto.Imagen = oProducto.Imagen;//Usamos la imagen de oProducto, del producto existente 
+                            }
+                            //Actualizar producto
+                            ctx.Producto.Add(producto);
+                            ctx.Entry(producto).State = EntityState.Modified;//El Add anterior sirve para los dos funciones, insertar o actualizar si se usa el entitystate en modified
+                            retorno = ctx.SaveChanges();
+                            if (producto.IdEstadoSistema != 0)//Si el estado en el sistema es 0 significa que es una desactivacion del producto por lo que no se actualizan sus tablas relacionadas
+                            {
+                                //Actualizar  e Insertar Inventarios del producto
+                                if (seleccionInventarios != null)
+                                {
+                                    ctx.Entry(producto).Collection(p => p.InventarioProducto).Load();
+                                    IEnumerable<InventarioProducto> inventariosActuales = _RepositoryInventarioProducto.GetInventarioProductoByProductoID(producto.IdProducto);
+                                    List<InventarioProducto> inventariosConservados = new List<InventarioProducto>();
+                                    //Agregamos en la lista los inventarios quye se van a conservar
+                                    foreach (var item in inventariosActuales)
+                                    {
+                                        if (seleccionInventarios.Contains(item.IdInventario.ToString()))
+                                        {
+                                            InventarioProducto oInventarioProducto = new InventarioProducto();
+                                            oInventarioProducto.IdInventario = item.IdInventario;
+                                            oInventarioProducto.IdProducto = item.IdProducto;
+                                            oInventarioProducto.StockMinimo = item.StockMinimo;
+                                            oInventarioProducto.Stock = item.Stock;
+                                            oInventarioProducto.Estante = item.Estante;
+                                            oInventarioProducto.IdEstadoSistema = 1;
+                                            inventariosConservados.Add(oInventarioProducto);
+                                        }
+                                    }
+                                    //Limpiamos en la BD todos los inventarios del producto
+                                    producto.InventarioProducto.Clear();
 
+                                    //Agregamos en la lista de conservados los inventarios nuevos del producto
+                                    for (int i = 0; i < seleccionInventarios.Count(); i++)
+                                    {
+                                        if (inventariosConservados.FirstOrDefault(x => x.IdInventario == int.Parse(seleccionInventarios[i])) == null)
+                                        {
+                                            InventarioProducto oInventarioProducto = new InventarioProducto();
+                                            oInventarioProducto.IdInventario = int.Parse(seleccionInventarios[i]);
+                                            oInventarioProducto.IdProducto = producto.IdProducto;
+                                            oInventarioProducto.StockMinimo = 1;
+                                            oInventarioProducto.Stock = 1;
+                                            oInventarioProducto.IdEstadoSistema = 1;
+                                            inventariosConservados.Add(oInventarioProducto);
+                                        }
+                                    }
+
+                                    //Agregamos los inventarios conservados y nuevos al producto
+                                    producto.InventarioProducto = inventariosConservados;
+                                    ctx.Entry(producto).State = EntityState.Modified;
+                                    retorno = ctx.SaveChanges();
+
+                                }
+                                //Actualizar e Insertar Proveedor del producto
+                                var seleccionProveedoresID = new HashSet<string>(seleccionProveedores);
+                                if (seleccionProveedores != null)
+                                {
+                                    ctx.Entry(producto).Collection(p => p.Proveedor).Load();
+                                    var newProveedorForProducto = ctx.Proveedor
+                                     .Where(x => seleccionProveedoresID.Contains(x.IdProveedor.ToString())).ToList();
+                                    producto.Proveedor = newProveedorForProducto;
+
+                                    ctx.Entry(producto).State = EntityState.Modified;
+                                    retorno = ctx.SaveChanges();
+                                }
+                                //Actualizar e Insertar Color del producto
+                                var seleccionColoresID = new HashSet<string>(seleccionColores);
+                                if (seleccionColores != null)
+                                {
+                                    ctx.Entry(producto).Collection(p => p.Color).Load();
+                                    var newColorForProducto = ctx.Color
+                                     .Where(x => seleccionColoresID.Contains(x.IdColor.ToString())).ToList();
+                                    producto.Color = newColorForProducto;
+
+                                    ctx.Entry(producto).State = EntityState.Modified;
+                                    retorno = ctx.SaveChanges();
+                                }
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    //Si idEstadoSistema corresponde a  0, se asigna al idEstadoSistema del producto y se actualiza en la BD
+                    using (MyContext ctx = new MyContext())// se usa una instancia nueva del context para esta desactivacion
+                    {
+                        ctx.Configuration.LazyLoadingEnabled = false;
+                        producto = ctx.Producto.Find(producto.IdProducto);
+                        producto.IdEstadoSistema = idEstadoSistema;
+                        ctx.SaveChanges();
                     }
                 }
             }
             else
             {
-                //Si idEstadoSistema corresponde a  0, se asigna al idEstadoSistema del producto y se actualiza en la BD
-                using (MyContext ctx = new MyContext())// se usa una instancia nueva del context para esta desactivacion
+                using (MyContext ctx = new MyContext())
                 {
-                    ctx.Configuration.LazyLoadingEnabled = false;
-                    producto = ctx.Producto.Find(producto.IdProducto);
-                    producto.IdEstadoSistema = idEstadoSistema;
-                    ctx.SaveChanges();
+                    //Insertar Producto
+                    ctx.Producto.Add(producto);
+                    retorno = ctx.SaveChanges();
                 }
             }
-
             if (retorno >= 0)
                 oProducto = GetProductoByID((int)producto.IdProducto);
 

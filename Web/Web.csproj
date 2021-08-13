@@ -284,6 +284,9 @@
     <Content Include="Resources\color-filler.png" />
     <Content Include="Resources\fill_bucket.png" />
     <Content Include="Resources\paint_palette.png" />
+    <Content Include="Resources\pulsera_diseño1.jpg" />
+    <Content Include="Resources\pulsera_diseño2.png" />
+    <Content Include="Resources\pulsera_diseño3.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />

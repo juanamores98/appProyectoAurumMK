@@ -14,13 +14,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <canvas id="myCanvas" style="width: 400px; height: 400px"></canvas>
+                            <canvas id="myCanvas" style="width: 600px; height: 450px"></canvas>
                         </div>
                         <div class="col">
                             <h2>
                                 Escoge varios colores para tu pulsera
                             </h2>
-                            <input id="color-picker" name='color' />
+                                <input id="color-picker" name='color' style="position: initial !important" />
                             <hr />
                             <button class="btn boton-estilo" id="paintbucket-plugin">
                                 <img src="~/Resources/fill_bucket.png" width="20" /> Colorear
@@ -29,9 +29,15 @@
                         </div>
                     </div>
                     <hr />
-                    <button class="btn boton-estilo" style="float:right">
-                        <h3>Solicitar Pulsera </h3>
-                    </button>
+                    @using (Html.BeginForm("ProductoRequest", "Producto", FormMethod.Post, new
+                    {
+                        enctype = "multipart/form-data",
+                        id = "myForm",
+                        onsubmit = "event.preventDefault(),formConfirm()"
+                    }))
+                    {@Html.AntiForgeryToken()
+                            <input type="submit" value="Solicitar Pulsera" class="btn boton-estilo" style="float:right;font-size:20px;" />
+                    }
                 </div>
             </div>
         </div>
@@ -40,15 +46,72 @@
         </div>
     </div>
 </div>
+<div id="parte">
+
+</div>
+@*<input type="file" name="ImageFile" style="display:none" />*@
 @section Scripts {
     <script>
+        
+        var form = document.getElementById('myForm');
+        form.onsubmit = function () {
+            //Obtener canvas y convertir en direccion / url
+            var canvas = document.getElementById("myCanvas");
+            var dataURL = canvas.toDataURL("image/png"); //img
+
+            //Convertir imagen canvas en archivo / file
+            var blobBin = atob(dataURL.split(',')[1]);
+            var array = [];
+            for (var i = 0; i < blobBin.length; i++) {
+                array.push(blobBin.charCodeAt(i));
+            }
+            var sub = dataURL.split(',')[1];
+            var ImagenFile = new Blob([new Uint8Array(array)], { type: 'image/png' });
+
+            //Preparar form 
+            var formData = new FormData(form);
+            formData.append('ImagenFile', sub);
+            var xhr = new XMLHttpRequest();
+
+            sweetConfirm();
+            // Enviar Form y eventos
+            xhr.open('POST', form.getAttribute('action'), true);
+            xhr.send(formData);
+
+
+            return false;
+        }
+
+        
+        
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de realizar la solicitud?",
+                    customName: "swal-modal-request-product",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    },
+                }).then(val => {
+                    if (val) {
+                        //document.forms['myForm'].submit();
+                        return val;
+                    }
+                });
+            }
+        }
+
         // Create a variable for the canvas and it's context
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
         // Initialise an image object
         var image = new Image();
-        image.src = "../Resources/color-filler.png"// Load an image
+        image.src = "../Resources/pulsera_diseño3.png"// Load an image
 
         // When it loads an image
         image.onload = function () {

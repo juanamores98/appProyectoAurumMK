@@ -200,6 +200,44 @@ namespace Web.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+        // POST: Producto/ProductoRequest/5
+        [HttpPost]
+        public ActionResult ProductoRequest(string ImagenFile)
+        {
+            MemoryStream target = new MemoryStream();
+            IServiceProducto _ServiceProducto = new ServiceProducto();
+            try
+            {
+                //Creacion de propuesta
+                Producto producto = new Producto();
+                producto.Nombre = "Propuesta Producto - "+DateTime.Now;
+                producto.CostoU = 4500;
+                producto.IdCategoriaProducto=1;
+                producto.IdEstadoSistema = 0;
+                producto.Imagen = Convert.FromBase64String(ImagenFile);
+
+                //Guardado de producto propuesta
+                Producto oProducto = _ServiceProducto.Save(producto, null, null, null, 0);
+
+
+                //SweetAlert
+                TempData["AlertMessageTitle"] = "Operacion Exitosa";
+                TempData["AlertMessageBody"] = "-";
+                TempData["AlertMessageType"] = "success";
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Producto";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
 
         // GET: Producto/Deactivate/5
         [CustomAuthorize((int)Roles.Administrador)]
