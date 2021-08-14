@@ -98,12 +98,14 @@ namespace Web.Controllers
         }
 
         // GET: Producto/CreateByUser/5
+        
         public ActionResult CreateByUser()
         {
             return View();
         }
 
         // GET: Producto/Edit/5
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceProducto _ServiceProducto = new ServiceProducto();
@@ -204,7 +206,6 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult ProductoRequest(string ImagenFile)
         {
-            MemoryStream target = new MemoryStream();
             IServiceProducto _ServiceProducto = new ServiceProducto();
             try
             {
@@ -220,12 +221,12 @@ namespace Web.Controllers
                 Producto oProducto = _ServiceProducto.Save(producto, null, null, null, 0);
 
 
-                //SweetAlert
+                ////SweetAlert
                 TempData["AlertMessageTitle"] = "Operacion Exitosa";
                 TempData["AlertMessageBody"] = "-";
                 TempData["AlertMessageType"] = "success";
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch (Exception ex)
             {

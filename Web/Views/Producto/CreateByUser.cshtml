@@ -15,17 +15,21 @@
                     <div class="row">
                         <div class="col">
                             <canvas id="myCanvas" style="width: 600px; height: 450px"></canvas>
+                            <p>
+                                Todas las propuestas serán tomadas en consideración por la tienda, el costo de la pulsera será ₡4500 al momento de ser aceptada!
+                            </p>
                         </div>
+                        
                         <div class="col">
-                            <h2>
+                            <h3>
                                 Escoge varios colores para tu pulsera
-                            </h2>
-                                <input id="color-picker" name='color' style="position: initial !important" />
+                            </h3>
+                            <input id="color-picker" name='color' />
                             <hr />
                             <button class="btn boton-estilo" id="paintbucket-plugin">
                                 <img src="~/Resources/fill_bucket.png" width="20" /> Colorear
                             </button>
-
+                            <p style="font-size:10px; color:red">*Hacer doble click</p>
                         </div>
                     </div>
                     <hr />
@@ -36,8 +40,9 @@
                         onsubmit = "event.preventDefault(),formConfirm()"
                     }))
                     {@Html.AntiForgeryToken()
-                            <input type="submit" value="Solicitar Pulsera" class="btn boton-estilo" style="float:right;font-size:20px;" />
-                    }
+                    <input type="text" id="imgCode" name="ImagenFile" value="" style="display:none" />
+                    <input type="submit" value="Solicitar Pulsera" class="btn boton-estilo" style="float:right;font-size:20px;" />
+                }
                 </div>
             </div>
         </div>
@@ -52,58 +57,62 @@
 @*<input type="file" name="ImageFile" style="display:none" />*@
 @section Scripts {
     <script>
-        
-        var form = document.getElementById('myForm');
-        form.onsubmit = function () {
-            //Obtener canvas y convertir en direccion / url
+        function formConfirm() {
+            
             var canvas = document.getElementById("myCanvas");
             var dataURL = canvas.toDataURL("image/png"); //img
-
-            //Convertir imagen canvas en archivo / file
-            var blobBin = atob(dataURL.split(',')[1]);
-            var array = [];
-            for (var i = 0; i < blobBin.length; i++) {
-                array.push(blobBin.charCodeAt(i));
-            }
-            var sub = dataURL.split(',')[1];
-            var ImagenFile = new Blob([new Uint8Array(array)], { type: 'image/png' });
-
-            //Preparar form 
-            var formData = new FormData(form);
-            formData.append('ImagenFile', sub);
-            var xhr = new XMLHttpRequest();
-
-            sweetConfirm();
-            // Enviar Form y eventos
-            xhr.open('POST', form.getAttribute('action'), true);
-            xhr.send(formData);
-
-
-            return false;
+            var base64URL = dataURL.split(',')[1];
+            document.getElementById("imgCode").value = base64URL;
+            document.forms['myForm'].submit();
         }
+
+        //var form = document.getElementById('myFormRequest');
+        //form.onsubmit = function () {
+        //    //Obtener canvas y convertir en direccion / url
+        //    var canvas = document.getElementById("myCanvas");
+        //    var dataURL = canvas.toDataURL("image/png"); //img
+
+        //    //Convertir imagen canvas en archivo / file
+        //    var blobBin = atob(dataURL.split(',')[1]);
+        //    var array = [];
+        //    for (var i = 0; i < blobBin.length; i++) {
+        //        array.push(blobBin.charCodeAt(i));
+        //    }
+        //    var sub = dataURL.split(',')[1];
+        //    var ImagenFile = new Blob([new Uint8Array(array)], { type: 'image/png' });
+
+        //    //Preparar form 
+        //    var formData = new FormData(form);
+        //    formData.append('ImagenFile', sub);
+        //    var xhr = new XMLHttpRequest();
+
+        //    //sweetConfirm();
+        //    // Enviar Form y eventos
+        //    xhr.open('POST', form.getAttribute('action'), true);
+        //    xhr.send(formData);
+        //}
 
         
         
-        function sweetConfirm() {
-            if ($("#myForm").valid()) {
-                swal({
-                    title: "¿Está seguro de realizar la solicitud?",
-                    customName: "swal-modal-request-product",
-                    buttons: {
-                        cancel: "Cancelar",
-                        confirm: {
-                            text: "Aceptar",
-                            className: "boton-estilo"
-                        }
-                    },
-                }).then(val => {
-                    if (val) {
-                        //document.forms['myForm'].submit();
-                        return val;
-                    }
-                });
-            }
-        }
+        //function sweetConfirm() {
+        //    if ($("#myForm").valid()) {
+        //        swal({
+        //            title: "¿Está seguro de realizar la solicitud?",
+        //            buttons: {
+        //                cancel: "Cancelar",
+        //                confirm: {
+        //                    text: "Aceptar",
+        //                    className: "boton-estilo"
+        //                }
+        //            },
+        //        }).then(val => {
+        //            if (val) {
+        //                //document.forms['myForm'].submit();
+        //                return val;
+        //            }
+        //        });
+        //    }
+        //}
 
         // Create a variable for the canvas and it's context
         var canvas = document.getElementById("myCanvas");
@@ -111,7 +120,7 @@
 
         // Initialise an image object
         var image = new Image();
-        image.src = "../Resources/pulsera_diseño3.png"// Load an image
+        image.src = "../Resources/pulsera_diseño4.png"// Load an image
 
         // When it loads an image
         image.onload = function () {

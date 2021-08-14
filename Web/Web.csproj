@@ -287,6 +287,7 @@
     <Content Include="Resources\pulsera_diseño1.jpg" />
     <Content Include="Resources\pulsera_diseño2.png" />
     <Content Include="Resources\pulsera_diseño3.png" />
+    <Content Include="Resources\pulsera_diseño4.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -565,6 +566,7 @@
     <Content Include="Views\Usuario\Deactivate.cshtml" />
     <Content Include="Views\Catalogo\Index.cshtml" />
     <Content Include="Views\Producto\CreateByUser.cshtml" />
+    <Content Include="Views\Shared\_MenuCatalogo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
