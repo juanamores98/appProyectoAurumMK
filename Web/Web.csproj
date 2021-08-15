@@ -567,6 +567,7 @@
     <Content Include="Views\Catalogo\Index.cshtml" />
     <Content Include="Views\Producto\CreateByUser.cshtml" />
     <Content Include="Views\Shared\_MenuCatalogo.cshtml" />
+    <Content Include="Views\Reports\ReporteVentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
