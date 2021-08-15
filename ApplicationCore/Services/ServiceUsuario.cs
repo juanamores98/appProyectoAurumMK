@@ -15,6 +15,7 @@ namespace ApplicationCore.Services
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             Usuario oUsuario = repository.GetUsuarioByID(id);
+            if (oUsuario != null) 
             oUsuario.Contra = Cryptography.DecrypthAES(oUsuario.Contra);
             return oUsuario;
         }

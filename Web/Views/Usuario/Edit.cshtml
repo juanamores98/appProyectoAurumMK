@@ -16,7 +16,7 @@
                     <h5 class="text-primary m-0 fw-bold">Usuario</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Save", "Proveedor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Save", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data", id= "myForm", onsubmit = "event.preventDefault(),sweetConfirm()" }))
                     {
         @Html.AntiForgeryToken()
                         <div class="form-horizontal">
@@ -112,4 +112,25 @@
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function sweetConfirm() {
+            if ($("#myForm").valid()) {
+                swal({
+                    title: "¿Está seguro de editar este producto?",
+                    buttons: {
+                        cancel: "Cancelar",
+                        confirm: {
+                            text: "Aceptar",
+                            className: "boton-estilo"
+                        }
+                    }
+                }).then(val => {
+                    if (val) {
+                        document.forms['myForm'].submit();
+                    }
+                });
+            }
+        }
+    </script>
 }
