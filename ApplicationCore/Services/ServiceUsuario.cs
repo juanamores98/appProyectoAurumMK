@@ -38,8 +38,8 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
 
             //Encriptar la contraseña para poder compararlo
-            //string crytpPasswd = Cryptography.DecrypthAES(password);
-            return repository.GetUsuario(email, password);
+            string crytpPasswd = Cryptography.EncrypthAES(password);
+            return repository.GetUsuario(email, crytpPasswd);
         }
 
         public IEnumerable<Usuario> GetAllUsers()
