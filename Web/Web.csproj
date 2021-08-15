@@ -279,6 +279,15 @@
     <None Include="Resources\UnAuthorized.png" />
     <None Include="Resources\star.png" />
     <Content Include="obj\Debug\Web.csproj.FileListAbsolute.txt" />
+    <Content Include="Resources\basic_shapes.jpg" />
+    <Content Include="Resources\cat.jpeg" />
+    <Content Include="Resources\color-filler.png" />
+    <Content Include="Resources\fill_bucket.png" />
+    <Content Include="Resources\paint_palette.png" />
+    <Content Include="Resources\pulsera_diseño1.jpg" />
+    <Content Include="Resources\pulsera_diseño2.png" />
+    <Content Include="Resources\pulsera_diseño3.png" />
+    <Content Include="Resources\pulsera_diseño4.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -395,6 +404,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\paintbucket.min.js" />
     <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -555,7 +565,8 @@
     <Content Include="Views\Usuario\Activate.cshtml" />
     <Content Include="Views\Usuario\Deactivate.cshtml" />
     <Content Include="Views\Catalogo\Index.cshtml" />
-    <Content Include="Views\Reports\ReporteVentas.cshtml" />
+    <Content Include="Views\Producto\CreateByUser.cshtml" />
+    <Content Include="Views\Shared\_MenuCatalogo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -78,6 +78,8 @@
                         <div class="dropdown-divider"></div>
                         @Html.ActionLink("Calificaciones y Comentarios", "Create", "CalificacionUsuario", null, new { @class = "dropdown-item" })
                         <div class="dropdown-divider"></div>
+                        @Html.ActionLink("Solicitar pulsera perzonalizada", "CreateByUser", "Producto", null, new { @class = "dropdown-item" })
+                        <div class="dropdown-divider"></div>
 
                         @if (Session["User"] != null)
                         {
