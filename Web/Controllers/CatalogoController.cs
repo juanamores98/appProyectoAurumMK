@@ -18,7 +18,7 @@ namespace Web.Controllers
             try
             {
                 IServiceProducto _ServiceProducto = new ServiceProducto();
-                lista = _ServiceProducto.GetProducto();
+                lista = _ServiceProducto.GetProductoByEstadoSistemaID(1);
                 ViewBag.listaProductos = lista;
                 return View(lista);
             }
