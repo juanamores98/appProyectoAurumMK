@@ -40,11 +40,17 @@ namespace Web.Util
 
         return lista;
 
-    }
+        }
         //COMENTARIOS 
         //Comando para inicializar los identities en una tabla SQLServer: DBCC CHECKIDENT('Color',RESEED,1)
         //using System.ComponentModel.DataAnnotations;
         // , id = "myForm", onsubmit = "event.preventDefault(),sweetConfirm()"
         //[MetadataType(typeof(CalificacionUsuarioMetadata))]
+
+
+        //Cadena de conecxión sólo para Alfredo
+        //<connectionStrings>
+        //    <add name = "AuronMkEntities" connectionString="metadata=res:///Models.MyModel_AurumMK.csdl|res:///Models.MyModel_AurumMK.ssdl|res://*/Models.MyModel_AurumMK.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=DESKTOP-VO65JJE\ALFREDOSQL;initial catalog=AuronMk;user id=sa;password=.;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+        //</connectionStrings>
     }
 }
