@@ -50,37 +50,37 @@
 
                                     @foreach (var item in Model)
                                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IdColor)
-                            </td>
-                            <td style="text-align: center;">
-                                @Html.DisplayFor(modelItem => item.Descripcion)
-                            </td>
-                            <td style="text-align: center;">
-                                @Html.DisplayFor(modelItem => item.Codigo)
-                            </td>
-                            <td style="text-align: center;">
-                                <input style="border:0;" type="color" value="@item.Codigo" disabled="disabled" />
-                            </td>
-                            <td style="text-align: center;">
-                                @if (item.IdEstadoSistema == 1)
-                                {
-                <label>Activo</label> }
-            else
-            {
-<label>Inactivo</label>}
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdColor)
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @Html.DisplayFor(modelItem => item.Descripcion)
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @Html.DisplayFor(modelItem => item.Codigo)
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <input style="border:0;" type="color" value="@item.Codigo" disabled="disabled" />
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @if (item.IdEstadoSistema == 1)
+                                                {
+                                                    <label>Activo</label> }
+                                                else
+                                                {
+                                                    <label>Inactivo</label>}
 
-                            </td>
-                            <td>
-                                @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
-                                <form action="/Color/Deactivate" id="myForm" method="post" onsubmit="event.preventDefault(),sweetConfirm()" style="display:inline-block">
-                                    <input type="text" name="id" value="@item.IdColor" style="display: none">
-                                    <input type="submit" value="Desactivar" class="btn boton-estilo" style="width:100px">
-                                </form>
-                            </td>
-                        </tr>
-}
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.IdColor }, new { @class = "btn  boton-estilo" }) |
+                                                <form action="/Color/Deactivate" id="myForm" method="post" onsubmit="event.preventDefault(),sweetConfirm()" style="display:inline-block">
+                                                    <input type="text" name="id" value="@item.IdColor" style="display: none">
+                                                    <input type="submit" value="Desactivar" class="btn boton-estilo" style="width:100px">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
 
                                 </table>
                             </div>
