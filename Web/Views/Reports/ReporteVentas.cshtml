@@ -1,2 +1,147 @@
-﻿
+﻿@model IEnumerable<Infraestructure.Models.PedidoProducto>
 
+@{ ViewBag.Title = "Mantenimiento Producto"; }
+<div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+    <div class="col-lg-3" style="background: #1d2554;">
+        @Html.Partial("_MenuReporte")
+    </div>
+    <div class="col-xl-9">
+        <div class="container">
+            <hr>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4" style="height:400px;">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Información</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <dl class="dl-horizontal">
+                                @if (ViewBag.Vendido1 != null)
+                                {
+                                    <dt>
+                                        @Html.DisplayName("ID")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("" + ((Infraestructure.Models.Producto)ViewBag.Vendido1).IdProducto)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Nombre")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("" + ((Infraestructure.Models.Producto)ViewBag.Vendido1).Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Costo")
+                                    </dt>
+
+                                    <dd>
+                                        ¢@Html.Display("" + ((Infraestructure.Models.Producto)ViewBag.Vendido1).CostoU)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Estado sistema")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("" + ((Infraestructure.Models.Producto)ViewBag.Vendido1).EstadoSistema)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayName("Categoria producto")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("" + ((Infraestructure.Models.Producto)ViewBag.Vendido1).CategoriaProducto)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Ventas Hechas")
+                                    </dt>
+
+                                    <dd>
+                                        @(Model.Where(x => x.IdProducto == ((Infraestructure.Models.Producto)ViewBag.Vendido1).IdProducto).Count())
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayName("Cantidad vendida")
+                                    </dt>
+
+                                    <dd>
+                                        @Html.Display("" + ((int)ViewBag.cantidad1))
+                                    </dd>
+                                }
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card shadow mb-4" style="height:400px;">
+                        <div class="card-header py-3">
+                            <h5 class="text-primary m-0 fw-bold">Información</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="dl-horizontal">
+                                @*<dt>
+                                        @Html.DisplayNameFor(model => model.IdProducto)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.IdProducto)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Nombre)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Nombre)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.CostoU)
+                                    </dt>
+
+                                    <dd>
+                                        ¢@Html.DisplayFor(model => model.CostoU)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.EstadoSistema)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EstadoSistema.Descripcion)
+                                    </dd>
+
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.CategoriaProducto)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.CategoriaProducto.Descripcion)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(VentasHechas)
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(VentasHechas)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(CantidadVendida)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(CantidadVendida)
+                                    </dd>*@
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

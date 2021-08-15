@@ -131,7 +131,7 @@ namespace Web.Controllers
 
       
         [HttpPost]
-        [ValidateAntiForgeryToken]
+
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int idUsuario)
         {

@@ -87,7 +87,11 @@ namespace web.Controllers
         {
             IEnumerable<PedidoProducto> lista = null;
             List<PedidoProducto> listaDiferentes = new List<PedidoProducto>();
+            ViewBag.Vendido1 = null;
+            ViewBag.Vendido1 = null;
+            ViewBag.Vendido1 = null;
 
+            ViewBag.cantidad1 = null;
             try
             {
                 //Primero creo la instancia del service
@@ -98,17 +102,20 @@ namespace web.Controllers
 
                 //Logica para sacar los datos que sean diferentes
                 //primero estoy metiendo en una lista todo lo que encuentre diferente (los id producto)
-                listaDiferentes.Add(lista.ElementAt(0));
-                listaDiferentes.ElementAt(0).Cantidad = 0;
-
-                for (int i = 0; i < lista.Count(); i++) {
-                    if ( listaDiferentes.Contains(lista.ElementAt(i)))
+                if (lista.Count() > 0)
+                {
+                    listaDiferentes.Add(lista.ElementAt(0));
+                    listaDiferentes.ElementAt(0).Cantidad = 0;
+                
+                for (int i = 0; i < lista.Count(); i++)
+                {
+                    if (listaDiferentes.Contains(lista.ElementAt(i)))
                     {
                     }
                     else
                     {
                         listaDiferentes.Add(lista.ElementAt(i));
-                        listaDiferentes.ElementAt(i).Cantidad=0;
+                        listaDiferentes.ElementAt(i).Cantidad = 0;
                     }
                 }
                 //luego de sacar lo diferente, tengo que contar la cantidad de veces que aparecen en la lista
@@ -137,15 +144,18 @@ namespace web.Controllers
                 listaDiferentes.OrderByDescending(PedidoProducto => PedidoProducto.CantidadVentas).ToList();
                 //Crear los viewbags, recordar que son 6, tres para el objeto y 3 para las cantidades vendidas
                 ViewBag.Vendido1 = _ServiceProducto.GetProductoByID(listaDiferentes.ElementAt(0).IdProducto);
-                ViewBag.Vendido1 = _ServiceProducto.GetProductoByID(listaDiferentes.ElementAt(1).IdProducto);
-                ViewBag.Vendido1 = _ServiceProducto.GetProductoByID(listaDiferentes.ElementAt(2).IdProducto);
+                ViewBag.Vendido2 = _ServiceProducto.GetProductoByID(listaDiferentes.ElementAt(1).IdProducto);
+                ViewBag.Vendido3 = _ServiceProducto.GetProductoByID(listaDiferentes.ElementAt(2).IdProducto);
                 //cantidad vendida
                 ViewBag.cantidad1 = listaDiferentes.ElementAt(0).Cantidad;
-                ViewBag.cantidad1 = listaDiferentes.ElementAt(1).Cantidad;
-                ViewBag.cantidad1 = listaDiferentes.ElementAt(2).Cantidad;
+                ViewBag.cantidad2 = listaDiferentes.ElementAt(1).Cantidad;
+                ViewBag.cantidad3 = listaDiferentes.ElementAt(2).Cantidad;
+            }
                 //retornar la lista para hacer el count
+                
                 return View(lista);
             }
+
             catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());

@@ -43,6 +43,7 @@ namespace ApplicationCore.Utils
         //Desencripta
         static public string DecrypthAES(string pCadena)
         {
+            
             byte[] cipherBytes = Convert.FromBase64String(pCadena);
             using (Aes encryptor = Aes.Create())
             {

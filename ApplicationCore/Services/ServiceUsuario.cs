@@ -23,6 +23,8 @@ namespace ApplicationCore.Services
         public Usuario Save(Usuario usuario)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
+            Usuario oUsuario = repository.GetUsuarioByID(usuario.IdUsuario);
+            if (oUsuario == null) 
             usuario.Contra = Cryptography.EncrypthAES(usuario.Contra);
             return repository.Save(usuario);
         }
@@ -39,8 +41,8 @@ namespace ApplicationCore.Services
             IRepositoryUsuario repository = new RepositoryUsuario();
 
             //Encriptar la contraseña para poder compararlo
-            //string crytpPasswd = Cryptography.DecrypthAES(password);
-            return repository.GetUsuario(email, password);
+            string crytpPasswd = Cryptography.EncrypthAES(password);
+            return repository.GetUsuario(email, crytpPasswd);
         }
 
         public IEnumerable<Usuario> GetAllUsers()
