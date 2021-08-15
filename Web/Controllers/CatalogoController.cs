@@ -19,7 +19,7 @@ namespace Web.Controllers
             {
                 IServiceProducto _ServiceProducto = new ServiceProducto();
                 lista = _ServiceProducto.GetProductoByEstadoSistemaID(1);
-                ViewBag.title = "Lista Productos";
+                ViewBag.listaProductos = lista;
                 return View(lista);
             }
             catch (Exception ex)

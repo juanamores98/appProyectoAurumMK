@@ -17,6 +17,7 @@ namespace Web
                         "~/Scripts/bootstrap-input-spinner.js",
                         "~/Scripts/custom-editors.js",
                         "~/Scripts/jquery.validate*",
+                        "~/Scripts/paintbucket.min.js",
                         "~/Scripts/jquery-ui.js",
                         "~/Scripts/jquery-3.6.0.slim.min.js",
                         "~/Scripts/bootstrap-datetimepicker.min.js",
