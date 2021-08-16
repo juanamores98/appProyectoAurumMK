@@ -11,11 +11,10 @@
     <div class="col-xl-9">
         <div class="row" style="margin: 10px -12px 0px -12px;">
             <div class="col-lg-12">
-
                 <h2>Listado de Pulseras</h2>
                 <div class="row">
                     <div class="col-lg-3">
-                        <h1 class="my-4">Producto</h1>
+                        <h1 class="my-4">Pulsera</h1>
                         <div class="list-group">
                             @foreach (var producto in (List<Infraestructure.Models.Producto>)ViewBag.listaProductos)
                             {
@@ -53,7 +52,7 @@
                                             <p class="card-text">   @Html.DisplayNameFor(model => model.CostoU):  @Html.DisplayFor(modelItem => item.CostoU)</p>
                                             <div class="card-body">
                                                 @Ajax.ActionLink("Ordenar",//Texto para el usuario
-                                                       "ordenarProducto",//Acción a llamar
+                                                       "ordenarPulsera",//Acción a llamar
                                                        "Orden",
                                                        new
                                                        {
@@ -61,7 +60,7 @@
                                                        },//Parámetros a enviar
                                                        new AjaxOptions
                                                        {
-                                                           UpdateTargetId = "cantidadProductos",
+                                                           UpdateTargetId = "cantidadPulseras",
                                                            InsertionMode = InsertionMode.Replace,
                                                            HttpMethod = "GET",
                                                        }, new { @class = "btn btn-primary" }

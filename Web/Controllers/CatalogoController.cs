@@ -6,12 +6,14 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
     public class CatalogoController : Controller
     {
         // GET: Catalogo
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Cliente)]
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
@@ -30,6 +32,37 @@ namespace Web.Controllers
                 //Redirección a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+        }
+
+        public PartialViewResult pulserasxNombre(int? id)
+        {
+            IEnumerable<Producto> lista = null;
+            IServiceProducto _ServiceProducto = new ServiceProducto();
+
+            if (id != null)
+            {
+                lista = (IEnumerable<Producto>)_ServiceProducto.GetProductoByID((int)id);
+            }
+            return PartialView("_PartialViewProducto", lista);
+        }
+
+        public ActionResult buscarPulseraxNombre(string filtro)
+        {
+            IEnumerable<Producto> lista = null;
+            IServiceProducto _ServiceProducto = new ServiceProducto();
+
+            //Error porque viene en blanco
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceProducto.GetProducto();
+            }
+            else
+            {
+                lista = _ServiceProducto.GetProductoByNombre(filtro);
+            }
+
+            //Retorna un partial view
+            return PartialView("_PartialViewProductoAdmin", lista);
         }
 
         // GET: Catalogo/Details/5
