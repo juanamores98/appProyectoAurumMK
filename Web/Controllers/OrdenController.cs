@@ -24,7 +24,7 @@ namespace Web.Controllers
         }
 
         //Actualizar Vista parcial detalle carrito
-        private ActionResult DetalleCarrito()
+        private ActionResult _DetalleOrden()
         {
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
         }
