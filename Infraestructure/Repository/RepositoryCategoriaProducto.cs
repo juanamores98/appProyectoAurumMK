@@ -69,7 +69,7 @@ namespace Infraestructure.Repository
             int retorno = 0; //Contabiliza la cantidad de líneas afectadas
             CategoriaProducto categoria = null;
 
-            //Si idEstadoSistema corresponde a 1, entonces se procede a insertar/actualizar el color
+           
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;

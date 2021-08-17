@@ -20,12 +20,18 @@
 
         @if (Session["User"] != null)
         {
-            <ul class="nav navbar-nav navbar-right">
+            @*<ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
                     <a class="nav-link link-estilo" href="#">
                         Orden
                         <span class="badge badge-primary badge-pill">0</span>
                     </a>
+                </li>
+            </ul>*@
+                    @*Detalle y link Orden*@
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item" id="cantidadPulseras">
+                    @Html.Partial("_OrdenCantidad")
                 </li>
             </ul>
         }

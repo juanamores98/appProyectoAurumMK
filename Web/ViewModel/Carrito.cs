@@ -75,12 +75,15 @@ namespace Web.ViewModel
             return "";
         }
 
-        public void SetItemCantidad(int idProducto, int cantidad)
+        public string SetItemCantidad(int idProducto, int cantidad)
         {
+            String mensaje = "";
+
             //Si estamos configurando la cantidad a 0, elimine el artículo por completo
             if (cantidad == 0)
             {
                 EliminarItem(idProducto);
+                mensaje = "Pulsera eliminada";
             }
             else
             {
@@ -91,17 +94,23 @@ namespace Web.ViewModel
                 {
                     ViewModelPedidoProducto item = Items.Find(x => x.IdProducto == idProducto);
                     item.Cantidad = cantidad;
+                    mensaje = "Cantidad actualizada";
                 }
             }
+            return mensaje;
         }
 
-        public void EliminarItem(int idProducto)
+        public string EliminarItem(int idProducto)
         {
+            String mensaje = "Pulsera no existe";
             if (Items.Exists(x => x.IdProducto == idProducto))
             {
                 var itemEliminar = Items.Single(x => x.IdProducto == idProducto);
                 Items.Remove(itemEliminar);
+
+                mensaje = "Pulsera eliminada";
             }
+            return mensaje;
         }
 
         public float GetTotal()
