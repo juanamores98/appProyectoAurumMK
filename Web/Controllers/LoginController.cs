@@ -42,8 +42,8 @@ namespace Web.Controllers
                         TempData["AlertMessageBody"] = "Bienvenido a AurumMK";
                         TempData["AlertMessageType"] = "success";
 
-                        return RedirectToAction("Index", "Login");
-                        
+                        return RedirectToAction("Index", "Home");
+
                     }
                     else
                     {
@@ -54,7 +54,7 @@ namespace Web.Controllers
                         
                         Log.Warn($"{usuario.Correo} se intentó conectar y falló");
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Login");
 
                     }
                 }

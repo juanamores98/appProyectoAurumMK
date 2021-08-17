@@ -38,7 +38,7 @@ namespace Web.ViewModel
         //Un constructor protegido asegura que un objeto no se puede crear desde el exterior
         protected Carrito()
         {
-
+            Items = new List<ViewModelPedidoProducto>();
         }
 
         /**
@@ -72,7 +72,7 @@ namespace Web.ViewModel
             {
                 
             }
-            return "";
+            return "Pulsera agregada";
         }
 
         public string SetItemCantidad(int idProducto, int cantidad)

@@ -44,10 +44,11 @@ namespace Web.Controllers
         //Ordenar una pulsera y agregarla al carrito
         public ActionResult ordenarPulsera(int? idProducto)
         {
-            int cantidadLibros = Carrito.Instancia.Items.Count();
+            int cantidadPulseras = Carrito.Instancia.Items.Count();
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idProducto);
-            return PartialView("_OrdenCantidad");
-            
+            //return PartialView("_OrdenCantidad");
+            return RedirectToAction("Index", "Catalogo");
+
         }
 
         //Actualizar solo la cantidad de libros que se muestra en el menú
