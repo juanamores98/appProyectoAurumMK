@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
+
 namespace Web.Controllers
 {
     public class LoginController : Controller
@@ -40,7 +42,7 @@ namespace Web.Controllers
                         TempData["AlertMessageBody"] = "Bienvenido a AurumMK";
                         TempData["AlertMessageType"] = "success";
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Login");
                         
                     }
                     else
@@ -49,9 +51,11 @@ namespace Web.Controllers
                         TempData["AlertMessageTitle"] = "Acceso Invalido";
                         TempData["AlertMessageBody"] = "Por favor verifique sus datos";
                         TempData["AlertMessageType"] = "warning";
-
-                        Log.Warn($"{usuario.Correo} se intentó conectar y falló");
                         
+                        Log.Warn($"{usuario.Correo} se intentó conectar y falló");
+
+                        return RedirectToAction("Index", "Home");
+
                     }
                 }
 
