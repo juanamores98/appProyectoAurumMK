@@ -20,6 +20,7 @@ namespace Web.Controllers
                 ViewBag.NotificationMessage = TempData["NotificationMessage"];
             }
 
+            ViewBag.DetalleOrden = Carrito.Instancia.Items;
             return View();
         }
 
@@ -34,9 +35,7 @@ namespace Web.Controllers
         {
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
 
-            TempData["AlertMessageTitle"] = "Mensaje";
-            TempData["AlertMessageBody"] = Carrito.Instancia.SetItemCantidad(idProducto, cantidad);
-            TempData["AlertMessageType"] = "success";
+            TempData["NotiCarrito"] = Carrito.Instancia.SetItemCantidad(idProducto, cantidad);
             TempData.Keep();
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
         }
@@ -73,7 +72,7 @@ namespace Web.Controllers
             TempData["AlertMessageBody"] = Carrito.Instancia.EliminarItem((int)idProducto);
             TempData["AlertMessageType"] = "success";
 
-            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
+            return RedirectToAction("Index", "Orden");
         }
 
         public ActionResult Save(Pedido pedido)
