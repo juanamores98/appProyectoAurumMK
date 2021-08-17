@@ -46,6 +46,11 @@ namespace Web.Controllers
         {
             int cantidadPulseras = Carrito.Instancia.Items.Count();
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idProducto);
+
+            TempData["AlertMessageTitle"] = "Mensaje";
+            TempData["AlertMessageBody"] = "Pulsera agregada al carrito";
+            TempData["AlertMessageType"] = "success";
+
             //return PartialView("_OrdenCantidad");
             return RedirectToAction("Index", "Catalogo");
 
@@ -80,7 +85,7 @@ namespace Web.Controllers
                 {
                     //validaciones de datos requeridos.
                     TempData["AlertMessageTitle"] = "Mensaje";
-                    TempData["AlertMessageBody"] = "Selecciones las pulseras a ordenar";
+                    TempData["AlertMessageBody"] = "Seleccione las pulseras a ordenar";
                     TempData["AlertMessageType"] = "success";
 
                     return RedirectToAction("Index");
