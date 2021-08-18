@@ -3,6 +3,7 @@ using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -37,11 +38,12 @@ namespace Web.Controllers
         public PartialViewResult pulserasxNombre(int? id)
         {
             IEnumerable<Producto> lista = null;
+
             IServiceProducto _ServiceProducto = new ServiceProducto();
 
             if (id != null)
             {
-                lista = (IEnumerable<Producto>)_ServiceProducto.GetProductoByID((int)id);
+                lista = _ServiceProducto.GetProductoByIDCatalogo((int)id);
             }
             return PartialView("_PartialViewProducto", lista);
         }

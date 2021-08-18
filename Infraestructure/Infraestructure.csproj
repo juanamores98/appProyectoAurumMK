@@ -155,6 +155,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepositoryCalificacionUsuario.cs" />
+    <Compile Include="Repository\IRepositoryCostoEnvio.cs" />
     <Compile Include="Repository\IRepositoryMotivoMovimiento.cs" />
     <Compile Include="Repository\IRepositoryColor.cs" />
     <Compile Include="Repository\IRepositoryContactoProveedor.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Repository\RepositoryCategoriaProducto.cs" />
     <Compile Include="Repository\RepositoryColor.cs" />
     <Compile Include="Repository\RepositoryContactoProveedor.cs" />
+    <Compile Include="Repository\RepositoryCostoEnvio.cs" />
     <Compile Include="Repository\RepositoryInventario.cs" />
     <Compile Include="Repository\RepositoryInventarioProducto.cs" />
     <Compile Include="Repository\RepositoryMotivoMovimiento.cs" />

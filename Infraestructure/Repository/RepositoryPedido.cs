@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryPedido : IRepositoryPedido
     {
-        public Pedido GetOrdenByID(int id)
+        public Pedido GetPedidoByID(int id)
         {
             Pedido pedido = null;
             try
@@ -107,7 +107,7 @@ namespace Infraestructure.Repository
                     //Se busca la orden que se salvó y se reenvía
                     if (resultado >= 0)
                     {
-                        pedido = GetOrdenByID(pPedido.IdPedido);
+                        pedido = GetPedidoByID(pPedido.IdPedido);
                     }
                 }
                 return pedido;

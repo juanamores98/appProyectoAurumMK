@@ -1,4 +1,5 @@
 ﻿using Infraestructure.Models;
+using Infraestructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,18 +12,20 @@ namespace ApplicationCore.Services
     {
         public IEnumerable<Pedido> GetPedido()
         {
-            //IRepositoryPedido;
-            return null;
+            IRepositoryPedido repository = new RepositoryPedido();
+            return repository.GetPedido();
         }
 
         public Pedido GetPedidoByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryPedido repository = new RepositoryPedido();
+            return repository.GetPedidoByID(id);
         }
 
         public Pedido Save(Pedido pedido)
         {
-            throw new NotImplementedException();
+            IRepositoryPedido repository = new RepositoryPedido();
+            return repository.Save(pedido);
         }
     }
 }

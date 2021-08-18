@@ -1,6 +1,6 @@
 ﻿@model List<Web.ViewModel.ViewModelPedidoProducto>
 
-<div class="table-responsive-sm">
+<div class="table-responsive-sm" style="width:70%; margin: auto !important;">
     @*Accion, nombre de controlador*@
 
     <table class="table table-striped">
@@ -23,41 +23,41 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.HiddenFor(modelItem => item.Producto.IdProducto)
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                </td>
-                <td class="center" style="width:1.5em">
-                    @Html.EditorFor(modelItem => item.Cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_libroid = item.Producto.IdProducto, onchange = "updateCantidad(this)" } })
-                </td>
-                <td class="right">
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.Producto.IdProducto)
+            @Html.DisplayFor(modelItem => item.Producto.Nombre)
+        </td>
+        <td class="center" style="width:1.5em">
+            @Html.DisplayFor(modelItem => item.Cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_pulseraid = item.Producto.IdProducto, onchange = "updateCantidad(this)" } })
+        </td>
+        <td class="right">
 
-                    @Html.DisplayFor(modelItem => item.Costo)
-                </td>
+            ¢ @Html.DisplayFor(modelItem => item.Costo)
+        </td>
 
-                <td class="right">
-                    @Html.DisplayFor(modelItem => item.subTotal)
-                </td>
-                <td>
-                    @Ajax.ActionLink("Eliminar",//Texto para el usuario
-                        "eliminarPulsera",//Acción a llamar
-                        "Orden",
-                        new
-                        {
-                            idProducto = item.IdProducto
-                        },//Parámetros a enviar
-                        new AjaxOptions
-                        {
-                            UpdateTargetId = "resultadoDetalle",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET",
-                            OnComplete = "updateCantLibros()"
-                        }, new { @class = "btn btn-primary" }
-                        )
+        <td class="right">
+            ¢ @Html.DisplayFor(modelItem => item.subTotal)
+        </td>
+        <td>
+            @Ajax.ActionLink("Eliminar",//Texto para el usuario
+                "eliminarPulsera",//Acción a llamar
+                "Orden",
+                new
+                {
+                    idProducto = item.IdProducto
+                },//Parámetros a enviar
+                new AjaxOptions
+                {
+                    UpdateTargetId = "resultadoDetalle",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    OnComplete = "updateCantPulseras()"
+                }, new { @class = "btn btn-primary" }
+                )
 
-                </td>
-            </tr>
+        </td>
+    </tr>
         }
 
     </table>
@@ -72,7 +72,7 @@
                         <strong>Total</strong>
                     </td>
                     <td class="right">
-                        <strong>@(((decimal)Web.ViewModel.Carrito.Instancia.GetTotal()).ToString("C2"))</strong>
+                        <strong>¢ @(((decimal)Web.ViewModel.Carrito.Instancia.GetTotal()).ToString("### ### ###,00"))</strong>
                     </td>
                 </tr>
             </tbody>
@@ -80,4 +80,50 @@
 
     </div>
 </div>
+
+@*@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <script type="text/javascript">
+
+        //Actualizar cantidad de pulseras en el carrito
+        //Cambio de cantidad en caja de texto
+        function updateCantidad(ctr) {
+            var txtCantidad = $(ctr);
+            var cantidad = txtCantidad.val();
+            var id = txtCantidad.data("pulseraid");
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Orden/actualizarCantidad",
+                data: { "idProducto": id, "cantidad": cantidad },
+                success: function (data) {
+                    $("#resultadoDetalle").html('');
+                    $("#resultadoDetalle").html(data);
+                    updateCantLibros();
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+        }
+        //Actualizar cantidad de pulseras en el menú
+        function updateCantPulseras() {
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Orden/actualizarOrdenCantidad",
+                success: function (data) {
+                    $("#cantidadLibros").html('');
+                    $("#cantidadLibros").html(data);
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
+        }
+
+
+    </script>
+}*@
 
