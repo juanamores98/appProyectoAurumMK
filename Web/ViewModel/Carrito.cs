@@ -20,6 +20,7 @@ namespace Web.ViewModel
 
         static Carrito()
         {
+
             //Si el carrito no estpa en la sesión, se rea uno y se guarda los ítems.
             if (HttpContext.Current.Session["carrito"] == null)
             {
