@@ -116,15 +116,35 @@ namespace Web.ViewModel
         public float GetTotal()
         {
             float total = 0;
+            total = Items.Sum(x => x.Costo) + 2500 + GetImpuesto() - GetDescuento();
+            return total;
+        }
+        public float GetSubTotal()
+        {
+            float total = 0;
             total = Items.Sum(x => x.Costo);
             return total;
         }
 
+        public float GetImpuesto()
+        {
+            float total = 0;
+            total = (float)(Items.Sum(x => x.Costo)*0.13);
+            return total;
+        }
+
+        
         public int GetCountItems()
         {
             int total = 0;
             total = (int)Items.Sum(x => x.Cantidad);
             return total;
+        }
+
+        public float GetDescuento()
+        {
+            int descuento = 0;
+            return descuento;
         }
 
         public void EliminarCarrito()

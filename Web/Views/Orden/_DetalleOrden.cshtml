@@ -23,41 +23,41 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.HiddenFor(modelItem => item.Producto.IdProducto)
-                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
-                </td>
-                <td class="center" style="width:1.5em">
-                    @Html.EditorFor(modelItem => item.Cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_pulseraid = item.Producto.IdProducto, onchange = "updateCantidad(this)" } })
-                </td>
-                <td class="right">
+    <tr>
+        <td>
+            @Html.HiddenFor(modelItem => item.Producto.IdProducto)
+            @Html.DisplayFor(modelItem => item.Producto.Nombre)
+        </td>
+        <td class="center" style="width:1.5em">
+            @Html.DisplayFor(modelItem => item.Cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_pulseraid = item.Producto.IdProducto, onchange = "updateCantidad(this)" } })
+        </td>
+        <td class="right">
 
-                    @Html.DisplayFor(modelItem => item.Costo)
-                </td>
+            ¢ @Html.DisplayFor(modelItem => item.Costo)
+        </td>
 
-                <td class="right">
-                    @Html.DisplayFor(modelItem => item.subTotal)
-                </td>
-                <td>
-                    @Ajax.ActionLink("Eliminar",//Texto para el usuario
-                        "eliminarPulsera",//Acción a llamar
-                        "Orden",
-                        new
-                        {
-                            idProducto = item.IdProducto
-                        },//Parámetros a enviar
-                        new AjaxOptions
-                        {
-                            UpdateTargetId = "resultadoDetalle",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET",
-                            OnComplete = "updateCantPulseras()"
-                        }, new { @class = "btn btn-primary" }
-                        )
+        <td class="right">
+            ¢ @Html.DisplayFor(modelItem => item.subTotal)
+        </td>
+        <td>
+            @Ajax.ActionLink("Eliminar",//Texto para el usuario
+                "eliminarPulsera",//Acción a llamar
+                "Orden",
+                new
+                {
+                    idProducto = item.IdProducto
+                },//Parámetros a enviar
+                new AjaxOptions
+                {
+                    UpdateTargetId = "resultadoDetalle",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    OnComplete = "updateCantPulseras()"
+                }, new { @class = "btn btn-primary" }
+                )
 
-                </td>
-            </tr>
+        </td>
+    </tr>
         }
 
     </table>

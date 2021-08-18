@@ -22,8 +22,19 @@ namespace Web.Controllers
                 ViewBag.NotificationMessage = TempData["NotificationMessage"];
             }
 
+            ViewBag.CostoEnvio = listaEnvios();
+
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
+
             return View();
+        }
+
+        private SelectList listaEnvios()
+        {
+            //Lista de envíos
+            IServiceCostoEnvio _ServiceCostoEnvio = new ServiceCostoEnvio();
+            IEnumerable<CostoEnvio> listaCostoEnvio = _ServiceCostoEnvio.GetCostoEnvio();
+            return new SelectList(listaCostoEnvio, "IdCostoEnvio", "Monto");
         }
 
         //Actualizar Vista parcial detalle carrito
@@ -79,8 +90,9 @@ namespace Web.Controllers
             return RedirectToAction("Index", "Orden");
         }
 
-        public ActionResult Save(Pedido pedido)
+        public ActionResult Save(Pedido pedido, int SeleccionCostoEnvio = 1)
         {
+
             try
             {
                 //Si no existe la sesión no hay nada
@@ -96,6 +108,11 @@ namespace Web.Controllers
                 else
                 {
                     var listaDetalle = Carrito.Instancia.Items;
+                    pedido.Total = Carrito.Instancia.GetTotal();
+                    pedido.SubTotal = Carrito.Instancia.GetSubTotal();
+                    pedido.Descuento = Carrito.Instancia.GetDescuento();
+                    pedido.Impuesto = Carrito.Instancia.GetImpuesto();
+                    pedido.IdCostoEnvio = SeleccionCostoEnvio;
 
                     foreach (var item in listaDetalle)
                     {
