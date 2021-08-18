@@ -34,6 +34,12 @@ namespace ApplicationCore.Services
             return repository.GetProductoByEstadoSistemaID(id);
         }
 
+        public IEnumerable<Producto> GetProductoByIDCatalogo(int id)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByIDCatalogo(id);
+        }
+
         public Producto GetProductoByID(int id)
         {
             IRepositoryProducto repository = new RepositoryProducto();

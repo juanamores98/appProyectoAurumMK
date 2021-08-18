@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.ViewModel;
 
 namespace Web.Controllers
@@ -13,6 +14,7 @@ namespace Web.Controllers
     public class OrdenController : Controller
     {
         // GET: Orden
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Cliente)]
         public ActionResult Index()
         {
             if (TempData.ContainsKey("NotificationMessage"))
@@ -25,6 +27,7 @@ namespace Web.Controllers
         }
 
         //Actualizar Vista parcial detalle carrito
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Cliente)]
         private ActionResult DetalleCarrito()
         {
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
@@ -63,7 +66,8 @@ namespace Web.Controllers
                 ViewBag.NotiCarrito = TempData["NotiCarrito"];
             }
             int cantidadPulseras = Carrito.Instancia.Items.Count();
-            return PartialView("_OrdenCantidad");
+
+            return RedirectToAction("_DetalleOrden", "Orden");
         }
 
         public ActionResult eliminarPulsera(int? idProducto)

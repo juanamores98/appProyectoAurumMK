@@ -95,7 +95,7 @@
                 type: "GET",
                 dataType: 'text',
                 url: "/Orden/actualizarCantidad",
-                data: { "idPulsera": id, "cantidad": cantidad },
+                data: { "idProducto": id, "cantidad": cantidad },
                 success: function (data) {
                     $("#resultadoDetalle").html('');
                     $("#resultadoDetalle").html(data);
@@ -106,21 +106,19 @@
             });
         }
         //Actualizar cantidad de pulseras en el menú
-        function updateCantLibros() {
+        function updateCantPulseras() {
             $.ajax({
                 type: "GET",
                 dataType: 'text',
                 url: "/Orden/actualizarOrdenCantidad",
                 success: function (data) {
-                    $("#cantidadLibros").html('');
-                    $("#cantidadLibros").html(data);
+                    $("#cantidadPulseras").html('');
+                    $("#cantidadPulseras").html(data);
                 }, error: function (xhr, status, error) {
                     console.log("Error: " + error + ", No Error: " + xhr.status);
                 },
             });
         }
-
-
     </script>
 }
 

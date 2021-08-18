@@ -9,7 +9,7 @@ namespace Infraestructure.Repository
 {
     public interface IRepositoryPedido
     {
-        Pedido GetOrdenByID(int id);
+        Pedido GetPedidoByID(int id);
         IEnumerable<Pedido> GetPedido();
         Pedido Save(Pedido pedido);
 

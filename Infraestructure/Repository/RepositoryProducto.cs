@@ -91,6 +91,7 @@ namespace Infraestructure.Repository
         public Producto GetProductoByID(int id)
         {
             Producto oProducto = null;
+
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
@@ -106,6 +107,28 @@ namespace Infraestructure.Repository
             }
             return oProducto;
         }
+
+
+        public IEnumerable<Producto> GetProductoByIDCatalogo(int id)
+        {
+            IEnumerable<Producto> lista = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Producto
+                        .Where(p => p.IdProducto == id)
+                        .Include("InventarioProducto.Inventario")
+                        .Include(x => x.CategoriaProducto)
+                        .Include(x => x.Color)
+                        .Include(x => x.Proveedor)
+                        .Include(x => x.EstadoSistema)
+                        .Include("RegistroProducto.RegistroMovimiento")
+                        .ToList();
+            }
+            return lista;
+        }
+
         public IEnumerable<Producto> GetProductoByNombre(string nombre)
         {
             throw new NotImplementedException();

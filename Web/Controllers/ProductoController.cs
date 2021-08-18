@@ -332,5 +332,6 @@ namespace Web.Controllers
             return new MultiSelectList(listaColor, "IdColor", "Descripcion", listaColorSelect);
 
         }
+
     }
 }
