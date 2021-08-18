@@ -289,6 +289,8 @@
     <Content Include="Resources\pulsera_diseño2.png" />
     <Content Include="Resources\pulsera_diseño3.png" />
     <Content Include="Resources\pulsera_diseño4.png" />
+    <Content Include="Resources\pulsera_diseño5.jpg" />
+    <Content Include="Resources\pulsera_diseño6.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-input-spinner.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
