@@ -4,7 +4,7 @@
     ViewBag.Title = "Pedido";
 }
 
-@{ 
+@{
     string nombre = "Usuario";
     string email = "Perfil";
     int idUsuario = 0;
@@ -22,61 +22,72 @@
         }
     }
 }
+<div style="width:70%; margin: 30px auto !important;">
+    <h2>Orden de Pulseras</h2>
+    @using (Html.BeginForm("Save", "Orden", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
 
-<h2>Orden de Pulseras</h2>
-@using (Html.BeginForm("Save", "Orden", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Usuario</label>
-                </div>
-                <div class="form-group">
-                    <label>@idUsuario</label>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "col-form-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.FechaHora, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
-                        @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="number" value="@idUsuario" name="IdUsuario" style="display:none;"/>
+                    </div>
+                    <div class="form-group">
+                        <label>@idUsuario</label>
                     </div>
                 </div>
 
+                <div class="col-lg-4" style="margin:20px 0px !important;">
+                    <div>
+                        <label>Costo de envío: ¢2,500</label>
+                    </div>
+                    <div>
+                        <label>IVA: 13%</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FechaHora, htmlAttributes: new { @class = "col-form-label" })
+
+                        @Html.TextBoxFor(model => model.FechaHora, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.FechaHora, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <hr />
-    <span class="glyphicons glyphicons-hand-left"></span>
-    <div id="resultadoDetalle">
-        @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
-        {
-            @Html.Partial("~/Views/Orden/_DetalleOrden.cshtml", (List<Web.ViewModel.ViewModelPedidoProducto>)ViewBag.DetalleOrden)
-        }
-        else
-        {
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                La orden no tiene pulseras asignadas
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
+        <hr />
+        <span class="glyphicons glyphicons-hand-left"></span>
+        <div id="resultadoDetalle">
+            @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
+            {
+                @Html.Partial("~/Views/Orden/_DetalleOrden.cshtml", (List<Web.ViewModel.ViewModelPedidoProducto>)ViewBag.DetalleOrden)
+            }
+            else
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    La orden no tiene pulseras asignadas
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
 
-    </div>
-    <hr />
-    <!-- Submit -->
-    <button type="submit" class="btn btn-success float-right" id="btnOrdenar">
-        <span class="glyphicon  glyphicon-floppy-save"></span>
-        Guardar
-    </button>
-}
+        </div>
+        <hr />
+        <!-- Submit -->
+        <button type="submit" class="btn btn-success float-right" id="btnOrdenar">
+            <span class="glyphicon  glyphicon-floppy-save"></span>
+            Guardar
+        </button>
+    }
+</div>
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
@@ -94,7 +105,7 @@
                 type: "GET",
                 dataType: 'text',
                 url: "/Orden/actualizarCantidad",
-                data: { "idPulsera": id, "cantidad": cantidad },
+                data: { "idProducto": id, "cantidad": cantidad },
                 success: function (data) {
                     $("#resultadoDetalle").html('');
                     $("#resultadoDetalle").html(data);
@@ -105,21 +116,19 @@
             });
         }
         //Actualizar cantidad de pulseras en el menú
-        function updateCantLibros() {
+        function updateCantPulseras() {
             $.ajax({
                 type: "GET",
                 dataType: 'text',
                 url: "/Orden/actualizarOrdenCantidad",
                 success: function (data) {
-                    $("#cantidadLibros").html('');
-                    $("#cantidadLibros").html(data);
+                    $("#cantidadPulseras").html('');
+                    $("#cantidadPulseras").html(data);
                 }, error: function (xhr, status, error) {
                     console.log("Error: " + error + ", No Error: " + xhr.status);
                 },
             });
         }
-
-
     </script>
 }
 

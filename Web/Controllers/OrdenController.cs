@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.ViewModel;
 
 namespace Web.Controllers
@@ -13,6 +14,7 @@ namespace Web.Controllers
     public class OrdenController : Controller
     {
         // GET: Orden
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Cliente)]
         public ActionResult Index()
         {
             if (TempData.ContainsKey("NotificationMessage"))
@@ -20,11 +22,24 @@ namespace Web.Controllers
                 ViewBag.NotificationMessage = TempData["NotificationMessage"];
             }
 
+            ViewBag.CostoEnvio = listaEnvios();
+
+            ViewBag.DetalleOrden = Carrito.Instancia.Items;
+
             return View();
         }
 
+        private SelectList listaEnvios()
+        {
+            //Lista de envíos
+            IServiceCostoEnvio _ServiceCostoEnvio = new ServiceCostoEnvio();
+            IEnumerable<CostoEnvio> listaCostoEnvio = _ServiceCostoEnvio.GetCostoEnvio();
+            return new SelectList(listaCostoEnvio, "IdCostoEnvio", "Monto");
+        }
+
         //Actualizar Vista parcial detalle carrito
-        private ActionResult _DetalleOrden()
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Cliente)]
+        private ActionResult DetalleCarrito()
         {
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
         }
@@ -34,9 +49,7 @@ namespace Web.Controllers
         {
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
 
-            TempData["AlertMessageTitle"] = "Mensaje";
-            TempData["AlertMessageBody"] = Carrito.Instancia.SetItemCantidad(idProducto, cantidad);
-            TempData["AlertMessageType"] = "success";
+            TempData["NotiCarrito"] = Carrito.Instancia.SetItemCantidad(idProducto, cantidad);
             TempData.Keep();
             return PartialView("_DetalleOrden", Carrito.Instancia.Items);
         }
@@ -44,10 +57,16 @@ namespace Web.Controllers
         //Ordenar una pulsera y agregarla al carrito
         public ActionResult ordenarPulsera(int? idProducto)
         {
-            int cantidadLibros = Carrito.Instancia.Items.Count();
+            int cantidadPulseras = Carrito.Instancia.Items.Count();
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idProducto);
-            return PartialView("_OrdenCantidad");
-            
+
+            TempData["AlertMessageTitle"] = "Mensaje";
+            TempData["AlertMessageBody"] = "Pulsera agregada al carrito";
+            TempData["AlertMessageType"] = "success";
+
+            //return PartialView("_OrdenCantidad");
+            return RedirectToAction("Index", "Catalogo");
+
         }
 
         //Actualizar solo la cantidad de libros que se muestra en el menú
@@ -58,7 +77,8 @@ namespace Web.Controllers
                 ViewBag.NotiCarrito = TempData["NotiCarrito"];
             }
             int cantidadPulseras = Carrito.Instancia.Items.Count();
-            return PartialView("_OrdenCantidad");
+
+            return RedirectToAction("_DetalleOrden", "Orden");
         }
 
         public ActionResult eliminarPulsera(int? idProducto)
@@ -67,11 +87,12 @@ namespace Web.Controllers
             TempData["AlertMessageBody"] = Carrito.Instancia.EliminarItem((int)idProducto);
             TempData["AlertMessageType"] = "success";
 
-            return PartialView("_DetalleOrden", Carrito.Instancia.Items);
+            return RedirectToAction("Index", "Orden");
         }
 
-        public ActionResult Save(Pedido pedido)
+        public ActionResult Save(Pedido pedido, int SeleccionCostoEnvio = 1)
         {
+
             try
             {
                 //Si no existe la sesión no hay nada
@@ -79,7 +100,7 @@ namespace Web.Controllers
                 {
                     //validaciones de datos requeridos.
                     TempData["AlertMessageTitle"] = "Mensaje";
-                    TempData["AlertMessageBody"] = "Selecciones las pulseras a ordenar";
+                    TempData["AlertMessageBody"] = "Seleccione las pulseras a ordenar";
                     TempData["AlertMessageType"] = "success";
 
                     return RedirectToAction("Index");
@@ -87,6 +108,11 @@ namespace Web.Controllers
                 else
                 {
                     var listaDetalle = Carrito.Instancia.Items;
+                    pedido.Total = Carrito.Instancia.GetTotal();
+                    pedido.SubTotal = Carrito.Instancia.GetSubTotal();
+                    pedido.Descuento = Carrito.Instancia.GetDescuento();
+                    pedido.Impuesto = Carrito.Instancia.GetImpuesto();
+                    pedido.IdCostoEnvio = SeleccionCostoEnvio;
 
                     foreach (var item in listaDetalle)
                     {

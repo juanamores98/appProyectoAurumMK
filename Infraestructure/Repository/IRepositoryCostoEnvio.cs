@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-    public interface IRepositoryPedido
+    public interface IRepositoryCostoEnvio
     {
-        Pedido GetPedidoByID(int id);
-        IEnumerable<Pedido> GetPedido();
-        Pedido Save(Pedido pedido);
-
+        IEnumerable<CostoEnvio> GetCostoEnvio();
     }
 }

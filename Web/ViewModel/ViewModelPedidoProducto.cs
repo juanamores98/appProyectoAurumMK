@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Web.ViewModel
 {
@@ -13,6 +14,8 @@ namespace Web.ViewModel
         public int IdProducto { get; set; }
         public byte[] Imagen { get; set; }
         public float Cantidad { get; set; }
+        public float Descuento { get; set; }
+        public int Envio { get; set; }
         public float Costo
         {
             get { return (float)Producto.CostoU; }
@@ -39,5 +42,6 @@ namespace Web.ViewModel
             this.IdProducto = idProducto;
             this.Producto = _ServiceProducto.GetProductoByID(idProducto);
         }
+
     }
 }
