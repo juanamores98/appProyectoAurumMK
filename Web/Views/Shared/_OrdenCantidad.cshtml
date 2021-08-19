@@ -2,7 +2,7 @@
     int cantidadPulseras = Web.ViewModel.Carrito.Instancia.GetCountItems();
 }
 <a href="@Url.Action("Index", "Orden")" class="nav-link">
-    Orden<span class="badge badge-light">@cantidadPulseras</span>
+    Orden <span class="badge badge-danger"> @cantidadPulseras</span>
 </a>
 
 @if (ViewBag.Noticarrito != null)

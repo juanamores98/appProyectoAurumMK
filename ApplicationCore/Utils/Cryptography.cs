@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Utils
 {
-    class Cryptography
+    public class Cryptography
     {
         const string KEY = "~!@#$%^&*()_+{}:>?<`1234567890-=[]\'.,/|";
         /// <summary>

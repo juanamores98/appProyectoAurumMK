@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using ApplicationCore.Services;
+using ApplicationCore.Utils;
 using Infraestructure.Models;
 using Web.Security;
 
@@ -265,7 +266,8 @@ namespace Web.Controllers
                 {
                    oUsuario.IdEstadoSistema=1;
                    oUsuario.EstadoSistema = null;
-                  _ServiceUsuario.Save(oUsuario);
+                    oUsuario.Contra = Cryptography.EncrypthAES(oUsuario.Contra);
+                    _ServiceUsuario.Save(oUsuario);
                 }
                 else
                 {
@@ -304,6 +306,7 @@ namespace Web.Controllers
                 {
                     oUsuario.IdEstadoSistema = 0;
                     oUsuario.EstadoSistema = null;
+                    oUsuario.Contra = Cryptography.EncrypthAES(oUsuario.Contra);
                     _ServiceUsuario.Save(oUsuario);
                 }
                 else
