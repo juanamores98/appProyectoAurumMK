@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ContactoProveedorMetadata))]
     public partial class ContactoProveedor
     {
         public int IdContactoProveedor { get; set; }

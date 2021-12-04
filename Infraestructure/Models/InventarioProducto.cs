@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(InventarioProductoMetadata))]
     public partial class InventarioProducto
     {
         public int IdInventario { get; set; }

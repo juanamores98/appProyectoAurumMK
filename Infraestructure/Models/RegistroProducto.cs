@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(RegistroProductoMetadata))]
     public partial class RegistroProducto
     {
         public int IdProducto { get; set; }
